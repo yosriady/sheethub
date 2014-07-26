@@ -10,6 +10,9 @@ gem 'unicorn-rails'
 # User authentication
 # gem 'devise'
 
+# Tags
+gem 'acts-as-taggable-on'
+
 # Pagination
 gem 'kaminari'
 
