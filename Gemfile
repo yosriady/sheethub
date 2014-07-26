@@ -7,6 +7,17 @@ gem 'rails', '4.1.1'
 gem 'pg'
 gem 'unicorn-rails'
 
+# User authentication
+# gem 'devise'
+
+# Pagination
+gem 'kaminari'
+
+# Form
+gem 'simple_form'
+# gem 'chosen-rails'
+# gem 'selectize-rails'
+
 # Frontend
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'sass-rails', '~> 4.0.3'
@@ -17,11 +28,13 @@ gem 'autoprefixer-rails'
 # gem 'gon'
 # gem 'slim-rails'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
-# S3 upload
+# File upload
+# gem 'carrierwave'
+# gem 'fog'
+# gem 'mini_magick'
 # gem 'aws-sdk'
+# gem "paperclip", "~> 4.1"
 # gem 's3_direct_upload'
 
 # API
@@ -29,6 +42,7 @@ gem 'grape'
 gem 'grape-jbuilder'
 
 # Others
+gem 'bitmask_attributes'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :production do
@@ -48,6 +62,8 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'rspec'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :test do
