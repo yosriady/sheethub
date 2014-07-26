@@ -45,12 +45,12 @@ end
 
 group :development, :test do
   gem 'dotenv-rails'
-  # gem 'rspec-rails'
-  # gem 'rspec'
+  gem 'rspec-rails'
+  gem 'rspec'
 end
 
 group :test do
-  # gem 'capybara'
-  # gem 'database_cleaner'
-  # gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
