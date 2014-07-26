@@ -27,14 +27,3 @@ UserVoice.push(['set', {
 UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
 
 UserVoice.push(['autoprompt', {}]);
-UserVoice=window.UserVoice||[];
-(function(){
-  var uv=document.createElement('script');
-  uv.type='text/javascript';
-  uv.async=true;
-  uv.src='//widget.uservoice.com/[YOUR_API_KEY].js';
-  var s=document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(uv,s)
-})();
-
-UserVoice.push(['addTrigger', {}]);
