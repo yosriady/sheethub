@@ -8,12 +8,13 @@ gem 'pg'
 gem 'unicorn-rails'
 
 # Frontend
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'autoprefixer-rails'
 # gem 'gon'
-# gem 'bootstrap-sass', '~> 3.1.1'
 # gem 'slim-rails'
 
 # Use ActiveModel has_secure_password
