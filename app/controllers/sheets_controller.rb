@@ -1,0 +1,2 @@
+class SheetsController < ApplicationController
+end
