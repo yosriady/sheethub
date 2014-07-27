@@ -21,8 +21,7 @@ gem 'kaminari'
 
 # Form
 gem 'simple_form'
-# gem 'chosen-rails'
-# gem 'selectize-rails'
+gem 'selectize-rails'
 
 # Frontend
 gem 'bootstrap-sass', '~> 3.1.1'

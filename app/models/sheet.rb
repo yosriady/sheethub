@@ -1,6 +1,6 @@
 class Sheet < ActiveRecord::Base
   acts_as_taggable # Alias for acts_as_taggable_on :tags
-  acts_as_taggable_on :composers, :genres
+  acts_as_taggable_on :composers, :genres, :series, :songs
 
   enum difficulty: %w{ beginner intermediate advanced }
 
