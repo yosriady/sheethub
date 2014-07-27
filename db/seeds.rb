@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Sheet.create(title: "Another Guldove", description: "Guitar piece by Yasunori Mitsuda, from Chrono Cross.", pages: 2)

@@ -7,6 +7,9 @@ gem 'rails', '4.1.1'
 gem 'pg'
 gem 'unicorn-rails'
 
+# Task Queue
+# gem 'sidekiq'
+
 # User authentication
 # gem 'devise'
 
