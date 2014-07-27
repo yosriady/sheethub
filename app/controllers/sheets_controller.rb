@@ -69,6 +69,6 @@ class SheetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sheet_params
-      params[:sheet]
+      params[:sheet].permit(:title, :description, :instruments, :pages)
     end
 end
