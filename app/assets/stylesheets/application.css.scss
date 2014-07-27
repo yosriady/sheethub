@@ -17,6 +17,20 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900);
 @import "bootstrap";
 
+// Bootstrap overrides
+.navbar {
+    border-radius: 0px
+}
+
+// Navigation bar
+.search-bar{
+    width: 32%;
+}
+
+
+
+// Table
 .table-container {
     background: #fff
 }
+
