@@ -1,10 +1,9 @@
-<%= simple_form_for(@sheet) do |f| %>
+<%= simple_form_for @sheet do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-  </div>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :pages %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <%= f.button :submit %>
 <% end %>
