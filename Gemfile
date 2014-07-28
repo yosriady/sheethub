@@ -21,6 +21,7 @@ gem 'kaminari'
 
 # Form
 gem 'simple_form'
+gem 'selectize-rails'
 gem 'chosen-rails'
 
 # Frontend
