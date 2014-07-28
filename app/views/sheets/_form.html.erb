@@ -4,6 +4,7 @@
   <%= f.input :title %>
   <%= f.input :description %>
   <%= f.input :pages %>
+  <%= f.input :instruments, :as => :check_boxes, :collection => Sheet.values_for_instruments =%>
 
   <%= f.button :submit %>
 <% end %>
