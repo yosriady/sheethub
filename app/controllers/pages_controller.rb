@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-
   def index
   end
 
@@ -11,5 +10,4 @@ class PagesController < ApplicationController
 
   def privacy
   end
-
 end
