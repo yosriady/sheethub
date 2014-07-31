@@ -31,7 +31,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'autoprefixer-rails'
-# gem 'gon'
+gem 'gon'
 # gem 'slim-rails'
 
 

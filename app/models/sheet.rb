@@ -1,4 +1,6 @@
 class Sheet < ActiveRecord::Base
+  before_validation :normalize_instruments
+
   acts_as_taggable # Alias for acts_as_taggable_on :tags
   acts_as_taggable_on :composers, :genres, :series, :songs
 
@@ -20,11 +22,19 @@ class Sheet < ActiveRecord::Base
     Sheet.find_by_sql(sql)
   end
 
-  def joined_tags
-    joined_tags = ""
-    tag_list.each do |tag|
-      joined_tags << "'#{tag}',"
+  private
+    def joined_tags
+      joined_tags = ""
+      tag_list.each do |tag|
+        joined_tags << "'#{tag}',"
+      end
+      return joined_tags[0..-2]
     end
-    return joined_tags[0..-2]
-  end
+
+    def normalize_instruments
+      # @sheet.instruments
+      # convert from comma separated string to symbol list
+      binding.pry
+    end
+
 end

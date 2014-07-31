@@ -98,6 +98,11 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.3)
     fssm (0.2.10)
+    gon (5.1.2)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
     grape (0.8.0)
       activesupport
       builder
@@ -184,6 +189,7 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    request_store (1.0.8)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -282,6 +288,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   faker
+  gon
   grape
   grape-jbuilder
   heroku-deflater

@@ -1,5 +1,6 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tags
 
   # GET /sheets
   # GET /sheets.json
@@ -67,8 +68,13 @@ class SheetsController < ApplicationController
       @sheet = Sheet.find(params[:id])
     end
 
+    def set_tags
+      gon.tags = Sheet.tag_counts_on(:tags)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def sheet_params
       params[:sheet].permit(:title, :description, :instruments, :pages)
     end
+
 end
