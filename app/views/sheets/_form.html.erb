@@ -2,9 +2,15 @@
   <%= f.error_notification %>
 
   <%= f.input :title %>
+
+
+  <%= f.label :instruments %>
+  <br>
+  <%= f.input_field :instruments, collection: Sheet.values_for_instruments, prompt: "Choose instruments", multiple: true , id: "instruments-field"%>
+
   <%= f.input :description %>
   <%= f.input :pages %>
-  <%= f.input :instruments, :as => :check_boxes, :collection => Sheet.values_for_instruments =%>
+
 
   <%= f.button :submit %>
 <% end %>
