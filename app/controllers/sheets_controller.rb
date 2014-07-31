@@ -1,6 +1,8 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy]
+  before_action :normalize_instruments, only: [:create, :update]
   before_action :set_tags
+  before_action :set_instruments
 
   # GET /sheets
   # GET /sheets.json
@@ -26,7 +28,7 @@ class SheetsController < ApplicationController
   # POST /sheets.json
   def create
     @sheet = Sheet.new(sheet_params)
-
+    @sheet.instruments = params[:sheet][:instruments]
     respond_to do |format|
       if @sheet.save
         format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
@@ -42,7 +44,9 @@ class SheetsController < ApplicationController
   # PATCH/PUT /sheets/1.json
   def update
     respond_to do |format|
-      if @sheet.update(sheet_params)
+      update_params = sheet_params
+      update_params[:instruments] = params[:sheet][:instruments]
+      if @sheet.update(update_params)
         format.html { redirect_to @sheet, notice: 'Sheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @sheet }
       else
@@ -63,18 +67,26 @@ class SheetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_sheet
       @sheet = Sheet.find(params[:id])
     end
 
     def set_tags
-      gon.tags = Sheet.tag_counts_on(:tags)
+      gon.tags ||= Sheet.tag_counts_on(:tags)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_instruments
+      gon.instruments ||= Sheet.values_for_instruments
+    end
+
     def sheet_params
       params[:sheet].permit(:title, :description, :instruments, :pages)
+    end
+
+    def normalize_instruments
+      params[:sheet][:instruments].delete("") # Delete space from selectize.js
+      params[:sheet][:instruments] = params[:sheet][:instruments].map &:to_sym
+      params[:sheet][:instruments].select! {|instrument| Sheet.values_for_instruments.include?(instrument)} # Delete invalid instruments
     end
 
 end

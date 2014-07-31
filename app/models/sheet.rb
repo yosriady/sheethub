@@ -1,5 +1,5 @@
 class Sheet < ActiveRecord::Base
-  before_validation :normalize_instruments
+  attr_accessor :instruments_list # For form parsing
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
   acts_as_taggable_on :composers, :genres, :series, :songs
@@ -22,6 +22,10 @@ class Sheet < ActiveRecord::Base
     Sheet.find_by_sql(sql)
   end
 
+  def self.instruments_to_bitmask(instruments)
+    (instruments & Sheet.values_for_instruments).map { |r| 2**Sheet.values_for_instruments.index(r) }.inject(0, :+)
+  end
+
   private
     def joined_tags
       joined_tags = ""
@@ -29,12 +33,6 @@ class Sheet < ActiveRecord::Base
         joined_tags << "'#{tag}',"
       end
       return joined_tags[0..-2]
-    end
-
-    def normalize_instruments
-      # @sheet.instruments
-      # convert from comma separated string to symbol list
-      binding.pry
     end
 
 end
