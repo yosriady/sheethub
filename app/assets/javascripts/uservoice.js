@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on("page:change", function() {
     UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/1foGiwZkzLazJrcOoI22A.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
     UserVoice.push(['set', {
       accent_color: '#448dd6',

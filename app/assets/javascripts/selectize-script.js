@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on("page:change", function() {
     $('#instruments-field').selectize({
         plugins: ['remove_button'],
         delimiter: ',',
