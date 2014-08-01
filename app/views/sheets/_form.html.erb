@@ -15,6 +15,7 @@
 
   <%= f.input :description %>
   <%= f.input :pages %>
+  <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %>
 
 
   <%= f.button :submit %>

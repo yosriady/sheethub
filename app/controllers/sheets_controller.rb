@@ -83,8 +83,7 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      binding.pry
-      params[:sheet].permit(:title, :description, :instruments, :tag_list, :pages)
+      params[:sheet].permit(:title, :description, :instruments, :tag_list, :pages, :difficulty)
     end
 
     def normalize_tags
