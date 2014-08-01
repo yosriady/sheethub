@@ -43,9 +43,14 @@
     }
 
     .navbar-brand {
-        color:#fff;
-        font-size: 32px;
-        font-weight: 900;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 400;
+
+        &:hover, &:focus, &:active{
+            color: #fff;
+        }
+
     }
 
     ul.dropdown-menu li a {

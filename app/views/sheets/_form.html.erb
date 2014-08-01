@@ -8,6 +8,11 @@
   <br>
   <%= f.input_field :instruments, collection: Sheet.values_for_instruments, prompt: "Choose instruments", multiple: true , id: "instruments-field"%>
 
+  <%= f.label :tags %>
+  <br>
+  <%= f.input_field :tag_list, collection: @tags, prompt: "Add tags", multiple: true , id: "tags-field"%>
+
+
   <%= f.input :description %>
   <%= f.input :pages %>
 

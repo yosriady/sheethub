@@ -1,6 +1,7 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy]
   before_action :normalize_instruments, only: [:create, :update]
+  before_action :normalize_tags, only: [:create, :update]
   before_action :set_tags
   before_action :set_instruments
 
@@ -29,6 +30,7 @@ class SheetsController < ApplicationController
   def create
     @sheet = Sheet.new(sheet_params)
     @sheet.instruments = params[:sheet][:instruments]
+    @sheet.tag_list = params[:sheet][:tag_list]
     respond_to do |format|
       if @sheet.save
         format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
@@ -46,6 +48,7 @@ class SheetsController < ApplicationController
     respond_to do |format|
       update_params = sheet_params
       update_params[:instruments] = params[:sheet][:instruments]
+      update_params[:tag_list] = params[:sheet][:tag_list]
       if @sheet.update(update_params)
         format.html { redirect_to @sheet, notice: 'Sheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @sheet }
@@ -72,7 +75,7 @@ class SheetsController < ApplicationController
     end
 
     def set_tags
-      gon.tags ||= Sheet.tag_counts_on(:tags)
+      @tags ||= Sheet.tag_counts_on(:tags).collect{|tag| tag.name} # Just the tag names
     end
 
     def set_instruments
@@ -80,7 +83,13 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params[:sheet].permit(:title, :description, :instruments, :pages)
+      binding.pry
+      params[:sheet].permit(:title, :description, :instruments, :tag_list, :pages)
+    end
+
+    def normalize_tags
+      params[:sheet][:tag_list].delete("") # Delete space from selectize.js
+      params[:sheet][:tag_list] = params[:sheet][:tag_list].map &:to_sym
     end
 
     def normalize_instruments

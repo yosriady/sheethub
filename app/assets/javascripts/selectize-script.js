@@ -5,4 +5,12 @@ $(document).on("page:change", function() {
         persist: false,
         create: false
     });
+
+    $('#tags-field').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        create: false
+    });
+
 });
