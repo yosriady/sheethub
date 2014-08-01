@@ -2,7 +2,7 @@ class Sheet < ActiveRecord::Base
   attr_accessor :instruments_list # For form parsing
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
-  acts_as_taggable_on :composers, :genres, :series, :songs
+  acts_as_taggable_on :composers, :genres, :origins
 
   enum difficulty: %w{ beginner intermediate advanced }
 
