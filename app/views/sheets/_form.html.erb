@@ -12,6 +12,11 @@
   <br>
   <%= f.input_field :tag_list, collection: @tags, prompt: "Add genres, origin, composers...", multiple: true , id: "tags-field"%>
 
+  <%= f.label :genres %>
+  <br>
+  <%= f.input_field :genre_list, collection: @genres, prompt: "Add genres", multiple: true , id: "genres-field"%>
+
+
 
   <%= f.input :description %>
   <%= f.input :pages %>

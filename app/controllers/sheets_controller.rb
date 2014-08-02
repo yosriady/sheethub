@@ -2,6 +2,7 @@ class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy]
   before_action :normalize_instruments, only: [:create, :update]
   before_action :normalize_tags, only: [:create, :update]
+  before_action :normalize_genres, only: [:create, :update]
   before_action :set_tags
   before_action :set_instruments
 
@@ -31,6 +32,7 @@ class SheetsController < ApplicationController
     @sheet = Sheet.new(sheet_params)
     @sheet.instruments = params[:sheet][:instruments]
     @sheet.tag_list = params[:sheet][:tag_list]
+    @sheet.genre_list = params[:sheet][:genre_list]
     respond_to do |format|
       if @sheet.save
         format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
@@ -49,6 +51,7 @@ class SheetsController < ApplicationController
       update_params = sheet_params
       update_params[:instruments] = params[:sheet][:instruments]
       update_params[:tag_list] = params[:sheet][:tag_list]
+      update_params[:genre_list] = params[:sheet][:genre_list]
       if @sheet.update(update_params)
         format.html { redirect_to @sheet, notice: 'Sheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @sheet }
@@ -76,6 +79,7 @@ class SheetsController < ApplicationController
 
     def set_tags
       @tags ||= Sheet.tag_counts_on(:tags).collect{|tag| tag.name} # Just the tag names
+      @genres ||= Sheet.tag_counts_on(:genres).collect{|tag| tag.name}
     end
 
     def set_instruments
@@ -83,12 +87,17 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params[:sheet].permit(:title, :description, :instruments, :tag_list, :pages, :difficulty)
+      params[:sheet].permit(:title, :description, :instruments, :tag_list, :genre_list, :pages, :difficulty)
     end
 
     def normalize_tags
       params[:sheet][:tag_list].delete("") # Delete space from selectize.js
       params[:sheet][:tag_list] = params[:sheet][:tag_list].map &:to_sym
+    end
+
+    def normalize_genres
+      params[:sheet][:genre_list].delete("") # Delete space from selectize.js
+      params[:sheet][:genre_list] = params[:sheet][:genre_list].map &:to_sym
     end
 
     def normalize_instruments

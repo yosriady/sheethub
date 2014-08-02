@@ -10,7 +10,14 @@ $(document).on("page:change", function() {
         plugins: ['remove_button'],
         delimiter: ',',
         persist: false,
-        create: false
+        create: true
+    });
+
+    $('#genres-field').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        create: true
     });
 
 });
