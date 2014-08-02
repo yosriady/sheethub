@@ -1,8 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p><%= @sheet.title %></p>
-<p><%= @sheet.description %></p>
-<p><%= @sheet.pages %></p>
+<p>TITLE: <%= @sheet.title %></p>
+<p>DESCRIPTION: <%= @sheet.description %></p>
+<p>FREE?: <%= @sheet.is_free? %></p>
+<p>ORIGINAL?: <%= @sheet.is_original? %></p>
+<p>PRICE: <%= @sheet.price %></p>
+<p>INSTRUMENTS: <%= @sheet.instruments %></p>
+<p>GENRES: <%= @sheet.genre_list %></p>
+<p>COMPOSERS: <%= @sheet.composer_list %></p>
+<p>ORIGINS: <%= @sheet.origin_list %></p>
+<p>PAGES: <%= @sheet.pages %></p>
+<p>DIFFICULTY: <%= @sheet.difficulty %></p>
+<p>Published at <%= @sheet.created_at %></p>
+
+<b>File</b>
+<p><%= @sheet.pdf_file_name %></p>
+<p><%= @sheet.pdf_file_size %> KB</p>
+<p><%= link_to @sheet.pdf.url, @sheet.pdf.url %></p>
+<p>Last updated <%= @sheet.pdf_updated_at %></p>
+
 
 
 <%= link_to 'Edit', edit_sheet_path(@sheet) %> |

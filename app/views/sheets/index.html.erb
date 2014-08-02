@@ -7,6 +7,7 @@
         <th>Title</th>
         <th>Description</th>
         <th>Pages</th>
+        <th>URL</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -17,6 +18,7 @@
           <td><%= sheet.title %></td>
           <td><%= sheet.description %></td>
           <td><%= sheet.pages %></td>
+          <td><%= sheet.pdf.url %></td>
           <td><%= link_to 'Show', sheet %></td>
           <td><%= link_to 'Edit', edit_sheet_path(sheet) %></td>
           <td><%= link_to 'Destroy', sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
