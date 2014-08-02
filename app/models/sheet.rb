@@ -1,5 +1,9 @@
 class Sheet < ActiveRecord::Base
   attr_accessor :instruments_list # For form parsing
+  enum difficulty: %w{ beginner intermediate advanced }
+  bitmask :instruments, :as => [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], :null => false
+  acts_as_taggable # Alias for acts_as_taggable_on :tags
+  acts_as_taggable_on :composers, :genres, :origins
 
   has_attached_file :pdf,
                     :hash_secret => "sheethubhashsecret" #TODO: Use ENV for this
@@ -11,13 +15,6 @@ class Sheet < ActiveRecord::Base
   validates_associated :assets,
     :on => [:create, :update],
     :message => "Sheet supporting files invalid"
-
-  acts_as_taggable # Alias for acts_as_taggable_on :tags
-  acts_as_taggable_on :composers, :genres, :origins
-
-  enum difficulty: %w{ beginner intermediate advanced }
-
-  bitmask :instruments, :as => [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], :null => false
 
   def find_related
     sql = "

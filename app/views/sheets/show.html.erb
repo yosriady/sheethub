@@ -19,7 +19,10 @@
 <p><%= link_to @sheet.pdf.url, @sheet.pdf.url %></p>
 <p>Last updated <%= @sheet.pdf_updated_at %></p>
 
-
+<b>Additional files</b>
+<% for asset in @sheet.assets %>
+  <p><%= asset.file.url %></p>
+<% end %>
 
 <%= link_to 'Edit', edit_sheet_path(@sheet) %> |
 <%= link_to 'Back', sheets_path %>
