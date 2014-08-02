@@ -6,7 +6,7 @@
 
   <%= f.label :instruments %>
   <br>
-  <%= f.input_field :instruments, collection: Sheet.values_for_instruments, prompt: "Choose instruments", multiple: true , id: "instruments-field"%>
+  <%= f.input_field :instruments_list, collection: Sheet.values_for_instruments, prompt: "Choose instruments", multiple: true , id: "instruments-field"%>
 
   <%= f.label :composers %>
   <br>

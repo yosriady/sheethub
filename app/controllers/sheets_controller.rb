@@ -1,11 +1,11 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy]
-  before_action :normalize_instruments, only: [:create, :update]
-  before_action :normalize_composers, only: [:create, :update]
-  before_action :normalize_genres, only: [:create, :update]
-  before_action :normalize_origins, only: [:create, :update]
+  before_action :normalize_tag_fields, only: [:create, :update]
+  before_action :validate_instruments, only: [:create, :update]
   before_action :set_tags
   before_action :set_instruments
+
+  TAG_FIELDS = [:composer_list, :genre_list, :origin_list, :instruments_list]
 
   # GET /sheets
   # GET /sheets.json
@@ -31,7 +31,7 @@ class SheetsController < ApplicationController
   # POST /sheets.json
   def create
     @sheet = Sheet.new(sheet_params)
-    @sheet.instruments = params[:sheet][:instruments]
+    @sheet.instruments = params[:sheet][:instruments_list]
     @sheet.composer_list = params[:sheet][:composer_list]
     @sheet.genre_list = params[:sheet][:genre_list]
     @sheet.origin_list = params[:sheet][:origin_list]
@@ -51,7 +51,7 @@ class SheetsController < ApplicationController
   def update
     respond_to do |format|
       update_params = sheet_params
-      update_params[:instruments] = params[:sheet][:instruments]
+      update_params[:instruments] = params[:sheet][:instruments_list]
       update_params[:composer_list] = params[:sheet][:composer_list]
       update_params[:genre_list] = params[:sheet][:genre_list]
       update_params[:origin_list] = params[:sheet][:origin_list]
@@ -76,6 +76,14 @@ class SheetsController < ApplicationController
   end
 
   private
+    def normalize_tag_fields
+      TAG_FIELDS.each { |tag_field| normalize_tags(tag_field)} # Clean up selectize tag values
+    end
+
+    def validate_instruments
+      params[:sheet][:instruments_list].select! {|instrument| Sheet.values_for_instruments.include?(instrument)} # Delete invalid instruments
+    end
+
     def set_sheet
       @sheet = Sheet.find(params[:id])
     end
@@ -91,28 +99,12 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params[:sheet].permit(:title, :description, :instruments, :composer_list, :genre_list, :origin_list,:pages, :difficulty)
+      params[:sheet].permit(:title, :description, :instruments_list, :composer_list, :genre_list, :origin_list,:pages, :difficulty)
     end
 
-    def normalize_composers
-      params[:sheet][:composer_list].delete("") # Delete space from selectize.js
-      params[:sheet][:composer_list] = params[:sheet][:composer_list].map &:to_sym
-    end
-
-    def normalize_genres
-      params[:sheet][:genre_list].delete("") # Delete space from selectize.js
-      params[:sheet][:genre_list] = params[:sheet][:genre_list].map &:to_sym
-    end
-
-    def normalize_origins
-      params[:sheet][:origin_list].delete("") # Delete space from selectize.js
-      params[:sheet][:origin_list] = params[:sheet][:origin_list].map &:to_sym
-    end
-
-    def normalize_instruments
-      params[:sheet][:instruments].delete("") # Delete space from selectize.js
-      params[:sheet][:instruments] = params[:sheet][:instruments].map &:to_sym
-      params[:sheet][:instruments].select! {|instrument| Sheet.values_for_instruments.include?(instrument)} # Delete invalid instruments
+    def normalize_tags(tag_list)
+      params[:sheet][tag_list].delete("")
+      params[:sheet][tag_list] = params[:sheet][tag_list].map &:to_sym
     end
 
 end
