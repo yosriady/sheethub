@@ -1,7 +1,8 @@
 class Sheet < ActiveRecord::Base
   attr_accessor :instruments_list # For form parsing
 
-  has_attached_file :pdf
+  has_attached_file :pdf,
+                    :hash_secret => "sheethubhashsecret" #TODO: Use ENV for this
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],
       :message => "only pdf files are allowed"

@@ -4,12 +4,10 @@ Rails.application.configure do
   # Paperclip file storage config
   config.paperclip_defaults = {
     :storage => :s3,
-    :url => ':s3_domain_url',
-    :path => '/:class/:attachment/:id_partition/:style/:filename',
     :s3_credentials => {
       :bucket => "sheethub",
-      :access_key_id => "AKIAI32VLLBYAJJ2THYA",
-      :secret_access_key => "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"
+      :access_key_id => "AKIAI32VLLBYAJJ2THYA", #TODO: Use ENV for this
+      :secret_access_key => "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"  #TODO: Use ENV for this
     }
   }
 
