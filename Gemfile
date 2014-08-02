@@ -32,16 +32,11 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'autoprefixer-rails'
 gem 'gon'
-# gem 'slim-rails'
-
 
 # File upload
-# gem 'carrierwave'
-# gem 'fog'
-# gem 'mini_magick'
-# gem 'aws-sdk'
-# gem "paperclip", "~> 4.1"
-# gem 's3_direct_upload'
+gem 'aws-sdk'
+gem 'paperclip'
+gem 'mini_magick'
 
 # API
 gem 'grape'
