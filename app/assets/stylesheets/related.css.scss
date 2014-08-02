@@ -1,0 +1,77 @@
+#related {
+    height: 250px;
+    position: relative;
+    margin-top: 70px;
+    background: #1a1a1a url('http://static.loudr.fm/images/bgs/bg_piano.jpg') no-repeat bottom center;
+    background-size: cover;
+    padding: 20px 40px;
+
+    h1 {
+        color: rgba(255,255,255,0.9);
+        font-weight: 300;
+    }
+
+    #related-tags {
+        width: 40%;
+        float: left;
+
+        .glyphicon {
+            color: #fff;
+            font-size: 24px;
+        }
+
+    }
+
+    #related-sheets {
+        width: 60%;
+        float: left;
+        padding: 10px;
+
+        .related-sheet {
+            cursor: pointer;
+            color: #fff;
+            width: 48%;
+            border-radius: 4px;
+            padding: 10px 15px;
+            background: rgba(255,255,255, 0.4); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(255,255,255, 0.4) 0%, rgba(221,221,221, 0.4) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255, 0.4)), color-stop(100%,rgba(221,221,221, 0.4))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(255,255,255, 0.4) 0%,rgba(221,221,221, 0.4) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(255,255,255, 0.4) 0%,rgba(221,221,221, 0.4) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(255,255,255, 0.4) 0%,rgba(221,221,221, 0.4) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(255,255,255, 0.4) 0%,rgba(221,221,221, 0.4) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(255,255,255, 0.4)', endColorstr='rgba(221,221,221, 0.4)',GradientType=0 ); /* IE6-9 */
+            float: left;
+            margin: 1%;
+
+            &:hover, &:focus, &:active{
+                background: rgba(255,255,255, 0.3); /* Old browsers */
+                background: -moz-linear-gradient(top, rgba(255,255,255, 0.3) 0%, rgba(221,221,221, 0.3) 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255, 0.3)), color-stop(100%,rgba(221,221,221, 0.3))); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top, rgba(255,255,255, 0.3) 0%,rgba(221,221,221, 0.3) 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top, rgba(255,255,255, 0.3) 0%,rgba(221,221,221, 0.3) 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top, rgba(255,255,255, 0.3) 0%,rgba(221,221,221, 0.3) 100%); /* IE10+ */
+                background: linear-gradient(to bottom, rgba(255,255,255, 0.3) 0%,rgba(221,221,221, 0.3) 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(255,255,255, 0.3)', endColorstr='rgba(221,221,221, 0.3)',GradientType=0 ); /* IE6-9 */
+            }
+
+            em {
+                font-size:12px;
+                text-transform: uppercase;
+                font-style: normal;
+                font-weight: 300;
+            }
+
+            h4 {
+                margin: 0px;
+                margin-top: 2px;
+            }
+
+            h5 {
+                font-weight: 300;
+                margin: 0px;
+                color: rgba(255,255,255,0.6);
+            }
+        }
+    }
+}

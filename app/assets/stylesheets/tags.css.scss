@@ -1,0 +1,24 @@
+.tag {
+    display: inline-block;
+    cursor: pointer;
+    margin: 2px 0px;
+    opacity: 0.85;
+    padding: 4px 8px;
+    color: #ffffff;
+    border: 1px solid #0073bb;
+    text-shadow: 0 1px 0 rgba(0, 51, 83, 0.9);
+    border-radius: 3px;
+    background-color: #1b9dec;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1da7ee), to(#178ee9));
+    background-image: -webkit-linear-gradient(top, #1da7ee, #178ee9);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#1da7ee), to(#178ee9));
+    background-image: linear-gradient(to bottom, #1da7ee, #178ee9);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff1da7ee', endColorstr='#ff178ee9', GradientType=0);
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),inset 0 1px rgba(255,255,255,0.03);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2),inset 0 1px rgba(255,255,255,0.03);
+
+    &:hover, &:focus {
+        opacity: 1;
+    }
+}
