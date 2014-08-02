@@ -5,7 +5,12 @@ class Sheet < ActiveRecord::Base
                     :hash_secret => "sheethubhashsecret" #TODO: Use ENV for this
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],
-      :message => "only pdf files are allowed"
+      :message => "Only pdf files are allowed"
+
+  has_many :assets, :dependent => :destroy
+  validates_associated :assets,
+    :on => [:create, :update],
+    :message => "Sheet supporting files invalid"
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
   acts_as_taggable_on :composers, :genres, :origins
