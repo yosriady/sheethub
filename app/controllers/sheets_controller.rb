@@ -1,8 +1,9 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy]
   before_action :normalize_instruments, only: [:create, :update]
-  before_action :normalize_tags, only: [:create, :update]
+  before_action :normalize_composers, only: [:create, :update]
   before_action :normalize_genres, only: [:create, :update]
+  before_action :normalize_origins, only: [:create, :update]
   before_action :set_tags
   before_action :set_instruments
 
@@ -31,8 +32,9 @@ class SheetsController < ApplicationController
   def create
     @sheet = Sheet.new(sheet_params)
     @sheet.instruments = params[:sheet][:instruments]
-    @sheet.tag_list = params[:sheet][:tag_list]
+    @sheet.composer_list = params[:sheet][:composer_list]
     @sheet.genre_list = params[:sheet][:genre_list]
+    @sheet.origin_list = params[:sheet][:origin_list]
     respond_to do |format|
       if @sheet.save
         format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
@@ -50,8 +52,9 @@ class SheetsController < ApplicationController
     respond_to do |format|
       update_params = sheet_params
       update_params[:instruments] = params[:sheet][:instruments]
-      update_params[:tag_list] = params[:sheet][:tag_list]
+      update_params[:composer_list] = params[:sheet][:composer_list]
       update_params[:genre_list] = params[:sheet][:genre_list]
+      update_params[:origin_list] = params[:sheet][:origin_list]
       if @sheet.update(update_params)
         format.html { redirect_to @sheet, notice: 'Sheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @sheet }
@@ -78,8 +81,9 @@ class SheetsController < ApplicationController
     end
 
     def set_tags
-      @tags ||= Sheet.tag_counts_on(:tags).collect{|tag| tag.name} # Just the tag names
+      @composers ||= Sheet.tag_counts_on(:composers).collect{|tag| tag.name} # Just the tag names
       @genres ||= Sheet.tag_counts_on(:genres).collect{|tag| tag.name}
+      @origins ||= Sheet.tag_counts_on(:origins).collect{|tag| tag.name}
     end
 
     def set_instruments
@@ -87,17 +91,22 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params[:sheet].permit(:title, :description, :instruments, :tag_list, :genre_list, :pages, :difficulty)
+      params[:sheet].permit(:title, :description, :instruments, :composer_list, :genre_list, :origin_list,:pages, :difficulty)
     end
 
-    def normalize_tags
-      params[:sheet][:tag_list].delete("") # Delete space from selectize.js
-      params[:sheet][:tag_list] = params[:sheet][:tag_list].map &:to_sym
+    def normalize_composers
+      params[:sheet][:composer_list].delete("") # Delete space from selectize.js
+      params[:sheet][:composer_list] = params[:sheet][:composer_list].map &:to_sym
     end
 
     def normalize_genres
       params[:sheet][:genre_list].delete("") # Delete space from selectize.js
       params[:sheet][:genre_list] = params[:sheet][:genre_list].map &:to_sym
+    end
+
+    def normalize_origins
+      params[:sheet][:origin_list].delete("") # Delete space from selectize.js
+      params[:sheet][:origin_list] = params[:sheet][:origin_list].map &:to_sym
     end
 
     def normalize_instruments

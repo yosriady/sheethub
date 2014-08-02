@@ -6,7 +6,7 @@ $(document).on("page:change", function() {
         create: false
     });
 
-    $('#tags-field').selectize({
+    $('#composers-field').selectize({
         plugins: ['remove_button'],
         delimiter: ',',
         persist: false,
@@ -14,6 +14,13 @@ $(document).on("page:change", function() {
     });
 
     $('#genres-field').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        create: true
+    });
+
+    $('#origins-field').selectize({
         plugins: ['remove_button'],
         delimiter: ',',
         persist: false,

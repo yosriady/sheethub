@@ -8,15 +8,17 @@
   <br>
   <%= f.input_field :instruments, collection: Sheet.values_for_instruments, prompt: "Choose instruments", multiple: true , id: "instruments-field"%>
 
-  <%= f.label :tags %>
+  <%= f.label :composers %>
   <br>
-  <%= f.input_field :tag_list, collection: @tags, prompt: "Add genres, origin, composers...", multiple: true , id: "tags-field"%>
+  <%= f.input_field :composer_list, collection: @composers, prompt: "Add composer(s)", multiple: true , id: "composers-field"%>
 
   <%= f.label :genres %>
   <br>
   <%= f.input_field :genre_list, collection: @genres, prompt: "Add genres", multiple: true , id: "genres-field"%>
 
-
+  <%= f.label :origins %>
+  <br>
+  <%= f.input_field :origin_list, collection: @origins, prompt: "Where is this from?", multiple: true , id: "origins-field"%>
 
   <%= f.input :description %>
   <%= f.input :pages %>
