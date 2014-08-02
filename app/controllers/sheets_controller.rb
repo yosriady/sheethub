@@ -98,13 +98,13 @@ class SheetsController < ApplicationController
       gon.instruments ||= Sheet.values_for_instruments
     end
 
-    def sheet_params
-      params[:sheet].permit(:title, :description, :instruments_list, :composer_list, :genre_list, :origin_list,:pages, :difficulty)
-    end
-
     def normalize_tags(tag_list)
       params[:sheet][tag_list].delete("")
       params[:sheet][tag_list] = params[:sheet][tag_list].map &:to_sym
+    end
+
+    def sheet_params
+      params[:sheet].permit(:title, :description, :instruments_list, :composer_list, :genre_list, :origin_list,:pages, :difficulty, :pdf)
     end
 
 end

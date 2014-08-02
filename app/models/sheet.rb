@@ -1,6 +1,11 @@
 class Sheet < ActiveRecord::Base
   attr_accessor :instruments_list # For form parsing
 
+  has_attached_file :pdf
+  validates_attachment_content_type :pdf,
+      :content_type => [ 'application/pdf' ],
+      :message => "only pdf files are allowed"
+
   acts_as_taggable # Alias for acts_as_taggable_on :tags
   acts_as_taggable_on :composers, :genres, :origins
 

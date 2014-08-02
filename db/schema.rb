@@ -11,24 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801150431) do
+ActiveRecord::Schema.define(version: 20140802120818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "sheets", force: true do |t|
-    t.boolean  "is_public?",                           default: true,  null: false
-    t.boolean  "is_flagged?",                          default: false, null: false
-    t.boolean  "is_free?",                             default: true,  null: false
-    t.boolean  "is_original?",                         default: false, null: false
-    t.decimal  "price",        precision: 2, scale: 0, default: 0,     null: false
-    t.string   "title",                                                null: false
-    t.text     "description",                                          null: false
-    t.integer  "pages",                                default: 0,     null: false
+    t.boolean  "is_public?",                               default: true,  null: false
+    t.boolean  "is_flagged?",                              default: false, null: false
+    t.boolean  "is_free?",                                 default: true,  null: false
+    t.boolean  "is_original?",                             default: false, null: false
+    t.decimal  "price",            precision: 2, scale: 0, default: 0,     null: false
+    t.string   "title",                                                    null: false
+    t.text     "description",                                              null: false
+    t.integer  "pages",                                    default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "difficulty"
     t.integer  "instruments"
+    t.string   "pdf_file_name"
+    t.string   "pdf_content_type"
+    t.integer  "pdf_file_size"
+    t.datetime "pdf_updated_at"
   end
 
   create_table "taggings", force: true do |t|

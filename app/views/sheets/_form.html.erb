@@ -23,6 +23,8 @@
   <%= f.input :description %>
   <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %>
 
+  <%= f.label :pdf %><br />
+  <%= f.file_field :pdf %>
 
   <%= f.button :submit %>
 <% end %>

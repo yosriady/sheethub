@@ -1,6 +1,18 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Paperclip file storage config
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :url => ':s3_domain_url',
+    :path => '/:class/:attachment/:id_partition/:style/:filename',
+    :s3_credentials => {
+      :bucket => "sheethub",
+      :access_key_id => "AKIAI32VLLBYAJJ2THYA",
+      :secret_access_key => "STIW0JGoAnCR5R0CscwUzE/lf0ucxnK4AvKoOGU9"
+    }
+  }
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
