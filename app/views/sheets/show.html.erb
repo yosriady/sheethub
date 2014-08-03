@@ -1,34 +1,84 @@
 <% title "#{@sheet.title} by #{@sheet.composer_list.to_s.titleize}"  %>
 
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <div class="row">
+        <p id="notice"><%= notice %></p>
 
-<p>TITLE: <%= @sheet.title %></p>
-<p>DESCRIPTION: <%= @sheet.description %></p>
-<p>FREE?: <%= @sheet.is_free? %></p>
-<p>ORIGINAL?: <%= @sheet.is_original? %></p>
-<p>PRICE: <%= @sheet.price %></p>
-<p>INSTRUMENTS: <%= @sheet.instruments %></p>
-<p>GENRES: <%= @sheet.genre_list %></p>
-<p>COMPOSERS: <%= @sheet.composer_list %></p>
-<p>ORIGINS: <%= @sheet.origin_list %></p>
-<p>PAGES: <%= @sheet.pages %></p>
-<p>DIFFICULTY: <%= @sheet.difficulty %></p>
-<p>Published at <%= @sheet.created_at %></p>
+        <div id="sheet-content" class="col-xs-8">
+            <%= image_tag("/assets/sheet.png", :class => "sample_sheet") %>
+            <%= render 'disqus' %>
+        </div>
 
-<b>File</b>
-<p><%= @sheet.pdf_file_name %></p>
-<p><%= @sheet.pdf_file_size %> KB</p>
-<p><%= link_to @sheet.pdf.url, @sheet.pdf.url %></p>
-<p>Last updated <%= @sheet.pdf_updated_at %></p>
+        <div id="sheet-sidebar" class="col-xs-4">
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <h1><%= @sheet.title %></h1>
+                <p><%= @sheet.description %></p>
+                <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
 
-<b>Additional files</b>
-<% for asset in @sheet.assets %>
-  <p><%= asset.file.url %></p>
-<% end %>
+                <h4>Instruments</h4>
+                <% for instrument in @sheet.instruments %>
+                <p class="tag"><span class="glyphicon glyphicon-bullhorn"></span> <%= instrument.to_s.titleize %></p>
+                <% end %>
+                <% if @sheet.genre_list %>
+                <h4>Genres</h4>
+                <% for genre in @sheet.genre_list %>
+                <p class="tag"><span class="glyphicon glyphicon-headphones"></span> <%= genre.titleize %></p>
+                <% end %>
+                <% end %>
+                <% if @sheet.composer_list %>
+                <h4>Composers</h4>
+                <% for composer in @sheet.composer_list %>
+                <p class="tag"><span class="glyphicon glyphicon-user"></span> <%= composer.titleize %></p>
+                <% end %>
+                <% end %>
 
-<%= link_to 'Edit', edit_sheet_path(@sheet) %> |
-<%= link_to 'Back', sheets_path %>
+                <% if @sheet.origin_list %>
+                <h4>Origin</h4>
+                <% for origin in @sheet.origin_list %>
+                <p class="tag"><span class="glyphicon glyphicon-screenshot"></span> <%= origin.titleize %></p>
+                <% end %>
+                <% end %>
 
-<%= render 'disqus' %>
+                <% if @sheet.difficulty %>
+                <p>DIFFICULTY: <%= @sheet.difficulty %></p>
+                <% end %>
+
+                <br>
+                <%= link_to 'Edit', edit_sheet_path(@sheet) %> |
+                <%= link_to 'Back', sheets_path %>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+        <div class="panel-heading"><span class="glyphicon glyphicon-file"></span> Files</div>
+          <div class="panel-body">
+            <ul id="sheet-files">
+                <!-- Main PDF file -->
+                <li>
+                    <p><%= @sheet.pdf_file_size %> KB</p>
+                    <p><%= link_to @sheet.pdf_file_name, @sheet.pdf.url %></p>
+                    <p>Last updated <%= @sheet.pdf_updated_at %></p>
+                </li>
+
+                <!-- Additional files -->
+                <% for asset in @sheet.assets %>
+                <li><%= asset.file.url %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+      <div class="panel-heading"><span class="glyphicon glyphicon-share"></span> Share</div>
+      <div class="panel-body">
+          <!-- TODO -->
+      </div>
+  </div>
+
+</div>
+</div>
+</div>
+
 
 <%= render 'related' %>

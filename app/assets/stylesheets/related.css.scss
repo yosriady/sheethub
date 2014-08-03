@@ -5,6 +5,7 @@
     background: #1a1a1a url('http://static.loudr.fm/images/bgs/bg_piano.jpg') no-repeat bottom center;
     background-size: cover;
     padding: 20px 40px;
+    clear: left;
 
     h1 {
         color: rgba(255,255,255,0.9);
@@ -14,6 +15,7 @@
     #related-tags {
         width: 40%;
         float: left;
+        padding-right: 20px;
 
         .glyphicon {
             color: #fff;
