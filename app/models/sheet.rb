@@ -16,6 +16,13 @@ class Sheet < ActiveRecord::Base
     :on => [:create, :update],
     :message => "Sheet supporting files invalid"
 
+  default_scope { where(is_public?: true) }
+  scope :is_public, -> { where(is_public?: true) }
+  scope :is_private, -> { where(is_public?: false) }
+  scope :free, -> { where(is_free?: true) }
+  scope :original, -> { where(is_original?: true) }
+  scope :flagged, -> { where(is_flagged?: true) }
+
   def find_related
     sql = "
     SELECT sheets.*, COUNT(tags.id) AS count
