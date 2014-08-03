@@ -2,14 +2,20 @@
 
 <div class="container">
     <div class="row">
-        <p id="notice"><%= notice %></p>
-
         <div id="sheet-content" class="col-xs-8">
             <%= image_tag("/assets/sheet.png", :class => "sample_sheet") %>
             <%= render 'disqus' %>
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4">
+
+
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                <button type="button" class="btn btn-success btn-lg add-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+                </div>
+            </div>
+
             <div class="panel panel-info">
               <div class="panel-body">
                 <h1><%= @sheet.title %></h1>

@@ -13,6 +13,8 @@
 
 <%= render 'layouts/navbar' unless @disable_navbar %>
 
+<%= render "layouts/flash_messages", flash: flash %>
+
 <%= yield %>
 
 </body>
