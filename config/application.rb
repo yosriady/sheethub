@@ -10,6 +10,7 @@ module Sheethub
   class Application < Rails::Application
 
     ActsAsTaggableOn.force_lowercase = true
+    ActsAsTaggableOn.force_parameterize = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
