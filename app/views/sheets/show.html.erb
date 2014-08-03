@@ -12,7 +12,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-body">
-                <button type="button" class="btn btn-success btn-lg add-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+                    <button type="button" class="btn btn-success btn-lg add-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
                 </div>
             </div>
 
@@ -22,28 +22,31 @@
                 <p><%= @sheet.description %></p>
                 <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
 
-                <h4>Instruments</h4>
-                <% for instrument in @sheet.instruments %>
-                <p class="tag"><span class="glyphicon glyphicon-bullhorn"></span> <%= instrument.to_s.titleize %></p>
+                <% if @sheet.instruments %>
+                    <h4>Instruments</h4>
+                    <% for instrument in @sheet.instruments %>
+                        <p class="tag"><span class="glyphicon glyphicon-bullhorn"></span> <%= instrument.to_s.titleize %></p>
+                    <% end %>
                 <% end %>
+
                 <% if @sheet.genre_list %>
-                <h4>Genres</h4>
-                <% for genre in @sheet.genre_list %>
-                <p class="tag"><span class="glyphicon glyphicon-headphones"></span> <%= genre.titleize %></p>
-                <% end %>
+                    <h4>Genres</h4>
+                    <% for genre in @sheet.genre_list %>
+                        <p class="tag"><span class="glyphicon glyphicon-headphones"></span> <%= genre.titleize %></p>
+                    <% end %>
                 <% end %>
                 <% if @sheet.composer_list %>
-                <h4>Composers</h4>
-                <% for composer in @sheet.composer_list %>
-                <p class="tag"><span class="glyphicon glyphicon-user"></span> <%= composer.titleize %></p>
-                <% end %>
+                    <h4>Composers</h4>
+                    <% for composer in @sheet.composer_list %>
+                        <p class="tag"><span class="glyphicon glyphicon-user"></span> <%= composer.titleize %></p>
+                    <% end %>
                 <% end %>
 
                 <% if @sheet.origin_list %>
-                <h4>Origin</h4>
-                <% for origin in @sheet.origin_list %>
-                <p class="tag"><span class="glyphicon glyphicon-screenshot"></span> <%= origin.titleize %></p>
-                <% end %>
+                    <h4>Origin</h4>
+                    <% for origin in @sheet.origin_list %>
+                        <p class="tag"><span class="glyphicon glyphicon-screenshot"></span> <%= origin.titleize %></p>
+                    <% end %>
                 <% end %>
 
                 <% if @sheet.difficulty %>
@@ -57,32 +60,32 @@
         </div>
 
         <div class="panel panel-info">
-        <div class="panel-heading"><span class="glyphicon glyphicon-file"></span> Files</div>
-          <div class="panel-body">
-            <ul id="sheet-files">
-                <!-- Main PDF file -->
-                <li>
-                    <p><%= @sheet.pdf_file_size %> KB</p>
-                    <p><%= link_to @sheet.pdf_file_name, @sheet.pdf.url %></p>
-                    <p>Last updated <%= @sheet.pdf_updated_at %></p>
-                </li>
+            <div class="panel-heading"><span class="glyphicon glyphicon-file"></span> Files</div>
+            <div class="panel-body">
+                <ul id="sheet-files">
+                    <!-- Main PDF file -->
+                    <li>
+                        <p><%= @sheet.pdf_file_size %> KB</p>
+                        <p><%= link_to @sheet.pdf_file_name, @sheet.pdf.url %></p>
+                        <p>Last updated <%= @sheet.pdf_updated_at %></p>
+                    </li>
 
-                <!-- Additional files -->
-                <% for asset in @sheet.assets %>
-                <li><%= asset.file.url %></li>
-                <% end %>
-            </ul>
+                    <!-- Additional files -->
+                    <% for asset in @sheet.assets %>
+                    <li><%= asset.file.url %></li>
+                    <% end %>
+                </ul>
+            </div>
         </div>
-    </div>
 
-    <div class="panel panel-info">
-      <div class="panel-heading"><span class="glyphicon glyphicon-share"></span> Share</div>
-      <div class="panel-body">
-          <!-- TODO -->
+        <div class="panel panel-info">
+          <div class="panel-heading"><span class="glyphicon glyphicon-share"></span> Share</div>
+          <div class="panel-body">
+              <!-- TODO -->
+          </div>
       </div>
-  </div>
 
-</div>
+  </div>
 </div>
 </div>
 
