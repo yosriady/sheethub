@@ -37,17 +37,33 @@ class Sheet < ActiveRecord::Base
     Sheet.find_by_sql(sql)
   end
 
+  def find_related_tags
+    related_sheets = Sheet.tagged_with(joined_tags, :any => true).limit(5)
+    related_tags = Set.new
+    related_sheets.each{ |sheet| related_tags.merge sheet.tags }
+    format_tags(related_tags.to_a)
+  end
+
   def self.instruments_to_bitmask(instruments)
     (instruments & Sheet.values_for_instruments).map { |r| 2**Sheet.values_for_instruments.index(r) }.inject(0, :+)
   end
 
-  private
+  protected
+    def tags
+      [genre_list, composer_list, source_list].flatten
+    end
+
     def joined_tags
-      joined_tags = ""
-      tag_list.each do |tag|
-        joined_tags << "'#{tag}',"
+      format_tags(tags)
+    end
+
+    # Formatting method for selectize.js usage
+    def format_tags(input)
+      output = ""
+      input.each do |tag|
+        output << "'#{tag}',"
       end
-      return joined_tags[0..-2]
+      return output[0..-2] # Strip trailing comma
     end
 
 end
