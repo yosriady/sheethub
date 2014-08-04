@@ -12,7 +12,7 @@
     </div>
     <div id="related-sheets">
         <% for sheet in @sheet.find_related %>
-            <a href="#">
+            <a href="<%= sheet_path(sheet) %>">
             <div class="related-sheet">
                 <em><%= sheet.instruments.join(", ") %></em>
                 <h4><%= sheet.title %></h4>
