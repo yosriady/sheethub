@@ -6,7 +6,7 @@
             <li>
                 <a href="<%= @sheet.pdf.url %>">
                     <div class="sheet-file">
-                        <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.pdf_file_name %> <strong><%= @sheet.pdf_file_size/1000 %> KB</strong></p>
+                    <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
                     </div>
                 </a>
             </li>
