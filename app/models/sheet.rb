@@ -41,7 +41,7 @@ class Sheet < ActiveRecord::Base
     related_sheets = Sheet.tagged_with(joined_tags, :any => true).limit(5)
     related_tags = Set.new
     related_sheets.each{ |sheet| related_tags.merge sheet.tags }
-    format_tags(related_tags.to_a)
+    related_tags.to_a
   end
 
   def self.instruments_to_bitmask(instruments)
