@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module Sheethub
   class Application < Rails::Application
 
+    ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true
     ActsAsTaggableOn.force_parameterize = true
 
