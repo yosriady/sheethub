@@ -42,10 +42,10 @@
                     <% end %>
                 <% end %>
 
-                <% if @sheet.origin_list %>
-                    <h4>Origin</h4>
-                    <% for origin in @sheet.origin_list %>
-                        <p class="tag"><span class="glyphicon glyphicon-screenshot"></span> <%= origin.titleize %></p>
+                <% if @sheet.source_list %>
+                    <h4>Source</h4>
+                    <% for source in @sheet.source_list %>
+                        <p class="tag"><span class="glyphicon glyphicon-screenshot"></span> <%= source.titleize %></p>
                     <% end %>
                 <% end %>
 

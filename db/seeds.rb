@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Sheet.create(title: "Another Guldove", description: "Guitar piece by Yasunori Mitsuda, from Chrono Cross.", pages: 2, instruments: [:guitar], composer_list: ["Yasunori Mitsuda".to_sym], genre_list: [:videogame, :fingerstyle] ,tag_list: [:summer], origin_list: ["Chrono Cross".to_sym])
+Sheet.create(title: "Another Guldove", description: "Guitar piece by Yasunori Mitsuda, from Chrono Cross.", pages: 2, instruments: [:guitar], composer_list: ["Yasunori Mitsuda".to_sym], genre_list: [:videogame, :fingerstyle] ,tag_list: [:summer], source_list: ["Chrono Cross".to_sym])
 
 Sheet.create(title: "Another Marbule", description: "Guitar piece by Yasunori Mitsuda, from Chrono Cross.", pages: 2, instruments: [:piano], tag_list: [:summer, :memories])
 

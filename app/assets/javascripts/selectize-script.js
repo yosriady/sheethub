@@ -20,7 +20,7 @@ $(document).on("page:change", function() {
         create: true
     });
 
-    $('#origins-field').selectize({
+    $('#sources-field').selectize({
         plugins: ['remove_button'],
         delimiter: ',',
         persist: false,

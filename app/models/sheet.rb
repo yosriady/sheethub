@@ -3,7 +3,7 @@ class Sheet < ActiveRecord::Base
   enum difficulty: %w{ beginner intermediate advanced }
   bitmask :instruments, :as => [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], :null => false
   acts_as_taggable # Alias for acts_as_taggable_on :tags
-  acts_as_taggable_on :composers, :genres, :origins
+  acts_as_taggable_on :composers, :genres, :sources
 
   has_attached_file :pdf,
                     :hash_secret => "sheethubhashsecret" #TODO: Use ENV for this

@@ -5,7 +5,7 @@ class SheetsController < ApplicationController
   before_action :set_tags
   before_action :set_instruments
 
-  TAG_FIELDS = [:composer_list, :genre_list, :origin_list, :instruments_list]
+  TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
 
   # GET /sheets
   # GET /sheets.json
@@ -25,6 +25,7 @@ class SheetsController < ApplicationController
 
   # GET /sheets/1/edit
   def edit
+    @sheet.instruments_list = @sheet.instruments
   end
 
   # POST /sheets
@@ -34,7 +35,7 @@ class SheetsController < ApplicationController
     @sheet.instruments = params[:sheet][:instruments_list]
     @sheet.composer_list = params[:sheet][:composer_list]
     @sheet.genre_list = params[:sheet][:genre_list]
-    @sheet.origin_list = params[:sheet][:origin_list]
+    @sheet.source_list = params[:sheet][:source_list]
     respond_to do |format|
       if @sheet.save
         format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
@@ -54,7 +55,7 @@ class SheetsController < ApplicationController
       update_params[:instruments] = params[:sheet][:instruments_list]
       update_params[:composer_list] = params[:sheet][:composer_list]
       update_params[:genre_list] = params[:sheet][:genre_list]
-      update_params[:origin_list] = params[:sheet][:origin_list]
+      update_params[:source_list] = params[:sheet][:source_list]
       if @sheet.update(update_params)
         format.html { redirect_to @sheet, notice: 'Sheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @sheet }
@@ -77,7 +78,7 @@ class SheetsController < ApplicationController
 
   private
     def normalize_tag_fields
-      TAG_FIELDS.each { |tag_field| normalize_tags(tag_field)} # Clean up selectize tag values
+      TAG_FIELDS.each { |tag_field| normalize_tags(tag_field)} # Clean up selectize tag values: genres, sources, composers, instruments
     end
 
     def validate_instruments
@@ -91,7 +92,7 @@ class SheetsController < ApplicationController
     def set_tags
       @composers ||= Sheet.tag_counts_on(:composers).collect{|tag| tag.name} # Just the tag names
       @genres ||= Sheet.tag_counts_on(:genres).collect{|tag| tag.name}
-      @origins ||= Sheet.tag_counts_on(:origins).collect{|tag| tag.name}
+      @sources ||= Sheet.tag_counts_on(:sources).collect{|tag| tag.name}
     end
 
     def set_instruments
@@ -104,7 +105,7 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params[:sheet].permit(:title, :description, :instruments_list, :composer_list, :genre_list, :origin_list,:pages, :difficulty, :pdf, :assets)
+      params[:sheet].permit(:title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets)
     end
 
 end
