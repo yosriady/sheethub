@@ -8,8 +8,6 @@
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4">
-
-
             <div class="panel panel-primary">
                 <div class="panel-body">
                     <button type="button" class="btn btn-success btn-lg add-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
@@ -18,6 +16,9 @@
 
             <div class="panel panel-info">
               <div class="panel-body">
+                <a href="<%= edit_sheet_path(@sheet) %>">
+                <button type="button" class="btn btn-success "><span class="glyphicon glyphicon-edit"></span> Edit</button></a>
+
                 <h1><%= @sheet.title %></h1>
                 <p><%= @sheet.description %></p>
                 <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
@@ -54,8 +55,6 @@
                 <% end %>
 
                 <br>
-                <%= link_to 'Edit', edit_sheet_path(@sheet) %> |
-                <%= link_to 'Back', sheets_path %>
             </div>
         </div>
 
