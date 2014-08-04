@@ -1,0 +1,25 @@
+ <div class="panel panel-info">
+    <div class="panel-heading"><span class="glyphicon glyphicon-file"></span> Files</div>
+    <div class="panel-body"  id="sheet-files">
+        <ul>
+            <!-- Main PDF file -->
+            <li>
+                <a href="<%= @sheet.pdf.url %>">
+                    <div class="sheet-file">
+                        <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.pdf_file_name %> <strong><%= @sheet.pdf_file_size/1000 %> KB</strong></p>
+                    </div>
+                </a>
+            </li>
+
+            <!-- Additional files -->
+            <% for asset in @sheet.assets %>
+            <li>
+                <a href="<%= asset.file.url %>">
+                    <div class="sheet-file">
+                        <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.asset_file_name %> <strong><%= @sheet.asset_file_size/1000 %> KB</strong></p>
+                    </div>
+                </a>
+                <% end %>
+            </ul>
+        </div>
+    </div>
