@@ -20,7 +20,45 @@
     }
 }
 
-ul#sheet-files {
+#sheet-files {
+
+
+    a {
+        &:hover, &:focus, &:active {
+                text-decoration: none;
+        }
+    }
+}
+
+.sheet-file {
+    background: rgba(37,131,235, 0.8);
+    border-radius: 4px;
+
+    &:hover, &:focus, &:active {
+            text-decoration: none;
+            background: rgba(37,131,235, 1);
+    }
+
+    .glyphicon {
+        opacity: 0.7;
+    }
+
+    p {
+        color: #fff;
+        padding: 10px;
+    }
+
+
+    strong {
+        font-weight: normal;
+        float:right;
+        color: rgba(255,255,255, 0.7)
+    }
+
+
+}
+
+#sheet-files ul{
     list-style-type: none;
     padding-left: 0px;
 }
