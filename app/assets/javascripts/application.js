@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require pdf
 //= require bootstrap
 //= require jquery_ujs
 //= require selectize

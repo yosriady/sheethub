@@ -1,0 +1,34 @@
+<canvas id="pdf-canvas" style="border:1px solid black"></canvas>
+<script type="text/javascript">
+$(document).on("page:change", function() {
+  var url = 'http://sheethub.s3.amazonaws.com/sheets/0b26b42aa027c6b73855feb68b8c089e893f8114/original/another_guldove.pdf?1407157315';
+  var url = gon.pdf_url;
+  console.log("Viewing " + url);
+  //
+  // Disable workers to avoid yet another cross-origin issue (workers need the URL of
+  // the script to be loaded, and dynamically loading a cross-origin script does
+  // not work)
+  //
+  // PDFJS.disableWorker = true;
+
+  // Asynchronous download PDF as an ArrayBuffer
+  PDFJS.getDocument(url).then(function getPdfHelloWorld(pdf) {
+    console.log(pdf);
+    // Fetch the first page
+    pdf.getPage(1).then(function getPageHelloWorld(page) {
+      var scale = 1.5;
+      var viewport = page.getViewport(scale);
+
+      // Prepare canvas using PDF page dimensions
+      var canvas = document.getElementById('pdf-canvas');
+      var context = canvas.getContext('2d');
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      // Render PDF page into canvas context
+      page.render({canvasContext: context, viewport: viewport});
+    });
+  });
+
+});
+</script>
