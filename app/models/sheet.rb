@@ -49,13 +49,13 @@ class Sheet < ActiveRecord::Base
     (instruments & Sheet.values_for_instruments).map { |r| 2**Sheet.values_for_instruments.index(r) }.inject(0, :+)
   end
 
+  def joined_tags
+    format_tags(tags)
+  end
+
   protected
     def tags
       [genre_list, composer_list, source_list].flatten
-    end
-
-    def joined_tags
-      format_tags(tags)
     end
 
     # Formatting method for selectize.js usage

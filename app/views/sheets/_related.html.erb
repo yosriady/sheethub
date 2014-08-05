@@ -1,5 +1,5 @@
+<% unless @sheet.joined_tags.empty? || @sheet.find_related_tags.blank? %>
 <div id="related">
-
     <div id="related-tags">
         <h1><span class="glyphicon glyphicon-heart"></span> You might also like...</h1>
         <% for tag in @sheet.find_related_tags %>
@@ -22,3 +22,4 @@
         <% end %>
     </div>
 </div>
+<% end %>
