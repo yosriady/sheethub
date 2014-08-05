@@ -1,6 +1,16 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Paperclip file storage config
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => "sheethub",
+      :access_key_id => "AKIAI32VLLBYAJJ2THYA", #TODO: Use ENV for this
+      :secret_access_key => "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"  #TODO: Use ENV for this
+    }
+  }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
