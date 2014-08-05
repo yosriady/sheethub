@@ -24,6 +24,7 @@ class Sheet < ActiveRecord::Base
   scope :flagged, -> { where(is_flagged?: true) }
 
   def find_related
+    return [] if joined_tags.empty?
     sql = "
     SELECT sheets.*, COUNT(tags.id) AS count
     FROM sheets, tags, taggings
