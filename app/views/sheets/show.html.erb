@@ -31,20 +31,20 @@
                     <% end %>
                 <% end %>
 
-                <% if @sheet.genre_list %>
+                <% if @sheet.genre_list.any? %>
                     <h4>Genres</h4>
                     <% for genre in @sheet.genre_list %>
                         <p class="tag"><span class="glyphicon glyphicon-headphones"></span> <%= genre.titleize %></p>
                     <% end %>
                 <% end %>
-                <% if @sheet.composer_list %>
+                <% if @sheet.composer_list.any? %>
                     <h4>Composers</h4>
                     <% for composer in @sheet.composer_list %>
                         <p class="tag"><span class="glyphicon glyphicon-user"></span> <%= composer.titleize %></p>
                     <% end %>
                 <% end %>
 
-                <% if @sheet.source_list %>
+                <% if @sheet.source_list.any? %>
                     <h4>Source</h4>
                     <% for source in @sheet.source_list %>
                         <p class="tag"><span class="glyphicon glyphicon-screenshot"></span> <%= source.titleize %></p>

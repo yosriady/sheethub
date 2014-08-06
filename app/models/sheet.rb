@@ -6,7 +6,8 @@ class Sheet < ActiveRecord::Base
   acts_as_taggable_on :composers, :genres, :sources
 
   has_attached_file :pdf,
-                    :hash_secret => "sheethubhashsecret" #TODO: Use ENV for this
+                    :hash_secret => "sheethubhashsecret", #TODO: Use ENV for this
+                    :default_url => "nil" #TODO: point to special Missing file route
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],
       :message => "Only pdf files are allowed"

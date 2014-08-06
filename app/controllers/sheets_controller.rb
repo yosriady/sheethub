@@ -77,6 +77,37 @@ class SheetsController < ApplicationController
     end
   end
 
+  # GET /genres
+  def genres
+    # TODO
+    #  display
+  end
+
+  # GET /genre/:slug
+  def find_by_genre
+    @sheets = Sheet.tagged_with(params[:slug], :on => :genres)
+  end
+
+  # GET /composers
+  def composers
+    # TODO
+  end
+
+  # GET /composer/:slug
+  def find_by_composer
+    # TODO
+  end
+
+  # GET /sources
+  def sources
+    # TODO
+  end
+
+  # GET /source/:slug
+  def find_by_source
+    # TODO
+  end
+
   private
     def normalize_tag_fields
       TAG_FIELDS.each { |tag_field| normalize_tags(tag_field)} # Clean up selectize tag values: genres, sources, composers, instruments
@@ -91,9 +122,9 @@ class SheetsController < ApplicationController
     end
 
     def set_tags
-      @composers ||= Sheet.tag_counts_on(:composers).collect{|tag| tag.name} # Just the tag names
-      @genres ||= Sheet.tag_counts_on(:genres).collect{|tag| tag.name}
-      @sources ||= Sheet.tag_counts_on(:sources).collect{|tag| tag.name}
+      @composers ||= Sheet.tags_on(:composers)
+      @genres ||= Sheet.tags_on(:genres)
+      @sources ||= Sheet.tags_on(:sources)
     end
 
     def set_instruments

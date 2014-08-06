@@ -10,15 +10,15 @@
 
   <%= f.label :composers %>
   <br>
-  <%= f.input_field :composer_list, collection: @composers, prompt: "Add composer(s)", multiple: true , id: "composers-field"%>
+  <%= f.input_field :composer_list, collection: @composers.collect{|tag| tag.name}, prompt: "Add composer(s)", multiple: true , id: "composers-field"%>
 
   <%= f.label :genres %>
   <br>
-  <%= f.input_field :genre_list, collection: @genres, prompt: "Add genres", multiple: true , id: "genres-field"%>
+  <%= f.input_field :genre_list, collection: @genres.collect{|tag| tag.name}, prompt: "Add genres", multiple: true , id: "genres-field"%>
 
   <%= f.label :sources %>
   <br>
-  <%= f.input_field :source_list, collection: @sources, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
+  <%= f.input_field :source_list, collection: @sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
   <%= f.input :description %>
   <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %>
