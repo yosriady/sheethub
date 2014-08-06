@@ -28,3 +28,11 @@ html, body {
     background: #fff
 }
 
+a {
+    text-decoration:none;
+
+    &:hover, &:focus {
+        text-decoration: none;
+    }
+
+}
