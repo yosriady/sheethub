@@ -79,8 +79,6 @@ class SheetsController < ApplicationController
 
   # GET /genres
   def genres
-    # TODO
-    #  display
   end
 
   # GET /genre/:slug
@@ -90,7 +88,6 @@ class SheetsController < ApplicationController
 
   # GET /composers
   def composers
-    # TODO
   end
 
   # GET /composer/:slug
@@ -100,7 +97,6 @@ class SheetsController < ApplicationController
 
   # GET /sources
   def sources
-    # TODO
   end
 
   # GET /source/:slug

@@ -9,6 +9,7 @@
             </span>
             </a>
         <% end %>
+        <%= render 'tags', tags: @genres %>
     </div>
     <div id="related-sheets">
         <% for sheet in @sheet.find_related %>
