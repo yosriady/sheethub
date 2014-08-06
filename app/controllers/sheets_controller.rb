@@ -82,7 +82,7 @@ class SheetsController < ApplicationController
   end
 
   # GET /genre/:slug
-  def find_by_genre
+  def by_genre
     @sheets = Sheet.tagged_with(params[:slug], :on => :genres)
   end
 
@@ -91,8 +91,8 @@ class SheetsController < ApplicationController
   end
 
   # GET /composer/:slug
-  def find_by_composer
-    # TODO
+  def by_composer
+    @sheets = Sheet.tagged_with(params[:slug], :on => :composers)
   end
 
   # GET /sources
@@ -100,8 +100,8 @@ class SheetsController < ApplicationController
   end
 
   # GET /source/:slug
-  def find_by_source
-    # TODO
+  def by_source
+    @sheets = Sheet.tagged_with(params[:slug], :on => :sources)
   end
 
   private
