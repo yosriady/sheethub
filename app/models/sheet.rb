@@ -24,7 +24,7 @@ class Sheet < ActiveRecord::Base
   scope :original, -> { where(is_original?: true) }
   scope :flagged, -> { where(is_flagged?: true) }
 
-  def find_related
+  def related_sheets
     return [] if joined_tags.empty?
     sql = "
     SELECT sheets.*, COUNT(tags.id) AS count
@@ -39,10 +39,10 @@ class Sheet < ActiveRecord::Base
     Sheet.find_by_sql(sql)
   end
 
-  def find_related_tags
+  def related_tags
     related_sheets = Sheet.tagged_with(joined_tags, :any => true).limit(5)
     related_tags = Set.new
-    related_sheets.each{ |sheet| related_tags.merge sheet.tags }
+    related_sheets.each{ |sheet| related_tags.merge sheet.tag_objects }
     related_tags.to_a
   end
 
@@ -57,6 +57,10 @@ class Sheet < ActiveRecord::Base
   protected
     def tags
       [genre_list, composer_list, source_list].flatten
+    end
+
+    def tag_objects
+      [genres, composers, sources].flatten
     end
 
     # Formatting method for selectize.js usage

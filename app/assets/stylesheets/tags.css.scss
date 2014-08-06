@@ -28,6 +28,10 @@
     opacity: 0.8;
 
     &:before {
-        content: "x";
+        content: "(";
+    }
+
+    &:after {
+        content: ")";
     }
 }

@@ -1,18 +1,11 @@
-<% unless @sheet.joined_tags.empty? || @sheet.find_related_tags.blank? %>
+<% unless @sheet.joined_tags.empty? || @sheet.related_tags.blank? %>
 <div id="related">
     <div id="related-tags">
         <h1><span class="glyphicon glyphicon-heart"></span> You might also like...</h1>
-        <% for tag in @sheet.find_related_tags %>
-            <a href="#">
-            <span class="tag">
-                <%= tag.titleize %>
-            </span>
-            </a>
-        <% end %>
-        <%= render 'tags', tags: @genres %>
+        <%= render 'tags', tags: @sheet.related_tags %>
     </div>
     <div id="related-sheets">
-        <% for sheet in @sheet.find_related %>
+        <% for sheet in @sheet.related_sheets %>
             <a href="<%= sheet_path(sheet) %>">
             <div class="related-sheet">
                 <em><%= sheet.instruments.join(", ") %></em>
