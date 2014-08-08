@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   resources :sheets
 
   get 'genres' => 'sheets#genres'
-  get 'genres/:slug' => 'sheets#by_genre'
+  get 'genres/:slug' => 'sheets#by_genre', as: 'genre'
 
   get 'composers' => 'sheets#composers'
-  get 'composers/:slug' => 'sheets#by_composer'
+  get 'composers/:slug' => 'sheets#by_composer', as: 'composer'
 
   get 'sources' => 'sheets#sources'
-  get 'sources/:slug' => 'sheets#by_source'
+  get 'sources/:slug' => 'sheets#by_source', as: 'source'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
