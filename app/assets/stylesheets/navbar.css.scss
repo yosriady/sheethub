@@ -23,6 +23,7 @@
 .navbar {
     font-weight: 300;
     background: #2583EB;
+    margin-bottom:0px;
     padding: 5px;
     border: none;
 
@@ -62,6 +63,24 @@
             color: #fff;
             background: #2583EB;
             border-radius: 0px;
+        }
+    }
+}
+
+.nav-strip {
+    color: #428bca;
+    height: 40px;
+    background: #d9edf7;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #bce8f1;
+
+    ul {
+        text-decoration: none;
+
+        li {
+
+
         }
     }
 }

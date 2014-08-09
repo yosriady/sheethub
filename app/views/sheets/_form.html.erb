@@ -25,9 +25,5 @@
   <%= f.label :pdf %><br />
   <%= f.file_field :pdf %>
 
-  <%= f.simple_fields_for :assets do |a| %>
-    <%= a.input :file %>
-  <% end %>
-
   <%= f.button :submit, class: "btn btn-success btn-lg btn-wide"%>
 <% end %>

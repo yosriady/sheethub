@@ -2,6 +2,21 @@
 
 <div class="container">
     <div class="row">
+        <div id="sheet-header" class="col-xs-8">
+            <h1><%= @sheet.title %></h1>
+            <h4>from <a href="#" class="sheet-author">Kabukibear</a></h4>
+        </div>
+        <div class="col-xs-4">
+            <div class="panel panel-success">
+                <div class="panel-body bg-success">
+                    <span class="sheet-price col-xs-4"><p>FREE</p></span>
+                    <button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="row">
         <div id="sheet-content" class="col-xs-8">
             <%= image_tag("/assets/sheet.png", :class => "sample_sheet") %>
             <%= render 'pdf_viewer' %>
@@ -9,18 +24,10 @@
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <button type="button" class="btn btn-success btn-lg btn-wide"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
-                </div>
-            </div>
+            <%= render 'files' %>
 
             <div class="panel panel-info">
               <div class="panel-body">
-                <a href="<%= edit_sheet_path(@sheet) %>">
-                <button type="button" class="btn btn-success "><span class="glyphicon glyphicon-edit"></span> Edit</button></a>
-
-                <h1><%= @sheet.title %></h1>
                 <p><%= @sheet.description %></p>
                 <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
 
@@ -59,8 +66,11 @@
             </div>
         </div>
 
-        <%= render 'files' %>
         <%= render 'share' %>
+
+        <a href="<%= edit_sheet_path(@sheet) %>">
+            <button type="button" class="btn btn-success "><span class="glyphicon glyphicon-edit"></span> Edit</button>
+        </a>
 
   </div>
 </div>
