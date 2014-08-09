@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def title(page_title)
-    content_for :title, " | " + page_title.to_s if page_title
+    content_for :title, page_title.to_s + " | " if page_title
   end
 
   def bootstrap_class_for flash_type
