@@ -1,8 +1,8 @@
 <%= simple_form_for @sheet do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :title %>
-  <%= f.input :description %>
+  <%= f.input :title, placeholder: "What's the title of your piece?" %>
+  <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
 
   <%= f.label :instruments %>
   <br>
@@ -29,6 +29,5 @@
     <%= a.input :file %>
   <% end %>
 
-
-  <%= f.button :submit %>
+  <%= f.button :submit, class: "btn btn-success btn-lg btn-wide"%>
 <% end %>

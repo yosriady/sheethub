@@ -27,4 +27,7 @@ $(document).on("page:change", function() {
         create: true
     });
 
+    $('#sheet_difficulty').selectize({});
+
+
 });

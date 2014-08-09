@@ -7,9 +7,13 @@
     </div>
 
     <div id="sheet-sidebar" class="col-xs-4">
-        <%= render 'form' %>
-    </div>
+        <a href="<%= sheet_path(@sheet) %>">
+        <button type="button" class="btn btn-default "><span class="glyphicon glyphicon-arrow-left"></span> Back</button></a>
 
-    <%= link_to 'Show', @sheet %> |
-    <%= link_to 'Back', sheets_path %>
+        <div class="panel panel-info">
+          <div class="panel-body">
+                <%= render 'form' %>
+            </div>
+          </div>
+        </div>
 </div>
