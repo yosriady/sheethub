@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <%= f.input :title %>
-
+  <%= f.input :description %>
 
   <%= f.label :instruments %>
   <br>
@@ -20,15 +20,14 @@
   <br>
   <%= f.input_field :source_list, collection: @sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
-  <%= f.input :description %>
   <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %>
 
   <%= f.label :pdf %><br />
   <%= f.file_field :pdf %>
 
-  <p>
-    <!-- Todo: link to add new asset -->
-  </p>
+  <%= f.simple_fields_for :assets do |a| %>
+    <%= a.input :file %>
+  <% end %>
 
 
   <%= f.button :submit %>

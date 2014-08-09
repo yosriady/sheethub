@@ -2,7 +2,13 @@
 <div class="container">
     <h1>Editing sheet</h1>
 
-    <%= render 'form' %>
+    <div id="sheet-content" class="col-xs-8">
+        <%= image_tag("/assets/sheet.png", :class => "sample_sheet") %>
+    </div>
+
+    <div id="sheet-sidebar" class="col-xs-4">
+        <%= render 'form' %>
+    </div>
 
     <%= link_to 'Show', @sheet %> |
     <%= link_to 'Back', sheets_path %>

@@ -1,5 +1,6 @@
 class Asset < ActiveRecord::Base
   belongs_to :sheet
+  validates_presence_of :sheet
 
   has_attached_file :file,
                     :hash_secret => "sheethubhashsecret" #TODO: Use ENV for this

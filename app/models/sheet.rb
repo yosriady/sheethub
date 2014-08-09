@@ -13,6 +13,7 @@ class Sheet < ActiveRecord::Base
       :message => "Only pdf files are allowed"
 
   has_many :assets, :dependent => :destroy
+  accepts_nested_attributes_for :assets
   validates_associated :assets,
     :on => [:create, :update],
     :message => "Sheet supporting files invalid"
