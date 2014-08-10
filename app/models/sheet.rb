@@ -25,6 +25,11 @@ class Sheet < ActiveRecord::Base
   scope :original, -> { where(is_original?: true) }
   scope :flagged, -> { where(is_flagged?: true) }
 
+  def price=(value)
+    value > 0 ? write_attribute(:is_free?, false) : write_attribute(:is_free?, true)
+    write_attribute(:price, value)
+  end
+
   def related_sheets
     return [] if joined_tags.empty?
     sql = "

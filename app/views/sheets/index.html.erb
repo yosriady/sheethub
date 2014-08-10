@@ -2,41 +2,44 @@
 
 <div class="container table-container">
   <div class="row">
-    <div class="col-xs-10">
-      <h1>Listing sheets</h1>
-    </div>
-    <div class="col-xs-2">
-      <!-- TODO: sorting dropdown? -->
+    <div class="col-xs-12">
+      <h1 class="text-center">Listing sheets</h1>
     </div>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Pages</th>
-        <th>URL</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% @sheets.each do |sheet| %>
+  <div class="col-xs-2">
+
+
+  </div>
+
+  <div class="col-xs-10">
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= sheet.title %></td>
-          <td><%= sheet.description %></td>
-          <td><%= sheet.pages %></td>
-          <td><%= sheet.pdf.url %></td>
-          <td><%= link_to 'Show', sheet %></td>
-          <td><%= link_to 'Edit', edit_sheet_path(sheet) %></td>
-          <td><%= link_to 'Destroy', sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Pages</th>
+          <th>URL</th>
+          <th>Actions</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @sheets.each do |sheet| %>
+          <tr>
+            <td><%= sheet.title %></td>
+            <td><%= sheet.description %></td>
+            <td><%= sheet.pages %></td>
+            <td><%= sheet.pdf.url.present? %></td>
+            <td><%= link_to 'Show', sheet %></td>
+            <td><%= link_to 'Edit', edit_sheet_path(sheet) %></td>
+            <td><%= link_to 'Destroy', sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+
 </div>
-
-<br>
-
-<%= link_to 'New Sheet', new_sheet_path %>
