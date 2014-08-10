@@ -1,5 +1,13 @@
-#filter-toggle {
+#filter-toggle, #sort-order {
     margin-top: 20px;
+}
+
+#sheet_sort_order + .selectize-control{
+    .selectize-input {
+        width: 160px;
+        float: right;
+        margin-top: 20px;
+    }
 }
 
 #wrapper {

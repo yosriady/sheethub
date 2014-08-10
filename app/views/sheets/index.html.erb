@@ -4,7 +4,11 @@
   <div class="row">
     <div class="col-xs-12">
       <a href="#filter-toggle" class="btn btn-default pull-left" id="filter-toggle"><span class="glyphicon glyphicon-expand"></span> Toggle Filters</a>
-      <a href="#filter-toggle" class="btn btn-default pull-right" id="filter-toggle"><span class="glyphicon glyphicon-expand"></span> Sort by Popularity</a>
+
+      <%= simple_form_for :sheet do |f| %>
+        <%= f.select :sort_order, Sheet::SORT_ORDERS %>
+      <% end %>
+
       <h1 class="text-center"><span>Listing sheets</span></h1>
     </div>
   </div>

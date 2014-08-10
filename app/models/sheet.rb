@@ -1,8 +1,20 @@
 class Sheet < ActiveRecord::Base
+  default_scope { where(is_public?: true) }
+  scope :is_public, -> { where(is_public?: true) }
+  scope :is_private, -> { where(is_public?: false) }
+  scope :free, -> { where(is_free?: true) }
+  scope :original, -> { where(is_original?: true) }
+  scope :flagged, -> { where(is_flagged?: true) }
+
+  SORT_ORDERS = {"Most Recent"=>:most_recent, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
+  scope :most_recent, -> { order(:created_at)}
+  scope :lowest_price, -> { order(price: :asc)}
+  scope :highest_price, -> { order(price: :desc)}
+
   attr_accessor :instruments_list # For form parsing
   enum difficulty: %w{ beginner intermediate advanced }
   bitmask :instruments, :as => [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], :null => false
-  acts_as_taggable # Alias for acts_as_taggable_on :tags
+  acts_as_taggable
   acts_as_taggable_on :composers, :genres, :sources
 
   has_attached_file :pdf,
@@ -17,13 +29,6 @@ class Sheet < ActiveRecord::Base
   validates_associated :assets,
     :on => [:create, :update],
     :message => "Sheet supporting files invalid"
-
-  default_scope { where(is_public?: true) }
-  scope :is_public, -> { where(is_public?: true) }
-  scope :is_private, -> { where(is_public?: false) }
-  scope :free, -> { where(is_free?: true) }
-  scope :original, -> { where(is_original?: true) }
-  scope :flagged, -> { where(is_flagged?: true) }
 
   def price=(value)
     value > 0 ? write_attribute(:is_free?, false) : write_attribute(:is_free?, true)
