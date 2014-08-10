@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require pdf
+//= require s3_direct_upload
 //= require bootstrap
 //= require jquery_ujs
 //= require selectize

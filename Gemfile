@@ -35,6 +35,7 @@ gem 'gon'
 # File upload
 gem 'aws-sdk'
 gem 'paperclip'
+gem 's3_direct_upload'
 gem 'mini_magick'
 
 # API
