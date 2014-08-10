@@ -11,11 +11,13 @@
 </head>
 <body>
 
-<%= render 'layouts/navbar' unless @disable_navbar %>
+<div id="wrap">
+    <%= render 'layouts/navbar' unless @disable_navbar %>
 
-<%= render "layouts/flash_messages", flash: flash %>
+    <%= render "layouts/flash_messages", flash: flash %>
 
-<%= yield %>
+    <%= yield %>
+</div>
 
 <%= render 'layouts/footer' %>
 
