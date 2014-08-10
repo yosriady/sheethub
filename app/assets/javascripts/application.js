@@ -13,6 +13,7 @@
 //= require jquery
 //= require pdf
 //= require s3_direct_upload
+//= require s3-uploader
 //= require bootstrap
 //= require jquery_ujs
 //= require selectize
