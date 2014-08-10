@@ -3,43 +3,49 @@
 <div class="container table-container">
   <div class="row">
     <div class="col-xs-12">
-      <h1 class="text-center">Listing sheets</h1>
+      <a href="#filter-toggle" class="btn btn-default pull-left" id="filter-toggle"><span class="glyphicon glyphicon-expand"></span> Toggle Filters</a>
+      <a href="#filter-toggle" class="btn btn-default pull-right" id="filter-toggle"><span class="glyphicon glyphicon-expand"></span> Sort by Popularity</a>
+      <h1 class="text-center"><span>Listing sheets</span></h1>
     </div>
   </div>
 
+  <div id="wrapper" class="toggled">
 
-  <div class="col-xs-2">
+    <%= render 'filters' %>
 
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Pages</th>
+                <th>URL</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @sheets.each do |sheet| %>
+              <tr>
+                <td><%= sheet.title %></td>
+                <td><%= sheet.description %></td>
+                <td><%= sheet.pages %></td>
+                <td><%= sheet.pdf.url.present? %></td>
+                <td><%= link_to 'Show', sheet %></td>
+                <td><%= link_to 'Edit', edit_sheet_path(sheet) %></td>
+                <td><%= link_to 'Destroy', sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
 
   </div>
-
-  <div class="col-xs-10">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Pages</th>
-          <th>URL</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @sheets.each do |sheet| %>
-          <tr>
-            <td><%= sheet.title %></td>
-            <td><%= sheet.description %></td>
-            <td><%= sheet.pages %></td>
-            <td><%= sheet.pdf.url.present? %></td>
-            <td><%= link_to 'Show', sheet %></td>
-            <td><%= link_to 'Edit', edit_sheet_path(sheet) %></td>
-            <td><%= link_to 'Destroy', sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-
-
 </div>

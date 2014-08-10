@@ -18,4 +18,5 @@
 //= require selectize-script
 //= require turbolinks
 //= require uservoice
+//= require filters-script
 //= require_tree .
