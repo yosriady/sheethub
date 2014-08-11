@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require pdf
 //= require s3_direct_upload
 //= require s3-uploader
 //= require bootstrap
