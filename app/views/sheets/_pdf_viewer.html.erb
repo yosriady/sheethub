@@ -9,7 +9,7 @@ $(document).on("page:change", function() {
   // the script to be loaded, and dynamically loading a cross-origin script does
   // not work)
   //
-  // PDFJS.disableWorker = true;
+  PDFJS.disableWorker = true;
 
   // Asynchronous download PDF as an ArrayBuffer
   PDFJS.getDocument(url).then(function getPdfHelloWorld(pdf) {

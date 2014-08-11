@@ -12,9 +12,6 @@ Rails.application.routes.draw do
   get 'sources' => 'sheets#sources'
   get 'sources/:slug' => 'sheets#by_source', as: 'source'
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
   root 'pages#index'
   get '/about', to: 'pages#about'
   get '/terms', to: 'pages#terms'
