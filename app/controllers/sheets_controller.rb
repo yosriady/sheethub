@@ -16,7 +16,6 @@ class SheetsController < ApplicationController
   # GET /sheets/1
   # GET /sheets/1.json
   def show
-    gon.pdf_url = @sheet.pdf.url
   end
 
   # GET /sheets/new
