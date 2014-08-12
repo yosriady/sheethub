@@ -3,9 +3,8 @@
     <div class="panel-body" id="sheet-files">
 
     <%= s3_uploader_form id: "s3-uploader",
-      callback_url: assets_url,
-      key: "files/{timestamp}-{unique_id}-#{SecureRandom.hex}/${filename}",
-      key_starts_with: "files/",
+      callback_url: assets_path,
+      callback_param: "asset[direct_upload_url]",
       expiration: 24.hours.from_now.utc.iso8601,
       max_file_size: 10.megabytes do %>
       <%= file_field_tag :file, multiple: true %>
