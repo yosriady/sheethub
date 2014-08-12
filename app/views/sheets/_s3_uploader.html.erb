@@ -1,6 +1,21 @@
 <div class="panel panel-info">
     <div class="panel-heading"><span class="glyphicon glyphicon-file"></span>Additional Files</div>
-    <div class="panel-body" id="sheet-files">
+    <div class="panel-body">
+
+    <ul id="sheet-files-edit">
+    <% for asset in @sheet.assets %>
+        <li>
+        <a href="<%= asset.url %>">
+            <div class="sheet-file">
+                <p><span class="glyphicon glyphicon-save"></span> <%= asset.filename %> <strong><%= number_to_human_size(asset.filesize) %></strong></p>
+            </div>
+        </a>
+        <a href="#" class="sheet-delete"><span class="glyphicon glyphicon-remove"></span></a>
+        </li>
+    <% end %>
+    </ul>
+
+    <div id="assets_container"></div>
 
     <%= s3_uploader_form id: "s3-uploader",
       callback_url: assets_path,
@@ -8,8 +23,6 @@
       max_file_size: 10.megabytes do %>
       <%= file_field_tag :file, multiple: true %>
     <% end %>
-
-    <div id="assets_container"></div>
 
     <script id="template-upload" type="text/x-tmpl">
     <div id="upload_{%=o.unique_id%}" class="upload">

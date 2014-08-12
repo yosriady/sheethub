@@ -23,6 +23,17 @@
   <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %>
 
   <%= f.label :pdf %><br />
+  <% if @sheet.pdf %>
+  <ul id="sheet-files">
+    <li>
+        <a href="<%= @sheet.pdf.url %>">
+            <div class="sheet-file">
+            <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
+            </div>
+        </a>
+    </li>
+  </ul>
+  <% end %>
   <%= f.file_field :pdf %>
 
   <%= f.button :submit, class: "btn btn-success btn-lg btn-wide pull-right"%>

@@ -1,7 +1,7 @@
  <div class="panel panel-info">
     <div class="panel-heading"><span class="glyphicon glyphicon-file"></span> Files</div>
-    <div class="panel-body"  id="sheet-files">
-        <ul>
+    <div class="panel-body">
+        <ul id="sheet-files">
             <!-- Main PDF file -->
             <li>
                 <a href="<%= @sheet.pdf.url %>">
@@ -13,13 +13,14 @@
 
             <!-- Additional files -->
             <% for asset in @sheet.assets %>
-            <li>
-                <a href="<%= asset.file.url %>">
+                <li>
+                <a href="<%= asset.url %>">
                     <div class="sheet-file">
-                        <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.asset_file_name %> <strong><%= @sheet.asset_file_size/1000 %> KB</strong></p>
+                        <p><span class="glyphicon glyphicon-save"></span> <%= asset.filename %> <strong><%= number_to_human_size(asset.filesize) %></strong></p>
                     </div>
                 </a>
-                <% end %>
+                </li>
+            <% end %>
             </ul>
         </div>
     </div>
