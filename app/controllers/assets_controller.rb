@@ -1,14 +1,18 @@
 class AssetsController < ApplicationController
 
   def create
-    binding.pry
-    @asset = Asset.create(asset_params)
+    @asset = Sheet.find(asset_params[:sheet_id]).assets.build(asset_params)
+    @asset.save
     # Once created, render a create.js.erb file that adds a completed file HTML element to the view
   end
 
   private
+    def set_asset
+      @asset = Asset.find(params[:id])
+    end
+
     def asset_params
-      params.require(:asset).permit(:direct_upload_url)
+      params.permit(:sheet_id, :url, :filename, :filesize, :filetype)
     end
 
 end
