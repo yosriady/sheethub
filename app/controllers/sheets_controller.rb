@@ -77,6 +77,17 @@ class SheetsController < ApplicationController
     end
   end
 
+  # GET /instruments
+  def instruments
+      @instruments = Sheet.values_for_instruments
+  end
+
+  # GET /instrument/:slug
+  def by_instrument
+      @sheets = Sheet.with_exact_instruments(params[:slug])
+  end
+
+
   # GET /genres
   def genres
   end

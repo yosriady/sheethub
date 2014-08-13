@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+
+        <h1>All Instruments</h1>
+        <% for instrument in @instruments %>
+            <a href="<%= instrument_path(instrument) %>">
+            <span class="tag">
+                <%= instrument %>
+            </span>
+            </a>
+        <% end %>
+
+    </div>
+</div>

@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :sheets
   resources :assets, only: [:create, :destroy]
 
+  get 'instruments' => 'sheets#instruments'
+  get 'instrument/:slug' => 'sheets#by_instrument', as: 'instrument'
+
   get 'genres' => 'sheets#genres'
   get 'genres/:slug' => 'sheets#by_genre', as: 'genre'
 
