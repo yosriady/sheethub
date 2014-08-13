@@ -1,7 +1,9 @@
-<% flash.each do |type, message| %>
-  <div class="alert <%= bootstrap_class_for(type) %> fade in">
-    <span class="glyphicon glyphicon-<%= glyphicon_for(type) %>"></span>
-    <button class="close" data-dismiss="alert">×</button>
-    <%= message %>
-  </div>
-<% end %>
+<div class="navbar-fixed-top" id="alerts">
+    <% flash.each do |type, message| %>
+      <div class="alert <%= bootstrap_class_for(type) %> fade">
+        <span class="glyphicon glyphicon-<%= glyphicon_for(type) %> pull-left"></span>
+        <button class="close" data-dismiss="alert">×</button>
+        <%= message %>
+      </div>
+    <% end %>
+</div>

@@ -1,4 +1,5 @@
 <% if @asset.persisted? %>
+  alert("File uploaded!");
   $('#assets_container').append("<%= j(render @asset) %>");
 <% else %>
   $('#upload_<%=params[:unique_id]%> div.progress').removeClass('active progress-striped').addClass('progress-danger');

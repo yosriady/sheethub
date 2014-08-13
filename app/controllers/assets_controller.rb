@@ -8,7 +8,10 @@ class AssetsController < ApplicationController
 
   def destroy
     @asset.destroy
-    # TODO: delete S3 Bucket file?
+    s3 = AWS::S3.new
+    bucket = s3.buckets['sheethub']
+    bucket.objects['abc']
+    binding.pry
     redirect_to :back
   end
 

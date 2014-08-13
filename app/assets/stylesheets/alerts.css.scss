@@ -1,0 +1,26 @@
+#alerts {
+    background:none;
+
+    .alert {
+        border-top: 2px solid #2583EB;
+        margin: 0px;
+        border-radius: 0px;
+        padding: 20px;
+        text-align: center;
+        font-size:18px;
+
+        .close {
+            font-size: 28px;
+        }
+
+        .glyphicon {
+            font-size: 22px;
+        }
+    }
+
+    .alert-info {
+        background: #fff;
+    }
+
+
+}

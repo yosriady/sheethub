@@ -11,6 +11,8 @@
     <div id="assets_container"></div>
 
     <%= s3_uploader_form id: "s3-uploader",
+      key: "files/{unique_id}-#{SecureRandom.hex}/${filename}",
+      key_starts_with: "files/",
       callback_url: assets_path,
       expiration: 24.hours.from_now.utc.iso8601,
       max_file_size: 10.megabytes do %>

@@ -28,7 +28,7 @@ module ApplicationHelper
       when :alert
         "warning-sign"
       else
-        "music"
+        "ok"
     end
   end
 
