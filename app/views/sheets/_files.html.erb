@@ -4,7 +4,7 @@
         <ul id="sheet-files">
             <!-- Main PDF file -->
             <li>
-                <a href="<%= @sheet.pdf.url %>">
+                <a href="<%= @sheet.pdf.url %>" title="<%= @sheet.pdf_file_name %>">
                     <div class="sheet-file">
                     <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
                     </div>
