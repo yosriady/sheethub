@@ -3,6 +3,7 @@
     <div class="panel-body">
         <ul id="sheet-files">
             <!-- Main PDF file -->
+            <% if @sheet.pdf.present? %>
             <li>
                 <a href="<%= @sheet.pdf.url %>" title="<%= @sheet.pdf_file_name %>">
                     <div class="sheet-file">
@@ -10,6 +11,10 @@
                     </div>
                 </a>
             </li>
+            <% else %>
+                No File Found.
+            <% end %>
+
 
             <!-- Additional files -->
             <% for asset in @sheet.assets %>
