@@ -3,7 +3,7 @@
   <div class="panel-body">
       <div class="form-group">
         <label class="control-label"><span class="glyphicon glyphicon-link"></span> Direct URL</label>
-        <input class="form-control" id="inputPassword" value="<%= sheet_url(@sheet) %>">
+        <input id="sheet-direct-url" onClick="this.select();" class="form-control" readonly value="<%= sheet_url(@sheet) %>">
     </div>
     <div class="share-buttons">
         <a href="https://www.facebook.com/sharer/sharer.php?u=<%= sheet_url(@sheet) %>" class='facebook share'></a>
