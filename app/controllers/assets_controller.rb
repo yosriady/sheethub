@@ -1,7 +1,9 @@
 class AssetsController < ApplicationController
   before_action :set_asset, only: [:destroy]
+  before_action :unescape_url, only: [:create]
 
   def create
+    binding.pry
     @asset = Sheet.find(asset_params[:sheet_id]).assets.build(asset_params)
     @asset.save
   end
@@ -24,4 +26,7 @@ class AssetsController < ApplicationController
       params.permit(:sheet_id, :url, :filename, :filesize, :filetype)
     end
 
+    def unescape_url
+      params[:url] = CGI.unescape(params[:url])
+    end
 end
