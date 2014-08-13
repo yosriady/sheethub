@@ -3,7 +3,6 @@ class AssetsController < ApplicationController
   before_action :unescape_url, only: [:create]
 
   def create
-    binding.pry
     @asset = Sheet.find(asset_params[:sheet_id]).assets.build(asset_params)
     @asset.save
   end
