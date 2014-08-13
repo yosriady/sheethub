@@ -26,7 +26,6 @@ class SheetsController < ApplicationController
   # GET /sheets/1/edit
   def edit
     @sheet.instruments_list = @sheet.instruments
-    gon.sheet_id ||= @sheet.id
   end
 
   # POST /sheets
@@ -126,6 +125,7 @@ class SheetsController < ApplicationController
 
     def set_sheet
       @sheet = Sheet.find(params[:id])
+      gon.sheet_id = @sheet.id
     end
 
     def set_tags
