@@ -7,16 +7,7 @@
             <h4>from <a href="#" class="sheet-author">Kabukibear</a></h4>
         </div>
         <div class="col-xs-4">
-            <div class="panel panel-success">
-                <div class="panel-body bg-success">
-                    <% if @sheet.is_free? %>
-                        <span class="sheet-price text-center"><p>FREE</p></span>
-                    <% else %>
-                        <span class="sheet-price col-xs-4"><p><%= number_to_currency(@sheet.price) %></p></span>
-                        <button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
-                    <% end %>
-                </div>
-            </div>
+            <%= render 'add_to_cart' %>
         </div>
         <hr>
     </div>
