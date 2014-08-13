@@ -1,4 +1,6 @@
 <% if @asset.persisted? %>
+    console.log(gon);
+    console.log(gon.sheet_id);
   $("#alerts").append("<%= j(render(partial: 'layouts/notice', locals: {content: @asset.filename, message: 'uploaded succesfully.'})) %>");
   $(".alert").addClass("in");
   $('#assets_container').append("<%= j(render @asset) %>");
