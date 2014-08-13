@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :sheets
-  resources :assets, only: [:new, :create]
+  resources :assets, only: [:create, :destroy]
 
   get 'genres' => 'sheets#genres'
   get 'genres/:slug' => 'sheets#by_genre', as: 'genre'
