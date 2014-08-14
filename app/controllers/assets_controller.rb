@@ -9,7 +9,10 @@ class AssetsController < ApplicationController
 
   def destroy
     @asset.destroy
-    s3 = AWS::S3.new
+    s3 = AWS::S3.new(:access_key_id => 'AKIAI32VLLBYAJJ2THYA',
+                    :secret_access_key => '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',
+                    :region => 'ap-southeast-1'
+    )
     asset = s3.buckets['sheethub'].objects[@asset.s3_key]
     asset.delete
     redirect_to :back
