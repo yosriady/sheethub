@@ -1,5 +1,5 @@
-<% unless @sheet.joined_tags.empty? || @sheet.related_tags.blank? %>
 <div id="related">
+    <% unless @sheet.joined_tags.empty? || @sheet.related_tags.blank? %>
     <div id="related-tags">
         <h1><span class="glyphicon glyphicon-tags"></span> You might also like...</h1>
         <%= render 'tags', tags: @sheet.related_tags %>
@@ -15,5 +15,8 @@
             </a>
         <% end %>
     </div>
+    <% else %>
+        <h1 class="text-center"><span class="glyphicon glyphicon-eye-close"></span></h1>
+        <h1 class="text-center">Sorry, we couldn't find anything similar to this piece.</h1>
+    <% end %>
 </div>
-<% end %>
