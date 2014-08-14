@@ -56,6 +56,16 @@
     background:#fff;
 }
 
+.sheet-file-missing {
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    p {
+        margin: 0px;
+    }
+}
+
 .sheet-file {
     background: rgba(37,131,235, 0.8);
     border-radius: 4px;
