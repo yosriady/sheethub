@@ -1,5 +1,19 @@
 module ApplicationHelper
 
+  def tag_path(tag)
+    context = tag.taggings[0].context #TODO: optimize SQL querying with includes?
+    case context
+    when "genres"
+      "/genre/#{tag.name}"
+    when "composers"
+      "/composer/#{tag.name}"
+    when "sources"
+      "/source/#{tag.name}"
+    else
+      "/404"
+    end
+  end
+
   def title(page_title)
     content_for :title, page_title.to_s + " | " if page_title
   end

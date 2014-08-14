@@ -7,13 +7,13 @@ Rails.application.routes.draw do
   get 'instrument/:slug' => 'sheets#by_instrument', as: 'instrument'
 
   get 'genres' => 'sheets#genres'
-  get 'genres/:slug' => 'sheets#by_genre', as: 'genre'
+  get 'genre/:slug' => 'sheets#by_genre', as: 'genre'
 
   get 'composers' => 'sheets#composers'
-  get 'composers/:slug' => 'sheets#by_composer', as: 'composer'
+  get 'composer/:slug' => 'sheets#by_composer', as: 'composer'
 
   get 'sources' => 'sheets#sources'
-  get 'sources/:slug' => 'sheets#by_source', as: 'source'
+  get 'source/:slug' => 'sheets#by_source', as: 'source'
 
   root 'pages#index'
   get '/about', to: 'pages#about'
