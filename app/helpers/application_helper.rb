@@ -14,6 +14,20 @@ module ApplicationHelper
     end
   end
 
+  def tag_glyphicon(tag)
+    context = tag.taggings[0].context #TODO: optimize SQL querying with includes?
+    case context
+    when "genres"
+      "headphones"
+    when "composers"
+      "user"
+    when "sources"
+      "screenshot"
+    else
+      "music"
+    end
+  end
+
   def title(page_title)
     content_for :title, page_title.to_s + " | " if page_title
   end

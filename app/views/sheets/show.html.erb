@@ -26,29 +26,21 @@
 
                 <% if @sheet.instruments %>
                     <h4>Instruments</h4>
-                    <% for instrument in @sheet.instruments %>
-                        <p class="tag"><span class="glyphicon glyphicon-bullhorn"></span> <%= instrument.to_s.titleize %></p>
-                    <% end %>
+                    <%= render 'instruments', instruments: @sheet.instruments %>
                 <% end %>
 
-                <% if @sheet.genre_list.any? %>
+                <% if @sheet.genres.any? %>
                     <h4>Genres</h4>
-                    <% for genre in @sheet.genre_list %>
-                        <p class="tag"><span class="glyphicon glyphicon-headphones"></span> <%= genre.titleize %></p>
-                    <% end %>
+                    <%= render 'tags', tags: @sheet.genres %>
                 <% end %>
-                <% if @sheet.composer_list.any? %>
+                <% if @sheet.composers.any? %>
                     <h4>Composers</h4>
-                    <% for composer in @sheet.composer_list %>
-                        <p class="tag"><span class="glyphicon glyphicon-user"></span> <%= composer.titleize %></p>
-                    <% end %>
+                    <%= render 'tags', tags: @sheet.composers %>
                 <% end %>
 
-                <% if @sheet.source_list.any? %>
+                <% if @sheet.sources.any? %>
                     <h4>Source</h4>
-                    <% for source in @sheet.source_list %>
-                        <p class="tag"><span class="glyphicon glyphicon-screenshot"></span> <%= source.titleize %></p>
-                    <% end %>
+                    <%= render 'tags', tags: @sheet.sources %>
                 <% end %>
 
                 <% if @sheet.difficulty %>
