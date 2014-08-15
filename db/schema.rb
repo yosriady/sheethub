@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815060142) do
+ActiveRecord::Schema.define(version: 20140815060537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,10 @@ ActiveRecord::Schema.define(version: 20140815060142) do
     t.string   "pdf_content_type"
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
+    t.string   "slug"
   end
+
+  add_index "sheets", ["slug"], name: "index_sheets_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

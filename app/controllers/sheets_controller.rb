@@ -124,7 +124,7 @@ class SheetsController < ApplicationController
     end
 
     def set_sheet
-      @sheet = Sheet.find(params[:id])
+      @sheet = Sheet.friendly.find(params[:id])
     end
 
     def set_tags

@@ -1,4 +1,16 @@
 class Sheet < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :sheet_slug, :use => :slugged
+
+  def sheet_slug
+    # TODO: ensure no collision with username or hash
+    # See slug candidates section of link below
+    # http://norman.github.io/friendly_id/file.Guide.html
+    [
+      :title
+    ]
+  end
+
   default_scope { where(is_public?: true) }
   scope :is_public, -> { where(is_public?: true) }
   scope :is_private, -> { where(is_public?: false) }
