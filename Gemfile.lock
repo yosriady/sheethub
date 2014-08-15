@@ -75,6 +75,8 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.1)
+    friendly_id (5.0.4)
+      activerecord (>= 4.0.0)
     gon (5.1.2)
       actionpack (>= 2.3.0)
       json
@@ -268,6 +270,7 @@ DEPENDENCIES
   bitmask_attributes
   bootstrap-sass (~> 3.1.1)
   dotenv-rails
+  friendly_id
   gon
   grape
   grape-jbuilder

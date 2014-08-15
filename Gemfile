@@ -43,6 +43,7 @@ gem 'grape'
 gem 'grape-jbuilder'
 
 # Others
+gem 'friendly_id'
 gem 'bitmask_attributes'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
