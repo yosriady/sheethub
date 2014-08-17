@@ -53,6 +53,12 @@ input[type="text"], textarea {
 
 a {
     text-decoration:none;
+    -o-transition:.1s;
+    -ms-transition:.1s;
+    -moz-transition:.1s;
+    -webkit-transition:.1s;
+    /* ...and now for the proper property */
+    transition:.1s;
 
     &:hover, &:focus {
         text-decoration: none;

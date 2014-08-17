@@ -1,3 +1,13 @@
+#related-tags, #related-sheets {
+    span {
+        -o-transition:.1s;
+        -ms-transition:.1s;
+        -moz-transition:.1s;
+        -webkit-transition:.1s;
+        transition:.1s;
+    }
+}
+
 #related {
     height: 250px;
     position: relative;
