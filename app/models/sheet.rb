@@ -29,11 +29,12 @@ class Sheet < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :composers, :genres, :sources
 
+  PDF_DEFAULT_URL = "nil"
   has_attached_file :pdf,
                     :styles => {:preview => ["", :jpg]},
                     :processors => [:preview],
                     :hash_secret => "sheethubhashsecret", #TODO: Use ENV for this
-                    :default_url => "nil" #TODO: point to special Missing file route
+                    :default_url => PDF_DEFAULT_URL #TODO: point to special Missing file route
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],
       :message => "Only pdf files are allowed"
@@ -43,6 +44,10 @@ class Sheet < ActiveRecord::Base
   validates_associated :assets,
     :on => [:create, :update],
     :message => "Sheet supporting files invalid"
+
+  def has_pdf_preview?
+    Sheet.last.pdf.url(:preview) != PDF_DEFAULT_URL
+  end
 
   def price=(value)
     value > 0 ? write_attribute(:is_free?, false) : write_attribute(:is_free?, true)
