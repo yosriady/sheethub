@@ -13,9 +13,8 @@ module Paperclip
     def make
       dst = Tempfile.new([@basename, 'jpg'].compact.join("."))
       dst.binmode
-      pdf = ::Magick::ImageList.new(File.expand_path(@file.path))
-      image = pdf[0].append(false)
-      image.format = 'JPG'
+      image= MiniMagick::Image.open(File.expand_path(@file.path))
+      image.format('jpg', 0)
       image.write(File.expand_path(dst.path))
       dst.flush
       return dst
