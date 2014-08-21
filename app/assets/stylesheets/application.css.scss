@@ -12,6 +12,8 @@
  *
  *= require selectize
  *= require selectize.default
+ *= require nprogress
+ *= require nprogress-bootstrap
  *= require s3_direct_upload_progress_bars
  *= require_self
  *= require_tree .
@@ -64,4 +66,11 @@ a {
         text-decoration: none;
     }
 
+}
+
+// NProgress bars
+body #nprogress .bar {
+    background: #2583EB;
+    padding-bottom:2px;
+    border-bottom: 2px solid #fff;
 }

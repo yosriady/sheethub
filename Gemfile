@@ -19,6 +19,9 @@ gem 'acts-as-taggable-on'
 # Pagination
 gem 'kaminari'
 
+# Progress bar
+gem 'nprogress-rails'
+
 # Form
 gem 'simple_form'
 gem 'selectize-rails'
