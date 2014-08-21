@@ -11,3 +11,9 @@ Sheet.create(title: "Another Guldove", description: "Guitar piece by Yasunori Mi
 Sheet.create(title: "Another Marbule", description: "Guitar piece by Yasunori Mitsuda, from Chrono Cross.", pages: 2, composer_list: ["Yasunori Mitsuda".to_sym], genre_list: [:fingerstyle] , instruments: [:piano])
 
 Sheet.create(title: "Another Termina", description: "Guitar piece by Yasunori Mitsuda, from Chrono Cross.", pages: 2, composer_list: ["Yasunori Mitsuda".to_sym], genre_list: [:videogame],  instruments: [:guitar])
+
+seed_data = []
+50.times do
+  seed_data << {title: Faker::Company.name, description: Faker::Company.bs}
+end
+Sheet.create(seed_data)
