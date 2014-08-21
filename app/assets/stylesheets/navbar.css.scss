@@ -26,6 +26,9 @@
     margin-bottom:0px;
     padding: 5px;
     border: none;
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
     .container-fluid {
         padding: 0 40px;

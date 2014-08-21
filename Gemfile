@@ -38,6 +38,9 @@ gem 'paperclip'
 gem 's3_direct_upload'
 gem 'mini_magick'
 
+# Perceptual Hash
+gem 'phashion'
+
 # API
 gem 'grape'
 gem 'grape-jbuilder'

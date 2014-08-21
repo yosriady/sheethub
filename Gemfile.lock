@@ -137,6 +137,7 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.17.1)
+    phashion (1.1.1)
     polyglot (0.3.5)
     pry (0.10.0)
       coderay (~> 1.1.0)
@@ -280,6 +281,7 @@ DEPENDENCIES
   mini_magick
   paperclip
   pg
+  phashion
   pry-rails
   pry-remote
   rails (= 4.1.1)
