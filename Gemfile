@@ -71,7 +71,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec'
   # gem 'factory_girl_rails'
-  # gem 'faker'
+  gem 'faker'
 end
 
 group :test do
