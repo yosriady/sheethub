@@ -45,7 +45,6 @@ class Sheet < ActiveRecord::Base
     :on => [:create, :update],
     :message => "Sheet supporting files invalid"
 
-
   # Perceptual Hash methods
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   def duplicate?(sheet, treshold=DEFAULT_PHASH_TRESHOLD)

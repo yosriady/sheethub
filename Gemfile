@@ -11,7 +11,8 @@ gem 'unicorn-rails'
 # gem 'sidekiq'
 
 # User authentication
-# gem 'devise'
+gem 'omniauth'
+gem 'devise'
 
 # Tags
 gem 'acts-as-taggable-on'
