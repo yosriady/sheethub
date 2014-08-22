@@ -21,32 +21,13 @@
     <div id="page-content-wrapper">
       <div class="row">
         <div class="col-lg-12">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Pages</th>
-                <th>URL</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @sheets.each do |sheet| %>
-              <tr>
-                <td><%= sheet.title %></td>
-                <td><%= sheet.description %></td>
-                <td><%= sheet.pages %></td>
-                <td><%= sheet.pdf.url.present? %></td>
-                <td><%= link_to 'Show', sheet %></td>
-                <td><%= link_to 'Edit', edit_sheet_path(sheet) %></td>
-                <td><%= link_to 'Destroy', sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
+          <%= render 'sheets' %>
         </div>
+      </div>
+
+
+      <div id="paginator">
+        <%= paginate @sheets, remote: true %>
       </div>
     </div>
     <!-- /#page-content-wrapper -->
