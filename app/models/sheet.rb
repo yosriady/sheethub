@@ -12,16 +12,19 @@ class Sheet < ActiveRecord::Base
   end
 
   default_scope { where(is_public?: true) }
+  default_scope { order(created_at: :desc) } # sort by most recent
+
   scope :is_public, -> { where(is_public?: true) }
   scope :is_private, -> { where(is_public?: false) }
   scope :free, -> { where(is_free?: true) }
   scope :original, -> { where(is_original?: true) }
   scope :flagged, -> { where(is_flagged?: true) }
 
-  SORT_ORDERS = {"Most Recent"=>:most_recent, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
-  scope :most_recent, -> { order(:created_at)}
+  SORT_ORDERS = {"Most Recent"=>:newest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   scope :lowest_price, -> { order(price: :asc)}
   scope :highest_price, -> { order(price: :desc)}
+  scope :oldest, -> { order(created_at: :asc)}
+  scope :newest, -> { order(created_at: :desc)}
 
   attr_accessor :instruments_list # For form parsing
   enum difficulty: %w{ beginner intermediate advanced }

@@ -10,11 +10,7 @@ class SheetsController < ApplicationController
   # GET /sheets
   # GET /sheets.json
   def index
-    @sheets = Sheet.is_public.page params[:page]
-    respond_to do |format|
-      format.js
-      format.html
-    end
+    @sheets = Sheet.is_public.page(params[:page])
   end
 
   # GET /sheets/1
