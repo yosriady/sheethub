@@ -20,7 +20,7 @@ class Sheet < ActiveRecord::Base
   scope :original, -> { where(is_original?: true) }
   scope :flagged, -> { where(is_flagged?: true) }
 
-  SORT_ORDERS = {"Most Recent"=>:newest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
+  SORT_ORDERS = {"Most Recent"=>:newest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   scope :lowest_price, -> { order(price: :asc)}
   scope :highest_price, -> { order(price: :desc)}
   scope :oldest, -> { order(created_at: :asc)}
@@ -47,6 +47,14 @@ class Sheet < ActiveRecord::Base
   validates_associated :assets,
     :on => [:create, :update],
     :message => "Sheet supporting files invalid"
+
+  def self.sort(sort_order)
+    if SORT_ORDERS.values.include?(sort_order)
+      self.send(sort_order)
+    else
+      raise "Sort Order not in #{Sheet::SORT_ORDERS.values}"
+    end
+  end
 
   # Perceptual Hash methods
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
