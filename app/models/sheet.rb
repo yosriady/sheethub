@@ -48,8 +48,10 @@ class Sheet < ActiveRecord::Base
     :on => [:create, :update],
     :message => "Sheet supporting files invalid"
 
-  def self.sort(sort_order)
-    if SORT_ORDERS.values.include?(sort_order)
+  def self.sorted(sort_order)
+    if sort_order.nil?
+      self.send(:newest)
+    elsif SORT_ORDERS.values.include?(sort_order.to_sym)
       self.send(sort_order)
     else
       raise "Sort Order not in #{Sheet::SORT_ORDERS.values}"

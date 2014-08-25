@@ -1,6 +1,8 @@
 $(document).on("page:change", function() {
     $("#sheet_sort_order").change(function () {
-        var sort_order = this.value;
-        alert(sort_order);
+        data = {
+            "sort_order": this.value
+        };
+        $.get("/sheets", data, undefined, "script");
     });
 });

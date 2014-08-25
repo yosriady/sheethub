@@ -10,7 +10,7 @@ class SheetsController < ApplicationController
   # GET /sheets
   # GET /sheets.json
   def index
-    @sheets = Sheet.page(params[:page])
+    @sheets = Sheet.sorted(params[:sort_order]).page(params[:page])
   end
 
   # GET /sheets/1
