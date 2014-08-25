@@ -10,6 +10,9 @@ gem 'unicorn-rails'
 # Task Queue
 # gem 'sidekiq'
 
+# Search
+gem 'searchkick'
+
 # User authentication
 gem 'omniauth'
 gem 'devise'

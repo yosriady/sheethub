@@ -1,4 +1,5 @@
 class Sheet < ActiveRecord::Base
+  searchkick
   extend FriendlyId
   friendly_id :sheet_slug, :use => :slugged
 
