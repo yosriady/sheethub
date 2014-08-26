@@ -39,7 +39,7 @@ module ApplicationHelper
       when :error
         "alert-error"
       when :alert
-        "alert-block"
+        "alert-info"
       when :notice
         "alert-info"
       else
