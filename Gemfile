@@ -16,6 +16,7 @@ gem 'searchkick'
 # User authentication
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
 gem 'devise'
 
 # Tags
