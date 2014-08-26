@@ -13,6 +13,11 @@ class SheetsController < ApplicationController
     @sheets = Sheet.sorted(params[:sort_order]).page(params[:page])
   end
 
+  # GET /search
+  def search
+    @sheets = Sheet.search params[:q], page: params[:page]
+  end
+
   # GET /sheets/1
   # GET /sheets/1.json
   def show

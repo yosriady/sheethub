@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :sheets
   resources :assets, only: [:create, :destroy]
 
+  get 'search' => 'sheets#search'
+
   get 'instruments' => 'sheets#instruments'
   get 'instrument/:slug' => 'sheets#by_instrument', as: 'instrument'
 

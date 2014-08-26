@@ -1,0 +1,22 @@
+<div class="container table-container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-center"><span>Search results for <%= params[:q] %></span></h1>
+    </div>
+  </div>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <%= render 'sheets' %>
+        </div>
+      </div>
+
+
+      <div id="paginator">
+        <%= paginate @sheets, remote: true %>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
