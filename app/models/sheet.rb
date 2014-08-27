@@ -86,7 +86,7 @@ class Sheet < ActiveRecord::Base
   # END of phash methods
 
   def has_pdf_preview?
-    Sheet.last.pdf.url(:preview) != PDF_DEFAULT_URL
+    pdf.url(:preview) != PDF_DEFAULT_URL
   end
 
   def price=(value)

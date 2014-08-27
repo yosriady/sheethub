@@ -31,7 +31,7 @@
                 <p><%= @sheet.description %></p>
                 <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
 
-                <% if @sheet.instruments %>
+                <% if @sheet.instruments.present? %>
                     <h4>Instruments</h4>
                     <%= render 'instruments', instruments: @sheet.instruments %>
                 <% end %>
