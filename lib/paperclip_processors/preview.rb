@@ -1,5 +1,5 @@
 module Paperclip
-  # Handles generating preview images of Sheet pdFs
+  # Handles generating preview images of Sheet PDFs
   class Preview < Processor
 
     def initialize(file, options = {}, attachment = nil)
@@ -19,6 +19,5 @@ module Paperclip
       dst.flush
       return dst
     end
-
   end
 end

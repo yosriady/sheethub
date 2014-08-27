@@ -59,6 +59,7 @@ class SheetsController < ApplicationController
   def update
     respond_to do |format|
       update_params = sheet_params
+      @sheet.slug = nil #Regenerate friendly-id
       update_params[:instruments] = params[:sheet][:instruments_list]
       update_params[:composer_list] = params[:sheet][:composer_list]
       update_params[:genre_list] = params[:sheet][:genre_list]

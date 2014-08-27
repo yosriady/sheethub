@@ -6,11 +6,9 @@ class Sheet < ActiveRecord::Base
   friendly_id :sheet_slug, :use => :slugged
 
   def sheet_slug
-    # TODO: ensure no collision with username or hash
-    # See slug candidates section of link below
-    # http://norman.github.io/friendly_id/file.Guide.html
     [
-      :title
+      :title,
+      [:title, user.name]
     ]
   end
 
