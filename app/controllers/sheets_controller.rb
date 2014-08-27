@@ -4,6 +4,8 @@ class SheetsController < ApplicationController
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_tags
   before_action :set_instruments
+  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_owner, :only => [:edit, :update, :destroy]
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
 
@@ -120,6 +122,13 @@ class SheetsController < ApplicationController
   end
 
   private
+    def authenticate_owner
+      unless @sheet.user == current_user
+        flash[:error] = 'You cannot edit this Sheet because you are not the owner.'
+        redirect_to sheets_path
+      end
+    end
+
     def normalize_tag_fields
       TAG_FIELDS.each { |tag_field| normalize_tags(tag_field)} # Clean up selectize tag values: genres, sources, composers, instruments
     end
@@ -148,7 +157,7 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params[:sheet].permit(:title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets_attributes)
+      params[:sheet].permit(:user_id, :title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets_attributes)
     end
 
 end

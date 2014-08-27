@@ -1,6 +1,8 @@
 <%= simple_form_for @sheet do |f| %>
   <%= f.error_notification %>
 
+  <%=f.hidden_field :user_id, value: current_user.id %>
+
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
 
