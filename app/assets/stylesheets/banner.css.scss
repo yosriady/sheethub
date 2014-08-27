@@ -1,5 +1,6 @@
 #banner {
-    height: 180px;
+    height: 200px;
+    margin-top: -20px;
     position: relative;
     background: #1a1a1a url("http://33.media.tumblr.com/8d41610b4f5e7d5b68e4430b736fbeb3/tumblr_n4vbj2Vv8h1st5lhmo1_1280.jpg") no-repeat bottom center;
     -webkit-background-size: cover;
@@ -10,7 +11,6 @@
     h2, h3 {
         width: 800px;
         margin: 20px auto;
-        margin-top: -20px;
         color: rgba(255,255,255,0.9);
         text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.6);
         font-weight: 300;

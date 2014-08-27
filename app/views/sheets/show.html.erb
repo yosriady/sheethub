@@ -25,42 +25,16 @@
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4">
-
             <div class="panel panel-info">
               <div class="panel-body">
                 <p><%= @sheet.description %></p>
                 <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
-
-                <% if @sheet.instruments.present? %>
-                    <h4>Instruments</h4>
-                    <%= render 'instruments', instruments: @sheet.instruments %>
-                <% end %>
-
-                <% if @sheet.genres.any? %>
-                    <h4>Genres</h4>
-                    <%= render 'tags', tags: @sheet.genres %>
-                <% end %>
-                <% if @sheet.composers.any? %>
-                    <h4>Composers</h4>
-                    <%= render 'tags', tags: @sheet.composers %>
-                <% end %>
-
-                <% if @sheet.sources.any? %>
-                    <h4>Source</h4>
-                    <%= render 'tags', tags: @sheet.sources %>
-                <% end %>
-
-                <% if @sheet.difficulty %>
-                <p>DIFFICULTY: <%= @sheet.difficulty %></p>
-                <% end %>
-
-                <br>
             </div>
         </div>
 
-        <%= render 'files' %>
-
         <%= render 'share' %>
+        <%= render 'files' %>
+        <%= render 'sheet_tags' %>
 
         <a href="<%= edit_sheet_path(@sheet) %>">
             <button type="button" class="btn btn-success "><span class="glyphicon glyphicon-edit"></span> Edit</button>
