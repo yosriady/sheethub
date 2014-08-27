@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827092703) do
+ActiveRecord::Schema.define(version: 20140827093320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140827092703) do
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
     t.string   "slug"
+    t.integer  "user_id",                                                  null: false
   end
 
   add_index "sheets", ["slug"], name: "index_sheets_on_slug", unique: true, using: :btree
