@@ -2,3 +2,15 @@ input[type="submit"] {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
+#new_user {
+    .btn {
+        float: left;
+        margin:20px 0px;
+        width: 47.5%;
+    }
+
+    input.btn {
+        margin-right: 5%;
+    }
+}
