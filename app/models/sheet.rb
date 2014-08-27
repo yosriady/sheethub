@@ -21,11 +21,11 @@ class Sheet < ActiveRecord::Base
   scope :original, -> { where(is_original?: true) }
   scope :flagged, -> { where(is_flagged?: true) }
 
-  SORT_ORDERS = {"Most Recent"=>:newest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
+  SORT_ORDERS = {"Latest"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   scope :lowest_price, -> { order(price: :asc)}
   scope :highest_price, -> { order(price: :desc)}
   scope :oldest, -> { order(created_at: :asc)}
-  scope :newest, -> { order(created_at: :desc)}
+  scope :latest, -> { order(created_at: :desc)}
 
   attr_accessor :instruments_list # For form parsing
   enum difficulty: %w{ beginner intermediate advanced }
@@ -51,7 +51,7 @@ class Sheet < ActiveRecord::Base
 
   def self.sorted(sort_order)
     if sort_order.nil?
-      self.send(:newest)
+      self.send(:latest)
     elsif SORT_ORDERS.values.include?(sort_order.to_sym)
       self.send(sort_order)
     else
