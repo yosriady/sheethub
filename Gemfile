@@ -10,6 +10,9 @@ gem 'unicorn-rails'
 # Task Queue
 # gem 'sidekiq'
 
+# Payments
+gem 'paypal-express'
+
 # Search
 gem 'searchkick'
 gem 'twitter-typeahead-rails'
