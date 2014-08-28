@@ -8,7 +8,7 @@ class Sheet < ActiveRecord::Base
   def sheet_slug
     [
       :title,
-      [:title, user.name]
+      [:title, user.username]
     ]
   end
 
