@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get 'sources' => 'sheets#sources'
   get 'source/:slug' => 'sheets#by_source', as: 'source'
 
-  root 'pages#index'
+  root 'sheets#index'
   get '/about', to: 'pages#about'
   get '/terms', to: 'pages#terms'
   get '/privacy', to: 'pages#privacy'

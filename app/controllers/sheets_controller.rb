@@ -129,7 +129,7 @@ class SheetsController < ApplicationController
     def authenticate_owner
       unless @sheet.user == current_user
         flash[:error] = 'You cannot edit this Sheet because you are not the owner.'
-        redirect_to sheets_path
+        redirect_to root_path
       end
     end
 
