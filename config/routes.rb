@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  match '/finish_registration' => 'registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
+
   resources :sheets
   resources :assets, only: [:create, :destroy]
 
