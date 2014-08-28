@@ -94,7 +94,6 @@ class SheetsController < ApplicationController
       @sheets = Sheet.with_exact_instruments(params[:slug])
   end
 
-
   # GET /genres
   def genres
   end
@@ -120,6 +119,10 @@ class SheetsController < ApplicationController
   # GET /source/:slug
   def by_source
     @sheets = Sheet.tagged_with(params[:slug], :on => :sources)
+  end
+
+  def autocomplete
+    render json: Sheet.search(params[:query], limit: 10).map{|s| {title: s.title, description: s.description, instruments: s.instruments, slug: s.slug, username: s.user.username}}
   end
 
   private

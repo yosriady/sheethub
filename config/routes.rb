@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   match 'users/finish_registration' => 'registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
 
-  resources :sheets
+  resources :sheets do
+    collection do
+      get 'autocomplete'
+    end
+  end
+
   resources :assets, only: [:create, :destroy]
 
   get 'search' => 'sheets#search'

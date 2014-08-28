@@ -19,6 +19,8 @@
 //= require jquery_ujs
 //= require selectize
 //= require selectize-script
+//= require twitter/typeahead
+//= require twitter/typeahead.min
 //= require turbolinks
 //= require uservoice
 //= require filters-script

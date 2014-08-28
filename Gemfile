@@ -12,6 +12,7 @@ gem 'unicorn-rails'
 
 # Search
 gem 'searchkick'
+gem 'twitter-typeahead-rails'
 
 # User authentication
 gem 'omniauth'
