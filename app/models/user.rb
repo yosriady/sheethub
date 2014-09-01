@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :sheets, dependent: :destroy
+  validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

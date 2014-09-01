@@ -3,7 +3,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /user/:username
   def profile
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by("lower(username) = ?", params[:username].downcase)
+    @sheets = @user.sheets
   end
 
   # GET /resource/edit

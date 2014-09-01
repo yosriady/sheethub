@@ -8,6 +8,7 @@ class FinishRegistrationsController < ApplicationController
       if current_user.update(update_params)
         redirect_to root_path, notice: 'Your profile was successfully updated.'
       else
+        flash[:error] = current_user.errors.full_messages.to_sentence
         redirect_to finish_registration_path, error: 'Your profile was not successfully updated.'
       end
     else
