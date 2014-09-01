@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
-    get 'user/:username' => "users/registrations#profile"
+    get 'user/:username' => "users/registrations#profile", :as => :profile
+    match 'users/finish_registration' => 'users/registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
   end
-  match 'users/finish_registration' => 'finish_registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
 
   resources :sheets do
     collection do
