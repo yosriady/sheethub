@@ -1,7 +1,7 @@
 class Sheet < ActiveRecord::Base
   belongs_to :user
 
-  searchkick
+  searchkick word_start: [:name]
   extend FriendlyId
   friendly_id :sheet_slug, :use => :slugged
 

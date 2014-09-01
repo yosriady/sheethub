@@ -122,7 +122,7 @@ class SheetsController < ApplicationController
   end
 
   def autocomplete
-    render json: Sheet.search(params[:query], limit: 10).map{|s| {title: s.title, description: s.description, instruments: s.instruments, slug: s.slug, username: s.user.username}}
+    render json: Sheet.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_path(s)}}
   end
 
   private
