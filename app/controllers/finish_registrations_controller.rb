@@ -1,4 +1,4 @@
-class RegistrationsController < ApplicationController
+class FinishRegistrationsController < ApplicationController
   before_action :ensure_registration_finished
 
   def finish_registration
