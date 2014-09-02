@@ -1,16 +1,18 @@
 <% if @user %>
   <% title "#{@user.username}'s Profile"  %>
 
-
   <div id="banner" class="profile-banner">
     <div class="center-block profile-banner-content" >
-          <%= image_tag(@user.image, class: "profile-avatar") %>
+        <%= image_tag(@user.image, class: "profile-avatar") %>
         <div class="profile-bio">
           <h1><%= @user.username %></h1>
           <p class="tagline"><%= @user.tagline %></p>
           <%= link_to @user.website, @user.website %>
         </div>
     </div>
+    <% if @user == current_user %>
+      <a href="<%= edit_user_registration_path %>" class="btn btn btn-success">Edit Profile</a>
+    <% end %>
   </div>
 
   <div class="container">
@@ -22,6 +24,7 @@
       </div>
     </div>
   <% else %>
+    <% title "User not found" %>
     <h2>User not found</h2>
   <% end %>
 
