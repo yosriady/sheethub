@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
 
-      if auth.provider == :facebook
+      # Get normal quality picture if using omniauth-facebook
+      if auth.provider == "facebook"
         user.image = auth.info.image + "?type=normal"
       else
         user.image = auth.info.image
