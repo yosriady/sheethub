@@ -48,6 +48,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def destroy
+    # Disable destroy
+    p "Accounts cannot be deleted"
+  end
+
   protected
     def registration_params
       params[:user].permit(:username, :finished_registration?, :tagline, :website)
