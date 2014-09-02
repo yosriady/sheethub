@@ -4,7 +4,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /user/:username
   def profile
     @user = User.find_by("lower(username) = ?", params[:username].downcase)
-    @sheets = @user.sheets
+    if @user
+      @sheets = @user.sheets
+    end
   end
 
   # GET /resource/edit

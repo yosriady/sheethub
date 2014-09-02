@@ -15,7 +15,13 @@ class User < ActiveRecord::Base
       user.name = auth.info.name
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
-      user.image = auth.info.image
+
+      if auth.provider == :facebook
+        user.image = auth.info.image + "?type=normal"
+      else
+        user.image = auth.info.image
+      end
+
     end
   end
 
