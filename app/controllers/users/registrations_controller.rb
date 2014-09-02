@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       update_params = registration_params
       update_params[:finished_registration?] = true
       if current_user.update(update_params)
-        redirect_to root_path, notice: 'Your profile was successfully updated.'
+        redirect_to profile_path(current_user), notice: 'Your profile was successfully updated.'
       else
         flash[:error] = current_user.errors.full_messages.to_sentence
         redirect_to finish_registration_path, error: 'Your profile was not successfully updated.'
@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def registration_params
-      params[:user].permit(:username, :finished_registration?)
+      params[:user].permit(:username, :finished_registration?, :tagline, :website)
     end
 
     def ensure_registration_finished

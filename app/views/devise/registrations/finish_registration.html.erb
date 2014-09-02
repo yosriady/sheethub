@@ -5,6 +5,8 @@
     <div class="col-lg-4 col-lg-offset-4">
     <%= simple_form_for current_user, url: finish_registration_path(current_user), method: :patch do |f| %>
       <%= f.input :username, label: 'Your username' %>
+      <%= f.input :tagline, label: 'Your tagline (Optional)' %>
+      <%= f.input :website, label: 'Your website (Optional)' %>
       <%= f.button :submit %>
     <% end %>
     </div>

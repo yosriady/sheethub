@@ -1,6 +1,39 @@
-.profile-avatar {
-    display:block;
-    min-width: 100px;
-    border-radius: 100%;
-    margin: 0 auto;
+#banner.profile-banner {
+    height: 150px;
+
+    .profile-banner-content {
+        width: 30%;
+    }
+
+    .profile-avatar {
+        float: left;
+        min-width: 100px;
+        border-radius: 100%;
+    }
+
+    .profile-bio {
+        float: left;
+
+        a, p, h1 {
+            margin: 0px;
+            margin-left: 20px;
+        }
+
+        p, h1 {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        h1 {
+            font-size: 48px;
+        }
+
+        a {
+            display:block;
+        }
+
+        h1 {
+            text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.6);
+            display: inline;
+        }
+    }
 }

@@ -1,7 +1,16 @@
 <% if @user %>
-  <div id="banner">
-      <%= image_tag(@user.image, class: "profile-avatar") %>
-      <h2><%= @user.username %></h2>
+  <% title "#{@user.username}'s Profile"  %>
+
+
+  <div id="banner" class="profile-banner">
+    <div class="center-block profile-banner-content" >
+          <%= image_tag(@user.image, class: "profile-avatar") %>
+        <div class="profile-bio">
+          <h1><%= @user.username %></h1>
+          <p class="tagline"><%= @user.tagline %></p>
+          <%= link_to @user.website, @user.website %>
+        </div>
+    </div>
   </div>
 
   <div id="page-content-wrapper">
