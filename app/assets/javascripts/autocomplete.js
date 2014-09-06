@@ -1,9 +1,10 @@
 $(document).on("page:change", function() {
+  if(!$('.twitter-typeahead').length){
     var sheets = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       remote: '/sheets/autocomplete?query=%QUERY'
-  });
+    });
 
     sheets.initialize();
 
@@ -27,4 +28,6 @@ $(document).on("page:change", function() {
             window.location.href = destination;
         }
     });
+
+  }
 });
