@@ -2,22 +2,22 @@
   <div class="panel-heading"><span class="glyphicon glyphicon-tags"></span> Tags</div>
   <div class="panel-body">
 
-    <% if @sheet.instruments.present? %>
-    <%= render 'instruments', instruments: @sheet.instruments %>
+    <% if sheet.instruments.present? %>
+    <%= render 'instruments', instruments: sheet.instruments %>
     <% end %>
 
-    <% if @sheet.genres.any? %>
-    <%= render 'tags', tags: @sheet.genres %>
+    <% if sheet.genres.any? %>
+    <%= render 'tags', tags: sheet.genres %>
     <% end %>
-    <% if @sheet.composers.any? %>
-    <%= render 'tags', tags: @sheet.composers %>
-    <% end %>
-
-    <% if @sheet.sources.any? %>
-    <%= render 'tags', tags: @sheet.sources %>
+    <% if sheet.composers.any? %>
+    <%= render 'tags', tags: sheet.composers %>
     <% end %>
 
-    <% if @sheet.difficulty %>
-    <p>DIFFICULTY: <%= @sheet.difficulty %></p>
+    <% if sheet.sources.any? %>
+    <%= render 'tags', tags: sheet.sources %>
+    <% end %>
+
+    <% if sheet.difficulty %>
+    <p>DIFFICULTY: <%= sheet.difficulty %></p>
     <% end %>
 </div></div>

@@ -1,25 +1,16 @@
-<table id="sheets" class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Pages</th>
-      <th>URL</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sheets.each do |sheet| %>
-    <tr>
-      <td><%= sheet.title %></td>
-      <td><%= sheet.description %></td>
-      <td><%= sheet.pages %></td>
-      <td><%= sheet.pdf.url.present? %></td>
-      <td><%= link_to 'Show', sheet %></td>
-      <td><%= link_to 'Edit', edit_sheet_path(sheet) %></td>
-      <td><%= link_to 'Destroy', sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="sheets">
+  <% @sheets.each do |sheet| %>
+    <a href="<%= sheet_url(sheet) %>"><div class="sheet">
+      <div class="sheet-thumb">
+        <!-- TODO -->
+      </div>
+      <div class="sheet-text">
+        <p class="sheet-instruments"><%= sheet.instruments.join(", ") %></p>
+        <h3><%= sheet.title %></h3>
+        <p><%= sheet.composer_list.to_s.titleize if sheet.composer_list.any? %></p>
+        <hr />
+        <a href="<%= profile_path(sheet.user.username) %>"><span class="glyphicon glyphicon-user"></span> <%= sheet.user.username %></a>
+      </div>
+    </div></a>
+  <% end %>
+</div>

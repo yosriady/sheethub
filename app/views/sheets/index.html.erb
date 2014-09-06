@@ -1,11 +1,11 @@
 <% title "Browse"  %>
 
-<div class="container table-container">
+<div class="container">
   <div class="row">
     <div class="col-xs-12">
       <a href="#filter-toggle" class="btn btn-default btn-gradient pull-left" id="filter-toggle"><span class="glyphicon glyphicon-expand"></span> Toggle Filters</a>
 
-      <%= simple_form_for :sheet do |f| %>
+      <%= simple_form_for :sheet, html: { class: 'sheet-sort-order' } do |f| %>
         <%= f.select :sort_order, Sheet::SORT_ORDERS %>
       <% end %>
 

@@ -34,7 +34,7 @@
 
         <%= render 'share' %>
         <%= render 'files' %>
-        <%= render 'sheet_tags' %>
+        <%= render 'sheet_tags', sheet:@sheet %>
 
         <a href="<%= edit_sheet_path(@sheet) %>">
             <button type="button" class="btn btn-success "><span class="glyphicon glyphicon-edit"></span> Edit</button>

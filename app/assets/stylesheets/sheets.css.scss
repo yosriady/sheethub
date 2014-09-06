@@ -1,3 +1,53 @@
-// Place all the styles related to the Sheets controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#sheets {
+    width: 100%;
+}
+
+.sheet {
+    background: white;
+    width: 32%;
+    padding: 1%;
+    margin: 0.5%;
+    float: left;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+    border: 1px solid transparent;
+
+    &:hover {
+        border: 1px solid rgb(188, 232, 241);
+        -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.2);
+        -moz-box-shadow: 0 0 3px rgba(0,0,0,0.2);
+        box-shadow: 0 0 3px rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
+
+    hr {
+        margin: 5px 0px;
+    }
+
+    h3 {
+        color: #2583EB;
+        margin: 0px;
+    }
+
+    p {
+        color: #303030;
+    }
+
+    .glyphicon {
+        font-size: 12px;
+    }
+
+    .sheet-instruments {
+        font-size: 12px;
+        margin: 0px;
+        text-transform: uppercase;
+        color: #777;
+    }
+
+}
