@@ -16,6 +16,6 @@ Sheet.create(user_id: 1, title: "Another Termina", description: "Guitar piece by
 
 seed_data = []
 50.times do
-  seed_data << {user_id: 1, title: Faker::Company.name, description: Faker::Company.bs}
+  seed_data << {user_id: 1, title: Faker::Company.name, description: Faker::Company.bs, composer_list: ["Yasunori Mitsuda".to_sym], genre_list: [:videogame],  instruments: [:guitar]}
 end
 Sheet.create(seed_data)
