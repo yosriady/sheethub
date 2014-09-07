@@ -39,6 +39,13 @@
         color: #303030;
     }
 
+    .sheet-text {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .glyphicon {
         font-size: 12px;
     }
