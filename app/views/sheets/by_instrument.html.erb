@@ -1,5 +1,16 @@
-<% for sheet in @sheets %>
-    <div>
-        <%= sheet.title %>
+<% title "Browse by Instrument | #{params[:slug].titleize}" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-center"><span><%= params[:slug].titleize %> Sheet Music</span></h1>
     </div>
-<% end %>
+  </div>
+
+    <!-- Page Content -->
+      <div class="row">
+        <div class="col-lg-12">
+          <%= render 'sheets' %>
+        </div>
+      </div>
+</div>
