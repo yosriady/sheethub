@@ -29,6 +29,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.3.0)
       activerecord (>= 3, < 5)
+    acts_as_votable (0.10.0)
     arel (5.0.1.20140414130214)
     attr_required (1.0.0)
     autoprefixer-rails (2.1.1.20140710)
@@ -327,6 +328,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
+  acts_as_votable
   autoprefixer-rails
   aws-sdk
   better_errors

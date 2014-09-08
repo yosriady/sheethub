@@ -26,6 +26,9 @@ gem 'devise'
 # Tags
 gem 'acts-as-taggable-on'
 
+# Votes
+gem 'acts_as_votable'
+
 # Pagination
 gem 'kaminari'
 
