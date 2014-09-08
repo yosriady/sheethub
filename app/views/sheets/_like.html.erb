@@ -1,0 +1,9 @@
+<% if current_user.voted_for? @sheet %>
+<a href="<%= like_sheet_path(@sheet) %>">
+    <button type="button" class="btn btn-success "><span class="glyphicon glyphicon-thumbs-down"></span> Unlike</button>
+</a>
+<% else %>
+<a href="<%= like_sheet_path(@sheet) %>">
+    <button type="button" class="btn btn-success "><span class="glyphicon glyphicon-thumbs-up"></span> Like</button>
+</a>
+<% end %>

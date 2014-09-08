@@ -10,6 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.find_by("lower(username) = ?", params[:username].downcase)
     if @user
       @sheets = @user.sheets
+      @likes = @user.find_voted_items
     end
   end
 
