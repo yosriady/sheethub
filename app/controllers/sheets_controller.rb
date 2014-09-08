@@ -1,5 +1,5 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: [:show, :edit, :update, :destroy]
+  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :like]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_tags
@@ -23,6 +23,21 @@ class SheetsController < ApplicationController
   # GET /sheets/1
   # GET /sheets/1.json
   def show
+  end
+
+  def like
+    unless current_user
+      redirect_to new_user_session_path, error: 'You need to be signed in to like'
+    end
+    if @sheet && (!current_user.voted_for? @sheet)
+      @sheet.liked_by current_user
+      redirect_to sheet_path(@sheet), notice: 'Liked!'
+    elsif @sheet && (current_user.voted_for? @sheet)
+      @sheet.unliked_by current_user
+      redirect_to sheet_path(@sheet), notice: 'Unliked!'
+    else
+      redirect_to root_path, error: 'Sheet not found'
+    end
   end
 
   # GET /sheets/new

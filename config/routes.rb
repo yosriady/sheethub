@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     collection do
       get 'autocomplete'
     end
+
+    member do
+      get 'like'
+    end
   end
 
   resources :assets, only: [:create, :destroy]

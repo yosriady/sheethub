@@ -1,5 +1,6 @@
 class Sheet < ActiveRecord::Base
   belongs_to :user
+  acts_as_votable
 
   searchkick word_start: [:name]
   extend FriendlyId
