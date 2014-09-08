@@ -11,7 +11,7 @@
         </div>
     </div>
     <% if @user == current_user %>
-      <a href="<%= edit_user_registration_path %>" class="btn btn btn-success">Edit Profile</a>
+      <a href="<%= edit_user_registration_path %>" class="btn btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
     <% end %>
   </div>
 
@@ -24,6 +24,7 @@
           <%= render '/sheets/sheets' %>
         <% else %>
           <h2>You have no sheets. Why not add one?</h2>
+          <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a>
         <% end %>
 
         </div>
