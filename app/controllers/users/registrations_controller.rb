@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # User profile edit/update
   def update
-    account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
+    account_update_params = registration_params
 
     # required for settings form to submit when password is left blank
     if account_update_params[:password].blank?
@@ -61,7 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def registration_params
-      params[:user].permit(:username, :finished_registration?, :tagline, :website)
+      params[:user].permit(:username, :finished_registration?, :tagline, :website, :bio)
     end
 
     def ensure_registration_finished

@@ -15,16 +15,25 @@
     <% end %>
   </div>
 
-  <div class="container">
+  <div class="container sheets-container">
     <div id="page-content-wrapper">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-3 profile-info">
+            <div class="panel panel-info">
+              <div class="panel-heading"><span class="glyphicon glyphicon-user"></span> <%= @user.username %></div>
+              <div class="panel-body">
+                <p><%= @user.bio %></p>
+                <em>Member since <%= distance_of_time_in_words(Time.now, @user.created_at) %> ago</em>
+            </div>
+        </div>
+      </div>
+
+        <div class="col-lg-9">
 
         <ul class="nav nav-tabs" role="tablist">
           <li class="active"><a href="#">Sheet Music <span class="badge"><%= @user.sheets.count %></span></a></li>
           <li><a href="#">Favourites <span class="badge">0</span></a></li>
         </ul>
-
 
         <% if @sheets.any? %>
           <%= render '/sheets/sheets' %>
@@ -39,7 +48,6 @@
         <% end %>
 
         </div>
-      </div>
     </div>
   <% else %>
     <% title "User not found" %>
