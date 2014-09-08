@@ -3,6 +3,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /user/:username
   def profile
+    unless params[:username]
+      # TODO: user not found page
+    end
+
     @user = User.find_by("lower(username) = ?", params[:username].downcase)
     if @user
       @sheets = @user.sheets
@@ -14,6 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # TODO: Edit Profile
   end
 
+  # User profile edit/update
   def update
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
 
@@ -33,12 +38,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  # Finish registration fields edit/update
   def finish_registration
     if request.patch? && params[:user] && params[:user][:username]
       update_params = registration_params
       update_params[:finished_registration?] = true
       if current_user.update(update_params)
-        redirect_to profile_path(current_user), notice: 'Your profile was successfully updated.'
+        redirect_to profile_path(current_user.username), notice: 'Your profile was successfully updated.'
       else
         flash[:error] = current_user.errors.full_messages.to_sentence
         redirect_to finish_registration_path, error: 'Your profile was not successfully updated.'

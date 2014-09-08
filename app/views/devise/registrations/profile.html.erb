@@ -19,7 +19,13 @@
     <div id="page-content-wrapper">
       <div class="row">
         <div class="col-lg-12">
+
+        <% if @sheets.any? %>
           <%= render '/sheets/sheets' %>
+        <% else %>
+          <h2>You have no sheets. Why not add one?</h2>
+        <% end %>
+
         </div>
       </div>
     </div>

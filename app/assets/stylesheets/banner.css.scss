@@ -10,7 +10,7 @@
 
     h1, h4 {
         width: 800px;
-        margin: 40px auto;
+        margin: 30px auto;
         margin-bottom:0px;
         color: white;
         text-align: center;
@@ -19,6 +19,24 @@
     h4 {
         font-weight: 300;
         margin-top:10px;
+    }
+
+}
+
+#banner.footer-banner {
+    height: 80px;
+
+    h3 {
+        float: left;
+        color: white;
+        margin: 0px;
+        line-height: 42px;
+    }
+
+    a {
+        width: 200px;
+        padding: 10px 15px;
+        float:right;
     }
 
 }

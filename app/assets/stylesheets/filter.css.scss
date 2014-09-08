@@ -24,10 +24,11 @@
 }
 
 #filter-wrapper {
-    position: fixed;
+    position: absolute;
     left: 250px;
     width: 0;
     height: 100%;
+    margin-top: 5px;
     margin-left: -250px;
     overflow-y: auto;
     -webkit-transition: all 0.2s ease;

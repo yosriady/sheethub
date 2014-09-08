@@ -15,7 +15,7 @@ $(document).on("page:change", function() {
       templates: {
         empty: [
         '<span class="no-results-message">',
-        'No matches for query'
+        'No matches'
         ].join('\n')
       }
     }).on('typeahead:selected', function(event, datum) {

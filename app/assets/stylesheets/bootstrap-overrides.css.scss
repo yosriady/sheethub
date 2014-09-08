@@ -2,6 +2,15 @@ body {
     background: #FBFBFB
 }
 
+.container {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.sheets-container {
+    min-height: 780px;
+}
+
 // Bootstrap overrides
 .navbar {
     border-radius: 0px
