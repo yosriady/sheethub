@@ -20,11 +20,22 @@
       <div class="row">
         <div class="col-lg-12">
 
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#">Sheet Music <span class="badge"><%= @user.sheets.count %></span></a></li>
+          <li><a href="#">Favourites <span class="badge">0</span></a></li>
+        </ul>
+
+
         <% if @sheets.any? %>
           <%= render '/sheets/sheets' %>
         <% else %>
-          <h2>You have no sheets. Why not add one?</h2>
-          <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a>
+            <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+            <% if @user == current_user %>
+              <h2>You have no sheets. Why not add one?</h2>
+              <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a>
+            <% else %>
+              <h2>This user has no sheets.</h2>
+            <% end %>
         <% end %>
 
         </div>
