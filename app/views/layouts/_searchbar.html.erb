@@ -1,0 +1,8 @@
+<div class="navbar-form input-group search-bar">
+  <form action="<%= search_path %>" method="get">
+    <div id="scrollable-dropdown-menu" class="has-feedback">
+      <%= text_field_tag :q, params[:q], id:"search_form", class:"typeahead form-control", placeholder:"Search for music..." %>
+      <i class="glyphicon glyphicon-search form-control-feedback"></i>
+  </div>
+</form>
+</div>
