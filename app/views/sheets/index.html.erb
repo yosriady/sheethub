@@ -15,7 +15,7 @@
 <div class="container sheets-container">
   <div class="row">
     <div class="col-xs-12">
-      <a href="#filter-toggle" class="btn btn-default btn-gradient pull-left" id="filter-toggle"><span class="glyphicon glyphicon-expand"></span> Toggle Filters</a>
+      <a href="javascript:void(0)" class="btn btn-default btn-gradient pull-left" id="filter-toggle"><span class="glyphicon glyphicon-expand"></span> Toggle Filters</a>
 
       <%= simple_form_for :sheet, html: { class: 'sheet-sort-order' } do |f| %>
         <%= f.select :sort_order, Sheet::SORT_ORDERS %>
