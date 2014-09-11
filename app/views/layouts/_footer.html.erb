@@ -1,5 +1,6 @@
-<%= render 'layouts/share_banner' if current_user %>
-<%= render 'layouts/sign_up_banner' unless current_user %>
+<!-- Don't render banner if on individual sheets page -->
+<%= render 'layouts/share_banner' if current_user && action_name != "show" %>
+<%= render 'layouts/sign_up_banner' if !current_user && action_name != "show" %>
 
 <footer class="panel-footer">
     <div class="container-fluid">
