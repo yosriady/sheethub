@@ -19,9 +19,9 @@
     <div id="page-content-wrapper">
       <div class="row">
         <div class="col-lg-3 profile-info">
-            <div class="panel panel-info">
-              <div class="panel-heading"><span class="glyphicon glyphicon-user"></span> <%= @user.username %></div>
+            <div class="well panel panel-info">
               <div class="panel-body">
+                <span class="glyphicon glyphicon-user"></span> <%= @user.username %>
                 <p><%= @user.bio %></p>
                 <em>Member since <%= distance_of_time_in_words(Time.now, @user.created_at) %> ago</em>
             </div>
