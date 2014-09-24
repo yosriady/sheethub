@@ -84,8 +84,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec'
   # gem 'factory_girl_rails'
-  gem 'faker'
 end
+
+# Test data generation
+gem 'faker'
 
 group :test do
   # gem 'database_cleaner'
