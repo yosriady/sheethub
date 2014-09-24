@@ -3,22 +3,31 @@ sheethub
 SheetHub is a self-publishing platform to share and sell sheet music.
 To make it easy for composers and arrangers to share their creations.
 
+http://goo.gl/9DAcsw
 
-## System Prerequisites
+## System requirements
+'''
+brew install <requirement>
+'''
+
 - elasticsearch
 - libpng
 - libjpeg
 - imagemagick
 
-## Quickstart Developer Guide
+```
+brew install <requirement>
+```
+
+## Get Started
 
 ```
 bundle install
-rake db:seed
+rake db:migrate
 rails s
 ```
 
-
-
-
-http://goo.gl/9DAcsw
+## Deploying to Production
+'''
+TODO
+'''
