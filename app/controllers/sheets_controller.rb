@@ -2,6 +2,7 @@ class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy, :like]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
+  before_action :set_all_tags, only: [:new, :edit]
   before_action :set_instruments
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_owner, :only => [:edit, :update, :destroy]
@@ -48,9 +49,6 @@ class SheetsController < ApplicationController
   # GET /sheets/new
   def new
     @sheet = Sheet.new
-    @composers ||= Sheet.tags_on(:composers)
-    @genres ||= Sheet.tags_on(:genres)
-    @sources ||= Sheet.tags_on(:sources)
   end
 
   # GET /sheets/1/edit
@@ -169,6 +167,12 @@ class SheetsController < ApplicationController
 
     def set_sheet
       @sheet = Sheet.friendly.find(params[:id])
+    end
+
+    def set_all_tags
+      @composers ||= Sheet.tags_on(:composers)
+      @genres ||= Sheet.tags_on(:genres)
+      @sources ||= Sheet.tags_on(:sources)
     end
 
     def set_instruments
