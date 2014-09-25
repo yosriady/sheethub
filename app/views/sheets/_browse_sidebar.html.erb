@@ -1,0 +1,80 @@
+<div id="browse-sidebar" class="col-xs-2 well">
+<div class="panel-group" id="accordion">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <p class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#browse-instruments">
+          <span class="glyphicon glyphicon-bullhorn"></span>
+          Instruments
+        </a>
+      </p>
+    </div>
+
+    <div id="browse-instruments" class="panel-collapse collapse">
+    <div class="panel-body">
+        <%= render 'instruments' %>
+    </div>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <p class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#browse-composers">
+          <span class="glyphicon glyphicon-user"></span>
+          Composers
+        </a>
+      </p>
+    </div>
+
+    <div id="browse-composers" class="panel-collapse collapse">
+    <div class="panel-body">
+        <%= render 'tags', tags: @composers %>
+        <br />
+        <a href="<%= composers_path %>">View All Composers</a>
+    </div>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <p class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#browse-genres">
+          <span class="glyphicon glyphicon-headphones"></span>
+          Genres
+        </a>
+      </p>
+    </div>
+
+    <div id="browse-genres" class="panel-collapse collapse">
+    <div class="panel-body">
+        <%= render 'tags', tags: @genres %>
+        <br />
+        <a href="<%= genres_path %>">View All Genres</a>
+    </div>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <p class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#browse-sources">
+          <span class="glyphicon glyphicon-book"></span>
+          Sources
+        </a>
+      </p>
+    </div>
+
+    <div id="browse-sources" class="panel-collapse collapse">
+    <div class="panel-body">
+        <%= render 'tags', tags: @sources %>
+        <br />
+        <a href="<%= sources_path %>">View All Sources</a>
+    </div>
+    </div>
+  </div>
+
+
+
+</div>
+</div>

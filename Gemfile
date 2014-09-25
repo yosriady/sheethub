@@ -86,7 +86,7 @@ group :development, :test do
   # gem 'factory_girl_rails'
 end
 
-# Test data generation
+# Test data generationw
 gem 'faker'
 
 group :test do

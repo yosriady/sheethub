@@ -22,7 +22,7 @@ module ApplicationHelper
     when "composers"
       "user"
     when "sources"
-      "screenshot"
+      "book"
     else
       "music"
     end

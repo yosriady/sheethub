@@ -23,5 +23,4 @@
 //= require twitter/typeahead.min
 //= require turbolinks
 //= require uservoice
-//= require filters-script
 //= require_tree .

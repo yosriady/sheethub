@@ -2,7 +2,6 @@ class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy, :like]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
-  before_action :set_tags
   before_action :set_instruments
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_owner, :only => [:edit, :update, :destroy]
@@ -12,7 +11,13 @@ class SheetsController < ApplicationController
   # GET /sheets
   # GET /sheets.json
   def index
+    @instruments = Sheet.values_for_instruments
     @sheets = Sheet.sorted(params[:sort_order]).page(params[:page])
+
+    # TODO: These should be cached, only show the most popular ones
+    @composers ||= Sheet.tags_on(:composers).limit(10)
+    @genres ||= Sheet.tags_on(:genres).limit(10)
+    @sources ||= Sheet.tags_on(:sources).limit(10)
   end
 
   # GET /search
@@ -111,6 +116,7 @@ class SheetsController < ApplicationController
 
   # GET /genres
   def genres
+    @genres ||= Sheet.tags_on(:genres)
   end
 
   # GET /genre/:slug
@@ -120,6 +126,7 @@ class SheetsController < ApplicationController
 
   # GET /composers
   def composers
+    @composers ||= Sheet.tags_on(:composers)
   end
 
   # GET /composer/:slug
@@ -129,6 +136,7 @@ class SheetsController < ApplicationController
 
   # GET /sources
   def sources
+    @sources ||= Sheet.tags_on(:sources)
   end
 
   # GET /source/:slug
@@ -158,12 +166,6 @@ class SheetsController < ApplicationController
 
     def set_sheet
       @sheet = Sheet.friendly.find(params[:id])
-    end
-
-    def set_tags
-      @composers ||= Sheet.tags_on(:composers)
-      @genres ||= Sheet.tags_on(:genres)
-      @sources ||= Sheet.tags_on(:sources)
     end
 
     def set_instruments

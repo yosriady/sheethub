@@ -3,7 +3,7 @@
   <div class="panel-body">
 
     <% if sheet.instruments.present? %>
-    <%= render 'instruments', instruments: sheet.instruments %>
+    <%= render 'sheet_instruments', instruments: sheet.instruments %>
     <% end %>
 
     <% if sheet.genres.any? %>

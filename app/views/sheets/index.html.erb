@@ -13,35 +13,27 @@
 </div>
 
 <div class="container sheets-container">
-  <div class="row">
-    <div class="col-xs-12">
-      <a href="javascript:void(0)" class="btn btn-default btn-gradient pull-left" id="filter-toggle"><span class="glyphicon glyphicon-expand"></span> Toggle Filters</a>
 
+<%= render 'browse_sidebar' %>
+
+<div class="col-xs-10">
+  <div class="row">
+    <div class="col-xs-2">
       <%= simple_form_for :sheet, html: { class: 'sheet-sort-order' } do |f| %>
         <%= f.select :sort_order, Sheet::SORT_ORDERS %>
       <% end %>
-
-      <h1 class="text-center"><span>Viewing all sheets</span></h1>
     </div>
   </div>
 
-  <div id="wrapper">
-
-    <%= render 'filters' %>
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-      <div class="row">
-        <div class="col-lg-12">
-          <%= render 'sheets' %>
-        </div>
-      </div>
-
-      <div id="paginator" class="text-center">
-        <%= paginate @sheets, remote: true %>
-      </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render 'sheets' %>
     </div>
-    <!-- /#page-content-wrapper -->
-
   </div>
+
+  <div id="paginator" class="text-center">
+    <%= paginate @sheets, remote: true %>
+  </div>
+</div>
+
 </div>

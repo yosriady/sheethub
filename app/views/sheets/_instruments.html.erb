@@ -1,5 +1,7 @@
-<% for instrument in instruments %>
+<% for instrument in @instruments %>
     <a href="<%= instrument_path(instrument) %>">
-        <p class="tag"><span class="glyphicon glyphicon-bullhorn"></span> <%= instrument.to_s.titleize %></p>
+    <span class="tag">
+        <%= instrument.to_s.titleize %>
+    </span>
     </a>
 <% end %>
