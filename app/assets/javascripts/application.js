@@ -24,4 +24,5 @@
 //= require turbolinks
 //= require uservoice
 //= require twitter
+//= require fb-sdk
 //= require_tree .
