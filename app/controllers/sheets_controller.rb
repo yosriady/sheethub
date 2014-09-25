@@ -48,6 +48,9 @@ class SheetsController < ApplicationController
   # GET /sheets/new
   def new
     @sheet = Sheet.new
+    @composers ||= Sheet.tags_on(:composers)
+    @genres ||= Sheet.tags_on(:genres)
+    @sources ||= Sheet.tags_on(:sources)
   end
 
   # GET /sheets/1/edit
