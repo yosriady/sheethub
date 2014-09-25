@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908083921) do
+ActiveRecord::Schema.define(version: 20140925154358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,14 +40,14 @@ ActiveRecord::Schema.define(version: 20140908083921) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "sheets", force: true do |t|
-    t.boolean  "is_public?",                               default: true,  null: false
-    t.boolean  "is_flagged?",                              default: false, null: false
-    t.boolean  "is_free?",                                 default: true,  null: false
-    t.boolean  "is_original?",                             default: false, null: false
-    t.decimal  "price",            precision: 2, scale: 0, default: 0,     null: false
-    t.string   "title",                                                    null: false
-    t.text     "description",                                              null: false
-    t.integer  "pages",                                    default: 0,     null: false
+    t.boolean  "is_public?",                                      default: true,  null: false
+    t.boolean  "is_flagged?",                                     default: false, null: false
+    t.boolean  "is_free?",                                        default: true,  null: false
+    t.boolean  "is_original?",                                    default: false, null: false
+    t.decimal  "price",                   precision: 2, scale: 0, default: 0,     null: false
+    t.string   "title",                                                           null: false
+    t.text     "description",                                                     null: false
+    t.integer  "pages",                                           default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "difficulty"
@@ -57,9 +57,23 @@ ActiveRecord::Schema.define(version: 20140908083921) do
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
     t.string   "slug"
-    t.integer  "user_id",                                                  null: false
+    t.integer  "user_id",                                                         null: false
+    t.integer  "cached_votes_total",                              default: 0
+    t.integer  "cached_votes_score",                              default: 0
+    t.integer  "cached_votes_up",                                 default: 0
+    t.integer  "cached_votes_down",                               default: 0
+    t.integer  "cached_weighted_score",                           default: 0
+    t.integer  "cached_weighted_total",                           default: 0
+    t.float    "cached_weighted_average",                         default: 0.0
   end
 
+  add_index "sheets", ["cached_votes_down"], name: "index_sheets_on_cached_votes_down", using: :btree
+  add_index "sheets", ["cached_votes_score"], name: "index_sheets_on_cached_votes_score", using: :btree
+  add_index "sheets", ["cached_votes_total"], name: "index_sheets_on_cached_votes_total", using: :btree
+  add_index "sheets", ["cached_votes_up"], name: "index_sheets_on_cached_votes_up", using: :btree
+  add_index "sheets", ["cached_weighted_average"], name: "index_sheets_on_cached_weighted_average", using: :btree
+  add_index "sheets", ["cached_weighted_score"], name: "index_sheets_on_cached_weighted_score", using: :btree
+  add_index "sheets", ["cached_weighted_total"], name: "index_sheets_on_cached_weighted_total", using: :btree
   add_index "sheets", ["slug"], name: "index_sheets_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
