@@ -22,7 +22,7 @@
                 <p><%= @user.bio %></p>
 
                 <% if @user.website %>
-                  <a href="<%= @user.website %>" class="btn btn btn-block btn-default"><span class="glyphicon glyphicon-globe"></span> <%= @user.website %></a>
+                  <a href="<%= url_with_protocol(@user.website) %>" class="btn btn btn-block btn-default"><span class="glyphicon glyphicon-globe"></span> <%= @user.website %></a>
                 <% end %>
 
                 <% if @user == current_user %>

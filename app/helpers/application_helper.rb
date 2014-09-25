@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def url_with_protocol(url)
+    /^http/i.match(url) ? url : "http://#{url}"
+  end
+
   def tag_path(tag)
     context = tag.taggings[0].context #TODO: optimize SQL querying with includes?
     case context
