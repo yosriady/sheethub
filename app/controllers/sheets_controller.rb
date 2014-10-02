@@ -2,7 +2,7 @@ class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy, :like]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
-  before_action :set_all_tags, only: [:new, :edit]
+  before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_owner, :only => [:edit, :update, :destroy]
@@ -15,7 +15,7 @@ class SheetsController < ApplicationController
     @instruments = Sheet.values_for_instruments
     @sheets = Sheet.sorted(params[:sort_order]).page(params[:page])
 
-    # TODO: These should be cached, only show the most popular ones
+    # TODO: These should be cached, only show the most popular ones every 24 hours?
     @composers ||= Sheet.tags_on(:composers).limit(10)
     @genres ||= Sheet.tags_on(:genres).limit(10)
     @sources ||= Sheet.tags_on(:sources).limit(10)
@@ -64,13 +64,15 @@ class SheetsController < ApplicationController
     @sheet.composer_list = params[:sheet][:composer_list]
     @sheet.genre_list = params[:sheet][:genre_list]
     @sheet.source_list = params[:sheet][:source_list]
+
     respond_to do |format|
       if @sheet.save
         format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
         format.json { render :show, status: :created, location: @sheet }
       else
         format.html { render :new }
-        format.json { render json: @sheet.errors, status: :unprocessable_entity }
+        flash[:error] = @sheet.errors.full_messages.to_sentence
+        format.json { render json: @sheet.errors.full_messages.to_sentence, status: :unprocessable_entity }
       end
     end
   end
@@ -90,7 +92,8 @@ class SheetsController < ApplicationController
         format.json { render :show, status: :ok, location: @sheet }
       else
         format.html { render :edit }
-        format.json { render json: @sheet.errors, status: :unprocessable_entity }
+        flash[:error] = @sheet.errors.full_messages.to_sentence
+        format.json { render json: @sheet.errors.full_messages.to_sentence, status: :unprocessable_entity }
       end
     end
   end
@@ -170,9 +173,9 @@ class SheetsController < ApplicationController
     end
 
     def set_all_tags
-      @composers ||= Sheet.tags_on(:composers)
-      @genres ||= Sheet.tags_on(:genres)
-      @sources ||= Sheet.tags_on(:sources)
+      @composers = Sheet.tags_on(:composers)
+      @genres = Sheet.tags_on(:genres)
+      @sources = Sheet.tags_on(:sources)
     end
 
     def set_instruments

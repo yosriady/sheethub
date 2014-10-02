@@ -6,6 +6,9 @@ class Sheet < ActiveRecord::Base
   extend FriendlyId
   friendly_id :sheet_slug, :use => :slugged
 
+  validates :title, presence: true
+  validates :description, presence: true
+
   def sheet_slug
     [
       :title,
@@ -31,6 +34,7 @@ class Sheet < ActiveRecord::Base
   attr_accessor :instruments_list # For form parsing
   enum difficulty: %w{ beginner intermediate advanced }
   bitmask :instruments, :as => [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], :null => false
+  validates :instruments, presence: true
   acts_as_taggable
   acts_as_taggable_on :composers, :genres, :sources
 
@@ -43,6 +47,7 @@ class Sheet < ActiveRecord::Base
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],
       :message => "Only pdf files are allowed"
+  validates :pdf, presence: true
 
   has_many :assets, :dependent => :destroy
   accepts_nested_attributes_for :assets
