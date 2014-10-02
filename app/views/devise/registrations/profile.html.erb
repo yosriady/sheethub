@@ -16,19 +16,18 @@
     <div id="page-content-wrapper">
       <div class="row">
         <div class="col-lg-3 profile-info">
+            <% if @user == current_user %>
+              <a href="<%= edit_user_registration_path %>" class="btn btn btn-block btn-lg btn-success"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
+            <% end %>
             <div class="well">
                 <h4><span class="glyphicon glyphicon-user"></span> <%= @user.username %></h4>
                 <em>Member since <%= distance_of_time_in_words(Time.now, @user.created_at) %> ago</em>
                 <p><%= @user.bio %></p>
 
-                <% if @user.website %>
+                <% if @user.website.present? %>
                   <a href="<%= url_with_protocol(@user.website) %>" class="btn btn btn-block btn-default"><span class="glyphicon glyphicon-globe"></span> Website </a>
                 <% end %>
-
-                <% if @user == current_user %>
-                  <a href="<%= edit_user_registration_path %>" class="btn btn btn-block btn-default"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
-                <% end %>
-        </div>
+            </div>
       </div>
 
         <div class="col-lg-9">
