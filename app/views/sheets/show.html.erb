@@ -36,10 +36,12 @@
         <%= render 'files' %>
         <%= render 'sheet_tags', sheet:@sheet %>
 
+        <% if @current_user.present? %>
         <div class="well">
             <%= render 'edit' %>
             <%= render 'like' %>
         </div>
+        <% end %>
 
         <%= render 'layouts/facebook_widget' %>
         <%= render 'layouts/twitter_widget' %>
