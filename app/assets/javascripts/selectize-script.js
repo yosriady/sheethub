@@ -10,21 +10,24 @@ $(document).on("page:change", function() {
         plugins: ['remove_button'],
         delimiter: ',',
         persist: false,
-        create: true
+        create: true,
+        maxItems: 5
     });
 
     $('#genres-field').selectize({
         plugins: ['remove_button'],
         delimiter: ',',
         persist: false,
-        create: true
+        create: true,
+        maxItems: 5
     });
 
     $('#sources-field').selectize({
         plugins: ['remove_button'],
         delimiter: ',',
         persist: false,
-        create: true
+        create: true,
+        maxItems: 5
     });
 
     $('#sheet_difficulty').selectize({});
