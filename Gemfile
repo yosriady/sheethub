@@ -10,6 +10,9 @@ gem 'unicorn-rails'
 # Task Queue
 # gem 'sidekiq'
 
+# Admin
+gem 'activeadmin', github: 'activeadmin'
+
 # Payments
 gem 'paypal-express'
 

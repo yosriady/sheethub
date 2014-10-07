@@ -96,8 +96,9 @@ class Sheet < ActiveRecord::Base
   end
 
   def price=(value)
-    value > 0 ? write_attribute(:is_free?, false) : write_attribute(:is_free?, true)
-    write_attribute(:price, value)
+    v = value.to_f
+    v > 0 ? write_attribute(:is_free?, false) : write_attribute(:is_free?, true)
+    write_attribute(:price, v)
   end
 
   # TODO: currently related_sheets is limited to 4 results for performance, refactor with ElasticSearch
