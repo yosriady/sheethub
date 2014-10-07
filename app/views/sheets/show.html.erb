@@ -32,14 +32,14 @@
             </div>
         </div>
 
-        <%= render 'share' %>
-        <%= render 'files' %>
+        <%= render 'sheet_share' %>
+        <%= render 'sheet_files' %>
         <%= render 'sheet_tags', sheet:@sheet %>
 
         <% if @current_user.present? %>
         <div class="well">
-            <%= render 'edit' %>
-            <%= render 'like' %>
+            <%= render 'edit_sheet_button' %>
+            <%= render 'like_sheet_button' %>
         </div>
         <% end %>
 
