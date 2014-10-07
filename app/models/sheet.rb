@@ -1,5 +1,8 @@
 class Sheet < ActiveRecord::Base
   SHEET_HASH_SECRET = "sheethubhashsecret"
+  PDF_DEFAULT_URL = "nil"
+  SORT_ORDERS = {"Latest"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
+  DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
 
   belongs_to :user
   acts_as_votable
@@ -27,7 +30,6 @@ class Sheet < ActiveRecord::Base
   scope :original, -> { where(is_original?: true) }
   scope :flagged, -> { where(is_flagged?: true) }
 
-  SORT_ORDERS = {"Latest"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   scope :lowest_price, -> { order(price: :asc)}
   scope :highest_price, -> { order(price: :desc)}
   scope :oldest, -> { order(created_at: :asc)}
@@ -40,7 +42,6 @@ class Sheet < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :composers, :genres, :sources
 
-  PDF_DEFAULT_URL = "nil"
   has_attached_file :pdf,
                     :styles => {:preview => ["", :jpg]},
                     :processors => [:preview],
@@ -68,7 +69,6 @@ class Sheet < ActiveRecord::Base
   end
 
   # Perceptual Hash methods
-  DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   def duplicate?(sheet, treshold=DEFAULT_PHASH_TRESHOLD)
     if (pdf.present? && sheet.pdf.present?)
       this = Phashion::Image.new(pdf.url)
