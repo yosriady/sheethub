@@ -21,6 +21,7 @@
     .profile-avatar {
         float: left;
         min-width: 100px;
+        max-width: 100px;
         border-radius: 100%;
     }
 
@@ -49,4 +50,8 @@
             display: inline;
         }
     }
+}
+
+.avatar-input {
+    padding-bottom: 20px;
 }

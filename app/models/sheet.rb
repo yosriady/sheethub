@@ -1,4 +1,6 @@
 class Sheet < ActiveRecord::Base
+  SHEET_HASH_SECRET = "sheethubhashsecret"
+
   belongs_to :user
   acts_as_votable
 
@@ -42,7 +44,7 @@ class Sheet < ActiveRecord::Base
   has_attached_file :pdf,
                     :styles => {:preview => ["", :jpg]},
                     :processors => [:preview],
-                    :hash_secret => "sheethubhashsecret", #TODO: Use ENV for this
+                    :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
                     :default_url => PDF_DEFAULT_URL #TODO: point to special Missing file route
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],

@@ -3,7 +3,7 @@
 
   <div id="banner" class="profile-banner">
     <div class="center-block profile-banner-content" >
-        <%= image_tag(@user.image, class: "profile-avatar") %>
+        <%= image_tag(@user.avatar_url, class: "profile-avatar") %>
         <div class="profile-bio">
           <h1><%= @user.username %></h1>
           <p class="tagline"><%= @user.tagline %></p>
