@@ -27,6 +27,8 @@
                 <% if @user.website.present? %>
                   <a href="<%= url_with_protocol(@user.website) %>" class="btn btn btn-block btn-default"><span class="glyphicon glyphicon-globe"></span> Website </a>
                 <% end %>
+
+                <a href="mailto:<%= @user.email %>" class="btn btn btn-block btn-default"><span class="glyphicon glyphicon-send"></span> Contact User</a>
             </div>
       </div>
 
