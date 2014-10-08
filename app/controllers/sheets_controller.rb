@@ -1,5 +1,5 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :flag, :like]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
@@ -8,6 +8,7 @@ class SheetsController < ApplicationController
   before_action :authenticate_owner, :only => [:edit, :update, :destroy]
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
+  DEFAULT_FLAG_MESSAGE = "No Message."
 
   # GET /sheets
   # GET /sheets.json
@@ -31,6 +32,14 @@ class SheetsController < ApplicationController
   def show
   end
 
+  # GET /sheets/1/flag
+  def flag
+    message = params[:message].present? ? params[:message] : DEFAULT_FLAG_MESSAGE
+    Flag.create(user_id:current_user, sheet_id:@sheet.id, message:message, email:params[:email])
+    redirect_to sheet_path(@sheet), notice: 'Succesfully flagged!'
+  end
+
+  # POST /sheets/1/flag
   def like
     unless current_user
       redirect_to new_user_session_path, error: 'You need to be signed in to like'

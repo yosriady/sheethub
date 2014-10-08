@@ -25,29 +25,22 @@
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4">
-            <div class="panel panel-info">
-              <div class="panel-body">
-                <p><%= @sheet.description %></p>
-                <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
+            <%= render 'sheet_info' %>
+            <%= render 'sheet_files' %>
+            <%= render 'sheet_share' %>
+            <%= render 'sheet_tags', sheet:@sheet %>
+
+            <div class="well">
+                <%= render 'edit_sheet_button' if @current_user.present? %>
+                <%= render 'like_sheet_button' if @current_user.present? %>
+                <%= render 'flag_sheet_button' %>
             </div>
+
+            <%= render 'layouts/facebook_widget' %>
+            <%= render 'layouts/twitter_widget' %>
+
         </div>
-
-        <%= render 'sheet_share' %>
-        <%= render 'sheet_files' %>
-        <%= render 'sheet_tags', sheet:@sheet %>
-
-        <% if @current_user.present? %>
-        <div class="well">
-            <%= render 'edit_sheet_button' %>
-            <%= render 'like_sheet_button' %>
-        </div>
-        <% end %>
-
-        <%= render 'layouts/facebook_widget' %>
-        <%= render 'layouts/twitter_widget' %>
-
-  </div>
-</div>
+    </div>
 </div>
 
 <%= render 'related' %>
