@@ -1,9 +1,11 @@
 class Asset < ActiveRecord::Base
+  ASSET_HASH_SECRET = "sheethubhashsecret"
+
   belongs_to :sheet
   validates_presence_of :sheet
 
   has_attached_file :file,
-                    :hash_secret => "sheethubhashsecret" #TODO: Use ENV for this
+                    :hash_secret => ASSET_HASH_SECRET #TODO: Use ENV for this
   # TODO: validate attachment content type: MIDI, .ptb, .gp5, .tg, etc...
 
   def s3_key

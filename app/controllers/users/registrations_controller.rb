@@ -1,4 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  SUCCESS_UPDATE_PROFILE_MESSAGE = 'Your profile was successfully updated.'
+  FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
+
   before_action :ensure_registration_finished
 
   # GET /user/:username
@@ -45,10 +48,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       update_params = registration_params
       update_params[:finished_registration?] = true
       if current_user.update(update_params)
-        redirect_to profile_path(current_user.username), notice: 'Your profile was successfully updated.'
+        redirect_to profile_path(current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
         flash[:error] = current_user.errors.full_messages.to_sentence
-        redirect_to finish_registration_path, error: 'Your profile was not successfully updated.'
+        redirect_to finish_registration_path, error: FAILURE_UPDATE_PROFILE_MESSAGE
       end
     else
       # Render Form
