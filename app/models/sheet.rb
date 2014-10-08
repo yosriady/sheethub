@@ -14,6 +14,8 @@ class Sheet < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
 
+  has_many :flags, :dependent => :destroy
+
   def sheet_slug
     [
       :title,

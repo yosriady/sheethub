@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007160256) do
+ActiveRecord::Schema.define(version: 20141008053753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 20141007160256) do
     t.integer  "filesize"
     t.integer  "sheet_id"
     t.string   "url"
+  end
+
+  create_table "flags", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "sheet_id",   null: false
+    t.string   "email"
+    t.text     "message",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "friendly_id_slugs", force: true do |t|
