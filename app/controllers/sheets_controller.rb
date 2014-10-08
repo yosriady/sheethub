@@ -9,6 +9,14 @@ class SheetsController < ApplicationController
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
   DEFAULT_FLAG_MESSAGE = "No Message."
+  SUCCESS_FLAG_MESSAGE = "Succesfully flagged! We'll come back to you in 72 hours."
+  ERROR_UNSIGNED_LIKE_MESSAGE = 'You need to be signed in to like'
+  SUCCESS_LIKE_MESSAGE = 'Liked!'
+  SUCCESS_UNLIKE_MESSAGE = 'Unliked!'
+  SUCCESS_CREATE_SHEET_MESSAGE = 'Sheet was successfully created.'
+  SUCCESS_UPDATE_SHEET_MESSAGE = 'Sheet was successfully updated.'
+  ERROR_UPDATE_SHEET_MESSAGE = 'You cannot edit this Sheet because you are not the owner.'
+  SUCCESS_DESTROY_SHEET_MESSAGE = 'Sheet was successfully destroyed.'
 
   # GET /sheets
   # GET /sheets.json
@@ -36,20 +44,20 @@ class SheetsController < ApplicationController
   def flag
     message = params[:message].present? ? params[:message] : DEFAULT_FLAG_MESSAGE
     Flag.create(user_id:current_user, sheet_id:@sheet.id, message:message, email:params[:email])
-    redirect_to sheet_path(@sheet), notice: 'Succesfully flagged!'
+    redirect_to sheet_path(@sheet), notice: SUCCESS_FLAG_MESSAGE
   end
 
   # POST /sheets/1/flag
   def like
     unless current_user
-      redirect_to new_user_session_path, error: 'You need to be signed in to like'
+      redirect_to new_user_session_path, error: ERROR_UNSIGNED_LIKE_MESSAGE
     end
     if @sheet && (!current_user.voted_for? @sheet)
       @sheet.liked_by current_user
-      redirect_to sheet_path(@sheet), notice: 'Liked!'
+      redirect_to sheet_path(@sheet), notice: SUCCESS_LIKE_MESSAGE
     elsif @sheet && (current_user.voted_for? @sheet)
       @sheet.unliked_by current_user
-      redirect_to sheet_path(@sheet), notice: 'Unliked!'
+      redirect_to sheet_path(@sheet), notice: SUCCESS_UNLIKE_MESSAGE
     else
       redirect_to root_path, error: 'Sheet not found'
     end
@@ -76,7 +84,7 @@ class SheetsController < ApplicationController
 
     respond_to do |format|
       if @sheet.save
-        format.html { redirect_to @sheet, notice: 'Sheet was successfully created.' }
+        format.html { redirect_to @sheet, notice: SUCCESS_CREATE_SHEET_MESSAGE }
         format.json { render :show, status: :created, location: @sheet }
       else
         format.html { render :new }
@@ -97,7 +105,7 @@ class SheetsController < ApplicationController
       update_params[:genre_list] = params[:sheet][:genre_list]
       update_params[:source_list] = params[:sheet][:source_list]
       if @sheet.update(update_params)
-        format.html { redirect_to @sheet, notice: 'Sheet was successfully updated.' }
+        format.html { redirect_to @sheet, notice: SUCCESS_UPDATE_SHEET_MESSAGE }
         format.json { render :show, status: :ok, location: @sheet }
       else
         format.html { render :edit }
@@ -112,7 +120,7 @@ class SheetsController < ApplicationController
   def destroy
     @sheet.destroy
     respond_to do |format|
-      format.html { redirect_to sheets_url, notice: 'Sheet was successfully destroyed.' }
+      format.html { redirect_to sheets_url, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
       format.json { head :no_content }
     end
   end
@@ -164,7 +172,7 @@ class SheetsController < ApplicationController
   private
     def authenticate_owner
       unless @sheet.user == current_user
-        flash[:error] = 'You cannot edit this Sheet because you are not the owner.'
+        flash[:error] = ERROR_UPDATE_SHEET_MESSAGE
         redirect_to root_path
       end
     end
