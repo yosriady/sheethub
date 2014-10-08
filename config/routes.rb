@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
     member do
       get 'like'
-      get 'flag'
+      post 'flag'
     end
   end
 

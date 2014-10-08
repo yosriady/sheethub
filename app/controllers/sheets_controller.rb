@@ -9,7 +9,7 @@ class SheetsController < ApplicationController
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
   DEFAULT_FLAG_MESSAGE = "No Message."
-  SUCCESS_FLAG_MESSAGE = "Succesfully flagged! We'll come back to you in 72 hours."
+  SUCCESS_FLAG_MESSAGE = "Succesfully reported! We'll come back to you in 72 hours."
   ERROR_UNSIGNED_LIKE_MESSAGE = 'You need to be signed in to like'
   SUCCESS_LIKE_MESSAGE = 'Liked!'
   SUCCESS_UNLIKE_MESSAGE = 'Unliked!'
@@ -40,14 +40,13 @@ class SheetsController < ApplicationController
   def show
   end
 
-  # GET /sheets/1/flag
+  # POST /sheets/1/flag
   def flag
-    message = params[:message].present? ? params[:message] : DEFAULT_FLAG_MESSAGE
-    Flag.create(user_id:current_user, sheet_id:@sheet.id, message:message, email:params[:email])
+    message = params[:flag][:message].present? ? params[:flag][:message] : DEFAULT_FLAG_MESSAGE
+    Flag.create(user_id:current_user, sheet_id:@sheet.id, message:message, email:params[:flag][:email])
     redirect_to sheet_path(@sheet), notice: SUCCESS_FLAG_MESSAGE
   end
 
-  # POST /sheets/1/flag
   def like
     unless current_user
       redirect_to new_user_session_path, error: ERROR_UNSIGNED_LIKE_MESSAGE
