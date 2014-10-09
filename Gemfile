@@ -55,7 +55,7 @@ gem 'gon'
 gem 'aws-sdk'
 gem 'paperclip'
 gem 's3_direct_upload'
-gem 'mini_magick'
+gem 'mini_magick', '4.0.0.rc'
 
 # Perceptual Hash
 gem 'phashion'
