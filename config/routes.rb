@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end
 
     member do
+      get 'download_pdf'
       get 'like'
       post 'flag'
     end

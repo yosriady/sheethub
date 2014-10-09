@@ -44,9 +44,7 @@ class Sheet < ActiveRecord::Base
   acts_as_taggable_on :composers, :genres, :sources
 
   has_attached_file :pdf,
-                    :styles => {:watermark => {
-                      :watermark_path => "#{Rails.root}/public/images/watermark.png",
-                    }, :preview => ["", :jpg], },
+                    :styles => {:preview => { :geometry => "", :format => :jpg, :instance => self}},
                     :processors => [:preview], #TODO: add :watermark
                     :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
                     :default_url => PDF_DEFAULT_URL #TODO: point to special Missing file route
@@ -98,10 +96,18 @@ class Sheet < ActiveRecord::Base
     pdf.url(:preview) != PDF_DEFAULT_URL
   end
 
+  def pdf_download_url
+    pdf.expiring_url(10)
+  end
+
   def price=(value)
     v = value.to_f
     v > 0 ? write_attribute(:is_free?, false) : write_attribute(:is_free?, true)
     write_attribute(:price, v)
+  end
+
+  def download_pdf_url
+    pdf.expiring_url(10)
   end
 
   # TODO: currently related_sheets is limited to 4 results for performance, refactor with ElasticSearch

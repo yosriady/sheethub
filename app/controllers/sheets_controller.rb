@@ -1,5 +1,5 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :flag, :like]
+  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :flag, :like, :download_pdf]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
@@ -38,6 +38,10 @@ class SheetsController < ApplicationController
   # GET /sheets/1
   # GET /sheets/1.json
   def show
+  end
+
+  def download_pdf
+    redirect_to @sheet.pdf_download_url
   end
 
   # POST /sheets/1/flag

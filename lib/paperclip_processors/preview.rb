@@ -13,6 +13,7 @@ module Paperclip
     def make
       dst = Tempfile.new([@basename, 'png'].compact.join("."))
       dst.binmode
+      # TODO: change image path to S3 expiring url
       image= MiniMagick::Image.open(File.expand_path(@file.path))
       image.format('png')
       image.write(File.expand_path(dst.path))

@@ -5,7 +5,7 @@
             <!-- Main PDF file -->
             <% if @sheet.pdf.present? %>
             <li>
-                <a href="<%= @sheet.pdf.url %>" title="<%= @sheet.pdf_file_name %>">
+                <a href="<%= download_pdf_sheet_path(@sheet) %>" title="<%= @sheet.pdf_file_name %>">
                     <div class="sheet-file">
                     <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
                     </div>
