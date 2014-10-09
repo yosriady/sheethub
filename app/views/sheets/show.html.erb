@@ -15,7 +15,7 @@
         <div id="sheet-content" class="col-xs-8">
 
         <% if @sheet.has_pdf_preview? %>
-            <%= image_tag(@sheet.pdf.url(:preview), :class => "sample_sheet") %>
+            <%= image_tag(@sheet.pdf_preview_url, :class => "sample_sheet") %>
         <% else %>
             <!-- TODO: finalize blank slate when no pdf preview -->
             <%= image_tag("/assets/sheet.png", :class => "sample_sheet") %>

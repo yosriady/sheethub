@@ -44,7 +44,7 @@ class Sheet < ActiveRecord::Base
   acts_as_taggable_on :composers, :genres, :sources
 
   has_attached_file :pdf,
-                    :styles => {:preview => { :geometry => "", :format => :jpg, :instance => self}},
+                    :styles => {:preview => { :geometry => "", :format => :jpg}},
                     :processors => [:preview], #TODO: add :watermark
                     :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
                     :default_url => PDF_DEFAULT_URL #TODO: point to special Missing file route
@@ -93,7 +93,12 @@ class Sheet < ActiveRecord::Base
   # END of phash methods
 
   def has_pdf_preview?
-    pdf.url(:preview) != PDF_DEFAULT_URL
+    preview_url = pdf_preview_url
+    preview_url.present? && preview_url != PDF_DEFAULT_URL
+  end
+
+  def pdf_preview_url
+    pdf.expiring_url(10, :preview)
   end
 
   def pdf_download_url
