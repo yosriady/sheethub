@@ -3,6 +3,10 @@
 
   <%=f.hidden_field :user_id, value: current_user.id %>
 
+  <div class="radio-btn-toolbar">
+    <%= f.input_field :is_public?, collection: [ ['Public', true ], ['Private', false] ], as: :radio_buttons, label_method: :first, value_method: :last %>
+  </div>
+
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
 
@@ -25,7 +29,7 @@
   <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %>
 
   <%= f.label :pdf %><br />
-  <% if @sheet.pdf.present? %>
+<!--   <% if @sheet.pdf.present? %>
   <ul id="sheet-files">
     <li>
         <a href="<%= @sheet.pdf.url %>">
@@ -35,7 +39,7 @@
         </a>
     </li>
   </ul>
-  <% end %>
+  <% end %> -->
   <%= f.file_field :pdf %>
 
   <%= f.button :submit, class: "btn btn-success btn-lg btn-wide pull-right"%>

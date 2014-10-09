@@ -14,3 +14,13 @@ input[type="submit"] {
         margin-right: 5%;
     }
 }
+
+.radio-btn-toolbar {
+    margin-left: 20px;
+
+    .radio {
+        display: inline-block;
+        width: 50%;
+    }
+
+}

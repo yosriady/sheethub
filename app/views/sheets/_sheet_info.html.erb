@@ -1,6 +1,6 @@
 <div class="panel panel-info">
   <div class="panel-body">
-    <p><%= @sheet.description %></p>
+    <p><%= @sheet.description.present? ? @sheet.description : 'No description.'%></p>
     <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
   </div>
 </div>

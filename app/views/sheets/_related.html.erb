@@ -10,7 +10,10 @@
             <div class="related-sheet">
                 <em><%= sheet.instruments.join(", ") %></em>
                 <h4><%= sheet.title %></h4>
-                <h5><%= sheet.source_list.to_s.titleize %>  <%= sheet.composer_list.to_s.titleize %></h5>
+                <h5>
+                <%= sheet.source_list.to_s.titleize + " | " if sheet.source_list.present?%>
+                <%= sheet.composer_list.to_s.titleize %>
+                </h5>
             </div>
             </a>
         <% end %>

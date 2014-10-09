@@ -1,7 +1,7 @@
 class Sheet < ActiveRecord::Base
   SHEET_HASH_SECRET = "sheethubhashsecret"
   PDF_DEFAULT_URL = "nil"
-  SORT_ORDERS = {"Latest"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
+  SORT_ORDERS = {"Most Recent"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
 
   belongs_to :user
@@ -12,7 +12,6 @@ class Sheet < ActiveRecord::Base
   friendly_id :sheet_slug, :use => :slugged
 
   validates :title, presence: true
-  validates :description, presence: true
 
   has_many :flags, :dependent => :destroy
 
