@@ -29,7 +29,7 @@
   <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %>
 
   <%= f.label :pdf %><br />
-<!--   <% if @sheet.pdf.present? %>
+  <% if  params[:action] == "edit" && @sheet.pdf.present? %>
   <ul id="sheet-files">
     <li>
         <a href="<%= @sheet.pdf.url %>">
@@ -39,7 +39,7 @@
         </a>
     </li>
   </ul>
-  <% end %> -->
+  <% end %>
   <%= f.file_field :pdf %>
 
   <%= f.button :submit, class: "btn btn-success btn-lg btn-wide pull-right"%>
