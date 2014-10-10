@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     created_at.strftime "%B %Y"
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def avatar_url
     if avatar.url.present? && avatar.url != MISSING_AVATAR_URL
       avatar.url(:thumb)
