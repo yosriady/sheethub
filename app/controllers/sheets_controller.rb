@@ -208,7 +208,7 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params[:sheet].permit(:user_id, :title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets_attributes)
+      params[:sheet].permit(:user_id, :title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets_attributes, :is_public?)
     end
 
 end
