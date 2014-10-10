@@ -4,7 +4,7 @@
   <% else %>
     <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
     <% if @user == current_user %>
-      <h2>You have no sheets. Why not add one?</h2>
+      <h2>You have no sheets.</h2>
       <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a>
     <% else %>
       <h2>This user has no sheets.</h2>

@@ -4,7 +4,7 @@
   <% else %>
     <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
     <% if @user == current_user %>
-      <h2>You have no likes. Why not add one?</h2>
+      <h2>You have no likes.</h2>
       <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Browse</a>
     <% else %>
       <h2>This user has no likes.</h2>
