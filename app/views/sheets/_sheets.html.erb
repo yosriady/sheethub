@@ -1,5 +1,5 @@
 <div id="sheets">
-  <% @sheets.each do |sheet| %>
+  <% if @sheets.each do |sheet| %>
     <a href="<%= sheet_url(sheet) %>"><div class="sheet" title="<%= sheet.title + " by " + sheet.composer_list.to_s.titleize if sheet.composer_list.any? %>">
       <div class="sheet-text">
         <p class="sheet-instruments"><%= sheet.instruments.join(", ") %></p>
@@ -10,5 +10,8 @@
         <span class="glyphicon glyphicon-user"></span> <%= sheet.user.username %>
       </div></a>
     </div>
+  <% end.empty? %>
+    <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+    <h2>No Sheets yet!</h2>
   <% end %>
 </div>

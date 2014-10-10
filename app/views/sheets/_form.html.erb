@@ -4,7 +4,7 @@
   <%=f.hidden_field :user_id, value: current_user.id %>
 
   <div class="radio-btn-toolbar">
-    <%= f.input_field :is_public?, collection: [ ['Public', true ], ['Private', false] ], as: :radio_buttons, label_method: :first, value_method: :last %>
+    <%= f.input_field :is_public, collection: [ ['Public', true ], ['Private', false] ], as: :radio_buttons, label_method: :first, value_method: :last %>
   </div>
 
   <%= f.input :title, placeholder: "What's the title of your piece?" %>

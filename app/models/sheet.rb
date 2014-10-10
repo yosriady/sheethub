@@ -3,6 +3,7 @@ class Sheet < ActiveRecord::Base
   PDF_DEFAULT_URL = "nil"
   SORT_ORDERS = {"Most Recent"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
+  EXPIRATION_TIME = 10
 
   belongs_to :user
   acts_as_votable
@@ -22,14 +23,13 @@ class Sheet < ActiveRecord::Base
     ]
   end
 
-  default_scope { where(is_public?: true) }
   default_scope { order(created_at: :desc) } # sort by most recent
 
-  scope :is_public, -> { where(is_public?: true) }
-  scope :is_private, -> { where(is_public?: false) }
-  scope :free, -> { where(is_free?: true) }
-  scope :original, -> { where(is_original?: true) }
-  scope :flagged, -> { where(is_flagged?: true) }
+  scope :is_public, -> { where(is_public: true) }
+  scope :is_private, -> { where(is_public: false) }
+  scope :free, -> { where(is_free: true) }
+  scope :original, -> { where(is_original: true) }
+  scope :flagged, -> { where(is_flagged: true) }
 
   scope :lowest_price, -> { order(price: :asc)}
   scope :highest_price, -> { order(price: :desc)}
@@ -98,16 +98,16 @@ class Sheet < ActiveRecord::Base
   end
 
   def pdf_preview_url
-    pdf.expiring_url(10, :preview)
+    pdf.expiring_url(EXPIRATION_TIME, :preview)
   end
 
   def pdf_download_url
-    pdf.expiring_url(10)
+    pdf.expiring_url(EXPIRATION_TIME)
   end
 
   def price=(value)
     v = value.to_f
-    v > 0 ? write_attribute(:is_free?, false) : write_attribute(:is_free?, true)
+    v > 0 ? write_attribute(:is_free, false) : write_attribute(:is_free, true)
     write_attribute(:price, v)
   end
 

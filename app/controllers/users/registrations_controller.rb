@@ -13,8 +13,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # TODO: refactor by using includes for better performance
     @user = User.includes(:sheets).find_by("lower(username) = ?", params[:username].downcase)
     if @user
-      @sheets = @user.sheets.where(is_public?: true)
-      @private_sheets = @user.sheets.where(is_public?: false)
+      @sheets = @user.public_sheets
+      @private_sheets = @user.private_sheets
       @likes = @user.find_voted_items
     end
   end

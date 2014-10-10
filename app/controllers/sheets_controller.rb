@@ -22,7 +22,7 @@ class SheetsController < ApplicationController
   # GET /sheets.json
   def index
     @instruments = Sheet.values_for_instruments
-    @sheets = Sheet.includes(:user).sorted(params[:sort_order]).page(params[:page])
+    @sheets = Sheet.is_public.includes(:user).sorted(params[:sort_order]).page(params[:page])
 
     # TODO: These should be cached, only show the most popular ones every 24 hours?
     @composers ||= Sheet.tags_on(:composers).limit(10)
@@ -32,7 +32,7 @@ class SheetsController < ApplicationController
 
   # GET /search
   def search
-    @sheets = Sheet.search params[:q], page: params[:page]
+    @sheets = Sheet.is_public.search params[:q], page: params[:page]
   end
 
   # GET /sheets/1
@@ -208,7 +208,7 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params[:sheet].permit(:user_id, :title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets_attributes, :is_public?)
+      params[:sheet].permit(:user_id, :title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets_attributes, :is_public)
     end
 
 end

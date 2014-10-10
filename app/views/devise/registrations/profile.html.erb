@@ -36,11 +36,11 @@
 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li class="active"><a href="#sheets" role="tab" data-toggle="tab">Sheet Music <span class="badge"><%= @sheets.count %></span></a></li>
+            <li class="active"><a href="#sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-music"></span> Sheet Music <span class="badge"><%= @sheets.count %></span></a></li>
             <% if current_user == @user %>
-            <li><a href="#private-sheets" role="tab" data-toggle="tab">Private Sheets <span class="badge"><%= @private_sheets.count %></span></a></li>
+            <li><a href="#private-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-eye-close"></span> Private Sheets <span class="badge"><%= @private_sheets.count %></span></a></li>
             <% end %>
-            <li><a href="#likes" role="tab" data-toggle="tab">Likes <span class="badge"><%= @user.votes.size %></span></a></li>
+            <li><a href="#likes" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-thumbs-up"></span> Likes <span class="badge"><%= @user.votes.size %></span></a></li>
           </ul>
 
           <!-- Tab panes -->

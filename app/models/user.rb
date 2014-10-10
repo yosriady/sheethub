@@ -20,6 +20,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
+  def public_sheets
+    sheets.where(is_public: true)
+  end
+
+  def private_sheets
+    sheets.where(is_public: false)
+  end
+
   def joined_at
     created_at.strftime "%B %Y"
   end
