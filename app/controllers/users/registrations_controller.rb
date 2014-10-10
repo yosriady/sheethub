@@ -10,9 +10,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       # TODO: user not found page
     end
 
-    @user = User.find_by("lower(username) = ?", params[:username].downcase)
+    # TODO: refactor by using includes for better performance
+    @user = User.includes(:sheets).find_by("lower(username) = ?", params[:username].downcase)
     if @user
-      @sheets = @user.sheets
+      @sheets = @user.sheets.where(is_public?: true)
+      @private_sheets = @user.sheets.where(is_public?: false)
       @likes = @user.find_voted_items
     end
   end
