@@ -36,10 +36,10 @@
 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#sheets" role="tab" data-toggle="tab">Sheet Music <span class="badge"><%= @user.sheets.count %></span></a></li>
             <% if current_user == @user %>
             <li><a href="#private-sheets" role="tab" data-toggle="tab">Private Sheets <span class="badge"><%= @user.sheets.where(is_public?: false).count %></span></a></li>
             <% end %>
-            <li class="active"><a href="#sheets" role="tab" data-toggle="tab">Sheet Music <span class="badge"><%= @user.sheets.count %></span></a></li>
             <li><a href="#likes" role="tab" data-toggle="tab">Likes <span class="badge"><%= @user.votes.size %></span></a></li>
           </ul>
 
