@@ -10,6 +10,9 @@ gem 'unicorn-rails'
 # Task Queue
 # gem 'sidekiq'
 
+# Audio
+# gem 'soundmanager-rails'
+
 # Admin
 gem 'activeadmin', github: 'activeadmin'
 

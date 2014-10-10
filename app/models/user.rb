@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{first_name} #{last_name}"
+    (first_name.present? || last_name.present?) ? "#{first_name} #{last_name}" : name
   end
 
   def avatar_url

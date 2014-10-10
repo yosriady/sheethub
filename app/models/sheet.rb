@@ -92,6 +92,14 @@ class Sheet < ActiveRecord::Base
   end
   # END of phash methods
 
+  def has_playable
+    get_audio_assets.present?
+  end
+
+  def get_audio_assets
+    assets.select{|asset| asset.filetype.starts_with? "audio"}
+  end
+
   def has_pdf_preview?
     preview_url = pdf_preview_url
     preview_url.present? && preview_url != PDF_DEFAULT_URL
