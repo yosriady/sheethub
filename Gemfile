@@ -17,7 +17,7 @@ gem 'unicorn-rails'
 gem 'activeadmin', github: 'activeadmin'
 
 # Payments
-gem 'paypal-express'
+gem 'activemerchant'
 
 # Search
 gem 'searchkick'
