@@ -3,7 +3,7 @@ class Sheet < ActiveRecord::Base
   PDF_DEFAULT_URL = "nil"
   SORT_ORDERS = {"Most Recent"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
-  EXPIRATION_TIME = 10
+  EXPIRATION_TIME = 600
 
   belongs_to :user
   acts_as_votable
