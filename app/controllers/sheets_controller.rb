@@ -140,36 +140,36 @@ class SheetsController < ApplicationController
 
   # GET /genres
   def genres
-    @genres ||= Sheet.tags_on(:genres)
+    @genres = Sheet.is_public.tags_on(:genres)
   end
 
   # GET /genre/:slug
   def by_genre
-    @sheets = Sheet.tagged_with(params[:slug], :on => :genres)
+    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :genres)
   end
 
   # GET /composers
   def composers
-    @composers ||= Sheet.tags_on(:composers)
+    @composers = Sheet.is_public.tags_on(:composers)
   end
 
   # GET /composer/:slug
   def by_composer
-    @sheets = Sheet.tagged_with(params[:slug], :on => :composers)
+    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :composers)
   end
 
   # GET /sources
   def sources
-    @sources ||= Sheet.tags_on(:sources)
+    @sources = Sheet.is_public.tags_on(:sources)
   end
 
   # GET /source/:slug
   def by_source
-    @sheets = Sheet.tagged_with(params[:slug], :on => :sources)
+    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :sources)
   end
 
   def autocomplete
-    render json: Sheet.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_path(s)}}
+    render json: Sheet.is_public.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_path(s)}}
   end
 
   private
@@ -193,9 +193,9 @@ class SheetsController < ApplicationController
     end
 
     def set_all_tags
-      @composers = Sheet.tags_on(:composers)
-      @genres = Sheet.tags_on(:genres)
-      @sources = Sheet.tags_on(:sources)
+      @composers = Sheet.is_public.tags_on(:composers)
+      @genres = Sheet.is_public.tags_on(:genres)
+      @sources = Sheet.is_public.tags_on(:sources)
     end
 
     def set_instruments

@@ -1,4 +1,4 @@
-<% for tag in tags %>
+<% if tags.each do |tag| %>
     <a href="<%= tag_path(tag) %>">
     <span class="tag">
         <span class="glyphicon glyphicon-<%= tag_glyphicon(tag) %>"></span>
@@ -6,4 +6,7 @@
         <span class="tag-count"><%= tag.taggings_count %></span>
     </span>
     </a>
+<% end.empty? %>
+    <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+    <h2>None yet!</h2>
 <% end %>
