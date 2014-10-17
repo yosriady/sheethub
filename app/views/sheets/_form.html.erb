@@ -26,7 +26,7 @@
   <br>
   <%= f.input_field :source_list, collection: @sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
-  <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %>
+  <!-- <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %> -->
 
   <%= f.label :pdf %><br />
   <% if  params[:action] == "edit" && @sheet.pdf.present? %>

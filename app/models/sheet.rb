@@ -44,8 +44,11 @@ class Sheet < ActiveRecord::Base
   acts_as_taggable_on :composers, :genres, :sources
 
   has_attached_file :pdf,
-                    :styles => {:preview => { :geometry => "", :format => :jpg}},
-                    :processors => [:preview], #TODO: add :watermark
+                    :styles => {
+                      :preview => { :geometry => "", :format => :png}
+                      # :original => {:watermark_path => "#{Rails.root}/public/images/watermark.png"}
+                    },
+                    :processors => [:preview], #Also, :preview
                     :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
                     :default_url => PDF_DEFAULT_URL #TODO: point to special Missing file route
   validates_attachment_content_type :pdf,
