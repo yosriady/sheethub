@@ -1,7 +1,7 @@
 <% if current_user == @user %>
 <div class="tab-pane" id="private-sheets">
   <% if @private_sheets.any? %>
-    <%= render '/sheets/private_sheets' %>
+    <%= render '/sheets/sheets', sheets: @private_sheets %>
   <% else %>
     <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
     <% if @user == current_user %>
