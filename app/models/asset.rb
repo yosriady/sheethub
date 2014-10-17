@@ -10,8 +10,7 @@ class Asset < ActiveRecord::Base
   # TODO: validate attachment content type: MIDI, .ptb, .gp5, .tg, etc...
 
   def s3_key
-    # TODO: just remove domain, don't use magic numbers
-    url[34..-1]
+    url.sub(S3DirectUpload.config.url, '')
   end
 
   def s3_object
