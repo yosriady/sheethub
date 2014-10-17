@@ -2,20 +2,16 @@
   <% title "#{@user.username}'s Profile"  %>
 
   <div id="banner" class="profile-banner">
-    <div class="profile-banner-content" >
-        <%= image_tag(@user.avatar_url, class: "profile-avatar") %>
-        <div class="profile-bio">
-          <h1><%= @user.username %></h1>
-          <p class="tagline"><%= @user.tagline %></p>
-          <%= link_to @user.website, @user.website %>
-        </div>
+    <%= image_tag(@user.avatar_url, class: "profile-avatar") %>
+    <div class="profile-bio">
+      <h1><%= @user.username %></h1>
+      <p class="tagline"><%= @user.tagline %></p>
     </div>
   </div>
 
   <div class="container sheets-container">
-    <div id="page-content-wrapper">
       <div class="row">
-        <div class="col-lg-3 profile-info">
+        <div class="col-xs-3 profile-info">
             <% if @user == current_user %>
               <a href="<%= edit_user_registration_path %>" class="btn btn btn-block btn-lg btn-success"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
             <% end %>
@@ -32,7 +28,7 @@
             </div>
       </div>
 
-        <div class="col-lg-9">
+        <div class="col-xs-9">
 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">

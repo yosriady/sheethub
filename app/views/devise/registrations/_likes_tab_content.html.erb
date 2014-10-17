@@ -1,6 +1,6 @@
 <div class="tab-pane" id="likes">
   <% if @user.votes.any? %>
-    <%= render 'layouts/likes' %>
+    <%= render '/sheets/sheets', sheets: @likes %>
   <% else %>
     <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
     <% if @user == current_user %>

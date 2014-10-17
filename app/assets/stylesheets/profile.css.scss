@@ -14,10 +14,6 @@
 #banner.profile-banner {
     height: 150px;
 
-    .profile-banner-content {
-        width: 30%;
-    }
-
     .profile-avatar {
         float: left;
         min-width: 100px;
@@ -27,6 +23,7 @@
 
     .profile-bio {
         float: left;
+        margin-top: 20px;
 
         a, p, h1 {
             margin: 0px;
