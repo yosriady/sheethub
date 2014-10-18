@@ -5,6 +5,10 @@ class Sheet < ActiveRecord::Base
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
 
+  monetize :price_cents, :numericality => {
+    :greater_than_or_equal_to => 0,
+    :less_than_or_equal_to => 10000
+  }
   belongs_to :user
   acts_as_votable
 
@@ -115,12 +119,6 @@ class Sheet < ActiveRecord::Base
 
   def pdf_download_url
     pdf.expiring_url(EXPIRATION_TIME)
-  end
-
-  def price=(value)
-    v = value.to_f
-    v > 0 ? write_attribute(:is_free, false) : write_attribute(:is_free, true)
-    write_attribute(:price, v)
   end
 
   def download_pdf_url
