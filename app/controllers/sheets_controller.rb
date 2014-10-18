@@ -19,6 +19,11 @@ class SheetsController < ApplicationController
   SUCCESS_DESTROY_SHEET_MESSAGE = 'Sheet was successfully destroyed.'
   ERROR_SHEET_NOT_FOUND_MESSAGE = 'Sheet not found'
 
+  def purchase
+    # TODO
+    binding.pry
+  end
+
   # GET /sheets
   # GET /sheets.json
   def index
