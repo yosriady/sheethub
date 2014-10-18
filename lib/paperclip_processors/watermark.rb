@@ -11,13 +11,16 @@ module Paperclip
     def make
       pdf = MiniMagick::Image.open(File.expand_path(@file.path))
       watermark = MiniMagick::Image.open(File.expand_path(@watermark_path))
-      pdf.pages.each_with_index do |frame, idx|
-        page = pdf.composite(watermark) do |c|
+      composited = pdf.pages.inject([]) do |composited, page|
+        composited << page.composite(watermark) do |c|
           c.compose "Over"
           c.gravity "SouthEast"
         end
       end
-      pdf.write(File.expand_path(pdf.path))
+      MiniMagick::Tool::Convert.new do |b|
+        composited.each { |page| b << page.path }
+        b << pdf.path
+      end
       return pdf
     end
   end

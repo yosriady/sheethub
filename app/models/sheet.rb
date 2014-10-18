@@ -45,15 +45,16 @@ class Sheet < ActiveRecord::Base
 
   has_attached_file :pdf,
                     :styles => {
-                      :preview => { :geometry => "", :format => :png}
-                      # :original => {:watermark_path => "#{Rails.root}/public/images/watermark.png"}
+                      :watermark => {:watermark_path => "#{Rails.root}/public/images/watermark.png"},
+                      :preview => {:geometry => "", :format => :png}
                     },
-                    :processors => [:preview], #Also, :preview
+                    :processors => [:preview],
                     :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
                     :default_url => PDF_DEFAULT_URL #TODO: point to special Missing file route
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],
       :message => "Only pdf files are allowed"
+  # do_not_validate_attachment_file_type :pdf
   validates :pdf, presence: true
 
   has_many :assets, :dependent => :destroy

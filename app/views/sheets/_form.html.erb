@@ -1,4 +1,4 @@
-<%= simple_form_for @sheet do |f| %>
+<%= simple_form_for @sheet, html: {multipart: true} do |f| %>
   <%= f.error_notification %>
 
   <%=f.hidden_field :user_id, value: current_user.id %>

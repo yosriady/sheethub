@@ -1,5 +1,4 @@
 module Paperclip
-  # Handles generating preview images of Sheet PDFs
   class Preview < Processor
 
     def initialize(file, options = {}, attachment = nil)
