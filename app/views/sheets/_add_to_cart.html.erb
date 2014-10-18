@@ -3,7 +3,7 @@
         <% if @sheet.is_free? %>
             <span class="sheet-price text-center"><p>FREE</p></span>
         <% else %>
-            <span class="sheet-price col-xs-4"><p><%= number_to_currency(@sheet.price) %></p></span>
+            <span class="sheet-price col-xs-4"><p><%= cents_to_dollars(@sheet.price_cents) %></p></span>
             <button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
         <% end %>
     </div>

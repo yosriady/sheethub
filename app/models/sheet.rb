@@ -5,10 +5,10 @@ class Sheet < ActiveRecord::Base
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
 
-  monetize :price_cents, :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 10000
-  }
+  def is_free?
+    return price_cents == 0
+  end
+
   belongs_to :user
   acts_as_votable
 
@@ -35,8 +35,8 @@ class Sheet < ActiveRecord::Base
   scope :original, -> { where(is_original: true) }
   scope :flagged, -> { where(is_flagged: true) }
 
-  scope :lowest_price, -> { order(price: :asc)}
-  scope :highest_price, -> { order(price: :desc)}
+  scope :lowest_price, -> { order(price_cents: :asc)}
+  scope :highest_price, -> { order(price_cents: :desc)}
   scope :oldest, -> { order(created_at: :asc)}
   scope :latest, -> { order(created_at: :desc)}
 

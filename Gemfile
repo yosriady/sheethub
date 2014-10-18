@@ -16,9 +16,6 @@ gem 'unicorn-rails'
 # Admin
 gem 'activeadmin', github: 'activeadmin'
 
-# Money
-gem 'money-rails'
-
 # Payments
 gem 'activemerchant'
 

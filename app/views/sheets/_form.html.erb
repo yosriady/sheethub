@@ -10,7 +10,8 @@
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
 
-  <%= f.input :price , placeholder: "What's the minimum price to pay to get access to uploads?" %>
+  <%= f.label "Price in US$" %>
+  <%= f.input_field :price_cents, :input_html => {value: number_with_precision(f.object.price_cents, precision: 2) }, placeholder: "What's the minimum price to pay to get access to uploads?" %>
 
   <%= f.label :instruments %>
   <br>
