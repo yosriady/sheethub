@@ -10,6 +10,8 @@
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
 
+  <%= f.input :price , placeholder: "What's the minimum price to pay to get access to uploads?" %>
+
   <%= f.label :instruments %>
   <br>
   <%= f.input_field :instruments_list, collection: Sheet.values_for_instruments, prompt: "Choose instruments", multiple: true , id: "instruments-field"%>
