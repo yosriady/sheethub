@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
   MISSING_AVATAR_URL = "/images/missing.png"
 
+  validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   has_many :sheets, dependent: :destroy
   acts_as_voter
 
@@ -12,10 +13,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   attr_accessor :remove_avatar
 
-  validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # Devise modules
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]

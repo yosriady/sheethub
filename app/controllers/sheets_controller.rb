@@ -17,6 +17,7 @@ class SheetsController < ApplicationController
   SUCCESS_UPDATE_SHEET_MESSAGE = 'Sheet was successfully updated.'
   ERROR_UPDATE_SHEET_MESSAGE = 'You cannot edit this Sheet because you are not the owner.'
   SUCCESS_DESTROY_SHEET_MESSAGE = 'Sheet was successfully destroyed.'
+  ERROR_SHEET_NOT_FOUND_MESSAGE = 'Sheet not found'
 
   # GET /sheets
   # GET /sheets.json
@@ -62,7 +63,7 @@ class SheetsController < ApplicationController
       @sheet.unliked_by current_user
       redirect_to sheet_path(@sheet), notice: SUCCESS_UNLIKE_MESSAGE
     else
-      redirect_to root_path, error: 'Sheet not found'
+      redirect_to root_path, error: ERROR_SHEET_NOT_FOUND_MESSAGE
     end
   end
 
