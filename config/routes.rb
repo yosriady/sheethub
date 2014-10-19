@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'order/paypal_checkout'
+  get 'order/new'
+  get 'order/cancel'
+  get 'order/create'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -14,7 +19,6 @@ Rails.application.routes.draw do
     end
 
     member do
-      get 'purchase'
       get 'download_pdf'
       get 'like'
       post 'flag'

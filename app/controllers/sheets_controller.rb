@@ -1,5 +1,5 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :flag, :like, :download_pdf]
+  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :flag, :like, :download_pdf, :purchase]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
@@ -18,11 +18,6 @@ class SheetsController < ApplicationController
   ERROR_UPDATE_SHEET_MESSAGE = 'You cannot edit this Sheet because you are not the owner.'
   SUCCESS_DESTROY_SHEET_MESSAGE = 'Sheet was successfully destroyed.'
   ERROR_SHEET_NOT_FOUND_MESSAGE = 'Sheet not found'
-
-  def purchase
-    # TODO
-    binding.pry
-  end
 
   # GET /sheets
   # GET /sheets.json
