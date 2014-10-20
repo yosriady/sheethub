@@ -5,6 +5,10 @@ class Sheet < ActiveRecord::Base
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
 
+  def price
+    return price_cents.to_f / 100
+  end
+
   def is_free?
     return price_cents == 0
   end

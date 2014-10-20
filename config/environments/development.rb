@@ -47,16 +47,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Active Merchant Paypal Gateway Initialization
-  config.after_initialize do
-    ActiveMerchant::Billing::Base.mode = :test
-    # Sandbox Business Account
-    paypal_options = {
-      login: "yosriady-facilitator_api1.gmail.com",
-      password: "H739SP4UDQSHEGAW",
-      signature: "A6AFKLF9K9Odzd81iNIOAJrlric4AKKVz.DGUTuNFWqyRFUGYkyp5-Ya"
-    }
-    ::PAYPAL_GATEWAY = ActiveMerchant::Billing::PaypalDigitalGoodsGateway.new(paypal_options)
-  end
+  Paypal.sandbox!
 
 end
