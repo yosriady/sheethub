@@ -19,6 +19,9 @@ gem 'activeadmin', github: 'activeadmin'
 # Payments
 gem 'paypal-express'
 
+# Soft Deletion
+gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
+
 # Search
 gem 'searchkick'
 gem 'twitter-typeahead-rails'
@@ -93,7 +96,7 @@ group :development, :test do
   # gem 'factory_girl_rails'
 end
 
-# Test data generationw
+# Test data generation
 gem 'faker'
 
 group :test do

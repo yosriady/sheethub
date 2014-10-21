@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019170754) do
+ActiveRecord::Schema.define(version: 20141021083905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20141019170754) do
     t.integer  "cached_weighted_total",   default: 0
     t.float    "cached_weighted_average", default: 0.0
     t.integer  "price_cents",             default: 0,     null: false
+    t.datetime "deleted_at"
   end
 
   add_index "sheets", ["cached_votes_down"], name: "index_sheets_on_cached_votes_down", using: :btree
@@ -127,6 +128,7 @@ ActiveRecord::Schema.define(version: 20141019170754) do
   add_index "sheets", ["cached_weighted_average"], name: "index_sheets_on_cached_weighted_average", using: :btree
   add_index "sheets", ["cached_weighted_score"], name: "index_sheets_on_cached_weighted_score", using: :btree
   add_index "sheets", ["cached_weighted_total"], name: "index_sheets_on_cached_weighted_total", using: :btree
+  add_index "sheets", ["deleted_at"], name: "index_sheets_on_deleted_at", using: :btree
   add_index "sheets", ["slug"], name: "index_sheets_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|

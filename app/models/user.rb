@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
     sheets.where(is_public: false)
   end
 
+  def deleted_sheets
+    Sheet.only_deleted.where(user_id: id)
+  end
+
   def joined_at
     created_at.strftime "%B %Y"
   end

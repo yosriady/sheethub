@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get 'download_pdf'
       get 'like'
       post 'flag'
+      get 'restore'
     end
   end
 

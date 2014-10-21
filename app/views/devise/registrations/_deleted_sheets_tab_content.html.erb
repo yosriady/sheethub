@@ -1,0 +1,11 @@
+<% if current_user == @user %>
+<div class="tab-pane" id="deleted-sheets">
+  <div class="well alert-info"><p>Deleted sheets older than 3 days are permanently removed from the system. Click to undo deletion.</p></div>
+  <% if @deleted_sheets.any? %>
+    <%= render '/sheets/deleted_sheets', sheets: @deleted_sheets %>
+  <% else %>
+    <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+    <h2>You have no deleted sheets.</h2>
+  <% end %>
+</div>
+<% end %>

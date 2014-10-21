@@ -14,8 +14,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.includes(:sheets).find_by("lower(username) = ?", params[:username].downcase)
     if @user
       @sheets = @user.public_sheets
-      @private_sheets = @user.private_sheets
       @likes = @user.find_voted_items
+      @private_sheets = @user.private_sheets
+      @deleted_sheets = @user.deleted_sheets
     end
   end
 

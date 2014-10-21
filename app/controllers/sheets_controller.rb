@@ -1,11 +1,12 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :edit, :update, :destroy, :flag, :like, :download_pdf, :purchase]
+  before_action :set_deleted_sheet, only: [:restore]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
-  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
-  before_action :authenticate_owner, :only => [:edit, :update, :destroy]
+  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :restore]
+  before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
   DEFAULT_FLAG_MESSAGE = "No Message."
@@ -17,7 +18,9 @@ class SheetsController < ApplicationController
   SUCCESS_UPDATE_SHEET_MESSAGE = 'Sheet was successfully updated.'
   ERROR_UPDATE_SHEET_MESSAGE = 'You cannot edit this Sheet because you are not the owner.'
   SUCCESS_DESTROY_SHEET_MESSAGE = 'Sheet was successfully destroyed.'
+  SUCCESS_RESTORE_SHEET_MESSAGE = 'Sheet was successfully restored.'
   ERROR_SHEET_NOT_FOUND_MESSAGE = 'Sheet not found'
+  ERROR_CANNOT_RESTORE_UNDESTROYED_SHEET = 'You cannot restore an un-deleted Sheet.'
 
   # GET /sheets
   # GET /sheets.json
@@ -108,7 +111,6 @@ class SheetsController < ApplicationController
       update_params[:composer_list] = params[:sheet][:composer_list]
       update_params[:genre_list] = params[:sheet][:genre_list]
       update_params[:source_list] = params[:sheet][:source_list]
-      binding.pry
       if @sheet.update(update_params)
         format.html { redirect_to @sheet, notice: SUCCESS_UPDATE_SHEET_MESSAGE }
         format.json { render :show, status: :ok, location: @sheet }
@@ -125,7 +127,15 @@ class SheetsController < ApplicationController
   def destroy
     @sheet.destroy
     respond_to do |format|
-      format.html { redirect_to sheets_url, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
+      format.html { redirect_to sheets_path, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
+      format.json { head :no_content }
+    end
+  end
+
+  def restore
+    Sheet.restore(@sheet)
+    respond_to do |format|
+      format.html { redirect_to sheet_path(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE }
       format.json { head :no_content }
     end
   end
@@ -192,6 +202,10 @@ class SheetsController < ApplicationController
 
     def set_sheet
       @sheet = Sheet.friendly.find(params[:id])
+    end
+
+    def set_deleted_sheet
+      @sheet = Sheet.only_deleted.friendly.find(params[:id])
     end
 
     def set_all_tags

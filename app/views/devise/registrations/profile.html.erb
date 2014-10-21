@@ -37,6 +37,7 @@
             <li><a href="#private-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-eye-close"></span> Private Sheets <span class="badge"><%= @private_sheets.count %></span></a></li>
             <% end %>
             <li><a href="#likes" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-thumbs-up"></span> Likes <span class="badge"><%= @user.votes.size %></span></a></li>
+            <li><a href="#deleted-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-trash"></span> Deleted <span class="badge"><%= @user.deleted_sheets.size %></span></a></li>
           </ul>
 
           <!-- Tab panes -->
@@ -44,6 +45,7 @@
             <%= render 'sheets_tab_content' %>
             <%= render 'likes_tab_content' %>
             <%= render 'private_sheets_tab_content' %>
+            <%= render 'deleted_sheets_tab_content' %>
           </div>
 
 

@@ -6,7 +6,8 @@ class Asset < ActiveRecord::Base
   validates_presence_of :sheet
 
   has_attached_file :file,
-                    :hash_secret => ASSET_HASH_SECRET #TODO: Use ENV for this
+                    :hash_secret => ASSET_HASH_SECRET, #TODO: Use ENV for this
+                    :preserve_files => "true"
   # TODO: validate attachment content type: MIDI, .ptb, .gp5, .tg, etc...
 
   def s3_key

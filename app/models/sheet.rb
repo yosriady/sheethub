@@ -15,6 +15,7 @@ class Sheet < ActiveRecord::Base
 
   belongs_to :user
   acts_as_votable
+  acts_as_paranoid
 
   searchkick word_start: [:name]
   extend FriendlyId
@@ -58,7 +59,8 @@ class Sheet < ActiveRecord::Base
                     },
                     :processors => [:preview],
                     :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
-                    :default_url => PDF_DEFAULT_URL #TODO: point to special Missing file route
+                    :default_url => PDF_DEFAULT_URL, #TODO: point to special Missing file route
+                    :preserve_files => "true"
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],
       :message => "Only pdf files are allowed"
