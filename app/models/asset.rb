@@ -3,6 +3,7 @@ class Asset < ActiveRecord::Base
   EXPIRATION_TIME = 600
 
   belongs_to :sheet
+  acts_as_paranoid
   validates_presence_of :sheet
 
   has_attached_file :file,

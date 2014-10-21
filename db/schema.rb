@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021083905) do
+ActiveRecord::Schema.define(version: 20141021101734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,10 @@ ActiveRecord::Schema.define(version: 20141021083905) do
     t.integer  "filesize"
     t.integer  "sheet_id"
     t.string   "url"
+    t.datetime "deleted_at"
   end
+
+  add_index "assets", ["deleted_at"], name: "index_assets_on_deleted_at", using: :btree
 
   create_table "flags", force: true do |t|
     t.integer  "user_id"

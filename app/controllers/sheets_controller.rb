@@ -133,7 +133,7 @@ class SheetsController < ApplicationController
   end
 
   def restore
-    Sheet.restore(@sheet)
+    Sheet.restore(@sheet, :recursive => true)
     respond_to do |format|
       format.html { redirect_to sheet_path(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE }
       format.json { head :no_content }
