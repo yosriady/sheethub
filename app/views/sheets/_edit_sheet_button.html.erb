@@ -1,5 +1,5 @@
-<% if current_user == @sheet.user %>
+<% if @current_user.present? && current_user == @sheet.user %>
 <a href="<%= edit_sheet_path(@sheet) %>">
-    <button type="button" class="btn btn-success "><span class="glyphicon glyphicon-edit"></span> Edit</button>
+    <button type="button" class="btn btn-success btn-block"><span class="glyphicon glyphicon-edit"></span> Edit</button>
 </a>
 <% end %>

@@ -34,8 +34,8 @@
             <%= render 'sheet_tags', sheet:@sheet %>
 
             <div class="well">
-                <%= render 'edit_sheet_button' if @current_user.present? %>
-                <%= render 'like_sheet_button' if @current_user.present? %>
+                <%= render 'edit_sheet_button' %>
+                <%= render 'like_sheet_button' %>
                 <%= render 'flag_sheet_button' %>
             </div>
 
