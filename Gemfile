@@ -89,6 +89,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'rspec'
+  gem 'letter_opener'
   # gem 'factory_girl_rails'
 end
 
