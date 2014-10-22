@@ -32,7 +32,7 @@
   <!-- <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %> -->
 
   <%= f.label :pdf %><br />
-  <% if  params[:action] == "edit" && @sheet.pdf.present? %>
+  <% if params[:action] == "edit" && @sheet.pdf.present? %>
   <ul id="sheet-files">
     <li>
         <a href="<%= download_sheet_path(@sheet) %>">

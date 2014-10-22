@@ -2,7 +2,7 @@
     <div class="panel-heading"><span class="glyphicon glyphicon-file"></span> Additional Files</div>
     <div class="panel-body">
 
-    <ul id="sheet-files">
+    <ul id="sheet-files" class="editable">
     <% for asset in @sheet.assets %>
         <%= render 'assets/asset', asset: asset %>
     <% end %>

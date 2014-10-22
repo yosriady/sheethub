@@ -21,7 +21,7 @@ class SheetsController < ApplicationController
   SUCCESS_RESTORE_SHEET_MESSAGE = 'Sheet was successfully restored.'
   ERROR_SHEET_NOT_FOUND_MESSAGE = 'Sheet not found'
   ERROR_CANNOT_RESTORE_UNDESTROYED_SHEET = 'You cannot restore an un-deleted Sheet.'
-  ERROR_PDF_UNPURCHASED_MESSAGE = 'You do not have access to this Sheet.'
+  ERROR_PDF_UNPURCHASED_MESSAGE = 'You must purchase to have access to this file.'
 
   # GET /sheets
   # GET /sheets.json
@@ -49,7 +49,8 @@ class SheetsController < ApplicationController
     if @sheet.is_free? || @sheet.purchased?(current_user)
       redirect_to @sheet.pdf_download_url
     else
-      redirect_to @sheet, error: ERROR_PDF_UNPURCHASED_MESSAGE
+      flash[:error] = ERROR_PDF_UNPURCHASED_MESSAGE
+      redirect_to sheet_path(@sheet)
     end
   end
 

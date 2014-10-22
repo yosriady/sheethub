@@ -28,10 +28,9 @@
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4">
+            <%= render 'sheet_tags', sheet:@sheet %>
             <%= render 'sheet_info' %>
             <%= render 'sheet_files' %>
-            <%= render 'sheet_share' %>
-            <%= render 'sheet_tags', sheet:@sheet %>
 
             <div class="well">
                 <%= render 'edit_sheet_button' %>
@@ -39,6 +38,7 @@
                 <%= render 'flag_sheet_button' %>
             </div>
 
+            <%= render 'sheet_share' %>
             <%= render 'layouts/facebook_widget' %>
             <%= render 'layouts/twitter_widget' %>
 

@@ -21,10 +21,24 @@ class AssetsController < ApplicationController
   end
 
   def download
-    if @asset.sheet.is_free? || @asset.sheet.purchased?(current_user)
+    sheet = @asset.sheet
+    if sheet.is_free? || sheet.purchased?(current_user)
       redirect_to @asset.download_url
     else
-      redirect_to @asset, error: ERROR_SHEET_UNPURCHASED_MESSAGE
+      # TODO: Message not displayed
+      flash[:error] = ERROR_SHEET_UNPURCHASED_MESSAGE
+      redirect_to sheet_path(sheet)
+    end
+  end
+
+  def destroy
+    sheet = @asset.sheet
+    if sheet.user == current_user
+      @asset.destroy
+      # TODO: flash messages not displayed, use render "sheets/edit" ?
+      redirect_to :back, notice: "File removed succesfully."
+    else
+      redirect_to :back, error: "You do not have permission to remove this file."
     end
   end
 

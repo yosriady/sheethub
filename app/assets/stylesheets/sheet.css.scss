@@ -115,8 +115,14 @@
     list-style-type: none;
     padding-left: 0px;
     a:first-child {
-        width: 90%;
+        width: 100%;
         display: inline-block;
+    }
+}
+
+#assets_container, ul#sheet-files.editable {
+    li a:first-child {
+        width: 90%;
     }
 }
 
