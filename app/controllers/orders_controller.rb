@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       payment_request,
       orders_success_url,
       orders_cancel_url,
-      paypal_options  # Optional
+      paypal_options
     )
     Order.create(sheet_id: sheet.id, user_id: current_user.id, status: 'processing', paypal_token: response.token, ip: request.ip)
     redirect_to response.redirect_uri

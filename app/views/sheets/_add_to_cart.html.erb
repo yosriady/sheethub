@@ -4,7 +4,7 @@
             <span class="sheet-price text-center"><p>FREE</p></span>
         <% else %>
             <span class="sheet-price col-xs-4"><p><%= cents_to_dollars(@sheet.price_cents) %></p></span>
-            <a href="<%= orders_paypal_checkout_path(:sheet_id => @sheet.id) %>"><button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Buy Now</button></a>
+            <a href="<%= orders_paypal_checkout_path(:sheet_id => @sheet.id) %>" data-no-turbolink='true'><button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Buy Now</button></a>
         <% end %>
     </div>
 </div>
