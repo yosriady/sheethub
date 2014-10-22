@@ -1,6 +1,8 @@
 <div class="panel panel-success">
     <div class="panel-body bg-success">
-        <% if @sheet.is_free? %>
+        <% if current_user && @sheet.purchased?(current_user) %>
+            <span class="sheet-price text-center"><p>PURCHASED</p></span>
+        <% elsif @sheet.is_free? %>
             <span class="sheet-price text-center"><p>FREE</p></span>
         <% else %>
             <span class="sheet-price col-xs-4"><p><%= cents_to_dollars(@sheet.price_cents) %></p></span>

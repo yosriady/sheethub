@@ -5,7 +5,7 @@
             <h1 class="text-center">Thank you</h1>
             <h2 class="text-center">You've purchased <%= link_to @sheet.title, sheet_path(@order.sheet) %>!</h2>
 
-            <%= render 'sheet', sheet: @sheet %>
+            <%= render 'sheets/sheet', sheet: @sheet %>
 
             <h2 class="text-center">You now have unlimited file access for your purchase. Visit your profile to view all of your purchased sheets.</h2>
             <a href="<%= profile_path(current_user.username) %>" class="btn btn block-center btn-block btn-lg btn-success"><span class="glyphicon glyphicon-edit"></span> Go to your Profile</a>

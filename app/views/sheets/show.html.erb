@@ -4,8 +4,8 @@
     <div class="row">
         <div id="sheet-header" class="col-xs-8">
             <% if !@sheet.is_public %>
+                <strong><span class="glyphicon glyphicon-eye-close"></span> PRIVATE</strong>
             <% end %>
-            <strong><span class="glyphicon glyphicon-eye-close"></span> PRIVATE</strong>
             <h1><%= @sheet.title %></h1>
             <h4>from <a href="<%= profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.username %></a></h4>
         </div>
