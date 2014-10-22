@@ -45,6 +45,7 @@ class SheetsController < ApplicationController
   def show
   end
 
+  # Downloads Sheet PDF
   def download
     if @sheet.is_free? || @sheet.purchased?(current_user)
       redirect_to @sheet.pdf_download_url
@@ -61,6 +62,7 @@ class SheetsController < ApplicationController
     redirect_to sheet_path(@sheet), notice: SUCCESS_FLAG_MESSAGE
   end
 
+  # Likes/Unlikes a Sheet
   def like
     unless current_user
       redirect_to new_user_session_path, error: ERROR_UNSIGNED_LIKE_MESSAGE
@@ -138,6 +140,7 @@ class SheetsController < ApplicationController
     end
   end
 
+  # Reverses soft-deletion
   def restore
     Sheet.restore(@sheet, :recursive => true)
     respond_to do |format|
