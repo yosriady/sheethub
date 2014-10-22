@@ -1,5 +1,7 @@
 class AssetsController < ApplicationController
-  before_action :set_asset, only: [:destroy]
+  ERROR_SHEET_UNPURCHASED_MESSAGE = 'You do not have access to this file.'
+
+  before_action :set_asset, only: [:destroy, :download]
   before_action :unescape_url, only: [:create]
 
   def create
@@ -16,6 +18,14 @@ class AssetsController < ApplicationController
     asset = s3.buckets['sheethub'].objects[@asset.s3_key]
     asset.delete
     redirect_to :back
+  end
+
+  def download
+    if @asset.sheet.is_free? || @asset.sheet.purchased?(current_user)
+      redirect_to @asset.download_url
+    else
+      redirect_to @asset, error: ERROR_SHEET_UNPURCHASED_MESSAGE
+    end
   end
 
   private

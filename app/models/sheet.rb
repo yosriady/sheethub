@@ -131,10 +131,6 @@ class Sheet < ActiveRecord::Base
     pdf.expiring_url(EXPIRATION_TIME)
   end
 
-  def download_pdf_url
-    pdf.expiring_url(10)
-  end
-
   # TODO: currently related_sheets is limited to 4 results for performance, refactor with ElasticSearch
   def related_sheets
     return [] if joined_tags.empty?
