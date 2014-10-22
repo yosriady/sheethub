@@ -15,8 +15,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user
       @sheets = @user.public_sheets
       @likes = @user.find_voted_items
-      @private_sheets = @user.private_sheets
-      @deleted_sheets = @user.deleted_sheets
+
+      if current_user == @user
+        @purchased_sheets = @user.purchased_sheets
+        @private_sheets = @user.private_sheets
+        @deleted_sheets = @user.deleted_sheets
+      end
     end
   end
 

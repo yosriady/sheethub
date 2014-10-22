@@ -26,6 +26,14 @@ class User < ActiveRecord::Base
     sheets.where(is_public: false)
   end
 
+  def purchased_sheets
+    Sheet.find(completed_orders.collect{|o| o.sheet_id})
+  end
+
+  def completed_orders
+    Order.where(user_id: id, status: "completed")
+  end
+
   def deleted_sheets
     Sheet.only_deleted.where(user_id: id)
   end

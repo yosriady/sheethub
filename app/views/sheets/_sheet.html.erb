@@ -1,0 +1,13 @@
+<a href="<%= sheet_url(sheet) %>"><div class="sheet" title="<%= sheet.title + " by " + sheet.composer_list.to_s.titleize if sheet.composer_list.any? %>">
+<div class="sheet-text">
+  <% if !sheet.is_public%>
+    <span class="glyphicon glyphicon-eye-close pull-right"></span>
+  <% end %>
+
+  <p class="sheet-instruments"><%= sheet.instruments.join(", ") %></p>
+  <h3><%= sheet.title %></h3>
+  <p><%= sheet.composer_list.any? ? sheet.composer_list.to_s.titleize : "Unknown Composer" %></p>
+</div></a>
+<a href="<%= profile_path(sheet.user.username) %>"><div class="sheet-user">
+  <span class="glyphicon glyphicon-user"></span> <%= sheet.user.username %>
+</div></a>

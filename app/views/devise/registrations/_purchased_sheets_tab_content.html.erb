@@ -1,0 +1,9 @@
+<div class="tab-pane active" id="purchased-sheets">
+  <% if @purchased_sheets.any? %>
+    <%= render '/sheets/sheets', sheets: @purchased_sheets %>
+  <% else %>
+    <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+    <h2>You have not purchased any sheets.</h2>
+    <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Browse</a>
+  <% end %>
+</div>
