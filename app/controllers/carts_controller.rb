@@ -1,23 +1,48 @@
 class CartsController < ApplicationController
+  SUCCESS_CART_ADD_MESSAGE = "Item added to cart."
+  SUCCESS_CART_REMOVE_MESSAGE = "Item removed from cart."
+  CANCEL_CART_PURCHASE_MESSAGE = "Purchase canceled."
+
   before_action :authenticate_user!, :only => [:paypal_checkout, :success, :cancel]
 
   def add
     sheet = Sheet.find(params[:sheet_id])
-    binding.pry
-    @cart
-    redirect_to :back
+    @cart.add(sheet)
+    redirect_to :back, notice: SUCCESS_CART_ADD_MESSAGE
+  end
+
+  def remove
+    sheet = Sheet.find(params[:sheet_id])
+    @cart.remove(sheet)
+    redirect_to :back, notice: SUCCESS_CART_REMOVE_MESSAGE
   end
 
   def paypal_checkout
-    binding.pry
+    payment_request = build_payment_request(@cart)
+    response = paypal_request.setup(
+      payment_request,
+      carts_success_url,
+      carts_cancel_url,
+      paypal_options
+    )
+    @cart.paypal_token = response.token
+    redirect_to response.redirect_uri
   end
 
   def success
+    token, payer_id = parseTokenAndPayerIdFromQueryString(request)
+    payment_request = build_payment_request(@cart)
+    response = paypal_request.details(token)
+    response = paypal_request.checkout!(
+      token,
+      payer_id,
+      payment_request
+    )
     binding.pry
+    @cart.complete_orders
   end
 
   def thank_you
-    binding.pry
   end
 
   def cancel
@@ -37,14 +62,22 @@ class CartsController < ApplicationController
       }
     end
 
-    def build_payment_request
-      # TODO: build payment request based on items in @cart
-      binding.pry
+    def build_payment_request(cart)
       Paypal::Payment::Request.new(
-        :description   => "#{sheet.title} Sheet Music",    # item description
-        :quantity      => 1,      # item quantity
-        :amount        => sheet.price   # item value
+        :description   => "Sheet Music from SheetHub",    # item description
+        :quantity      => cart.orders.size,      # item quantity
+        :amount        => cart.total,   # item value
+        :items         => build_payment_items(cart.orders)
       )
+    end
+
+    def build_payment_items(orders)
+      orders.map{|o| {
+        :name => o.sheet.title,
+        :amount => o.sheet.price,
+        :category => :Digital,
+        :url => sheet_url(o.sheet)
+      }}
     end
 
     def paypal_request

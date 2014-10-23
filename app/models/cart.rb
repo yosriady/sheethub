@@ -8,11 +8,16 @@ class Cart < ActiveRecord::Base
   end
 
   def include?(sheet)
-    sheets.ids.include?(sheet.id)
+    sheets.map(&:id).include?(sheet.id)
   end
 
   def remove(sheet)
     orders.where(sheet_id: sheet.id).destroy_all
+  end
+
+  def complete_orders
+    paypal_token = nil
+    orders.map{|o| o.update(status: Order.statuses[:completed], purchased_at: Time.now)}
   end
 
   def clear

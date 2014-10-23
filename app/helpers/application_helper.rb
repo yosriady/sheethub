@@ -4,10 +4,6 @@ module ApplicationHelper
     /^http/i.match(url) ? url : "http://#{url}"
   end
 
-  def cents_to_dollars(cents)
-    '$%.2f' % (cents.to_i/100.0)
-  end
-
   def tag_path(tag)
     context = tag.taggings[0].context #TODO: optimize SQL querying with includes?
     case context

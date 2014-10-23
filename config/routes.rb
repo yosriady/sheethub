@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   post 'carts/add'
+  post 'carts/remove'
   get 'carts/paypal_checkout'
   get 'carts/success'
   get 'carts/cancel'

@@ -1,13 +1,22 @@
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> <%= @cart.orders.size %></a>
-  <ul class="dropdown-menu" role="menu">
-    <% if @cart.orders.each do |order| %>
-      <li><%= order %></li>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> <%= @cart ? @cart.orders.size : 0%></a>
+
+  <ul id="cart" class="dropdown-menu" role="menu">
+    <% if @cart && @cart.orders.each do |order| %>
+      <li>
+
+      <%= order.sheet.title %> <%= order.sheet.user.username %> <%= "$#{order.sheet.price}" %> <%= link_to :x, carts_remove_path(:sheet_id => order.sheet.id), :method => :post %>
+
+      </li>
     <% end.empty? %>
-        <li><span class="glyphicon glyphicon-eye-close"></span> No orders yet!</li>
+        <li><span class="glyphicon glyphicon-eye-close"></span> Your cart is empty.</li>
     <% end %>
-    <% if @cart.orders.present? %>
-        <li><a id="paypal-checkout-btn" href="<%= carts_paypal_checkout_path %>">Checkout</a></li>
+    <% if @cart && @cart.orders.present? %>
+        <li><a id="paypal-checkout-btn" href="<%= carts_paypal_checkout_path %>" data-no-turbolink='true'>Checkout</a></li>
+    <% end %>
+    <% if @cart.nil? %>
+      <li><span class="glyphicon glyphicon-eye-close"></span> Sign in to add items to cart!</li>
     <% end %>
   </ul>
+
 </li>
