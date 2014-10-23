@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   has_many :sheets, dependent: :destroy
+  has_one :cart
   acts_as_voter
 
   has_attached_file :avatar,

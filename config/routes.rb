@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'orders/paypal_checkout'
-  get 'orders/success'
-  get 'orders/cancel'
+  post 'carts/add'
+  get 'carts/paypal_checkout'
+  get 'carts/success'
+  get 'carts/cancel'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

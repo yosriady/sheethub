@@ -1,0 +1,13 @@
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> <%= @cart.orders.size %></a>
+  <ul class="dropdown-menu" role="menu">
+    <% if @cart.orders.each do |order| %>
+      <li><%= order %></li>
+    <% end.empty? %>
+        <li><span class="glyphicon glyphicon-eye-close"></span> No orders yet!</li>
+    <% end %>
+    <% if @cart.orders.present? %>
+        <li><a id="paypal-checkout-btn" href="<%= carts_paypal_checkout_path %>">Checkout</a></li>
+    <% end %>
+  </ul>
+</li>

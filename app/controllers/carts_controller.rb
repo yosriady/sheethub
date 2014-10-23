@@ -1,9 +1,11 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!, :only => [:paypal_checkout, :success, :cancel]
-  before_filter :extract_shopping_cart
 
-  def add_item
+  def add
+    sheet = Sheet.find(params[:sheet_id])
+    binding.pry
     @cart
+    redirect_to :back
   end
 
   def paypal_checkout
@@ -23,12 +25,6 @@ class CartsController < ApplicationController
   end
 
   private
-    def extract_cart
-      shopping_cart_id = session[:cart_id]
-      @cart = session[:cart_id] ? Cart.find(cart_id) : Cart.create
-      session[:cart_id] = @cart.id
-    end
-
     def parseTokenAndPayerIdFromQueryString(request)
       return request.query_parameters["token"], request.query_parameters["PayerID"]
     end

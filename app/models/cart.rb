@@ -3,4 +3,26 @@ class Cart < ActiveRecord::Base
   belongs_to :user
   has_many :orders
 
+  # TODO: validate against duplicates items in cart
+  # Do this client side too
+
+  def add
+
+  end
+
+  def include?(sheet)
+
+  end
+
+  def remove
+    # TODO
+  end
+
+  def clear
+  end
+
+  def total
+
+  end
+
 end
