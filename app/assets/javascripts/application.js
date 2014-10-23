@@ -25,5 +25,5 @@
 //= require uservoice
 //= require twitter
 //= require fb-sdk
-
+//= require paypal-checkout
 //= require_tree .

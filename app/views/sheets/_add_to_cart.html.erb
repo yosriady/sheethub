@@ -1,12 +1,22 @@
 <div class="panel panel-success">
     <div class="panel-body bg-success">
-        <% if current_user && @sheet.purchased?(current_user) %>
+        <% if current_user && @sheet.purchased_by?(current_user) %>
             <span class="sheet-price text-center"><p><span class="glyphicon glyphicon-ok"></span> PURCHASED</p></span>
         <% elsif @sheet.is_free? %>
             <span class="sheet-price text-center"><p><span class="glyphicon glyphicon-ok"></span> FREE</p></span>
         <% else %>
             <span class="sheet-price col-xs-4"><p><%= cents_to_dollars(@sheet.price_cents) %></p></span>
-            <a href="<%= orders_paypal_checkout_path(:sheet_id => @sheet.id) %>" data-no-turbolink='true'><button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Buy Now</button></a>
+            <a id="paypal-checkout-btn" href="<%= orders_paypal_checkout_path(:sheet_id => @sheet.id) %>" data-no-turbolink='true'><button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Buy Now</button></a>
         <% end %>
     </div>
+</div>
+
+<div id="paypalProgressModal" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="flagModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        Please wait while we redirect you to Paypal.
+      </div>
+    </div>
+  </div>
 </div>

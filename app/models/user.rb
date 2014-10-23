@@ -27,11 +27,15 @@ class User < ActiveRecord::Base
   end
 
   def purchased_sheets
-    Sheet.find(completed_orders.collect{|o| o.sheet_id})
+    Sheet.find(purchased_sheet_ids)
+  end
+
+  def purchased_sheet_ids
+    completed_orders.collect{|o| o.sheet_id}
   end
 
   def completed_orders
-    Order.where(user_id: id, status: "completed")
+    Order.where(user_id: id, status: Order.statuses[:completed])
   end
 
   def deleted_sheets

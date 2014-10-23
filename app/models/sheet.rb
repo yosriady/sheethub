@@ -5,8 +5,8 @@ class Sheet < ActiveRecord::Base
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
 
-  def purchased?(user)
-    return Order.where(sheet: id, user: user).exists?
+  def purchased_by?(user)
+    user.purchased_sheet_ids.include?(id)
   end
 
   def price
