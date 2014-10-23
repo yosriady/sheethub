@@ -20,9 +20,9 @@ Rails.application.routes.draw do
 
     member do
       get 'download'
-      get 'like'
+      post 'like'
       post 'flag'
-      get 'restore'
+      post 'restore'
     end
   end
 
