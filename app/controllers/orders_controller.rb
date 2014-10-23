@@ -52,9 +52,6 @@ class OrdersController < ApplicationController
   end
 
   def cancel
-    token = request.query_parameters["token"]
-    @order = Order.where(paypal_token: token).first
-    @order.update(status: 'canceled')
     redirect_to sheets_path, notice: CANCEL_ORDER_MESSAGE
   end
 

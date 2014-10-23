@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021182916) do
+ActiveRecord::Schema.define(version: 20141023092259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 20141021182916) do
 
   add_index "assets", ["deleted_at"], name: "index_assets_on_deleted_at", using: :btree
 
+  create_table "carts", force: true do |t|
+    t.string   "paypal_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
   create_table "flags", force: true do |t|
     t.integer  "user_id"
     t.integer  "sheet_id",   null: false
@@ -85,16 +92,15 @@ ActiveRecord::Schema.define(version: 20141021182916) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "orders", force: true do |t|
-    t.integer  "sheet_id"
-    t.integer  "user_id"
+    t.integer  "sheet_id",     null: false
+    t.integer  "user_id",      null: false
     t.string   "ip"
     t.string   "description"
-    t.string   "paypal_token"
-    t.string   "paypal_payer_id"
     t.datetime "purchased_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status"
+    t.integer  "cart_id",      null: false
   end
 
   create_table "sheets", force: true do |t|
