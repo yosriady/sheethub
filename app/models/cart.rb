@@ -1,5 +1,7 @@
 class Cart < ActiveRecord::Base
-  validates :user_id, uniqueness: true #Users can only have one active cart
+  validates :user_id, uniqueness: true # Users can only have one active cart
+  validates :cart_id, absence: true, if: "completed?"
+  validates :cart_id, presence: true, if: "processing?"
   belongs_to :user
   has_many :orders
 
