@@ -5,6 +5,9 @@ class Sheet < ActiveRecord::Base
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
 
+  validates :price_cents, inclusion: { in: (199..99999),
+    message: "Price must be between $1.99 - $999.99" }
+
   def purchased_by?(user)
     user.purchased_sheet_ids.include?(id)
   end
