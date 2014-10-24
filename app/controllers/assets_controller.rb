@@ -22,7 +22,7 @@ class AssetsController < ApplicationController
 
   def download
     sheet = @asset.sheet
-    if sheet.is_free? || sheet.purchased_by?(current_user)
+    if sheet.is_free? || sheet.purchased_by?(current_user) || sheet.uploaded_by?(current_user)
       redirect_to @asset.download_url
     else
       # TODO: Message not displayed

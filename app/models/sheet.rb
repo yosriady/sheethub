@@ -13,6 +13,11 @@ class Sheet < ActiveRecord::Base
     user.purchased_sheet_ids.include?(id)
   end
 
+  def uploaded_by?(usr)
+    return false unless usr
+    user.id == usr.id
+  end
+
   def price
     return price_cents.to_f / 100
   end

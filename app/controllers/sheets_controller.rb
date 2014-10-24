@@ -47,7 +47,7 @@ class SheetsController < ApplicationController
 
   # Downloads Sheet PDF
   def download
-    if @sheet.is_free? || @sheet.purchased_by?(current_user)
+    if @sheet.is_free? || @sheet.purchased_by?(current_user) || @sheet.uploaded_by?(current_user)
       redirect_to @sheet.pdf_download_url
     else
       flash[:error] = ERROR_PDF_UNPURCHASED_MESSAGE
