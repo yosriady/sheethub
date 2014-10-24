@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
   MISSING_AVATAR_URL = "/images/missing.png"
+  EXPIRATION_TIME = 600
 
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   has_many :sheets, dependent: :destroy
@@ -53,7 +54,7 @@ class User < ActiveRecord::Base
 
   def avatar_url
     if avatar.url.present? && avatar.url != MISSING_AVATAR_URL
-      avatar.url(:thumb)
+      avatar.expiring_url(EXPIRATION_TIME, :thumb)
     else
       image
     end
