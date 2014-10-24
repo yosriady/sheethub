@@ -9,9 +9,8 @@ class User < ActiveRecord::Base
   acts_as_voter
 
   has_attached_file :avatar,
-                    :styles => { :thumb => "100x100>" },
                     :convert_options => {
-                        :thumb => "-quality 100 -strip" },
+                        :original => "-strip"},
                     :hash_secret => AVATAR_HASH_SECRET,
                     :default_url => MISSING_AVATAR_URL
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
@@ -56,9 +55,9 @@ class User < ActiveRecord::Base
 
   def avatar_url
     if avatar.url.present? && avatar.url != MISSING_AVATAR_URL
-      avatar.expiring_url(EXPIRATION_TIME, :thumb)
+      avatar.expiring_url(EXPIRATION_TIME, :original)
     else
-      image
+      MISSING_AVATAR_URL
     end
   end
 

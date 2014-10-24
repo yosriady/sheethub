@@ -9,6 +9,7 @@ class Sheet < ActiveRecord::Base
     message: "Price must be between $1.99 - $999.99" }
 
   def purchased_by?(user)
+    return false unless user
     user.purchased_sheet_ids.include?(id)
   end
 
