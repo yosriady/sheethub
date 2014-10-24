@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar,
                     :styles => { :thumb => "100x100>" },
+                    :convert_options => {
+                        :thumb => "-quality 100 -strip" },
                     :hash_secret => AVATAR_HASH_SECRET,
                     :default_url => MISSING_AVATAR_URL
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/

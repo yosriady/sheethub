@@ -6,6 +6,9 @@
             <span class="sheet-price text-center"><p><span class="glyphicon glyphicon-ok"></span> IN CART</p></span>
         <% elsif @sheet.is_free? %>
             <span class="sheet-price text-center"><p><span class="glyphicon glyphicon-ok"></span> FREE</p></span>
+        <% elsif current_user.nil? %>
+            <span class="sheet-price col-xs-4"><p><%= "$#{@sheet.price}" %></p></span>
+            <a href="<%= new_user_session_path %>"><button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button></a>
         <% else %>
             <span class="sheet-price col-xs-4"><p><%= "$#{@sheet.price}" %></p></span>
             <a href="<%= carts_add_path(:sheet_id => @sheet.id) %>" data-method="post"><button type="button" class="btn btn-success btn-lg col-xs-8"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button></a>

@@ -4,7 +4,9 @@ class Cart < ActiveRecord::Base
   has_many :orders
 
   def add(sheet)
-    orders.create(sheet_id: sheet.id, user_id: user_id)
+    if !sheet.purchased_by?(User.find(user_id)) && !include?(sheet)
+      orders.create(sheet_id: sheet.id, user_id: user_id)
+    end
   end
 
   def include?(sheet)
@@ -24,7 +26,7 @@ class Cart < ActiveRecord::Base
   end
 
   def clear_orders
-    orders.each{|o| o.cart_id = nil}
+    orders.each{|o| o.update(cart_id: nil)}
   end
 
   def total
