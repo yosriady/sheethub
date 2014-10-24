@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+  SUCCESS_CART_PURCHASE_MESSAGE = "Purchase successful."
   SUCCESS_CART_ADD_MESSAGE = "Item added to cart."
   SUCCESS_CART_REMOVE_MESSAGE = "Item removed from cart."
   CANCEL_CART_PURCHASE_MESSAGE = "Purchase canceled."
@@ -38,8 +39,12 @@ class CartsController < ApplicationController
       payer_id,
       payment_request
     )
-    binding.pry
+
     @cart.complete_orders
+    @purchased_sheets = @cart.sheets
+    @cart.clear_token
+    @cart.clear_orders
+    render :action => "thank_you", notice: SUCCESS_CART_PURCHASE_MESSAGE
   end
 
   def thank_you

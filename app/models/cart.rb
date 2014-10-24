@@ -16,21 +16,23 @@ class Cart < ActiveRecord::Base
   end
 
   def complete_orders
-    paypal_token = nil
     orders.map{|o| o.update(status: Order.statuses[:completed], purchased_at: Time.now)}
   end
 
-  def clear
-    orders.destroy_all
+  def clear_token
+    paypal_token = nil
+  end
+
+  def clear_orders
+    orders.each{|o| o.cart_id = nil}
   end
 
   def total
     sheets.sum(&:price)
   end
 
-  private
-    def sheets
-      Sheet.find(orders.pluck(:sheet_id))
-    end
+  def sheets
+    Sheet.find(orders.pluck(:sheet_id))
+  end
 
 end

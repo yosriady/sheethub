@@ -2,16 +2,20 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <h1 class="text-center">Thank You</h1>
-            <h3 class="text-center">You've purchased <%= link_to @sheet.title, sheet_path(@order.sheet) %>!</h3>
+            <h1 class="text-center">Thank You For Your Purchase</h1>
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-12">
-        <div style="margin-left: 40%;">
-            <%= render 'sheets/sheet', sheet: @sheet %>
-        </div>
+            <% if @purchased_sheets.each do |sheet| %>
+              <div style="margin-left: 40%;">
+                <%= render 'sheets/sheet', sheet: sheet %>
+              </div>
+              <% end.empty? %>
+              <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+              <h2>No Sheets purchased.</h2>
+              <% end %>
         </div>
     </div>
 
