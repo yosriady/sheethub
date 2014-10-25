@@ -5,11 +5,10 @@ class Sheet < ActiveRecord::Base
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
   PRICE_VALUE_VALIDATION_MESSAGE = "Price must be between $1.99 - $999.99"
-  WATERMARK_PATH = "#{Rails.root}/public/images/watermark.png"
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
   INVALID_SORT_ORDERS_MESSAGE = "Sort Order not in #{Sheet::SORT_ORDERS.values}"
 
-  validates :price_cents, inclusion: { in: (199..99999),
+  validates :price_cents, inclusion: { in: (0..99999),
     message: PRICE_VALUE_VALIDATION_MESSAGE }
   belongs_to :user
   acts_as_votable
@@ -42,10 +41,10 @@ class Sheet < ActiveRecord::Base
 
   has_attached_file :pdf,
                     :styles => {
-                      :watermark => {:watermark_path => WATERMARK_PATH},
+                      # :watermark => {},
                       :preview => {:geometry => "", :format => :png}
                     },
-                    :processors => [:preview],
+                    :processors => [:preview], # :watermark currently disabled
                     :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
                     :default_url => PDF_DEFAULT_URL, #TODO: point to special Missing file route
                     :preserve_files => "true"
