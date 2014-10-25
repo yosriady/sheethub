@@ -4,47 +4,22 @@ class Sheet < ActiveRecord::Base
   SORT_ORDERS = {"Most Recent"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
+  PRICE_VALUE_VALIDATION_MESSAGE = "Price must be between $1.99 - $999.99"
+  WATERMARK_PATH = "#{Rails.root}/public/images/watermark.png"
+  INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
+  INVALID_SORT_ORDERS_MESSAGE = "Sort Order not in #{Sheet::SORT_ORDERS.values}"
 
   validates :price_cents, inclusion: { in: (199..99999),
-    message: "Price must be between $1.99 - $999.99" }
-
-  def purchased_by?(user)
-    return false unless user
-    user.purchased_sheet_ids.include?(id)
-  end
-
-  def uploaded_by?(usr)
-    return false unless usr
-    user.id == usr.id
-  end
-
-  def price
-    return price_cents.to_f / 100
-  end
-
-  def is_free?
-    return price_cents == 0
-  end
-
+    message: PRICE_VALUE_VALIDATION_MESSAGE }
   belongs_to :user
   acts_as_votable
   acts_as_paranoid
-
+  before_destroy :soft_destroy_callback
   searchkick word_start: [:name]
   extend FriendlyId
   friendly_id :sheet_slug, :use => :slugged
-
   validates :title, presence: true
-
   has_many :flags, :dependent => :destroy
-
-  def sheet_slug
-    [
-      :title,
-      [:title, user.username]
-    ]
-  end
-
   default_scope { order(created_at: :desc) } # sort by most recent
 
   scope :is_public, -> { where(is_public: true) }
@@ -67,7 +42,7 @@ class Sheet < ActiveRecord::Base
 
   has_attached_file :pdf,
                     :styles => {
-                      :watermark => {:watermark_path => "#{Rails.root}/public/images/watermark.png"},
+                      :watermark => {:watermark_path => WATERMARK_PATH},
                       :preview => {:geometry => "", :format => :png}
                     },
                     :processors => [:preview],
@@ -84,7 +59,32 @@ class Sheet < ActiveRecord::Base
   accepts_nested_attributes_for :assets
   validates_associated :assets,
     :on => [:create, :update],
-    :message => "Sheet supporting files invalid"
+    :message => INVALID_ASSETS_MESSAGE
+
+  def purchased_by?(user)
+    return false unless user
+    user.purchased_sheet_ids.include?(id)
+  end
+
+  def uploaded_by?(usr)
+    return false unless usr
+    user.id == usr.id
+  end
+
+  def price
+    return price_cents.to_f / 100
+  end
+
+  def is_free?
+    return price_cents == 0
+  end
+
+  def sheet_slug
+    [
+      :title,
+      [:title, user.username]
+    ]
+  end
 
   def self.sorted(sort_order)
     if sort_order.nil?
@@ -92,7 +92,7 @@ class Sheet < ActiveRecord::Base
     elsif SORT_ORDERS.values.include?(sort_order.to_sym)
       self.send(sort_order)
     else
-      raise "Sort Order not in #{Sheet::SORT_ORDERS.values}"
+      raise INVALID_SORT_ORDERS_MESSAGE
     end
   end
 
@@ -173,6 +173,10 @@ class Sheet < ActiveRecord::Base
   end
 
   protected
+    def soft_destroy_callback
+      # TODO: Send email to all buyers
+    end
+
     def tags
       [genre_list, composer_list, source_list].flatten
     end
