@@ -27,7 +27,7 @@ class CartsController < ApplicationController
       paypal_options
     )
     @cart.paypal_token = response.token
-    redirect_to response.redirect_uri
+    redirect_to response.popup_uri
   end
 
   def success
@@ -61,9 +61,7 @@ class CartsController < ApplicationController
 
     def paypal_options
       return {
-        no_shipping: true, # if you want to disable shipping information
-        allow_note: false, # if you want to disable notes
-        pay_on_paypal: true #if you want to commit the transaction in paypal instead of your site
+        no_shipping: true
       }
     end
 
