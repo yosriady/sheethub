@@ -4,7 +4,9 @@
     <%= render '/sheets/sheets', sheets: @purchased_sheets %>
   <% else %>
     <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
-    <h2>You have not purchased any sheets.</h2>
+    <h2>You don't have any purchases yet.</h2>
+    <h4>Add sheets to your cart and check out to complete your purchase.</h4>
+    <h4>You can review and download your purchased sheets here.</h4>
     <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Browse</a>
   <% end %>
 </div>

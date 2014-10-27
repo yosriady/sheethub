@@ -1,6 +1,12 @@
 // Place all the styles related to the Carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#cart-dropdown .badge {
+    background-color: rgba(0,0,0, 0.2);
+    margin-left: 4px;
+}
+
 #cart {
     width: 360px;
     padding: 10px;

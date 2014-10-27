@@ -2,6 +2,16 @@ body {
     background: #FBFBFB
 }
 
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 5px;
+    border-top: none;
+}
+
+
+.navbar ul.nav li .dropdown-menu > li > a {
+    padding: 5px 10px;
+}
+
 .display-inline {
     display: inline;
 }
@@ -56,4 +66,8 @@ body {
 
 .margintop30 {
     margin-top: 30%;
+}
+
+.well {
+    border-color: #eeeff2;
 }

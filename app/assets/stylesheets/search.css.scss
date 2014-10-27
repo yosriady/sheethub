@@ -1,14 +1,6 @@
 .search-bar{
-    width: 30%;
+    width: 320px;
     margin-bottom: 0px;
-}
-
-.banner-search-bar {
-    width: 40%;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin: 20px auto;
-    box-shadow: rgba(0,0,0,0.1) 0 5px 20px;
 }
 
 .input-group .form-control:first-child {
@@ -26,3 +18,8 @@
         border-radius: 4px;
     }
 }
+
+.tt-dataset-sheets {
+    width: 290px;
+}
+

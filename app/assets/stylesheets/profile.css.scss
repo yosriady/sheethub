@@ -1,14 +1,25 @@
+.tab-pane h2 {
+    font-weight: bold;
+}
+
+.tab-pane h2 .glyphicon {
+    margin-top: 20px;
+}
+
+.tab-pane h2, .tab-pane h4 {
+    text-align: center;
+}
+
+.tab-pane h2, h4 {
+    color: rgb(84, 86, 88);
+}
+
 .profile-info {
     padding: 0px;
 
     .glyphicon {
         font-size: 12px;
     }
-
-    .well {
-        margin-top: 10px;
-    }
-
 }
 
 #banner.profile-banner {

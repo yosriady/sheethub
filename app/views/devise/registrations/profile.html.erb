@@ -12,9 +12,6 @@
   <div class="container sheets-container">
       <div class="row">
         <div class="col-xs-3 profile-info">
-            <% if @user == current_user %>
-              <a href="<%= edit_user_registration_path %>" class="btn btn-block btn-lg btn-success"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
-            <% end %>
             <div class="well">
                 <h4><span class="glyphicon glyphicon-user"></span> <%= "#{@user.username} (#{@user.full_name })" %></h4>
                 <em>Member since <%= distance_of_time_in_words(Time.now, @user.created_at) %> ago</em>
