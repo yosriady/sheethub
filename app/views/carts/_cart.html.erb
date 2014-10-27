@@ -3,16 +3,16 @@
 
   <ul id="cart" class="dropdown-menu" role="menu">
     <% if @cart && @cart.orders.each do |order| %>
-      <li>
-
-      <%= order.sheet.title %> <%= order.sheet.user.username %> <%= "$#{order.sheet.price}" %> <%= link_to :x, carts_remove_path(:sheet_id => order.sheet.id), :method => :post %>
-
-      </li>
+      <li><div class="cart-item">
+        <a href="<%= sheet_path(order.sheet) %>"><%= order.sheet.title %></a>
+        <%= link_to "", carts_remove_path(:sheet_id => order.sheet.id), :method => :post, class: "cart-remove-item glyphicon glyphicon-remove" %>
+        <p><%= "$#{order.sheet.price}" %></p>
+      </div></li>
     <% end.empty? %>
-        <li><span class="glyphicon glyphicon-eye-close"></span> Your cart is empty. Use search to help you find the perfect sheet music to play. </li>
+        <li><p class="empty-cart-message"><span class="glyphicon glyphicon-eye-close"></span> Your cart is empty. Use the search bar to help you find the perfect sheet music to play. </p></li>
     <% end %>
     <% if @cart && @cart.orders.present? %>
-        <li><a id="paypal-checkout-btn" href="<%= carts_paypal_checkout_path %>" data-no-turbolink='true'>Checkout</a></li>
+        <li><a id="paypal-checkout-btn" href="<%= carts_paypal_checkout_path %>" data-no-turbolink='true'><span class="glyphicon glyphicon-shopping-cart"></span> Checkout with Paypal</a></li>
     <% end %>
     <% if @cart.nil? %>
       <li><span class="glyphicon glyphicon-eye-close"></span> Sign in to add items to cart!</li>

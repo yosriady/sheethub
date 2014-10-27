@@ -5,9 +5,41 @@
 #cart-dropdown .badge {
     background-color: rgba(0,0,0, 0.2);
     margin-left: 4px;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 #cart {
     width: 360px;
-    padding: 10px;
+
+    .cart-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.14902);;
+        padding: 5px 20px;
+
+        a {
+            display: inline;
+            padding: 0px;
+            font-size: 16px;
+
+            &:hover, &:active {
+                background: none;
+                color: #2a6496;
+            }
+
+            &.cart-remove-item {
+                float: right;
+                margin-top: 15px;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .empty-cart-message {
+        padding: 5px 20px;
+    }
+
+    #paypal-checkout-btn {
+        padding: 10px 20px;
+    }
 }
+
