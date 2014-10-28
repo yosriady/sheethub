@@ -1,17 +1,11 @@
 <% if @user %>
   <% title "#{@user.username}'s Profile"  %>
 
-  <div id="banner" class="profile-banner">
-    <%= image_tag(@user.avatar_url, class: "profile-avatar") %>
-    <div class="profile-bio">
-      <h1><%= @user.username %></h1>
-      <p class="tagline"><%= @user.tagline %></p>
-    </div>
-  </div>
+  <%= render 'profile_banner', user:@user %>
 
   <div class="container sheets-container">
       <div class="row">
-        <div class="col-xs-3 profile-info">
+      <div class="col-xs-3 profile-info">
             <div class="well">
                 <h4><span class="glyphicon glyphicon-user"></span> <%= "#{@user.username} (#{@user.full_name })" %></h4>
                 <em>Member since <%= distance_of_time_in_words(Time.now, @user.created_at) %> ago</em>
@@ -34,8 +28,6 @@
             <li><a href="#likes" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-thumbs-up"></span> Likes <span class="badge"><%= @user.votes.size %></span></a></li>
 
             <% if current_user == @user %>
-            <li><a href="#purchased-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-shopping-cart"></span> Purchased Sheets <span class="badge"><%= @purchased_sheets.count %></span></a></li>
-
             <li><a href="#private-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-eye-close"></span> Private Sheets <span class="badge"><%= @private_sheets.count %></span></a></li>
 
             <li><a href="#deleted-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-trash"></span> Deleted <span class="badge"><%= @user.deleted_sheets.size %></span></a></li>
@@ -46,7 +38,6 @@
           <div class="tab-content">
             <%= render 'sheets_tab_content' %>
             <%= render 'likes_tab_content' %>
-            <%= render 'purchased_sheets_tab_content' %>
             <%= render 'private_sheets_tab_content' %>
             <%= render 'deleted_sheets_tab_content' %>
           </div>

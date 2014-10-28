@@ -17,11 +17,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @likes = @user.find_voted_items
 
       if current_user == @user
-        @purchased_sheets = @user.purchased_sheets
         @private_sheets = @user.private_sheets
         @deleted_sheets = @user.deleted_sheets
       end
     end
+  end
+
+  def purchases
+    unless current_user
+      redirect_to :back, error: "You are not logged in."
+    end
+
+    @purchases = current_user.purchased_sheets
   end
 
   # GET /resource/edit
@@ -43,7 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.update_attributes(account_update_params)
       set_flash_message :notice, :updated
       sign_in @user, :bypass => true
-      redirect_to profile_path(@user.username)
+      redirect_to user_profile_path(@user.username)
     else
       render "edit"
     end
@@ -55,7 +62,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       update_params = registration_params
       update_params[:finished_registration?] = true
       if current_user.update(update_params)
-        redirect_to profile_path(current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
+        redirect_to user_profile_path(current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
         flash[:error] = current_user.errors.full_messages.to_sentence
         redirect_to finish_registration_path, error: FAILURE_UPDATE_PROFILE_MESSAGE

@@ -27,7 +27,8 @@ class CartsController < ApplicationController
       paypal_options
     )
     @cart.paypal_token = response.token
-    redirect_to response.popup_uri
+    # redirect_to response.popup_uri
+    redirect_to response.redirect_uri
   end
 
   def success

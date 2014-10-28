@@ -7,7 +7,7 @@
                 <strong><span class="glyphicon glyphicon-eye-close"></span> PRIVATE</strong>
             <% end %>
             <h1><%= @sheet.title %></h1>
-            <h4>from <a href="<%= profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.username %></a></h4>
+            <h4>from <a href="<%= user_profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.username %></a></h4>
         </div>
         <div class="col-xs-4">
             <%= render 'add_to_cart' %>

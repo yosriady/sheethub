@@ -18,8 +18,10 @@
           <ul class="dropdown-menu" role="menu">
 
           <% if current_user.finished_registration? %>
-            <li><a href="<%= profile_path(current_user.username) %>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+            <li><a href="<%= user_profile_path(current_user.username) %>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
             <li><a href="<%= edit_user_registration_path %>"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+            <li><a href="<%= user_purchases_path %>"><span class="glyphicon glyphicon-shopping-cart"></span> Purchases</a></li>
+            <li><a href="<%= user_deleted_sheets_path %>"><span class="glyphicon glyphicon-trash"></span> Trash</a></li>
           <% end %>
             <hr>
             <li><%= link_to destroy_user_session_path, :method => :delete do %><span class="glyphicon glyphicon-off"></span> Logout<% end %></li>

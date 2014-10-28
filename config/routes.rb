@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
-    get 'user/:username' => "users/registrations#profile", :as => :profile
+    get 'user/:username' => "users/registrations#profile", :as => :user_profile
     match 'users/finish_registration' => 'users/registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
+    get 'purchases' => "users/registrations#purchases", :as => :user_purchases
+    get 'trash' => "users/registrations#deleted_sheets", :as => :user_deleted_sheets
   end
 
   resources :sheets do
