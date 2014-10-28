@@ -25,7 +25,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sales
-    # TODO
+    @all_sales = current_user.all_sales
+    @sales_past_month = current_user.sales_past_month
   end
 
   def trash

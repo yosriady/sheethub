@@ -33,6 +33,14 @@ class User < ActiveRecord::Base
     Sheet.find(purchased_sheet_ids)
   end
 
+  def all_sales
+    Order.where(sheet_id: sheets.ids)
+  end
+
+  def sales_past_month
+    Order.where(sheet_id: sheets.ids).where("purchased_at >= ?", 1.month.ago.utc).order(:purchased_at)
+  end
+
   def purchased_sheet_ids
     completed_orders.collect{|o| o.sheet_id}
   end

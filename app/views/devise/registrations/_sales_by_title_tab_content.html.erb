@@ -1,0 +1,28 @@
+<div class="tab-pane" id="sales-by-title">
+  <% if @all_sales.any? %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sheet</th>
+          <th>Earning</th>
+          <th>Quantity Sold</th>
+          <th>Total Earnings <a href="<%= faq_path %>#earnings-calculation"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @all_sales.each do |order| %>
+            <tr>
+              <td><%= link_to order.sheet.title, sheet_path(order.sheet) %></td>
+              <td><%= number_to_currency(order.sheet.royalty) %></td>
+              <td><%= order.sheet.total_sold %></td>
+              <td><%= number_to_currency(order.sheet.total_royalties) %></td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+    <h2>You have no sales yet.</h2>
+  <% end %>
+    <h4>Promote your sheets through the Share buttons to sell and earn more.</h4>
+</div>

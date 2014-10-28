@@ -70,8 +70,24 @@ class Sheet < ActiveRecord::Base
     user.id == usr.id
   end
 
+  def total_sales
+    total_sold * price
+  end
+
+  def total_sold
+    Order.where(sheet_id: id).size
+  end
+
+  def total_royalties
+    Order.where(sheet_id: id).size * royalty
+  end
+
   def price
     return price_cents.to_f / 100
+  end
+
+  def royalty
+    return ((0.8 * price) - 0.8).round(1)
   end
 
   def is_free?

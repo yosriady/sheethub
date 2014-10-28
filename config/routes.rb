@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
   root 'sheets#index'
   get '/about', to: 'pages#about'
+  get '/faq', to: 'pages#faq'
   get '/terms', to: 'pages#terms'
   get '/privacy', to: 'pages#privacy'
 end
