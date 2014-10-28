@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get 'user/:username' => "users/registrations#profile", :as => :user_profile
     match 'users/finish_registration' => 'users/registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
     get 'purchases' => "users/registrations#purchases", :as => :user_purchases
-    get 'trash' => "users/registrations#deleted_sheets", :as => :user_deleted_sheets
+    get 'trash' => "users/registrations#trash", :as => :user_trash
   end
 
   resources :sheets do

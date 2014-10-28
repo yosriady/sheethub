@@ -29,8 +29,6 @@
 
             <% if current_user == @user %>
             <li><a href="#private-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-eye-close"></span> Private Sheets <span class="badge"><%= @private_sheets.count %></span></a></li>
-
-            <li><a href="#deleted-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-trash"></span> Deleted <span class="badge"><%= @user.deleted_sheets.size %></span></a></li>
             <% end %>
           </ul>
 
@@ -39,7 +37,6 @@
             <%= render 'sheets_tab_content' %>
             <%= render 'likes_tab_content' %>
             <%= render 'private_sheets_tab_content' %>
-            <%= render 'deleted_sheets_tab_content' %>
           </div>
 
 

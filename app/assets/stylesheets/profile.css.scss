@@ -1,12 +1,12 @@
-#purchased-sheets h2, .tab-pane h2 {
+#deleted-sheets h2, #purchased-sheets h2, .tab-pane h2 {
     font-weight: bold;
 }
 
-#purchased-sheets h2 .glyphicon, .tab-pane h2 .glyphicon {
+#deleted-sheets h2 .glyphicon, #purchased-sheets h2 .glyphicon, .tab-pane h2 .glyphicon {
     margin-top: 20px;
 }
 
-#purchased-sheets h2, #purchased-sheets h4, .tab-pane h2, .tab-pane h4 {
+#deleted-sheets h2, #deleted-sheets h4, #purchased-sheets h2, #purchased-sheets h4, .tab-pane h2, .tab-pane h4 {
     color: rgb(84, 86, 88);
     text-align: center;
 }

@@ -1,5 +1,4 @@
-<% if current_user == @user %>
-<div class="tab-pane" id="deleted-sheets">
+<div id="deleted-sheets">
   <% if @deleted_sheets.any? %>
     <%= render '/sheets/deleted_sheets', sheets: @deleted_sheets %>
   <% else %>
@@ -7,4 +6,3 @@
     <h2>You have no deleted sheets.</h2>
   <% end %>
 </div>
-<% end %>

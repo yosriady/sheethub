@@ -15,11 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user
       @sheets = @user.public_sheets
       @likes = @user.find_voted_items
-
-      if current_user == @user
-        @private_sheets = @user.private_sheets
-        @deleted_sheets = @user.deleted_sheets
-      end
+      @private_sheets = @user.private_sheets if current_user == @user
     end
   end
 
@@ -29,6 +25,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     @purchases = current_user.purchased_sheets
+  end
+
+  def trash
+    unless current_user
+      redirect_to :back, error: "You are not logged in."
+    end
+
+     @deleted_sheets = current_user.deleted_sheets
   end
 
   # GET /resource/edit
