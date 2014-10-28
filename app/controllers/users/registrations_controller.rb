@@ -3,6 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
   before_action :ensure_registration_finished
+  before_action :authenticate_user!, :only => [:purchases, :sales, :trash]
 
   # GET /user/:username
   def profile
@@ -20,24 +21,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def purchases
-    unless current_user
-      redirect_to :back, error: "You are not logged in."
-    end
-
     @purchases = current_user.purchased_sheets
   end
 
-  def trash
-    unless current_user
-      redirect_to :back, error: "You are not logged in."
-    end
+  def sales
+    # TODO
+  end
 
+  def trash
      @deleted_sheets = current_user.deleted_sheets
   end
 
   # GET /resource/edit
   def edit
-    # TODO: Edit Profile
   end
 
   # User profile edit/update
