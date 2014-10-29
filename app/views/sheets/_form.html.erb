@@ -8,10 +8,16 @@
   </div>
 
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
+  <%= f.label :publishing_right %> <a href="<%= faq_path %>#publishing-rights"><span class="glyphicon glyphicon-question-sign"></span></a>
+  <%= f.input_field :publishing_right, :as => :select, :collection => Sheet.publishing_rights.keys %>
+
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
 
   <%= f.label "Price in US$" %>
-  <%= f.input_field :price_cents, :input_html => {value: number_with_precision(f.object.price_cents, precision: 2) }, placeholder: "What's the minimum price to pay to get access to uploads?" %>
+  <div class="input-group">
+  <span class="input-group-addon">$</span>
+    <%= f.input_field :price_cents, :input_html => {value: number_with_precision(f.object.price_cents, precision: 2) }, placeholder: "What's the minimum price to pay to get access to uploads?" %>
+  </div>
 
   <%= f.label :instruments %>
   <br>
@@ -28,8 +34,6 @@
   <%= f.label :sources %>
   <br>
   <%= f.input_field :source_list, collection: @sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
-
-  <!-- <%= f.input :difficulty, :as => :select, :collection => Sheet.difficulties.keys.to_a %> -->
 
   <%= f.label :pdf %><br />
   <% if params[:action] == "edit" && @sheet.pdf.present? %>

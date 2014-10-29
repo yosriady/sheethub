@@ -31,6 +31,22 @@ $(document).on("page:change", function() {
     });
 
     $('#sheet_difficulty').selectize({});
+
+    $('#sheet_publishing_right').selectize({
+        options: [{
+            "label":'This title is my original composition',
+            "value":'original'
+        }, {
+            "label":'I have acquired the necessary publishing and worldwide distribution rights',
+            "value":'rights'
+        }, {
+            "label":'This is a public domain work',
+            "value":'public_domain'
+        }],
+        valueField: 'value',
+        labelField: 'label'
+    });
+
     $('#sheet_sort_order').selectize({
         create: false,
         persist: false,

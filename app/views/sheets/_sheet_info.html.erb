@@ -1,6 +1,9 @@
 <div class="panel panel-info">
   <div class="panel-body">
+    <% if @sheet.original? || @sheet.public_domain? %>
+      <strong class="publishing-rights"><span class="glyphicon glyphicon-certificate"></span> <%= @sheet.rights %></strong>
+    <% end %>
     <p><%= @sheet.description.present? ? @sheet.description : 'No description.'%></p>
-    <em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em>
+    <p><em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em></p>
   </div>
 </div>
