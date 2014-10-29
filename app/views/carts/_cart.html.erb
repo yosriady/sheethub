@@ -15,7 +15,7 @@
         <li><a id="paypal-checkout-btn" href="<%= carts_paypal_checkout_path %>" data-no-turbolink='true'><span class="glyphicon glyphicon-shopping-cart"></span> Checkout with Paypal</a></li>
     <% end %>
     <% if @cart.nil? %>
-      <li><span class="glyphicon glyphicon-eye-close"></span> Sign in to add items to cart!</li>
+      <li><p class="empty-cart-message"><span class="glyphicon glyphicon-eye-close"></span> Sign in to add items to cart!</p></li>
     <% end %>
   </ul>
 
