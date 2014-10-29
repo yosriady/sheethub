@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   EXPIRATION_TIME = 600
 
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
+  validates_acceptance_of :terms, acceptance: true
   has_many :sheets, dependent: :destroy
   has_one :cart
   acts_as_voter

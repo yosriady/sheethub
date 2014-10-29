@@ -40,3 +40,16 @@ input[type="submit"] {
     }
 
 }
+
+#form-terms {
+    padding: 10px;
+
+    input[type="checkbox"], p {
+        float: left
+    }
+
+    input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+}
