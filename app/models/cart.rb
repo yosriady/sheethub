@@ -22,7 +22,7 @@ class Cart < ActiveRecord::Base
   end
 
   def clear_token
-    paypal_token = nil
+    token = nil
   end
 
   def clear_orders
