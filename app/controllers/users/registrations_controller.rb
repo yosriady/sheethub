@@ -25,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sales
-    @all_sales = current_user.all_sales
+    @published_sheets = current_user.sheets
     @sales_past_month = current_user.sales_past_month
   end
 
@@ -80,7 +80,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def registration_params
-      params[:user].permit(:username, :finished_registration?, :tagline, :website, :bio, :avatar)
+      params[:user].permit(:username, :finished_registration?, :tagline, :website, :bio, :avatar, :terms)
     end
 
     def ensure_registration_finished

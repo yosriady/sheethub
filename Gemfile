@@ -19,6 +19,10 @@ gem 'activeadmin', github: 'activeadmin'
 # Payments
 gem 'paypal-express'
 
+# Charts
+gem 'groupdate'
+gem 'chartkick'
+
 # Soft Deletion
 gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
 

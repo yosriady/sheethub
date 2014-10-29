@@ -7,7 +7,7 @@
       <div class="row">
       <div class="col-xs-3 profile-info">
             <div class="well">
-                <h4><span class="glyphicon glyphicon-user"></span> <%= "#{@user.username} (#{@user.full_name })" %></h4>
+                <h4><span class="glyphicon glyphicon-user"></span> <%= "#{@user.username}" %></h4>
                 <em>Member since <%= distance_of_time_in_words(Time.now, @user.created_at) %> ago</em>
                 <p><%= @user.bio %></p>
 

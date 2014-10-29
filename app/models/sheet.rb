@@ -19,7 +19,6 @@ class Sheet < ActiveRecord::Base
   friendly_id :sheet_slug, :use => :slugged
   validates :title, presence: true
   has_many :flags, :dependent => :destroy
-  default_scope { order(created_at: :desc) } # sort by most recent
 
   scope :is_public, -> { where(is_public: true) }
   scope :is_private, -> { where(is_public: false) }

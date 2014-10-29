@@ -1,12 +1,13 @@
 <div class="tab-pane active" id="sales-by-date">
   <% if @sales_past_month.any? %>
+    <%= line_chart @sales_past_month.group_by_day(:purchased_at).count %>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Purchase date</th>
           <th>Sheet</th>
           <th>Buyer</th>
-          <th>Earning <a href="<%= faq_path %>#earnings-calculation"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+          <th>Estimated Earning <a href="<%= faq_path %>#earnings-calculation"><span class="glyphicon glyphicon-question-sign"></span></a></th>
         </tr>
       </thead>
       <tbody>

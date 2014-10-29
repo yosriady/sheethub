@@ -1,21 +1,20 @@
 <div class="tab-pane" id="sales-by-title">
-  <% if @all_sales.any? %>
+  <% if @published_sheets.any? %>
+    <%= pie_chart @published_sheets.group(:title).count %>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Sheet</th>
-          <th>Earning</th>
-          <th>Quantity Sold</th>
-          <th>Total Earnings <a href="<%= faq_path %>#earnings-calculation"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+          <th>Total Orders</th>
+          <th>Estimated Total Earnings <a href="<%= faq_path %>#earnings-calculation"><span class="glyphicon glyphicon-question-sign"></span></a></th>
         </tr>
       </thead>
       <tbody>
-          <% @all_sales.each do |order| %>
+          <% @published_sheets.each do |sheet| %>
             <tr>
-              <td><%= link_to order.sheet.title, sheet_path(order.sheet) %></td>
-              <td><%= number_to_currency(order.sheet.royalty) %></td>
-              <td><%= order.sheet.total_sold %></td>
-              <td><%= number_to_currency(order.sheet.total_royalties) %></td>
+              <td><%= link_to sheet.title, sheet_path(sheet) %></td>
+              <td><%= sheet.total_sold %></td>
+              <td><%= number_to_currency(sheet.total_royalties) %></td>
             </tr>
           <% end %>
       </tbody>
