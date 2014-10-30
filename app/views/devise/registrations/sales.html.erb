@@ -10,16 +10,47 @@
           <p class="bg-info"><a href="<%= user_withdraw_earnings_path %>" class="btn btn-primary"><span class="glyphicon glyphicon-calendar"></span> Request Early Payout</a>Your next scheduled payout of earnings since <%= current_user.last_payout_date.strftime("%A, %d %b %Y %l:%M %p") %> totaling <strong><%= number_to_currency(current_user.unclaimed_earnings_amount) %></strong> will be on <strong><%= Time.now.utc.end_of_month.strftime("%A, %d %b %Y %l:%M %p") %>.</strong> <a href="<%= faq_path %>#payout-dates"><span class="glyphicon glyphicon-question-sign"></span></a>
           </p>
         </div>
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs nav-justified" role="tablist">
-          <li class="active"><a href="#sales-by-date" role="tab" data-toggle="tab"> Sales By Date</a></li>
-          <li><a href="#sales-by-title" role="tab" data-toggle="tab"> Sales By Title</a></li>
-        </ul>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <%= render 'sales_by_date_tab_content' %>
-          <%= render 'sales_by_title_tab_content' %>
-        </div>
+  <div class="panel panel-info">
+    <div class="panel-heading"><span class="glyphicon glyphicon-stats"></span> Sales By Title (in USD)</div>
+    <div class="panel-body">
+      <%= pie_chart(@aggregated_sales) if @aggregated_sales.present? %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading"><span class="glyphicon glyphicon-stats"></span> Sales Quantity By Date</div>
+    <div class="panel-body">
+      <%= line_chart @sales_past_month.group_by_day(:purchased_at).count if @sales_past_month.present? %>
+    </div>
+  </div>
+
+  <% if @sales_past_month.any? %>
+    <table class="table table-striped">
+      <thead class="bg-info">
+        <tr>
+          <th><span class="glyphicon glyphicon-calendar"></span> Sale date</th>
+          <th><span class="glyphicon glyphicon-music"></span> Sheet</th>
+          <th><span class="glyphicon glyphicon-user"></span> Buyer</th>
+          <th><span class="glyphicon glyphicon-usd"></span> Estimated Earning <a href="<%= faq_path %>#earnings-calculation"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @sales_past_month.each do |order| %>
+            <tr>
+              <td><%= order.purchased_at.strftime("%A, %d %b %Y %l:%M %p") %></td>
+              <td><%= link_to order.sheet.title, sheet_path(order.sheet) %></td>
+              <td><%= link_to order.user.username, user_profile_path(order.user.username) %></td>
+              <td><%= number_to_currency(order.sheet.royalty) %></td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+    <h2>You have no sales yet.</h2>
+  <% end %>
+  <h4>Promote your sheets through the Share buttons to sell and earn more.</h4>
+
       </div>
   </div>

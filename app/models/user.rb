@@ -57,8 +57,20 @@ class User < ActiveRecord::Base
     # last_payout_date = Time.now.utc
   end
 
+  def sales
+    Order.where(sheet_id: sheets.ids)
+  end
+
+  def aggregated_sales
+    result = {}
+    sheets.each do |sheet|
+      result[sheet.title] = sheet.total_sales
+    end
+    return result
+  end
+
   def sales_past_month
-    Order.where(sheet_id: sheets.ids).where("purchased_at >= ?", 1.month.ago.utc)
+    sales.where("purchased_at >= ?", 1.month.ago.utc)
   end
 
   def purchased_sheet_ids

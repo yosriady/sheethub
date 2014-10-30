@@ -29,7 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sales
-    @published_sheets = current_user.sheets
+    @aggregated_sales = current_user.aggregated_sales
     @sales_past_month = current_user.sales_past_month
   end
 
