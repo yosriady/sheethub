@@ -2,9 +2,13 @@ class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
   MISSING_AVATAR_URL = "/images/missing.png"
   EXPIRATION_TIME = 600
+  FREE_QUANTITY_OF_SHEETS = 30
+  PREMIUM_QUANTITY_OF_SHEETS = 30
 
+  enum membership_type: %w{ free premium }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   validates_acceptance_of :terms, acceptance: true
+  validate :validate_number_of_uploaded_sheets
   has_many :sheets, dependent: :destroy
   has_one :cart
   acts_as_voter
@@ -95,4 +99,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  private
+    def validate_number_of_uploaded_sheets
+      errors.add(:sheets, "You have exceeded the number of sheets you can upload. Free users have 30, Premium can have up to 250. Upgrade your membership to continue publishing on SheetHub. ") if sheets.size > membership_sheet_quantity
+    end
+
+    def membership_sheet_quantity
+      free? ? FREE_QUANTITY_OF_SHEETS : PREMIUM_QUANTITY_OF_SHEETS
+    end
 end
