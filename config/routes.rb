@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get 'sales' => "users/registrations#sales", :as => :user_sales
     get 'purchases' => "users/registrations#purchases", :as => :user_purchases
     get 'trash' => "users/registrations#trash", :as => :user_trash
-    get 'request_payout' => "users/registrations#request_payout", :as => :user_request_payout
+    get 'withdraw_earnings' => "users/registrations#withdraw_earnings", :as => :user_withdraw_earnings
   end
 
   resources :sheets do

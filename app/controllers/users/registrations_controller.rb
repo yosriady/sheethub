@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def request_payout
+  def withdraw_earnings
     binding.pry
   end
 
