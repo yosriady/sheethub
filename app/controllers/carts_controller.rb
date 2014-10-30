@@ -18,6 +18,15 @@ class CartsController < ApplicationController
     redirect_to :back, notice: SUCCESS_CART_REMOVE_MESSAGE
   end
 
+  def checkout
+    # TODO: View to Finalize changes before redirect
+    # Render orders & total
+    # Unlimited access
+    # Add credibility icons
+    # What's next? blurb
+    # In this view, have a paypal checkout button with id="paypal-checkout-btn" and data-no-turbolink='true' for redirect
+  end
+
   def paypal_checkout
     payment_request = build_payment_request(@cart)
     response = paypal_request.setup(

@@ -1,11 +1,11 @@
+<% unless sheet.joined_tags.empty? || sheet.related_tags.blank? %>
 <div id="related">
-    <% unless @sheet.joined_tags.empty? || @sheet.related_tags.blank? %>
     <div id="related-tags">
         <h1><span class="glyphicon glyphicon-tags"></span> You might also like...</h1>
-        <%= render 'tags', tags: @sheet.related_tags %>
+        <%= render 'sheets/tags', tags: sheet.related_tags %>
     </div>
     <div id="related-sheets">
-        <% for sheet in @sheet.related_sheets %>
+        <% for sheet in sheet.related_sheets %>
             <a href="<%= sheet_path(sheet) %>">
             <div class="related-sheet">
                 <em><%= sheet.instruments.join(", ") %></em>
@@ -18,9 +18,5 @@
             </a>
         <% end %>
     </div>
-    <% else %>
-        <h1 class="text-center"><span class="glyphicon glyphicon-eye-close"></span></h1>
-        <h1 class="text-center">Sorry, we couldn't find anything similar to this piece.</h1>
-        <h1 class="text-center">Adding tags helps improve related results.</h1>
-    <% end %>
 </div>
+<% end %>

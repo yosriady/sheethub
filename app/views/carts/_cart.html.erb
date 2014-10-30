@@ -2,33 +2,15 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout <span class="badge"><%= @cart ? @cart.orders.size : 0%></span></a>
 
   <ul id="cart" class="dropdown-menu" role="menu">
-    <% if @cart && @cart.orders.each do |order| %>
-      <li><div class="cart-item">
-        <a href="<%= sheet_path(order.sheet) %>"><%= order.sheet.title %></a>
-        <%= link_to "", carts_remove_path(:sheet_id => order.sheet.id), :method => :post, class: "cart-remove-item glyphicon glyphicon-remove" %>
-        <p><%= "$#{order.sheet.price}" %></p>
-      </div></li>
-    <% end.empty? %>
-        <li><p class="empty-cart-message"><span class="glyphicon glyphicon-eye-close"></span> Your cart is empty. Use the search bar to help you find the perfect sheet music to play. </p></li>
-    <% end %>
+    <%= render 'carts/cart_items', orders: @cart.orders %>
+
     <% if @cart && @cart.orders.present? %>
-        <li><a id="paypal-checkout-btn" href="<%= carts_paypal_checkout_path %>" data-no-turbolink='true'><span class="glyphicon glyphicon-shopping-cart"></span> Checkout with Paypal</a></li>
-    <% end %>
-    <% if @cart.nil? %>
+        <li><a href="<%= carts_checkout_path %>"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout</a></li>
+    <% elsif @cart.nil? %>
       <li><p class="empty-cart-message"><span class="glyphicon glyphicon-eye-close"></span> Sign in to add items to cart!</p></li>
     <% end %>
   </ul>
 
 </li>
 
-<div id="paypalProgressModal" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="flagModal" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-        <%= image_tag "loading.gif", class: "center-block" %>
-        <!-- <h1 class="text-center"><span class="glyphicon glyphicon-time"></span></h1> -->
-        <p>Please wait while we redirect you to Paypal.</p>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'carts/paypal_progress_modal' %>

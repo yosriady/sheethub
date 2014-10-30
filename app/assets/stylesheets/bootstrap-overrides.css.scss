@@ -26,8 +26,8 @@ body {
     padding-bottom: 20px;
 }
 
-.sheets-container {
-    min-height: 380px;
+.container {
+    min-height: 360px;
 }
 
 // Bootstrap overrides
@@ -70,4 +70,9 @@ body {
 
 .well {
     border-color: #eeeff2;
+}
+
+.bg-info, .bg-primary {
+    padding: 10px;
+    border-radius: 4px;
 }

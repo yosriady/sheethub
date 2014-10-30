@@ -3,10 +3,10 @@
 <% if current_user %>
   <%= render 'profile_banner', user:current_user %>
 
-  <div class="container sheets-container">
+  <div class="container">
     <div class="row">
     <div class="col-xs-12">
-        <h2>Your Purchases</h2>
+        <h3>Your Purchases</h3>
         <%= render 'purchased_sheets_tab_content' %>
     </div>
   </div>
