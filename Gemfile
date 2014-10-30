@@ -18,6 +18,7 @@ gem 'activeadmin', github: 'activeadmin'
 
 # Payments
 gem 'paypal-express'
+gem 'paypal-sdk-adaptivepayments'
 
 # Charts
 gem 'groupdate'

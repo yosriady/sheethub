@@ -6,7 +6,10 @@
     <div class="row">
       <div class="col-xs-12">
         <h3>Your Sales</h3>
-
+        <div id="payout-info">
+          <p class="bg-info"><a href="<%= user_request_payout_path %>" class="btn btn-primary"><span class="glyphicon glyphicon-calendar"></span> Request Early Payout</a>Your next scheduled payout of earnings since <%= current_user.last_payout_date.strftime("%A, %d %b %Y %l:%M %p") %> totaling <strong>$<%= current_user.unclaimed_payout_amount %></strong> will be on <strong><%= Time.now.utc.end_of_month.strftime("%A, %d %b %Y %l:%M %p") %>.</strong> <a href="<%= faq_path %>#payout-dates"><span class="glyphicon glyphicon-question-sign"></span></a>
+          </p>
+        </div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified" role="tablist">
           <li class="active"><a href="#sales-by-date" role="tab" data-toggle="tab"> Sales By Date</a></li>

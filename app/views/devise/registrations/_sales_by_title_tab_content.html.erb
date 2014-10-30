@@ -1,6 +1,5 @@
 <div class="tab-pane" id="sales-by-title">
   <% if @published_sheets.any? %>
-    <%= pie_chart @published_sheets.group(:title).count %>
     <table class="table table-striped">
       <thead>
         <tr>

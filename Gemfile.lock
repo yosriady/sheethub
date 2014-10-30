@@ -232,6 +232,11 @@ GEM
       activesupport (>= 2.3)
       attr_required (>= 0.0.5)
       restclient_with_cert
+    paypal-sdk-adaptivepayments (1.117.0)
+      paypal-sdk-core (~> 0.3.0)
+    paypal-sdk-core (0.3.1)
+      multi_json (~> 1.0)
+      xml-simple
     pg (0.17.1)
     phashion (1.1.1)
     polyamorous (1.1.0)
@@ -378,6 +383,7 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.3)
       rack (>= 1.0)
+    xml-simple (1.1.4)
 
 PLATFORMS
   ruby
@@ -413,6 +419,7 @@ DEPENDENCIES
   paperclip
   paranoia!
   paypal-express
+  paypal-sdk-adaptivepayments
   pg
   phashion
   pry-rails

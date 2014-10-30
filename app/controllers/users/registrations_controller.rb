@@ -20,6 +20,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def request_payout
+    binding.pry
+  end
+
   def purchases
     @purchases = current_user.purchased_sheets
   end

@@ -38,6 +38,25 @@ class User < ActiveRecord::Base
     Sheet.find(purchased_sheet_ids)
   end
 
+  def unclaimed_sales
+    Order.where(sheet_id: sheets.ids).where("purchased_at <= ?", last_payout_date.utc)
+  end
+
+  def unclaimed_payout_amount
+    payout_total = unclaimed_sales.inject(0) {|total, order| total + order.sheet.royalty}
+    return payout_total.round(1)
+  end
+
+  def request_payout
+    payout_total = unclaimed_payout_amount
+    api = PayPal::SDK::AdaptivePayments.new
+
+    # TODO: Do payment transfer here
+    # https://github.com/paypal/adaptivepayments-sdk-ruby#example
+    binding.pry
+    # last_payout_date = Time.now.utc
+  end
+
   def sales_past_month
     Order.where(sheet_id: sheets.ids).where("purchased_at >= ?", 1.month.ago.utc)
   end

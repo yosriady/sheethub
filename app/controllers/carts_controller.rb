@@ -19,12 +19,6 @@ class CartsController < ApplicationController
   end
 
   def checkout
-    # TODO: View to Finalize changes before redirect
-    # Render orders & total
-    # Unlimited access
-    # Add credibility icons
-    # What's next? blurb
-    # In this view, have a paypal checkout button with id="paypal-checkout-btn" and data-no-turbolink='true' for redirect
   end
 
   def paypal_checkout
@@ -95,9 +89,9 @@ class CartsController < ApplicationController
 
     def paypal_request
       Paypal::Express::Request.new(
-        :username   => "yosriady-facilitator_api1.gmail.com",
-        :password   => "H739SP4UDQSHEGAW",
-        :signature  => "A6AFKLF9K9Odzd81iNIOAJrlric4AKKVz.DGUTuNFWqyRFUGYkyp5-Ya"
+        :username   => PAYPAL_USERNAME,
+        :password   => PAYPAL_PASSWORD,
+        :signature  => PAYPAL_SIGNATURE
       )
     end
 end
