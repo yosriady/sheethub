@@ -78,15 +78,15 @@ class Sheet < ActiveRecord::Base
   end
 
   def total_sales
-    total_sold * price
+    completed_orders.size * price
   end
 
-  def total_sold
-    Order.where(sheet_id: id).size
+  def completed_orders
+    Order.where(sheet_id: id, status: "completed")
   end
 
   def total_royalties
-    Order.where(sheet_id: id).size * royalty
+    completed_orders.size * royalty
   end
 
   def price
