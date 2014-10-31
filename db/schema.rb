@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031113310) do
+ActiveRecord::Schema.define(version: 20141031114936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 20141031113310) do
     t.datetime "confirmation_sent_at"
     t.integer  "membership_type",        default: 0,                     null: false
     t.datetime "last_payout_date",       default: '2014-10-30 12:57:40', null: false
+    t.string   "paypal_email"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

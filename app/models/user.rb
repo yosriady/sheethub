@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   enum membership_type: %w{ free premium }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   validates_acceptance_of :terms, acceptance: true
+  validates_email_format_of :email, message: 'You have an invalid email address'
+  validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   validate :validate_number_of_uploaded_sheets
   has_many :sheets, dependent: :destroy
   has_one :cart
@@ -45,6 +47,10 @@ class User < ActiveRecord::Base
   def unclaimed_earnings_amount
     earnings_total = unclaimed_sales.inject(0) {|total, order| total + order.sheet.royalty}
     return earnings_total.round(1)
+  end
+
+  def has_paypal_email?
+    paypal_email.present?
   end
 
   def withdraw_earnings

@@ -24,6 +24,9 @@ gem 'paypal-sdk-adaptivepayments'
 gem 'groupdate'
 gem 'chartkick'
 
+# Model Validations
+gem 'validates_email_format_of'
+
 # Soft Deletion
 gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
 
