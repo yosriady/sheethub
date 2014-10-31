@@ -81,12 +81,12 @@ class Sheet < ActiveRecord::Base
     completed_orders.size * price
   end
 
-  def completed_orders
-    Order.where(sheet_id: id, status: "completed")
-  end
-
   def total_royalties
     completed_orders.size * royalty
+  end
+
+  def completed_orders
+    Order.where(sheet_id: id, status: "completed")
   end
 
   def price

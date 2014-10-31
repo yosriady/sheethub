@@ -1,9 +1,4 @@
-<div class="panel panel-info">
-  <div class="panel-heading"><span class="glyphicon glyphicon-tags"></span> Tags</div>
-  <div class="panel-body">
-    <%= render 'sheet_instruments', instruments: sheet.instruments if sheet.instruments.present? %>
-    <%= render 'tags', tags: sheet.genres if sheet.genres.any? %>
-    <%= render 'tags', tags: sheet.composers if sheet.composers.any? %>
-    <%= render 'tags', tags: sheet.sources if sheet.sources.any? %>
-  </div>
-</div>
+<%= render 'sheet_instruments', instruments: sheet.instruments if sheet.instruments.present? %>
+<%= render 'tags', tags: sheet.genres if sheet.genres.any? %>
+<%= render 'tags', tags: sheet.composers if sheet.composers.any? %>
+<%= render 'tags', tags: sheet.sources if sheet.sources.any? %>

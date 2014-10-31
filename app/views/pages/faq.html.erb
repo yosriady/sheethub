@@ -5,40 +5,33 @@
 </div>
 <div class="container">
 <div class="col-xs-9">
-<h4 id="earnings-calculation">How are earnings calculated?</h4>
-<p>TODO</p>
 
-<h4 id="paypal-transfer">What do you need my Paypal Email for?</h4>
-<p>We need it to send in your sales earnings at the end of every month. </p>
+<div class="panel-group" role="tablist" aria-multiselectable="true">
+  <h4><span class="glyphicon glyphicon-stats"></span> Sales and Earnings</h4>
+  <%= render "faq_item", id:"earnings-calculation", question: "How are earnings calculated?", answer: "TODO"%>
+  <%= render "faq_item", id:"paypal-transfer", question: "What do you need my Paypal Email for?", answer: "We need it to send in your sales earnings at the end of every month."%>
+  <%= render "faq_item", id:"payout-dates", question: "When do I get my sales earnings? What are payout dates?", answer: "Your earnings are paid out automatically at <strong>the end of every month</strong> to your Paypal account. You can request an early payout to immediately send in sales made since the last payout date to your account. Do note however, that <em>each</em> payout request is subject to Paypal transaction fees, and requesting early payouts can lower your overall earnings. If you can, we recommend waiting for your monthly scheduled payments to maximize your earnings."%>
+  <%= render "faq_item", id:"earnings-payout-date", question: "When are earnings paid?", answer: "Earnings are paid within 30 days after the end of each month, with a $20 minimum for payment. Please note that all earnings will be earned, calculated, and paid out in US Dollars."%>
 
-<h4 id="payout-dates">When do I get my sales earnings? What are payout dates?</h4>
-<p>Your earnings are paid out automatically at <strong>the end of every month</strong> to your Paypal account. You can request an early payout to immediately send in sales made since the last payout date to your account. Do note however, that <em>each</em> payout request is subject to Paypal transaction fees, and requesting early payouts can lower your overall earnings. If you can, we recommend waiting for your monthly scheduled payments to maximize your earnings. </p>
+  <hr>
 
-<h4 id="arrangements">Can I submit an arrangement of public domain sheet music?</h4>
-<p>Yes, you may submit an arrangement of public domain sheet music as long as you have added additional value that is not currently represented on SheetHub. This includes an unusual instrumentation, a level-specific arrangement or an arrangement in a style that is different than the original. </p>
-
-<h4 id="publishing-rights">Do I need to have publishing rights to the sheet music?</h4>
-<p>Yes, we take publishing rights and copyright laws very seriously. You will be asked, as part of your sheet music submission, to validate what type of rights you currently have:</p>
+  <h4><span class="glyphicon glyphicon-book"></span> Publishing Rights and Copyright</h4>
+  <%= render "faq_item", id:"arrangements", question: "Can I submit an arrangement of public domain sheet music?", answer: "Yes, you may submit an arrangement of public domain sheet music as long as you have added additional value that is not currently represented on SheetHub. This includes an unusual instrumentation, a level-specific arrangement or an arrangement in a style that is different than the original."%>
+  <%= render "faq_item", id:"publishing-rights", question: "Do I need to have publishing rights to the sheet music?", answer: "<p>Yes, we take publishing rights and copyright laws very seriously. You will be asked, as part of your sheet music submission, to validate what type of rights you currently have:</p>
 <ul>
 <li>Original composition - the sheet music is entirely your own</li>
 <li>Publishing and distribution rights acquired - you have worked with a publisher or copyright holder and received approval to sell the sheet music on a worldwide basis</li>
 <li>Unique version of a public domain sheet music - you have arranged a public domain work in a unique way that differentiates it from products currently available for sale on SheetHub.</li>
-</ul>
-
-<h4 id="earnings-payout-date">When are earnings paid?</h4>
-<p>Earnings are paid within 30 days after the end of each month, with a $20 minimum for payment. Please note that all earnings will be earned, calculated, and paid out in US Dollars.</p>
-
-<h4 id="infringement-flagging"> How do I let SheetHub know about a potential copyright infringement?</h4>
-<p>Send a message with all of the details and proof of copyright ownership and examples of the potential infringement via the “Report” button on the infringing sheet page.</p>
+</ul>"%>
+  <%= render "faq_item", id:"infringement-flagging", question: "How do I let SheetHub know about a potential copyright infringement?", answer: "Send a message with all of the details and proof of copyright ownership and examples of the potential infringement via the “Report” button on the infringing sheet page"%>
+</div>
 
 </div>
-<div class="col-xs-3 well">
-    <a href="#earnings-calculation"><p>How are earnings calculated?</p></a>
-    <a href="#arrangements"><p>Can I submit an arrangement of public domain sheet music?</p></a>
-    <a href="publishing-rights"><p>Do I need to have publishing rights to the sheet music?</p></a>
-    <a href="earnings-payout-date"><p>When are earnings paid?</p></a>
-    <a href="infringement-flagging"><p>How do I let SheetHub know about a potential copyright infringement?</p></a>
-    <a href="paypal-transfer"><p><What do you need my Paypal Email for?</p><</a>
+<div class="col-xs-3">
+    <h3>Have more questions?</h3>
+    <div class="well">
+        <a href="mailto:yosriady@gmail.com" class="btn btn-block btn-lg btn-default"><span class="glyphicon glyphicon-send"></span> Contact Us</a>
+    </div>
 </div>
 
 </div>

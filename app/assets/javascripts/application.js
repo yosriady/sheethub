@@ -16,6 +16,7 @@
 //= require s3_direct_upload
 //= require s3-uploader
 //= require bootstrap
+//= require tooltips
 //= require jquery_ujs
 //= require selectize
 //= require selectize-script

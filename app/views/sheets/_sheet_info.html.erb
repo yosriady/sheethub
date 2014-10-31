@@ -6,4 +6,10 @@
     <p><%= @sheet.description.present? ? @sheet.description : 'No description.'%></p>
     <p><em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em></p>
   </div>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <%= render 'sheet_tags', sheet:@sheet %>
+        </li>
+    </ul>
 </div>

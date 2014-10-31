@@ -1,7 +1,7 @@
 <% unless sheet.joined_tags.empty? || sheet.related_tags.blank? %>
 <div id="related">
     <div id="related-tags">
-        <h1><span class="glyphicon glyphicon-tags"></span> You might also like...</h1>
+        <h1><span class="glyphicon glyphicon-heart-empty"></span> Recommended for you</h1>
         <%= render 'sheets/tags', tags: sheet.related_tags %>
     </div>
     <div id="related-sheets">
