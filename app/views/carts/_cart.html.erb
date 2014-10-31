@@ -2,7 +2,7 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout <span class="badge"><%= @cart ? @cart.orders.size : 0%></span></a>
 
   <ul id="cart" class="dropdown-menu" role="menu">
-    <%= render 'carts/cart_items', orders: @cart.orders %>
+    <%= render 'carts/cart_items', orders: @cart.orders if @cart %>
 
     <% if @cart && @cart.orders.present? %>
         <li><a href="<%= carts_checkout_path %>"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout</a></li>

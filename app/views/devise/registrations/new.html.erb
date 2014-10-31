@@ -3,6 +3,8 @@
     <h2>Sign up</h2>
 
     <div class="col-lg-4 col-lg-offset-4">
+        <%= render "devise/shared/omniauth_links" %>
+        <hr>
 
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), defaults: { input_html: { class: 'form-control' }}) do |f| %>
         <%= f.error_notification %>
@@ -14,8 +16,8 @@
         </div>
 
         <div class="form-actions">
-            <%= f.button :submit, "Sign up", class:"btn btn btn-success btn-lg btn-wide" %>
-            <%= link_to "Sign in", new_session_path(resource_name), class:"btn btn btn-default btn-lg btn-wide" %>
+            <%= f.button :submit, "Sign up", class:"btn btn btn-success btn-wide" %>
+            <%= link_to "Sign in", new_session_path(resource_name), class:"btn btn btn-default btn-wide" %>
         </div>
         <% end %>
 

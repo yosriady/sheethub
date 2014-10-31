@@ -15,8 +15,10 @@
  *= require nprogress
  *= require nprogress-bootstrap
  *= require s3_direct_upload_progress_bars
+ *= require font-awesome
  *= require_self
  *= require_tree .
+ *= require bootstrap-social
  */
 
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);

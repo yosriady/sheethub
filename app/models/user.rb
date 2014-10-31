@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
   MISSING_AVATAR_URL = "/images/missing.png"
   EXPIRATION_TIME = 600
-  FREE_QUANTITY_OF_SHEETS = 30
-  PREMIUM_QUANTITY_OF_SHEETS = 30
+  FREE_QUANTITY_OF_SHEETS = 150
+  PREMIUM_QUANTITY_OF_SHEETS = 500
 
   enum membership_type: %w{ free premium }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?

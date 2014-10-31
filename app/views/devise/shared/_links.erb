@@ -5,10 +5,3 @@
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end -%>
-
-<h2> Or, you can sign in with: </h2>
-
-<%- if devise_mapping.omniauthable? %>
-    <%= link_to "Facebook", omniauth_authorize_path(resource_name, "facebook"), class:"btn btn btn-default btn-lg btn-wide sign-in-facebook" %>
-    <%= link_to "Google", omniauth_authorize_path(resource_name, "google_oauth2"), class:"btn btn btn-default btn-lg btn-wide sign-in-google_oauth2" %>
-<% end -%>

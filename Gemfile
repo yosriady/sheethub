@@ -58,6 +58,7 @@ gem 'selectize-rails'
 
 # Frontend
 gem 'bootstrap-sass', '~> 3.1.1'
+gem 'font-awesome-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
