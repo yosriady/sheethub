@@ -1,0 +1,18 @@
+<div id="sales-stats" class="row">
+  <div class="col-xs-3">
+    <h1 class="text-center"><%= @aggregated_sales.size%></h1>
+    <p class="text-center">sales</p>
+  </div>
+  <div class="col-xs-3">
+    <h1 class="text-center"><%= number_to_currency(current_user.aggregated_earnings) %></h1>
+    <p class="text-center">estimated profit</p>
+  </div>
+  <div class="col-xs-3">
+    <h1 class="text-center"><%= @sales_past_month.size %></h1>
+    <p class="text-center">sales past month</p>
+  </div>
+  <div class="col-xs-3">
+    <h1 class="text-center"><%= number_to_currency(current_user.earnings_past_month) %></h1>
+    <p class="text-center">profit past month</p>
+  </div>
+</div>

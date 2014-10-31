@@ -62,9 +62,9 @@ class Sheet < ActiveRecord::Base
     :message => INVALID_ASSETS_MESSAGE
 
   def rights
-    return "Original Work" if original?
+    return "Original" if original?
     return "With Publishing Rights" if rights?
-    return "Public Domain Work" if public_domain?
+    return "Public Domain" if public_domain?
   end
 
   def purchased_by?(user)
@@ -81,12 +81,12 @@ class Sheet < ActiveRecord::Base
     completed_orders.size * price
   end
 
-  def total_royalties
+  def total_earnings
     completed_orders.size * royalty
   end
 
   def completed_orders
-    Order.where(sheet_id: id, status: "completed")
+    Order.where(sheet_id: id, status: Order.statuses[:completed])
   end
 
   def price

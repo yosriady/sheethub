@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-xs-8">
             <h4>Thank You For Your Purchase</h4>
-            <p class="bg-primary">You now have <strong>Unlimited Access</strong> to the following sheets</p>
+            <p class="bg-primary"><span class="glyphicon glyphicon-thumbs-up"></span> You now have <strong>Unlimited Access</strong> to the following sheets</p>
             <div>
                 <% if @purchased_sheets.each do |sheet| %>
                     <%= render 'sheets/sheet', sheet: sheet %>

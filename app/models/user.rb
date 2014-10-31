@@ -64,13 +64,22 @@ class User < ActiveRecord::Base
   end
 
   def sales
-    Order.where(sheet_id: sheets.ids)
+    Order.where(sheet_id: sheets.ids, status: Order.statuses[:completed])
   end
 
   def aggregated_sales
     result = {}
     sheets.each do |sheet|
-      result[sheet.title] = sheet.total_sales
+      total_sales = sheet.total_sales
+      result[sheet.title] = total_sales if total_sales > 0
+    end
+    return result
+  end
+
+  def aggregated_earnings
+    result = 0
+    sheets.each do |sheet|
+      result += sheet.total_earnings
     end
     return result
   end
@@ -79,11 +88,19 @@ class User < ActiveRecord::Base
     sales.where("purchased_at >= ?", 1.month.ago.utc)
   end
 
-  def purchased_sheet_ids
-    completed_orders.collect{|o| o.sheet_id}
+  def earnings_past_month
+    result = 0
+    sales_past_month.each do |order|
+      result += order.sheet.royalty
+    end
+    return result
   end
 
-  def completed_orders
+  def purchased_sheet_ids
+    purchased_orders.collect{|o| o.sheet_id}
+  end
+
+  def purchased_orders
     Order.where(user_id: id, status: Order.statuses[:completed])
   end
 
