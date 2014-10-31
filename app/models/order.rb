@@ -3,6 +3,8 @@ class Order < ActiveRecord::Base
                        message: "Users cannot have multiple orders of the same Sheet." }
   validates :cart_id, absence: {if: "completed?", message: "Order cart_id must be cleared after purchase completion"}
   validates :cart_id, presence: {if: "processing?", message: "Order cart_id must exist while processing"}
+  validates :payer_id, presence: {if: "completed?"}
+  validates :payer_id, absence: {if: "processing?"}
 
   belongs_to :user
   belongs_to :sheet

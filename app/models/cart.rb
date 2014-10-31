@@ -17,8 +17,9 @@ class Cart < ActiveRecord::Base
     orders.where(sheet_id: sheet.id).destroy_all
   end
 
-  def complete_orders
-    orders.map{|o| o.update(status: Order.statuses[:completed], purchased_at: Time.now)}
+  def complete_orders(payer_id)
+    # TODO: need to validate if payer_id is nil?
+    orders.map{|o| o.update(status: Order.statuses[:completed], payer_id: payer_id, purchased_at: Time.now)}
   end
 
   def clear_token

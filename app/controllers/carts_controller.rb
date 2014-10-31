@@ -44,7 +44,7 @@ class CartsController < ApplicationController
       payment_request
     )
 
-    @cart.complete_orders
+    @cart.complete_orders(payer_id)
     @purchased_sheets = @cart.sheets
     @cart.clear_token
     @cart.clear_orders
