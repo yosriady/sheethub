@@ -1,8 +1,0 @@
-<div id="deleted-sheets">
-  <% if @deleted_sheets.any? %>
-    <%= render '/sheets/deleted_sheets', sheets: @deleted_sheets %>
-  <% else %>
-    <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
-    <h2>You have no deleted sheets.</h2>
-  <% end %>
-</div>

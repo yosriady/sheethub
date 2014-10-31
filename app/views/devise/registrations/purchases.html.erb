@@ -7,7 +7,18 @@
     <div class="row">
     <div class="col-xs-12">
         <h3>Your Purchases</h3>
-        <%= render 'purchased_sheets_tab_content' %>
+        <div id="purchased-sheets">
+          <% if @purchases.any? %>
+            <p class="bg-primary">Thank you for your purchase! Enjoy <strong>Unlimited Access</strong> and future updates forever.</p>
+            <%= render '/sheets/sheets', sheets: @purchases %>
+          <% else %>
+            <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+            <h2>You don't have any purchases yet.</h2>
+            <h4>Add sheets to your cart and check out to complete your purchase.</h4>
+            <h4>You can review and download your purchased sheets here.</h4>
+            <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Browse</a>
+          <% end %>
+        </div>
     </div>
   </div>
 <% else %>
