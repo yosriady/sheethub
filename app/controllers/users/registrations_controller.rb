@@ -25,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def purchases
-    @purchases = current_user.purchased_sheets
+    @purchases = current_user.purchased_orders.page(params[:page])
   end
 
   def sales

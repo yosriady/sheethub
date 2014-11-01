@@ -69,7 +69,7 @@ class Sheet < ActiveRecord::Base
 
   def purchased_by?(user)
     return false unless user
-    user.purchased_sheet_ids.include?(id)
+    return user.purchased?(id)
   end
 
   def uploaded_by?(usr)

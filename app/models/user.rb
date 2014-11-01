@@ -36,10 +36,6 @@ class User < ActiveRecord::Base
     sheets.where(is_public: false)
   end
 
-  def purchased_sheets
-    Sheet.find(purchased_sheet_ids)
-  end
-
   def unclaimed_sales
     Order.where(sheet_id: sheets.ids).where("purchased_at >= ?", last_payout_date.utc)
   end
@@ -96,12 +92,12 @@ class User < ActiveRecord::Base
     return result
   end
 
-  def purchased_sheet_ids
-    purchased_orders.collect{|o| o.sheet_id}
+  def purchased_orders
+    Order.includes(:sheet).where(user_id: id, status: Order.statuses[:completed])
   end
 
-  def purchased_orders
-    Order.where(user_id: id, status: Order.statuses[:completed])
+  def purchased?(sheet_id)
+    purchased_orders.where(sheet_id: sheet_id).present?
   end
 
   def deleted_sheets

@@ -8,7 +8,8 @@
         <div id="purchased-sheets">
           <% if @purchases.any? %>
             <p class="bg-primary"><span class="glyphicon glyphicon-thumbs-up"></span> Thank you for your purchase! Enjoy <strong>Unlimited Access</strong> and future updates forever.</p>
-            <%= render '/sheets/sheets', sheets: @purchases %>
+            <%= render 'orders', orders: @purchases %>
+            <%= paginate @purchases, remote: true %>
           <% else %>
             <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
             <h2>You have not purchased any sheets.</h2>
