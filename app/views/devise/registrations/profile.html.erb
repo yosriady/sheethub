@@ -5,21 +5,7 @@
 
   <div class="container">
       <div class="row">
-      <div class="col-xs-3 profile-info">
-            <div class="well">
-                <h4><span class="glyphicon glyphicon-user"></span> <%= "#{@user.username}" %></h4>
-                <em>Member since <%= distance_of_time_in_words(Time.now, @user.created_at) %> ago</em>
-                <p><%= @user.bio %></p>
-
-                <% if @user.website.present? %>
-                  <a href="<%= url_with_protocol(@user.website) %>" class="btn btn btn-block btn-default"><span class="glyphicon glyphicon-globe"></span> Website </a>
-                <% end %>
-
-                <a href="mailto:<%= @user.email %>" class="btn btn btn-block btn-default"><span class="glyphicon glyphicon-send"></span> Contact User</a>
-            </div>
-      </div>
-
-        <div class="col-xs-9">
+        <div class="col-xs-12">
 
           <!-- Nav tabs -->
           <ul class="nav nav-pills" role="tablist">

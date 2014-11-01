@@ -84,7 +84,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def registration_params
-      params[:user].permit(:username, :finished_registration?, :tagline, :website, :bio, :avatar, :terms, :paypal_email)
+      params[:user].permit(:username, :finished_registration?, :tagline, :website, :avatar, :terms, :paypal_email)
     end
 
     def ensure_registration_finished
