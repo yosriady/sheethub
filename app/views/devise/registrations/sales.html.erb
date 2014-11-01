@@ -44,6 +44,7 @@
               <td><%= number_to_currency(order.sheet.royalty) %></td>
             </tr>
           <% end %>
+          <%= paginate @sales_past_month, remote: true %>
       </tbody>
     </table>
   <% else %>

@@ -14,9 +14,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # TODO: refactor by using includes for better performance
     @user = User.includes(:sheets).find_by("lower(username) = ?", params[:username].downcase)
     if @user
-      @sheets = @user.public_sheets
+      @sheets = @user.public_sheets.page(params[:page])
       @likes = @user.find_voted_items
-      @private_sheets = @user.private_sheets if current_user == @user
+      @private_sheets = @user.private_sheets.page(params[:page]) if current_user == @user
     end
   end
 
@@ -30,11 +30,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def sales
     @aggregated_sales = current_user.aggregated_sales
-    @sales_past_month = current_user.sales_past_month
+    @sales_past_month = current_user.sales_past_month.page(params[:page])
   end
 
   def trash
-     @deleted_sheets = current_user.deleted_sheets
+     @deleted_sheets = current_user.deleted_sheets.page(params[:page])
   end
 
   # GET /resource/edit

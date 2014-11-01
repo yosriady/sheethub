@@ -2,6 +2,7 @@
 <div class="tab-pane" id="private-sheets">
   <% if @private_sheets.any? %>
     <%= render '/sheets/sheets', sheets: @private_sheets %>
+    <%= paginate @private_sheets, remote: true %>
   <% else %>
     <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
     <h2>You have no private sheets.</h2>
