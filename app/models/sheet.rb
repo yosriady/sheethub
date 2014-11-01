@@ -4,12 +4,12 @@ class Sheet < ActiveRecord::Base
   SORT_ORDERS = {"Most Recent"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
-  PRICE_VALUE_VALIDATION_MESSAGE = "Price must be between $1.99 - $999.99"
+  PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $1.99 - $999.99"
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
   INVALID_SORT_ORDERS_MESSAGE = "Sort Order not in #{Sheet::SORT_ORDERS.values}"
 
-  validates :price_cents, inclusion: { in: (0..99999),
-    message: PRICE_VALUE_VALIDATION_MESSAGE }
+
+  validate :validate_price
   belongs_to :user
   acts_as_votable
   acts_as_paranoid
@@ -214,6 +214,11 @@ class Sheet < ActiveRecord::Base
         output << "'#{tag}',"
       end
       return output[0..-2] # Strip trailing comma
+    end
+
+    def validate_price
+      valid_price = price_cents.zero? || price_cents.in?(199..99999)
+      errors.add(:price_cents, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
     end
 
 end
