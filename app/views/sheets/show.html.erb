@@ -25,6 +25,9 @@
             <%= image_tag("/assets/sheet.png", :class => "sample_sheet") %>
         <% end %>
 
+            <a href="<%= user_profile_path(@sheet.user.username) %>">
+                <button type="button" class="btn btn-block btn-default">See more from this user <span class="glyphicon glyphicon-arrow-right"></span></button>
+            </a>
             <%= render 'disqus' %>
         </div>
 
