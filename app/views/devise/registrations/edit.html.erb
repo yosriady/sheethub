@@ -2,18 +2,12 @@
 
 <div class="container">
     <div class="row">
-
-    <div class="col-xs-4 col-xs-offset-4">
       <h3>Settings</h3>
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }, defaults: { input_html: { class: 'form-control' }}) do |f| %>
         <%= f.error_notification %>
 
-        <div class="avatar-input">
-          <%= f.label :avatar %>
-          <%= image_tag resource.avatar_url %>
-          <%= f.file_field :avatar %>
-        </div>
+        <div class="col-xs-4">
 
         <div class="form-inputs">
           <%= f.input :first_name %>
@@ -23,14 +17,28 @@
 
           <%= f.label :paypal_email %> <a href="<%= faq_path %>#paypal-transfer"><span class="glyphicon glyphicon-question-sign"></span></a>
           <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Update", class: "btn btn-success btn-lg btn-block" %>
+          </div>
+          <%= link_to "Back to Profile", user_profile_path(current_user.username), class: "btn btn-default btn-block"%>
         </div>
 
-        <div class="form-actions">
-          <%= f.button :submit, "Update", class: "btn btn-success btn-lg btn-block" %>
         </div>
+
+          <div class="col-xs-4">
+            <div class="avatar-input well">
+              <%= f.label :avatar %>
+              <%= image_tag resource.avatar_url %>
+              <%= f.file_field :avatar %>
+            </div>
+          </div>
+
+       <!--    <div class="col-xs-4">
+            Email notification settings?
+
+          </div> -->
       <% end %>
-
-      <%= link_to "Back to Profile", user_profile_path(current_user.username), class: "btn btn-default btn-block"%>
     </div>
   </div>
 </div>

@@ -7,12 +7,6 @@ gem 'rails', '4.1.1'
 gem 'pg'
 gem 'unicorn-rails'
 
-# Task Queue
-# gem 'sidekiq'
-
-# Audio
-# gem 'soundmanager-rails'
-
 # Admin
 gem 'activeadmin', github: 'activeadmin'
 
@@ -74,10 +68,6 @@ gem 'mini_magick', '4.0.0.rc'
 
 # Perceptual Hash
 gem 'phashion'
-
-# API
-gem 'grape'
-gem 'grape-jbuilder'
 
 # Others
 gem 'friendly_id'

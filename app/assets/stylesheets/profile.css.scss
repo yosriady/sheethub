@@ -1,37 +1,32 @@
-#deleted-sheets h2 .glyphicon, #purchased-sheets h2 .glyphicon, .tab-pane h2 .glyphicon {
-    margin-top: 20px;
-}
-
-#deleted-sheets h2, #deleted-sheets h4, #purchased-sheets h2, #purchased-sheets h4, .tab-pane h2, .tab-pane h4 {
-    color: rgb(84, 86, 88);
-    text-align: center;
-}
 
 #banner.profile-banner {
     height: 150px;
+    padding-left: 5%;
 
     .profile-avatar {
         float: left;
         min-width: 100px;
         max-width: 100px;
-        border-radius: 100%;
+        border-radius: 12px;
+        margin-top: 10px;
     }
 
     .profile-bio {
         float: left;
         margin-top: 20px;
 
-        a, p, h1 {
+        p, h1 {
             margin: 0px;
             margin-left: 20px;
         }
 
-        p, h1 {
+        p, h1, a  {
             color: rgba(255, 255, 255, 0.9);
         }
 
         h1 {
-            font-size: 48px;
+            font-size: 36px;
+            font-weight: 600;
         }
 
         a {

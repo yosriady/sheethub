@@ -2,6 +2,7 @@
     <%= image_tag(user.avatar_url, class: "profile-avatar") %>
     <div class="profile-bio">
       <h1><%= user.username %></h1>
-      <p class="tagline"><%= user.tagline %></p>
+      <p><span class="glyphicon glyphicon-comment"></span> <%= user.tagline %></p>
+      <p><a href="<%= user.website %>"><span class="glyphicon glyphicon-link"></span> <%= user.website %></a></p>
     </div>
 </div>
