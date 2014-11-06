@@ -51,15 +51,6 @@ class User < ActiveRecord::Base
     sheets.where(is_public: false)
   end
 
-  def unclaimed_sales
-    Order.where(sheet_id: sheets.ids).where("purchased_at >= ?", last_payout_date.utc)
-  end
-
-  def unclaimed_earnings_amount
-    earnings_total = unclaimed_sales.inject(0) {|total, order| total + order.sheet.royalty}
-    return earnings_total.round(1)
-  end
-
   def has_paypal_email?
     paypal_email.present?
   end

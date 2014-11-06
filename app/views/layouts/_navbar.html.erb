@@ -13,22 +13,7 @@
         <%= render 'carts/cart' %>
 
       <% if user_signed_in? %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <%= current_user.username %></a>
-          <ul class="dropdown-menu" role="menu">
-
-          <% if current_user.finished_registration? %>
-            <li><a href="<%= user_profile_path(current_user.username) %>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-            <li><a href="<%= edit_user_registration_path %>"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-            <li><a href="<%= user_private_sheets_path %>"><span class="glyphicon glyphicon-eye-close"></span> Private Sheets</a></li>
-            <li><a href="<%= user_purchases_path %>"><span class="glyphicon glyphicon-shopping-cart"></span> Purchases</a></li>
-            <li><a href="<%= user_sales_path %>"><span class="glyphicon glyphicon-stats"></span> Sales</a></li>
-            <li><a href="<%= user_trash_path %>"><span class="glyphicon glyphicon-trash"></span> Trash</a></li>
-          <% end %>
-            <hr>
-            <li><%= link_to destroy_user_session_path, :method => :delete do %><span class="glyphicon glyphicon-off"></span> Logout<% end %></li>
-          </ul>
-        </li>
+        <%= render 'layouts/user_dropdown' %>
       <% else %>
         <li><a href="<%= new_user_session_path =%>"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
       <% end %>

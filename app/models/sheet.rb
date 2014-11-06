@@ -6,6 +6,7 @@ class Sheet < ActiveRecord::Base
   PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $1.99 - $999.99"
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
 
+  before_create :record_publisher
   validate :validate_price
   belongs_to :user
   acts_as_votable
@@ -204,4 +205,7 @@ class Sheet < ActiveRecord::Base
       errors.add(:price_cents, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
     end
 
+    def record_publisher
+      user.update_attribute(:has_published, true) unless user.has_published
+    end
 end

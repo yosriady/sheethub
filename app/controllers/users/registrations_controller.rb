@@ -3,7 +3,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
   before_action :set_user, :only => [:profile, :likes, :sheets]
-  before_action :ensure_registration_finished
+  before_action :validate_registration_finished
+  before_action :validate_has_published, :only => [:sales]
   before_action :authenticate_user!, :only => [:purchases, :sales, :trash, :private_music]
 
   # GET /user/:username
@@ -91,9 +92,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params[:user].permit(:username, :finished_registration?, :tagline, :website, :avatar, :terms, :paypal_email)
     end
 
-    def ensure_registration_finished
+    def validate_registration_finished
       if params[:action] == "finish_registration" && (!current_user || current_user.finished_registration?)
         redirect_to root_path
       end
+    end
+
+    def validate_has_published
+      redirect_to root_path, notice: "Sales is only available when you have a published sheet." unless current_user.has_published
     end
 end
