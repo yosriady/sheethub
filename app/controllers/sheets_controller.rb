@@ -27,12 +27,10 @@ class SheetsController < ApplicationController
   # GET /sheets.json
   def index
     @instruments = Sheet.values_for_instruments
-    @sheets = Sheet.is_public.includes(:user).sorted(params[:sort_order]).page(params[:page])
-
-    # TODO: These should be cached, only show the most popular ones every 24 hours?
-    @composers ||= Sheet.tags_on(:composers).limit(10)
-    @genres ||= Sheet.tags_on(:genres).limit(10)
-    @sources ||= Sheet.tags_on(:sources).limit(10)
+    @sheets = Sheet.is_public.includes(:user).page(params[:page])
+    @composers = Sheet.tags_on(:composers).limit(10)
+    @genres = Sheet.tags_on(:genres).limit(10)
+    @sources = Sheet.tags_on(:sources).limit(10)
   end
 
   # GET /search
@@ -103,6 +101,7 @@ class SheetsController < ApplicationController
         format.json { render :show, status: :created, location: @sheet }
       else
         format.html { render :new }
+        binding.pry
         flash[:error] = @sheet.errors.full_messages.to_sentence
         format.json { render json: @sheet.errors.full_messages.to_sentence, status: :unprocessable_entity }
       end

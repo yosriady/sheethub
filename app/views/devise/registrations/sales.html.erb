@@ -4,10 +4,7 @@
     <div class="row">
       <div class="col-xs-12">
         <h3>Your Sales</h3>
-<!--         <div id="payout-info">
-          <p class="bg-info"><a href="<%= user_withdraw_earnings_path %>" class="btn btn-primary"><span class="glyphicon glyphicon-calendar"></span> Request Early Payout</a>Your next scheduled payout since <%= current_user.last_payout_date.strftime("%A, %d %b %Y %l:%M %p") %> totaling <strong><%= number_to_currency(current_user.unclaimed_earnings_amount) %></strong> will be on <strong><%= Time.now.utc.end_of_month.strftime("%A, %d %b %Y %l:%M %p") %>.</strong> <a href="<%= faq_path %>#payout-dates"><span class="glyphicon glyphicon-question-sign"></span></a>
-          </p>
-        </div> -->
+        <p class="bg-primary"><span class="glyphicon glyphicon-share"></span> Promote your sheets through the Share buttons to sell and earn more.</p>
         <%= render "sales_stats" %>
 
   <div class="panel panel-info">
@@ -51,7 +48,5 @@
     <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
     <h2>You have no sales yet.</h2>
   <% end %>
-  <p class="bg-primary"><span class="glyphicon glyphicon-share"></span> Promote your sheets through the Share buttons to sell and earn more.</p>
-
       </div>
   </div>

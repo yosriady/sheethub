@@ -2,7 +2,7 @@
     <%= image_tag(user.avatar_url, class: "profile-avatar") %>
     <div class="profile-bio">
       <h1><%= user.username %></h1>
-      <p><span class="glyphicon glyphicon-comment"></span> <%= user.tagline %></p>
-      <p><a href="<%= user.website %>"><span class="glyphicon glyphicon-link"></span> <%= user.website %></a></p>
+      <% if user.tagline.present? %><p><span class="glyphicon glyphicon-comment"></span> <%= user.tagline %></p><% end %>
+      <% if user.website.present? %><p><a href="<%= url_with_protocol(user.website) %>" target="_blank"><span class="glyphicon glyphicon-link"></span> <%= user.website %></a></p><% end %>
     </div>
 </div>

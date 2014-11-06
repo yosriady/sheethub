@@ -5,7 +5,7 @@
     <div class="row">
     <div class="col-xs-12">
         <h3>Your Deleted Sheets</h3>
-        <p class="bg-danger"><span class="glyphicon glyphicon-trash"></span> Deleted sheets that remain here for more than 72 hours will be permanently deleted.</p>
+        <p class="bg-danger"><span class="glyphicon glyphicon-trash"></span> Here you can restore your deleted sheets at any time.</p>
         <div id="deleted-sheets">
           <% if @deleted_sheets.any? %>
             <%= render '/sheets/deleted_sheets', sheets: @deleted_sheets %>

@@ -1,12 +1,10 @@
 class Sheet < ActiveRecord::Base
   SHEET_HASH_SECRET = "sheethubhashsecret"
   PDF_DEFAULT_URL = "nil"
-  SORT_ORDERS = {"Most Recent"=>:latest, "Least Recent"=>:oldest, "Lowest Price"=>:lowest_price, "Highest Price"=>:highest_price}
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
   PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $1.99 - $999.99"
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
-  INVALID_SORT_ORDERS_MESSAGE = "Sort Order not in #{Sheet::SORT_ORDERS.values}"
 
   validate :validate_price
   belongs_to :user
@@ -49,8 +47,7 @@ class Sheet < ActiveRecord::Base
                     :default_url => PDF_DEFAULT_URL, #TODO: point to special Missing file route
                     :preserve_files => "true"
   validates_attachment_content_type :pdf,
-      :content_type => [ 'application/pdf' ],
-      :message => "Only pdf files are allowed"
+      :content_type => [ 'application/pdf' ]
   validates :pdf, presence: true
 
   has_many :assets, :dependent => :destroy
@@ -104,16 +101,6 @@ class Sheet < ActiveRecord::Base
       :title,
       [:title, user.username]
     ]
-  end
-
-  def self.sorted(sort_order)
-    if sort_order.nil?
-      self.send(:latest)
-    elsif SORT_ORDERS.values.include?(sort_order.to_sym)
-      self.send(sort_order)
-    else
-      raise INVALID_SORT_ORDERS_MESSAGE
-    end
   end
 
   # Perceptual Hash methods

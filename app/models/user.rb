@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   EXPIRATION_TIME = 600
   FREE_QUANTITY_OF_SHEETS = 150
   PREMIUM_QUANTITY_OF_SHEETS = 500
-  AVATAR_WIDTH = 100
-  AVATAR_HEIGHT = 100
+  AVATAR_MAX_WIDTH = 300
+  AVATAR_MAX_HEIGHT = 300
 
   enum membership_type: %w{ free premium }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
                     :hash_secret => AVATAR_HASH_SECRET,
                     :default_url => MISSING_AVATAR_URL
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-  validates :avatar, :dimensions => { width: AVATAR_WIDTH, height: AVATAR_HEIGHT }
+  validates :avatar, :dimensions => { width: AVATAR_MAX_WIDTH, height: AVATAR_MAX_HEIGHT }
   attr_accessor :remove_avatar
 
   # Devise modules

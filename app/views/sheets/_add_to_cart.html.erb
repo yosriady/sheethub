@@ -1,6 +1,8 @@
 <div class="panel panel-success">
     <div class="panel-body bg-success">
-        <% if current_user && @sheet.purchased_by?(current_user) %>
+        <% if current_user && @sheet.uploaded_by?(current_user) %>
+            <%= render 'edit_sheet_button' %>
+        <% elsif current_user && @sheet.purchased_by?(current_user) %>
             <span class="sheet-price text-center"><p><span class="glyphicon glyphicon-ok"></span> PURCHASED</p></span>
         <% elsif current_user && @cart.include?(@sheet) %>
             <span class="sheet-price text-center"><p><span class="glyphicon glyphicon-ok"></span> IN CART</p></span>

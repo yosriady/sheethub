@@ -46,17 +46,4 @@ $(document).on("page:change", function() {
         valueField: 'value',
         labelField: 'label'
     });
-
-    $('#sheet_sort_order').selectize({
-        create: false,
-        persist: false,
-        render: {
-            item: function(item, escape) {
-                return '<div> Sort By ' + item.text + '</div>';
-            },
-            option: function(item, escape) {
-                return '<div> Sort By ' + item.text + '</div>';
-            }
-        }
-    });
 });
