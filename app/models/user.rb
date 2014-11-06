@@ -31,6 +31,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
+  def display_name
+    if first_name.present?
+      if last_name.present?
+        "#{first_name} #{last_name}"
+      else
+        first_name
+      end
+    else
+      username
+    end
+  end
+
   def public_sheets
     sheets.where(is_public: true)
   end

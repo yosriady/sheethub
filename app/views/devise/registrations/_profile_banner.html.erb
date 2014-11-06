@@ -1,7 +1,7 @@
 <div id="banner" class="profile-banner">
     <%= image_tag(user.avatar_url, class: "profile-avatar") %>
     <div class="profile-bio">
-      <h1><%= user.username %></h1>
+      <h1><%= user.display_name %></h1>
       <% if user.tagline.present? %><p><span class="glyphicon glyphicon-comment"></span> <%= user.tagline %></p><% end %>
       <% if user.website.present? %><p><a href="<%= url_with_protocol(user.website) %>" target="_blank"><span class="glyphicon glyphicon-link"></span> <%= user.website %></a></p><% end %>
     </div>
