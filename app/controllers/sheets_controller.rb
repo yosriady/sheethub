@@ -22,6 +22,7 @@ class SheetsController < ApplicationController
   ERROR_SHEET_NOT_FOUND_MESSAGE = 'Sheet not found'
   ERROR_CANNOT_RESTORE_UNDESTROYED_SHEET = 'You cannot restore an un-deleted Sheet.'
   ERROR_PDF_UNPURCHASED_MESSAGE = 'You must purchase to have access to this file.'
+  SEARCH_PAGE_SIZE = 24
 
   # GET /sheets
   # GET /sheets.json
@@ -35,7 +36,7 @@ class SheetsController < ApplicationController
 
   # GET /search
   def search
-    @sheets = Sheet.is_public.search params[:q], page: params[:page]
+    @sheets = Sheet.is_public.search params[:q], page: params[:page], per_page: SEARCH_PAGE_SIZE
   end
 
   # GET /sheets/1

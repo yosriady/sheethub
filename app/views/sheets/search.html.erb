@@ -9,5 +9,8 @@
     <div class="col-xs-12">
       <%= render 'sheets', sheets: @sheets %>
     </div>
+    <div id="paginator" class="text-center">
+      <%= paginate @sheets %>
+    </div>
   </div>
 </div>
