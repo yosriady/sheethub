@@ -1,0 +1,21 @@
+<% title "Private Sheets" %>
+
+<% if current_user %>
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+        <h3>Your Private Sheets</h3>
+        <p class="bg-info"><span class="glyphicon glyphicon-eye-close"></span> Private sheets are not publicly visible and does not appear in search results. </p>
+        <% if @private_sheets.any? %>
+          <%= render '/sheets/sheets', sheets: @private_sheets %>
+        <% else %>
+          <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+          <h2>You have no private sheets.</h2>
+          <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a>
+        <% end %>
+    </div>
+  </div>
+<% else %>
+  <h2>You need to be logged in</h2>
+<% end %>
+  </div>

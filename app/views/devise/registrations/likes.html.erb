@@ -1,0 +1,36 @@
+<% if @user %>
+  <% title "#{@user.username}'s Likes"  %>
+
+  <%= render 'profile_banner', user:@user %>
+
+  <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-pills">
+            <li><a href="<%= user_profile_path(@user.username) %>"><span class="glyphicon glyphicon-music"></span> Sheet Music </a></li>
+
+            <li class="active"><a href="<%= user_likes_path(@user.username) %>"><span class="glyphicon glyphicon-thumbs-up"></span> Likes <span class="badge"><%= @likes.size %></span></a></li>
+          </ul>
+
+          <% if @likes.any? %>
+            <%= render 'likes', likes: @likes %>
+          <% else %>
+            <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+            <% if @user == current_user %>
+              <h2>You have no likes.</h2>
+              <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Browse</a>
+            <% else %>
+              <h2>This user has no likes.</h2>
+            <% end %>
+          <% end %>
+
+        </div>
+    </div>
+  <% else %>
+    <% title "User not found" %>
+    <h2>User not found</h2>
+  <% end %>
+
+  </div>

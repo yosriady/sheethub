@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
     get 'user/:username' => "users/registrations#profile", :as => :user_profile
+    get 'user/:username/likes' => "users/registrations#likes", :as => :user_likes
     match 'users/finish_registration' => 'users/registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
+    get 'private_sheets' => "users/registrations#private_sheets", :as => :user_private_sheets
     get 'sales' => "users/registrations#sales", :as => :user_sales
     get 'purchases' => "users/registrations#purchases", :as => :user_purchases
     get 'trash' => "users/registrations#trash", :as => :user_trash

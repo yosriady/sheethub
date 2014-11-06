@@ -8,21 +8,15 @@
         <div class="col-xs-12">
 
           <!-- Nav tabs -->
-          <ul class="nav nav-pills" role="tablist">
-            <li class="active"><a href="#sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-music"></span> Sheet Music <span class="badge"><%= @sheets.count %></span></a></li>
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#sheets"><span class="glyphicon glyphicon-music"></span> Sheet Music <span class="badge"><%= @sheets.count %></span></a></li>
 
-            <li><a href="#likes" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-thumbs-up"></span> Likes <span class="badge"><%= @user.votes.size %></span></a></li>
-
-            <% if current_user == @user %>
-            <li><a href="#private-sheets" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-eye-close"></span> Private Sheets <span class="badge"><%= @private_sheets.count %></span></a></li>
-            <% end %>
+            <li><a href="<%= user_likes_path(@user.username) %>"><span class="glyphicon glyphicon-thumbs-up"></span> Likes </a></li>
           </ul>
 
           <!-- Tab panes -->
           <div class="tab-content">
             <%= render 'sheets_tab_content' %>
-            <%= render 'likes_tab_content' %>
-            <%= render 'private_sheets_tab_content' %>
           </div>
 
 

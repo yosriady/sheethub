@@ -2,8 +2,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   SUCCESS_UPDATE_PROFILE_MESSAGE = 'Your profile was successfully updated.'
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
+  before_action :set_user, :only => [:profile, :likes, :sheets]
   before_action :ensure_registration_finished
-  before_action :authenticate_user!, :only => [:purchases, :sales, :trash]
+  before_action :authenticate_user!, :only => [:purchases, :sales, :trash, :private_music]
 
   # GET /user/:username
   def profile
@@ -11,17 +12,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
       # TODO: user not found page
     end
 
-    # TODO: refactor by using includes for better performance
-    @user = User.includes(:sheets).find_by("lower(username) = ?", params[:username].downcase)
-    if @user
-      @sheets = @user.public_sheets
-      @likes = @user.find_voted_items
-      @private_sheets = @user.private_sheets.page(params[:page]) if current_user == @user
-    end
+    @sheets = @user.public_sheets.page(params[:page]) if @user
+  end
+
+  def private_sheets
+    @private_sheets = current_user.private_sheets.page(params[:page])
+  end
+
+  def likes
+    @likes = @user.find_voted_items
   end
 
   def purchases
-    @purchases = current_user.purchased_orders
+    @purchases = current_user.purchased_orders.page(params[:page])
   end
 
   def sales
@@ -80,6 +83,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+    def set_user
+      @user = User.includes(:sheets).find_by("lower(username) = ?", params[:username].downcase)
+    end
+
     def registration_params
       params[:user].permit(:username, :finished_registration?, :tagline, :website, :avatar, :terms, :paypal_email)
     end
