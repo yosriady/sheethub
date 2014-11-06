@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   EXPIRATION_TIME = 600
   FREE_QUANTITY_OF_SHEETS = 150
   PREMIUM_QUANTITY_OF_SHEETS = 500
+  AVATAR_WIDTH = 100
+  AVATAR_HEIGHT = 100
 
   enum membership_type: %w{ free premium }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
@@ -21,6 +23,7 @@ class User < ActiveRecord::Base
                     :hash_secret => AVATAR_HASH_SECRET,
                     :default_url => MISSING_AVATAR_URL
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  validates :avatar, :dimensions => { width: AVATAR_WIDTH, height: AVATAR_HEIGHT }
   attr_accessor :remove_avatar
 
   # Devise modules
@@ -47,16 +50,6 @@ class User < ActiveRecord::Base
 
   def has_paypal_email?
     paypal_email.present?
-  end
-
-  def withdraw_earnings
-    payout_total = unclaimed_earnings_amount
-    api = PayPal::SDK::AdaptivePayments.new
-
-    # TODO: Do payment transfer here
-    # https://github.com/paypal/adaptivepayments-sdk-ruby#example
-    binding.pry
-    # last_payout_date = Time.now.utc
   end
 
   def sales

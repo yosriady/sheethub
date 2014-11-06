@@ -8,7 +8,6 @@ class Sheet < ActiveRecord::Base
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
   INVALID_SORT_ORDERS_MESSAGE = "Sort Order not in #{Sheet::SORT_ORDERS.values}"
 
-
   validate :validate_price
   belongs_to :user
   acts_as_votable
@@ -52,7 +51,6 @@ class Sheet < ActiveRecord::Base
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ],
       :message => "Only pdf files are allowed"
-  # do_not_validate_attachment_file_type :pdf
   validates :pdf, presence: true
 
   has_many :assets, :dependent => :destroy

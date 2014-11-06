@@ -27,8 +27,9 @@
         </div>
 
           <div class="col-xs-4">
+            <%= f.label :avatar %>
+            <p class="bg-info"><span class="glyphicon glyphicon-picture"></span> Avatar dimensions must be 100x100 pixels. </p>
             <div class="avatar-input well">
-              <%= f.label :avatar %>
               <%= image_tag resource.avatar_url %>
               <%= f.file_field :avatar %>
             </div>

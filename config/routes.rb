@@ -1,4 +1,7 @@
+
 Rails.application.routes.draw do
+
+  # mount PgHero::Engine, at: "pghero"
 
   post 'carts/add'
   post 'carts/remove'
@@ -16,7 +19,6 @@ Rails.application.routes.draw do
     get 'sales' => "users/registrations#sales", :as => :user_sales
     get 'purchases' => "users/registrations#purchases", :as => :user_purchases
     get 'trash' => "users/registrations#trash", :as => :user_trash
-    get 'withdraw_earnings' => "users/registrations#withdraw_earnings", :as => :user_withdraw_earnings
   end
 
   resources :sheets do

@@ -20,10 +20,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def withdraw_earnings
-    binding.pry
-  end
-
   def purchases
     @purchases = current_user.purchased_orders.page(params[:page])
   end
@@ -57,6 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in @user, :bypass => true
       redirect_to user_profile_path(@user.username)
     else
+      flash[:error] = @user.errors.full_messages.to_sentence
       render "edit"
     end
   end
