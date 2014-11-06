@@ -35,7 +35,7 @@ class SheetsController < ApplicationController
 
   # GET /search
   def search
-    @sheets = Sheet.is_public.search(params[:q])
+    @sheets = Sheet.is_public.search params[:q], page: params[:page]
   end
 
   # GET /sheets/1
