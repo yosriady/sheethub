@@ -39,6 +39,10 @@ class SheetsController < ApplicationController
     @sheets = Sheet.is_public.search params[:q], page: params[:page], per_page: SEARCH_PAGE_SIZE
   end
 
+  def best_sellers
+    @sheets = Sheet.best_sellers.page(params[:page])
+  end
+
   # GET /sheets/1
   # GET /sheets/1.json
   def show

@@ -18,8 +18,7 @@ class Cart < ActiveRecord::Base
   end
 
   def complete_orders(payer_id)
-    # TODO: need to validate if payer_id is nil?
-    orders.map{|o| o.update(status: Order.statuses[:completed], payer_id: payer_id, purchased_at: Time.now)}
+    orders.map{|o| o.complete(payer_id)}
   end
 
   def clear_token

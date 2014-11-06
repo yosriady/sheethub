@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :assets, only: [:create, :destroy]
   get 'assets/:id/download' => 'assets#download', as: 'download_asset'
 
+  get 'best_sellers' => 'sheets#best_sellers'
   get 'search' => 'sheets#search'
 
   get 'instruments' => 'sheets#instruments'

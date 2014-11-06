@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101183019) do
+ActiveRecord::Schema.define(version: 20141106150654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -128,6 +129,7 @@ ActiveRecord::Schema.define(version: 20141101183019) do
     t.integer  "price_cents",             default: 0,     null: false
     t.datetime "deleted_at"
     t.integer  "publishing_right",                        null: false
+    t.integer  "total_sold",              default: 0
   end
 
   add_index "sheets", ["cached_votes_down"], name: "index_sheets_on_cached_votes_down", using: :btree

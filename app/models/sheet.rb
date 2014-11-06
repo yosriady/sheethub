@@ -20,14 +20,8 @@ class Sheet < ActiveRecord::Base
 
   scope :is_public, -> { where(is_public: true) }
   scope :is_private, -> { where(is_public: false) }
-  scope :free, -> { where(is_free: true) }
-  scope :original, -> { where(is_original: true) }
   scope :flagged, -> { where(is_flagged: true) }
-
-  scope :lowest_price, -> { order(price_cents: :asc)}
-  scope :highest_price, -> { order(price_cents: :desc)}
-  scope :oldest, -> { order(created_at: :asc)}
-  scope :latest, -> { order(created_at: :desc)}
+  scope :best_sellers, -> { is_public.order(price_cents: :desc)}
 
   attr_accessor :instruments_list # For form parsing
   enum difficulty: %w{ beginner intermediate advanced }
@@ -82,6 +76,10 @@ class Sheet < ActiveRecord::Base
 
   def completed_orders
     Order.where(sheet_id: id, status: Order.statuses[:completed])
+  end
+
+  def count_sales_and_cache
+    total_sold = completed_orders.size
   end
 
   def price
