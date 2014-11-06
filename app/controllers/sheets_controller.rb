@@ -27,7 +27,7 @@ class SheetsController < ApplicationController
   # GET /sheets.json
   def index
     @instruments = Sheet.values_for_instruments
-    @sheets = Sheet.is_public.includes(:user).page(params[:page])
+    @sheets = Sheet.is_public.includes(:user)
     @composers = Sheet.tags_on(:composers).limit(10)
     @genres = Sheet.tags_on(:genres).limit(10)
     @sources = Sheet.tags_on(:sources).limit(10)
@@ -35,7 +35,7 @@ class SheetsController < ApplicationController
 
   # GET /search
   def search
-    @sheets = Sheet.is_public.search params[:q], page: params[:page]
+    @sheets = Sheet.is_public.search(params[:q])
   end
 
   # GET /sheets/1

@@ -9,7 +9,6 @@
         <div id="deleted-sheets">
           <% if @deleted_sheets.any? %>
             <%= render '/sheets/deleted_sheets', sheets: @deleted_sheets %>
-            <%= paginate @deleted_sheets, remote: true %>
           <% else %>
             <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
             <h2>You have no deleted sheets.</h2>

@@ -5,16 +5,14 @@
     <div class="row">
     <div class="col-xs-12">
         <h3>Your Purchases</h3>
+        <p class="bg-info"><span class="glyphicon glyphicon-heart-empty"></span> Add sheets to your cart and check out amazing music. You can review and download your purchased sheets here.</p>
         <div id="purchased-sheets">
           <% if @purchases.any? %>
             <p class="bg-primary"><span class="glyphicon glyphicon-thumbs-up"></span> Thank you for your purchase! Enjoy <strong>Unlimited Access</strong> and future updates forever.</p>
             <%= render 'orders', orders: @purchases %>
-            <%= paginate @purchases, remote: true %>
           <% else %>
             <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
             <h2>You have not purchased any sheets.</h2>
-            <h4>Add sheets to your cart and check out amazing music.</h4>
-            <h4>You can review and download your purchased sheets here.</h4>
             <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Browse</a>
           <% end %>
         </div>
