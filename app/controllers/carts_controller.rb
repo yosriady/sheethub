@@ -3,8 +3,10 @@ class CartsController < ApplicationController
   SUCCESS_CART_ADD_MESSAGE = "Item added to cart."
   SUCCESS_CART_REMOVE_MESSAGE = "Item removed from cart."
   CANCEL_CART_PURCHASE_MESSAGE = "Purchase canceled."
+  EMPTY_CART_MESSAGE = "Your cart is empty."
 
   before_action :authenticate_user!, :only => [:paypal_checkout, :success, :cancel]
+  before_action :validate_cart_not_empty, :only => [:checkout]
 
   def add
     sheet = Sheet.find(params[:sheet_id])
@@ -15,7 +17,11 @@ class CartsController < ApplicationController
   def remove
     sheet = Sheet.find(params[:sheet_id])
     @cart.remove(sheet)
-    redirect_to :back, notice: SUCCESS_CART_REMOVE_MESSAGE
+    if @cart.orders.empty?
+      redirect_to sheets_path, notice: EMPTY_CART_MESSAGE
+    else
+      redirect_to :back, notice: SUCCESS_CART_REMOVE_MESSAGE
+    end
   end
 
   def checkout
@@ -59,6 +65,10 @@ class CartsController < ApplicationController
   end
 
   private
+    def validate_cart_not_empty
+      redirect_to sheets_path, notice: EMPTY_CART_MESSAGE if @cart.orders.empty?
+    end
+
     def parseTokenAndPayerIdFromQueryString(request)
       return request.query_parameters["token"], request.query_parameters["PayerID"]
     end
