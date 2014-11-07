@@ -99,10 +99,6 @@ class User < ActiveRecord::Base
     Sheet.only_deleted.where(user_id: id)
   end
 
-  def joined_at
-    created_at.strftime "%B %Y"
-  end
-
   def full_name
     (first_name.present? || last_name.present?) ? "#{first_name} #{last_name}" : name
   end
@@ -133,14 +129,6 @@ class User < ActiveRecord::Base
         user.image = auth.info.image
       end
       user.save
-    end
-  end
-
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
     end
   end
 

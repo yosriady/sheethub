@@ -79,10 +79,6 @@ class Sheet < ActiveRecord::Base
     Order.where(sheet_id: id, status: Order.statuses[:completed])
   end
 
-  def count_sales_and_cache
-    total_sold = completed_orders.size
-  end
-
   def price
     return price_cents.to_f / 100
   end
@@ -124,14 +120,6 @@ class Sheet < ActiveRecord::Base
     this.fingerprint
   end
   # END of phash methods
-
-  def has_playable
-    get_audio_assets.present?
-  end
-
-  def get_audio_assets
-    assets.select{|asset| asset.filetype.starts_with? "audio"}
-  end
 
   def has_pdf_preview?
     preview_url = pdf_preview_url

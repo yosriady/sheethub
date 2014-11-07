@@ -97,6 +97,7 @@ group :development, :test do
   gem 'letter_opener'
   # gem 'factory_girl_rails'
   gem "bullet"
+  gem "rails_best_practices"
 end
 
 # Test data generation
