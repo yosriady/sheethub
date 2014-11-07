@@ -14,6 +14,10 @@ class OrdersController < ApplicationController
       paypal_options
     )
     @order = Order.find_or_initialize_by(user_id: current_user.id, sheet_id: sheet.id)
+    if @order.completed?
+      redirect_to :back, error: "You've already purchased #{sheet.title}"
+    end
+
     @order.token = response.token
 
     if @order.save
