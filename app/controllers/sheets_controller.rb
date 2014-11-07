@@ -1,5 +1,5 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :flag, :like, :download, :purchase]
+  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :report, :flag, :like, :download, :purchase]
   before_action :set_deleted_sheet, only: [:restore]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
@@ -56,6 +56,10 @@ class SheetsController < ApplicationController
       flash[:error] = ERROR_PDF_UNPURCHASED_MESSAGE
       redirect_to sheet_path(@sheet)
     end
+  end
+
+  # GET /sheets/1/flag
+  def report
   end
 
   # POST /sheets/1/flag

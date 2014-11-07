@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+        <h3>Report <%= link_to @sheet.title, @sheet %></h3>
+        <p class="bg-info"><i class="fa fa-thumbs-o-up"></i> We take copyright infringements very seriously. <a href="<%= faq_path %>#publishing-rights"><span class="glyphicon glyphicon-question-sign"></span></a></p>
+        <%= simple_form_for Flag.new,
+            :url => url_for(:action => 'flag', :controller => 'sheets'),
+            :method => 'post',
+            defaults: { input_html: { class: 'form-control' }} do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :email, autofocus: true, placeholder: "Your email" if current_user.nil? %>
+            <%= f.input :message, autofocus: true, placeholder: "What's the issue you want to report?" %>
+            <%= f.submit 'Report', class:"btn btn-primary" %>
+        <% end %>
+    </div>
+  </div>
+</div>

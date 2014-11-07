@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     member do
       get 'download'
       post 'like'
+      get 'report'
       post 'flag'
       post 'restore'
     end
