@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.paypal-logo {
+    height: 60px;
+    float: left
+}
+
+#paypal-checkout-btn button {
+    margin-top: 12px;
+}
+
 #cart-dropdown .badge {
     background-color: rgba(0,0,0, 0.2);
     margin-left: 4px;
@@ -15,6 +24,10 @@
     .cart-total strong p {
         margin-top: 5px;
         margin-bottom:0px;
+    }
+
+    .cart-total {
+        padding: 5px 20px;
     }
 
     .cart-item {

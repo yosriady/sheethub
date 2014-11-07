@@ -1,9 +1,0 @@
-<% if @cart && orders.each do |order| %>
-    <li><div class="cart-item">
-        <a href="<%= sheet_path(order.sheet) %>"><%= order.sheet.title %></a>
-        <%= link_to "", carts_remove_path(:sheet_id => order.sheet.id), :method => :post, class: "cart-remove-item glyphicon glyphicon-remove" %>
-        <p><%= "$#{order.sheet.price}" %></p>
-    </div></li>
-<% end.empty? %>
-    <li><p class="empty-cart-message"><span class="glyphicon glyphicon-eye-close"></span> Your cart is empty. Use the search bar to help you find the perfect sheet music to play. </p></li>
-<% end %>
