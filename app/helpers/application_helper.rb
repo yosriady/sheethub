@@ -4,8 +4,9 @@ module ApplicationHelper
     /^http/i.match(url) ? url : "http://#{url}"
   end
 
+  # TOOD: Refactor tag.taggings[0].context
   def tag_path(tag)
-    context = tag.taggings[0].context #TODO: optimize SQL querying with includes?
+    context = tag.taggings[0].context
     case context
     when "genres"
       "/genre/#{tag.name}"
@@ -19,7 +20,7 @@ module ApplicationHelper
   end
 
   def tag_icon(tag)
-    context = tag.taggings[0].context #TODO: optimize SQL querying with includes?
+    context = tag.taggings[0].context
     case context
     when "genres"
       "headphones"

@@ -29,9 +29,9 @@ class SheetsController < ApplicationController
   def index
     @instruments = Sheet.values_for_instruments
     @sheets = Sheet.is_public.includes(:user).page(params[:page])
-    @composers = Sheet.tags_on(:composers).limit(10)
-    @genres = Sheet.tags_on(:genres).limit(10)
-    @sources = Sheet.tags_on(:sources).limit(10)
+    @composers = Sheet.tags_on(:composers).includes(:taggings).limit(10)
+    @genres = Sheet.tags_on(:genres).includes(:taggings).limit(10)
+    @sources = Sheet.tags_on(:sources).includes(:taggings).limit(10)
   end
 
   # GET /search
@@ -174,7 +174,7 @@ class SheetsController < ApplicationController
 
   # GET /genre/:slug
   def by_genre
-    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :genres).page(params[:page])
+    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :genres).includes(:user).page(params[:page])
   end
 
   # GET /composers
@@ -184,7 +184,7 @@ class SheetsController < ApplicationController
 
   # GET /composer/:slug
   def by_composer
-    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :composers).page(params[:page])
+    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :composers).includes(:user).page(params[:page])
   end
 
   # GET /sources
@@ -194,7 +194,7 @@ class SheetsController < ApplicationController
 
   # GET /source/:slug
   def by_source
-    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :sources).page(params[:page])
+    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :sources).includes(:user).page(params[:page])
   end
 
   def autocomplete
@@ -218,7 +218,7 @@ class SheetsController < ApplicationController
     end
 
     def set_sheet
-      @sheet = Sheet.friendly.find(params[:id])
+      @sheet = Sheet.includes(:sources, :composers, :genres).friendly.find(params[:id])
     end
 
     def set_deleted_sheet

@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /user/:username
   def profile
     unless params[:username]
-      # TODO: user not found page
+      raise ActionController::RoutingError.new('User Not Found')
     end
 
     @sheets = @user.public_sheets.page(params[:page]) if @user
@@ -85,7 +85,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def set_user
-      @user = User.includes(:sheets).find_by("lower(username) = ?", params[:username].downcase)
+      @user = User.find_by("lower(username) = ?", params[:username].downcase)
     end
 
     def registration_params

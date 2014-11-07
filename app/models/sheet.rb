@@ -163,8 +163,8 @@ class Sheet < ActiveRecord::Base
     Sheet.find_by_sql(sql)
   end
 
-  def related_tags #TODO: optimize SQL querying with includes?
-    related_sheets = Sheet.tagged_with(joined_tags, :any => true).limit(5)
+  def related_tags
+    related_sheets = Sheet.tagged_with(joined_tags, :any => true).includes(:sources, :composers, :genres).limit(5)
     related_tags = Set.new
     related_sheets.each{ |sheet| related_tags.merge sheet.tag_objects }
     related_tags.to_a

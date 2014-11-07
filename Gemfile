@@ -96,6 +96,7 @@ group :development, :test do
   gem 'rspec'
   gem 'letter_opener'
   # gem 'factory_girl_rails'
+  gem "bullet"
 end
 
 # Test data generation
