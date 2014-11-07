@@ -18,17 +18,17 @@ module ApplicationHelper
     end
   end
 
-  def tag_glyphicon(tag)
+  def tag_icon(tag)
     context = tag.taggings[0].context #TODO: optimize SQL querying with includes?
     case context
     when "genres"
       "headphones"
     when "composers"
-      "user"
+      "users"
     when "sources"
       "book"
     else
-      "music"
+      "magic"
     end
   end
 
@@ -51,16 +51,16 @@ module ApplicationHelper
     end
   end
 
-  def glyphicon_for flash_type
+  def icon_for flash_type
     case flash_type.to_sym
       when :success
-        "ok"
+        "check"
       when :error
         "remove"
       when :alert
-        "warning-sign"
+        "warning"
       else
-        "ok"
+        "check"
     end
   end
 

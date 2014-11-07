@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-4 col-lg-offset-4">
         <h3>Report <%= link_to @sheet.title, @sheet %></h3>
-        <p class="bg-info"><i class="fa fa-thumbs-o-up"></i> We take copyright infringements very seriously. <a href="<%= faq_path %>#publishing-rights"><span class="glyphicon glyphicon-question-sign"></span></a></p>
+        <p class="bg-info"><i class="fa fa-thumbs-up"></i> We take copyright infringements very seriously. <a href="<%= faq_path %>#publishing-rights"><i class="fa fa-question-circle"></i></a></p>
         <%= simple_form_for Flag.new,
             :url => url_for(:action => 'flag', :controller => 'sheets'),
             :method => 'post',

@@ -2,7 +2,7 @@
   <% if orders.each do |order| %>
   <%= render 'sheets/sheet', sheet: order.sheet %>
   <% end.empty? %>
-  <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+  <h2><i class="fa fa-eye-slash"></i></h2>
   <h2>No Sheets yet!</h2>
   <% end %>
 </div>

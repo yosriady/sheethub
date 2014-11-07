@@ -8,7 +8,7 @@
   </div>
 
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
-  <%= f.label :publishing_right %> <a href="<%= faq_path %>#publishing-rights"><span class="glyphicon glyphicon-question-sign"></span></a>
+  <%= f.label :publishing_right %> <a href="<%= faq_path %>#publishing-rights"><i class="fa fa-question-circle"></i></a>
   <%= f.input_field :publishing_right, :as => :select, :collection => Sheet.publishing_rights.keys %>
 
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
@@ -41,7 +41,7 @@
     <li>
         <a href="<%= download_sheet_path(@sheet) %>">
             <div class="sheet-file">
-            <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
+            <p><i class="fa fa-download"></i> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
             </div>
         </a>
     </li>

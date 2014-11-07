@@ -9,14 +9,14 @@
         <%= render "sales_stats" %>
 
         <div class="panel panel-info">
-          <div class="panel-heading"><span class="glyphicon glyphicon-stats"></span> Sales By Title (in USD)</div>
+          <div class="panel-heading"><i class="fa fa-line-chart"></i> Sales By Title (in USD)</div>
           <div class="panel-body">
             <%= pie_chart(@aggregated_sales) if @aggregated_sales.present? %>
           </div>
         </div>
 
         <div class="panel panel-info">
-          <div class="panel-heading"><span class="glyphicon glyphicon-stats"></span> Sales Quantity By Date</div>
+          <div class="panel-heading"><i class="fa fa-calendar"></i> Sales Quantity By Date</div>
           <div class="panel-body">
             <%= line_chart @sales_past_month.group_by_day(:purchased_at).count if @sales_past_month.present? %>
           </div>

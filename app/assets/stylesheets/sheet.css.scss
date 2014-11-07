@@ -83,12 +83,14 @@
 }
 
 .sheet-file {
-    background: rgba(37,131,235, 0.8);
     border-radius: 4px;
+    border: 1px solid rgba(66, 139, 202, 0.25);
+    margin-bottom:10px;
 
     &:hover, &:focus, &:active {
-            text-decoration: none;
-            background: rgba(37,131,235, 1);
+        text-decoration: none;
+        background: rgba(37,131,235, 1);
+        color: #fff;
     }
 
     .glyphicon {
@@ -96,7 +98,7 @@
     }
 
     p {
-        color: #fff;
+        margin: 0px;
         padding: 10px;
     }
 

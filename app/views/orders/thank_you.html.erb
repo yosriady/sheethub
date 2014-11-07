@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-xs-8">
             <h4>Thank You For Your Purchase</h4>
-            <p class="bg-primary"><span class="glyphicon glyphicon-thumbs-up"></span> You now have <strong>Unlimited Access</strong> to <%= @order.sheet.title %></p>
+            <p class="bg-primary"><i class="fa fa-thumbs-up"></i> You now have <strong>Unlimited Access</strong> to <%= @order.sheet.title %></p>
             <div id="sheets">
                 <%= render 'sheets/sheet', sheet: @order.sheet %>
             </div>
@@ -16,7 +16,7 @@
         </div>
         <div class="col-xs-4">
             <div class="well">
-                <a href="<%= user_purchases_path %>" class="btn btn-block btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Your Purchases</a>
+                <a href="<%= user_purchases_path %>" class="btn btn-block btn-success"><i class="fa fa-shopping-cart"></i> Your Purchases</a>
             </div>
         </div>
     </div>

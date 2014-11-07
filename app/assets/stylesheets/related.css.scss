@@ -7,7 +7,7 @@
         transition:.1s;
     }
 
-    h1 .glyphicon {
+    h1 .fa {
         font-size: 28px;
     }
 }
@@ -32,9 +32,8 @@
         float: left;
         padding-right: 20px;
 
-        .glyphicon-tags {
-            color: #fff;
-            font-size: 24px;
+        .fa-heart-o {
+            font-size: 32px;
         }
 
     }

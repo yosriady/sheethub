@@ -1,20 +1,20 @@
  <div class="panel panel-info">
-    <div class="panel-heading"><span class="glyphicon glyphicon-file"></span> Files</div>
-    <div class="panel-body">
+    <div class="panel-heading"><i class="fa fa-cloud-download"></i> Files</div>
+    <div class="panel-body list-group">
         <ul id="sheet-files">
             <!-- Main PDF file -->
             <% if @sheet.pdf.present? %>
             <li>
                 <a href="<%= download_sheet_path(@sheet) %>" title="<%= @sheet.pdf_file_name %>" data-no-turbolink='true'>
                     <div class="sheet-file">
-                    <p><span class="glyphicon glyphicon-save"></span> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
+                    <p><i class="fa fa-download"></i> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
                     </div>
                 </a>
             </li>
             <% else %>
                 <li>
                     <div class="sheet-file-missing bg-danger">
-                        <p><span class="glyphicon glyphicon-eye-close"></span> No PDF File Found.</p>
+                        <p><i class="fa fa-eye-slash"></i> No PDF File Found.</p>
                     </div>
                 </li>
             <% end %>

@@ -1,17 +1,17 @@
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <%= current_user.username %></a>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.username %></a>
   <ul class="dropdown-menu" role="menu">
 
   <% if current_user.finished_registration? %>
-    <li><a href="<%= user_profile_path(current_user.username) %>"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-    <li><a href="<%= edit_user_registration_path %>"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+    <li><a href="<%= user_profile_path(current_user.username) %>"><i class="fa fa-user"></i> Profile</a></li>
+    <li><a href="<%= edit_user_registration_path %>"><i class="fa fa-cog"></i> Settings</a></li>
     <hr>
-    <li><a href="<%= user_purchases_path %>"><span class="glyphicon glyphicon-shopping-cart"></span> Purchases</a></li>
-    <li><a href="<%= user_private_sheets_path %>"><span class="glyphicon glyphicon-eye-close"></span> Private Sheets</a></li>
-    <% if current_user.has_published %><li><a href="<%= user_sales_path %>"><span class="glyphicon glyphicon-stats"></span> Sales</a></li><% end %>
-    <li><a href="<%= user_trash_path %>"><span class="glyphicon glyphicon-trash"></span> Trash</a></li>
+    <li><a href="<%= user_purchases_path %>"><i class="fa fa-shopping-cart"></i> Purchases</a></li>
+    <li><a href="<%= user_private_sheets_path %>"><i class="fa fa-eye-slash"></i> Private Sheets</a></li>
+    <% if current_user.has_published %><li><a href="<%= user_sales_path %>"><i class="fa fa-line-chart"></i> Sales</a></li><% end %>
+    <li><a href="<%= user_trash_path %>"><i class="fa fa-trash"></i> Trash</a></li>
   <% end %>
     <hr>
-    <li><%= link_to destroy_user_session_path, :method => :delete do %><span class="glyphicon glyphicon-off"></span> Logout<% end %></li>
+    <li><%= link_to destroy_user_session_path, :method => :delete do %><i class="fa fa-sign-out"></i> Logout<% end %></li>
   </ul>
 </li>

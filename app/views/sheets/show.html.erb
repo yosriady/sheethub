@@ -4,7 +4,7 @@
     <div class="row">
         <div id="sheet-header" class="col-xs-8">
             <% if !@sheet.is_public %>
-                <strong><span class="glyphicon glyphicon-eye-close"></span> PRIVATE</strong>
+                <strong><i class="fa fa-eye-slash"></i> PRIVATE</strong>
             <% end %>
 
             <h1><%= @sheet.title %></h1>
@@ -25,7 +25,7 @@
         <% end %>
 
             <a href="<%= user_profile_path(@sheet.user.username) %>">
-                <button type="button" class="btn btn-block btn-default">See more from this user <span class="glyphicon glyphicon-arrow-right"></span></button>
+                <button type="button" class="btn btn-block btn-default">See more from this user <span class="fa fa-arrow-right"></span></button>
             </a>
             <%= render 'disqus' %>
         </div>

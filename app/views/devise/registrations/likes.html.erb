@@ -9,18 +9,18 @@
 
           <!-- Nav tabs -->
           <ul class="nav nav-pills">
-            <li><a href="<%= user_profile_path(@user.username) %>"><span class="glyphicon glyphicon-music"></span> Sheet Music </a></li>
+            <li><a href="<%= user_profile_path(@user.username) %>"><i class="fa fa-music"></i> Sheet Music </a></li>
 
-            <li class="active"><a href="<%= user_likes_path(@user.username) %>"><span class="glyphicon glyphicon-thumbs-up"></span> Likes <span class="badge"><%= @likes.size %></span></a></li>
+            <li class="active"><a href="<%= user_likes_path(@user.username) %>"><i class="fa fa-thumbs-up"></i> Likes <span class="badge"><%= @likes.size %></span></a></li>
           </ul>
 
           <% if @likes.any? %>
             <%= render 'likes', likes: @likes %>
           <% else %>
-            <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+            <h2><i class="fa fa-eye-slash"></i></h2>
             <% if @user == current_user %>
               <h2>You have no likes.</h2>
-              <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="glyphicon glyphicon-cloud-upload"></span> Browse</a>
+              <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-picture"></span> Browse</a>
             <% else %>
               <h2>This user has no likes.</h2>
             <% end %>

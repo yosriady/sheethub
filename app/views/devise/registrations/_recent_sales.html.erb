@@ -3,10 +3,10 @@
   <table class="table table-striped">
     <thead class="bg-info">
       <tr>
-        <th><span class="glyphicon glyphicon-calendar"></span> Sale date</th>
-        <th><span class="glyphicon glyphicon-music"></span> Sheet</th>
-        <th><span class="glyphicon glyphicon-user"></span> Buyer</th>
-        <th><span class="glyphicon glyphicon-usd"></span> Estimated Earning <a href="<%= faq_path %>#earnings-calculation"><span class="glyphicon glyphicon-question-sign"></span></a></th>
+        <th><i class="fa fa-calendar"></i> Sale date</th>
+        <th><i class="fa fa-thumbs-up"></i> Sheet</th>
+        <th><i class="fa fa-user"></i> Buyer</th>
+        <th><i class="fa fa-usd"></i> Estimated Earning <a href="<%= faq_path %>#earnings-calculation"><i class="fa fa-question-circle"></i></a></th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +21,6 @@
     </tbody>
   </table>
 <% else %>
-  <h2><span class="glyphicon glyphicon-eye-close"></span></h2>
+  <h2><i class="fa fa-eye-slash"></i></h2>
   <h2>You have no sales yet.</h2>
 <% end %>
