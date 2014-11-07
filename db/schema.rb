@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106154229) do
+ActiveRecord::Schema.define(version: 20141107060358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,13 +63,6 @@ ActiveRecord::Schema.define(version: 20141106154229) do
 
   add_index "assets", ["deleted_at"], name: "index_assets_on_deleted_at", using: :btree
 
-  create_table "carts", force: true do |t|
-    t.string   "token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
   create_table "flags", force: true do |t|
     t.integer  "user_id"
     t.integer  "sheet_id",   null: false
@@ -99,8 +92,8 @@ ActiveRecord::Schema.define(version: 20141106154229) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status",       default: 0
-    t.integer  "cart_id"
     t.string   "payer_id"
+    t.string   "token"
   end
 
   create_table "sheets", force: true do |t|

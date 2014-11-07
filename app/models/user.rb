@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   validate :validate_number_of_uploaded_sheets
   has_many :sheets, dependent: :destroy
-  has_one :cart
   acts_as_voter
 
   has_attached_file :avatar,

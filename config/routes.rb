@@ -3,12 +3,9 @@ Rails.application.routes.draw do
 
   # mount PgHero::Engine, at: "pghero"
 
-  post 'carts/add'
-  post 'carts/remove'
-  get 'carts/checkout'
-  get 'carts/paypal_checkout'
-  get 'carts/success'
-  get 'carts/cancel'
+  post 'checkout' => 'orders#checkout'
+  get 'orders/success'
+  get 'orders/cancel'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

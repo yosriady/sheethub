@@ -10,8 +10,6 @@
         <li class="<%= 'active' if params[:action] == 'index' %>"><a href="<%= root_path =%>"><span class="glyphicon glyphicon-picture"></span> Discover</a></li>
         <li class="<%= 'active' if params[:action] == 'new' %>"><a href="<%= new_sheet_path =%>"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</a></li>
 
-        <%= render 'carts/cart' %>
-
       <% if user_signed_in? %>
         <%= render 'layouts/user_dropdown' %>
       <% else %>

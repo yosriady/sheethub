@@ -4,14 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :ensure_registration_finishes
-  before_filter :extract_cart
   after_filter :store_location
-
-  def extract_cart
-    if current_user
-      @cart = Cart.where(user_id: current_user.id).first || Cart.create(user_id: current_user.id)
-    end
-  end
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
