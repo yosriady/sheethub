@@ -1,6 +1,6 @@
 class DimensionsValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    if record.send("#{attribute}?".to_sym)
+    if record.send("#{attribute}?".to_sym) && value.queued_for_write[:original].present?
       image = value.queued_for_write[:original]
       dimensions = Paperclip::Geometry.from_file(image.path)
       width = options[:width]
