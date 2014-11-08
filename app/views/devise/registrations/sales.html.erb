@@ -3,10 +3,10 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <%= render 'recent_sales' %>
+        <%= render 'recent_sales', sales: @sales_past_month %>
 
         <h3>Sales Statistics</h3>
-        <%= render "sales_stats" %>
+        <%= render "sales_stats", aggregated_sales: @aggregated_sales, recent_sales:@sales_past_month %>
 
         <div class="panel panel-info">
           <div class="panel-heading"><i class="fa fa-line-chart"></i> Sales By Title (in USD)</div>

@@ -1,5 +1,6 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: [:show, :edit, :update, :destroy, :report, :flag, :like, :download, :purchase]
+  before_action :set_sheet, only: [:show, :update, :destroy, :report, :flag, :like, :download, :purchase]
+  before_action :set_sheet_lazy, only: [:edit]
   before_action :set_deleted_sheet, only: [:restore]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
@@ -98,11 +99,8 @@ class SheetsController < ApplicationController
   # POST /sheets
   # POST /sheets.json
   def create
-    @sheet = Sheet.new(sheet_params)
-    @sheet.instruments = params[:sheet][:instruments_list]
-    @sheet.composer_list = params[:sheet][:composer_list]
-    @sheet.genre_list = params[:sheet][:genre_list]
-    @sheet.source_list = params[:sheet][:source_list]
+    create_params = build_tags(sheet_params)
+    @sheet = Sheet.new(create_params)
 
     respond_to do |format|
       if @sheet.save
@@ -120,13 +118,10 @@ class SheetsController < ApplicationController
   # PATCH/PUT /sheets/1
   # PATCH/PUT /sheets/1.json
   def update
+    update_params = build_tags(sheet_params)
+    @sheet.slug = nil #Regenerate friendly-id
+
     respond_to do |format|
-      update_params = sheet_params
-      @sheet.slug = nil #Regenerate friendly-id
-      update_params[:instruments] = params[:sheet][:instruments_list]
-      update_params[:composer_list] = params[:sheet][:composer_list]
-      update_params[:genre_list] = params[:sheet][:genre_list]
-      update_params[:source_list] = params[:sheet][:source_list]
       if @sheet.update(update_params)
         format.html { redirect_to @sheet, notice: SUCCESS_UPDATE_SHEET_MESSAGE }
         format.json { render :show, status: :ok, location: @sheet }
@@ -202,6 +197,15 @@ class SheetsController < ApplicationController
   end
 
   private
+    def build_tags(sheet_params)
+      updated_params = sheet_params
+      updated_params[:instruments] = params[:sheet][:instruments_list]
+      updated_params[:composer_list] = params[:sheet][:composer_list]
+      updated_params[:genre_list] = params[:sheet][:genre_list]
+      updated_params[:source_list] = params[:sheet][:source_list]
+      return updated_params
+    end
+
     def authenticate_owner
       unless @sheet.user == current_user
         flash[:error] = ERROR_UPDATE_SHEET_MESSAGE
@@ -219,6 +223,10 @@ class SheetsController < ApplicationController
 
     def set_sheet
       @sheet = Sheet.includes(:sources, :composers, :genres).friendly.find(params[:id])
+    end
+
+    def set_sheet_lazy
+      @sheet = Sheet.friendly.find(params[:id])
     end
 
     def set_deleted_sheet

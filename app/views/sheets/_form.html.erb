@@ -1,4 +1,4 @@
-<%= simple_form_for @sheet, html: {multipart: true} do |f| %>
+<%= simple_form_for sheet, html: {multipart: true} do |f| %>
   <%= f.error_notification %>
 
   <%=f.hidden_field :user_id, value: current_user.id %>
@@ -25,23 +25,23 @@
 
   <%= f.label :composers %>
   <br>
-  <%= f.input_field :composer_list, collection: @composers.collect{|tag| tag.name}, prompt: "Add composer(s)", multiple: true , id: "composers-field"%>
+  <%= f.input_field :composer_list, collection: composers.collect{|tag| tag.name}, prompt: "Add composer(s)", multiple: true , id: "composers-field"%>
 
   <%= f.label :genres %>
   <br>
-  <%= f.input_field :genre_list, collection: @genres.collect{|tag| tag.name}, prompt: "Add genres", multiple: true , id: "genres-field"%>
+  <%= f.input_field :genre_list, collection: genres.collect{|tag| tag.name}, prompt: "Add genres", multiple: true , id: "genres-field"%>
 
   <%= f.label :sources %>
   <br>
-  <%= f.input_field :source_list, collection: @sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
+  <%= f.input_field :source_list, collection: sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
   <%= f.label :pdf %><br />
-  <% if params[:action] == "edit" && @sheet.pdf.present? %>
+  <% if params[:action] == "edit" && sheet.pdf.present? %>
   <ul id="sheet-files">
     <li>
-        <a href="<%= download_sheet_path(@sheet) %>">
+        <a href="<%= download_sheet_path(sheet) %>">
             <div class="sheet-file">
-            <p><i class="fa fa-download"></i> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
+            <p><i class="fa fa-download"></i> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
             </div>
         </a>
     </li>

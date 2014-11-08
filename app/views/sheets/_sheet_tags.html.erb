@@ -1,4 +1,4 @@
 <%= render 'sheet_instruments', instruments: sheet.instruments if sheet.instruments.present? %>
-<%= render 'tags', tags: sheet.genres.includes(:taggings) if sheet.genres.any? %>
-<%= render 'tags', tags: sheet.composers.includes(:taggings) if sheet.composers.any? %>
-<%= render 'tags', tags: sheet.sources.includes(:taggings) if sheet.sources.any? %>
+<%= render 'tags', tags: sheet.genres if sheet.genres.any? %>
+<%= render 'tags', tags: sheet.composers if sheet.composers.any? %>
+<%= render 'tags', tags: sheet.sources if sheet.sources.any? %>

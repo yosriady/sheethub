@@ -9,11 +9,11 @@
     <div id="sheet-sidebar" class="col-xs-4">
         <div class="panel panel-info">
           <div class="panel-body">
-                <%= render 'form' %>
+                <%= render 'form', sheet: @sheet, genres: @genres, composers: @composers, sources: @sources %>
           </div>
         </div>
 
-        <%= render 's3_uploader' %>
+        <%= render 's3_uploader', sheet: @sheet %>
 
         <div class="panel panel-danger">
           <div class="panel-heading"><i class="fa fa-warning"></i> Danger Zone</div>

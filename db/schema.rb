@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107060358) do
+ActiveRecord::Schema.define(version: 20141108113838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20141107060358) do
   end
 
   add_index "assets", ["deleted_at"], name: "index_assets_on_deleted_at", using: :btree
+  add_index "assets", ["sheet_id"], name: "index_assets_on_sheet_id", using: :btree
 
   create_table "flags", force: true do |t|
     t.integer  "user_id"
@@ -71,6 +72,9 @@ ActiveRecord::Schema.define(version: 20141107060358) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "flags", ["sheet_id"], name: "index_flags_on_sheet_id", using: :btree
+  add_index "flags", ["user_id"], name: "index_flags_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -95,6 +99,9 @@ ActiveRecord::Schema.define(version: 20141107060358) do
     t.string   "payer_id"
     t.string   "token"
   end
+
+  add_index "orders", ["sheet_id"], name: "index_orders_on_sheet_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "sheets", force: true do |t|
     t.boolean  "is_public",               default: true,  null: false
@@ -134,6 +141,7 @@ ActiveRecord::Schema.define(version: 20141107060358) do
   add_index "sheets", ["cached_weighted_total"], name: "index_sheets_on_cached_weighted_total", using: :btree
   add_index "sheets", ["deleted_at"], name: "index_sheets_on_deleted_at", using: :btree
   add_index "sheets", ["slug"], name: "index_sheets_on_slug", unique: true, using: :btree
+  add_index "sheets", ["user_id"], name: "index_sheets_on_user_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

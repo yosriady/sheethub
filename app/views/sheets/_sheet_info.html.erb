@@ -1,19 +1,19 @@
 <div class="panel panel-info">
   <div class="panel-body">
-    <% if @sheet.original? || @sheet.public_domain? %>
-      <strong class="publishing-rights"><i class="fa fa-certificate"></i> <%= @sheet.rights %></strong>
+    <% if sheet.original? || sheet.public_domain? %>
+      <strong class="publishing-rights"><i class="fa fa-certificate"></i> <%= sheet.rights %></strong>
     <% end %>
-    <p><%= @sheet.description? ? @sheet.description : 'No description.'%></p>
-    <p><em>Published <%= distance_of_time_in_words(Time.now, @sheet.created_at) %> ago</em></p>
+    <p><%= sheet.description? ? sheet.description : 'No description.'%></p>
+    <p><em>Published <%= distance_of_time_in_words(Time.now, sheet.created_at) %> ago</em></p>
   </div>
 
     <ul class="list-group">
         <li class="list-group-item">
-            <%= render 'sheet_tags', sheet:@sheet %>
+            <%= render 'sheet_tags', sheet:sheet %>
         </li>
 
         <li class="list-group-item well">
-            <%= render 'like_sheet_button' %>
+            <%= render 'like_sheet_button', sheet:sheet %>
         </li>
     </ul>
 </div>

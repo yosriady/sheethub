@@ -19,7 +19,6 @@ class OrdersController < ApplicationController
     end
 
     @order.token = response.token
-
     if @order.save
       redirect_to response.redirect_uri
     else

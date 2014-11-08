@@ -3,11 +3,11 @@
     <div class="panel-body list-group">
         <ul id="sheet-files">
             <!-- Main PDF file -->
-            <% if @sheet.pdf.present? %>
+            <% if sheet.pdf.present? %>
             <li>
-                <a href="<%= download_sheet_path(@sheet) %>" title="<%= @sheet.pdf_file_name %>" data-no-turbolink='true'>
+                <a href="<%= download_sheet_path(sheet) %>" title="<%= sheet.pdf_file_name %>" data-no-turbolink='true'>
                     <div class="sheet-file">
-                    <p><i class="fa fa-download"></i> <%= @sheet.pdf_file_name %> <strong><%= number_to_human_size(@sheet.pdf_file_size) %></strong></p>
+                    <p><i class="fa fa-download"></i> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
                     </div>
                 </a>
             </li>
@@ -21,7 +21,7 @@
 
 
             <!-- Additional files -->
-            <% for asset in @sheet.assets %>
+            <% for asset in sheet.assets %>
                 <%= render 'assets/asset', asset: asset %>
             <% end %>
             </ul>

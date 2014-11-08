@@ -1,6 +1,6 @@
 <% if tags.each do |tag| %>
     <a href="<%= tag_path(tag) %>">
-    <span class="tag" data-toggle="tooltip" data-placement="top" title="<%= tag.taggings_count %> sheets found">
+    <span class="tag" data-toggle="tooltip" data-placement="top">
         <span class="fa fa-<%= tag_icon(tag) %>"></span>
         <%= tag.name.titleize %>
     </span>

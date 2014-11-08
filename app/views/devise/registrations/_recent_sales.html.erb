@@ -1,4 +1,4 @@
-<% if @sales_past_month.any? %>
+<% if sales.any? %>
   <h3>Recent Sales</h3>
   <table class="table table-striped">
     <thead class="bg-info">
@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-        <% @sales_past_month.each do |order| %>
+        <% sales.each do |order| %>
           <tr>
             <td><%= order.purchased_at.strftime("%A, %d %b %Y %l:%M %p") %></td>
             <td><%= link_to order.sheet.title, sheet_path(order.sheet) %></td>

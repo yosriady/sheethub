@@ -3,7 +3,7 @@
     <div class="panel-body">
 
     <ul id="sheet-files" class="editable">
-    <% for asset in @sheet.assets %>
+    <% for asset in sheet.assets %>
         <%= render 'assets/asset', asset: asset %>
     <% end %>
     </ul>
@@ -11,7 +11,7 @@
     <div id="assets_container"></div>
 
     <%= s3_uploader_form id: "s3-uploader",
-      data: {:sheet_id => @sheet.id},
+      data: {:sheet_id => sheet.id},
       key: "files/{unique_id}-#{SecureRandom.hex}/${filename}",
       key_starts_with: "files/",
       callback_url: assets_path,

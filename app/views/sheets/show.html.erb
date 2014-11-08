@@ -11,7 +11,7 @@
             <h4>from <a href="<%= user_profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.username %></a></h4>
         </div>
         <div class="col-xs-4">
-            <%= render 'buy_now' %>
+            <%= render 'buy_now', sheet:@sheet %>
         </div>
     </div>
     <div class="row">
@@ -31,17 +31,17 @@
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4">
-            <%= render 'sheet_info' %>
-            <%= render 'sheet_files' %>
+            <%= render 'sheet_info', sheet:@sheet %>
+            <%= render 'sheet_files', sheet: @sheet %>
 
-            <%= render 'sheet_share' %>
+            <%= render 'sheet_share', sheet: @sheet %>
 
             <div class="panel panel-info">
                 <%= render 'layouts/twitter_widget' %>
                 <%= render 'layouts/facebook_widget' %>
             </div>
 
-            <%= render 'flag_sheet_button' %>
+            <%= render 'flag_sheet_button', sheet: @sheet %>
         </div>
     </div>
 </div>
