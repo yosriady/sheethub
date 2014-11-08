@@ -12,7 +12,7 @@
 
     <div id="browse-instruments" class="panel-collapse collapse">
     <div class="panel-body">
-        <%= render 'instruments', instruments: @instruments %>
+        <%= render 'instruments', instruments: instruments %>
     </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
 
     <div id="browse-composers" class="panel-collapse collapse">
     <div class="panel-body">
-        <%= render 'tags', tags: @composers %>
+        <%= render 'tags', tags: composers %>
         <br />
         <a href="<%= composers_path %>">View All Composers</a>
     </div>
@@ -48,7 +48,7 @@
 
     <div id="browse-genres" class="panel-collapse collapse">
     <div class="panel-body">
-        <%= render 'tags', tags: @genres %>
+        <%= render 'tags', tags: genres %>
         <br />
         <a href="<%= genres_path %>">View All Genres</a>
     </div>
@@ -67,7 +67,7 @@
 
     <div id="browse-sources" class="panel-collapse collapse">
     <div class="panel-body">
-        <%= render 'tags', tags: @sources %>
+        <%= render 'tags', tags: sources %>
         <br />
         <a href="<%= sources_path %>">View All Sources</a>
     </div>

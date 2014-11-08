@@ -1,9 +1,9 @@
 <div class="tab-pane active" id="sheets">
   <% if sheets.any? %>
-    <%= render '/sheets/sheets', sheets: @sheets %>
+    <%= render '/sheets/sheets', sheets: sheets %>
   <% else %>
     <h2><i class="fa fa-eye-slash"></i></h2>
-    <% if @user == current_user %>
+    <% if user == current_user %>
       <h2>You have no sheets.</h2>
       <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-cloud-upload"></span> Upload</a>
     <% else %>
