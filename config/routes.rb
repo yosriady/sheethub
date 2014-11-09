@@ -1,7 +1,7 @@
 
 Rails.application.routes.draw do
 
-  # mount PgHero::Engine, at: "pghero"
+  mount PgHero::Engine, at: "pghero"
 
   post 'checkout' => 'orders#checkout'
   get 'orders/success'

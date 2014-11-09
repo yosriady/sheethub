@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def purchased_orders
-    Order.includes(:sheet).where(user_id: id, status: Order.statuses[:completed])
+    Order.where(user_id: id, status: Order.statuses[:completed])
   end
 
   def purchased?(sheet_id)

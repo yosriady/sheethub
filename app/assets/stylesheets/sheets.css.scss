@@ -3,6 +3,13 @@
     float: left;
 }
 
+#purchased-sheets {
+    .sheet {
+        width: 50%;
+        margin: 10px auto;
+    }
+}
+
 .sheet {
     background: white;
     width: 32%;

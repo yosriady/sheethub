@@ -2,10 +2,10 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-8">
-            <h4>Thank You For Your Purchase</h4>
+        <h3>Thank You For Your Purchase</h3>
+        <div class="col-xs-8 white-container">
             <p class="bg-primary"><i class="fa fa-thumbs-up"></i> You now have <strong>Unlimited Access</strong> to <%= @order.sheet.title %></p>
-            <div id="sheets">
+            <div id="sheets purchased-sheets">
                 <%= render 'sheets/sheet', sheet: @order.sheet %>
             </div>
 
@@ -16,7 +16,7 @@
         </div>
         <div class="col-xs-4">
             <div class="well">
-                <a href="<%= user_purchases_path %>" class="btn btn-block btn-success"><i class="fa fa-shopping-cart"></i> Your Purchases</a>
+                <a href="<%= user_purchases_path %>" class="btn btn-block btn-success"><i class="fa fa-shopping-cart"></i> View Your Purchases</a>
             </div>
         </div>
     </div>

@@ -134,7 +134,7 @@ class Sheet < ActiveRecord::Base
     pdf.expiring_url(EXPIRATION_TIME)
   end
 
-  # TODO: currently related_sheets is limited to 4 results for performance, refactor with ElasticSearch
+  # TODO: currently related_sheets is limited to 3 results for performance, refactor with ElasticSearch
   def related_sheets
     return [] if joined_tags.empty?
     sql = "
@@ -146,7 +146,7 @@ class Sheet < ActiveRecord::Base
            AND taggings.tag_id = tags.id
            AND tags.name IN (#{joined_tags}))
     GROUP BY sheets.id ORDER BY count DESC
-    LIMIT 4
+    LIMIT 3
     "
     Sheet.find_by_sql(sql)
   end

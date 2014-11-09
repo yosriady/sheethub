@@ -8,6 +8,7 @@
         <% for sheet in sheet.related_sheets %>
             <a href="<%= sheet_path(sheet) %>">
             <div class="related-sheet">
+                <i class="pull-right fa fa-bookmark"></i>
                 <em><%= sheet.instruments.join(", ") %></em>
                 <h4><%= sheet.title %></h4>
                 <h5>

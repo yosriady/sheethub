@@ -8,7 +8,7 @@ gem 'pg'
 gem 'unicorn-rails'
 
 # DB analytics
-# gem 'pghero'
+gem 'pghero'
 
 # Admin
 gem 'activeadmin', github: 'activeadmin'

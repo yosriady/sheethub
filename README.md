@@ -31,3 +31,4 @@ rails s
 '''
 TODO
 '''
+Don’t forget to run Sheet.reindex when dropping/re-creating tables

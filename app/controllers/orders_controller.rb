@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  SUCCESS_ORDER_PURCHASE_MESSAGE = "Purchase successful."
+  SUCCESS_ORDER_PURCHASE_MESSAGE = "Great success! Thank you for your purchase."
   CANCEL_ORDER_PURCHASE_MESSAGE = "Purchase canceled."
 
   before_action :authenticate_user!, :only => [:checkout, :success, :cancel]

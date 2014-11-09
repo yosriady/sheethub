@@ -1,6 +1,6 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: [:show, :update, :destroy, :report, :flag, :like, :download, :purchase]
-  before_action :set_sheet_lazy, only: [:edit]
+  before_action :set_sheet, only: [:show, :update]
+  before_action :set_sheet_lazy, only: [:edit, :report, :flag, :like, :destroy, :download]
   before_action :set_deleted_sheet, only: [:restore]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
@@ -15,14 +15,14 @@ class SheetsController < ApplicationController
   ERROR_UNSIGNED_LIKE_MESSAGE = 'You need to be signed in to like'
   SUCCESS_LIKE_MESSAGE = 'Liked!'
   SUCCESS_UNLIKE_MESSAGE = 'Unliked!'
-  SUCCESS_CREATE_SHEET_MESSAGE = 'Sheet was successfully created.'
-  SUCCESS_UPDATE_SHEET_MESSAGE = 'Sheet was successfully updated.'
-  ERROR_UPDATE_SHEET_MESSAGE = 'You cannot edit this Sheet because you are not the owner.'
+  SUCCESS_CREATE_SHEET_MESSAGE = "Woohoo! You've uploaded a new sheet!"
+  SUCCESS_UPDATE_SHEET_MESSAGE = "Fine piece of work! You've updated your sheet."
+  ERROR_UPDATE_SHEET_MESSAGE = 'Oops! You cannot edit this Sheet because you are not the owner.'
   SUCCESS_DESTROY_SHEET_MESSAGE = 'Sheet was successfully destroyed.'
   SUCCESS_RESTORE_SHEET_MESSAGE = 'Sheet was successfully restored.'
   ERROR_SHEET_NOT_FOUND_MESSAGE = 'Sheet not found'
   ERROR_CANNOT_RESTORE_UNDESTROYED_SHEET = 'You cannot restore an un-deleted Sheet.'
-  ERROR_PDF_UNPURCHASED_MESSAGE = 'You must purchase to have access to this file.'
+  ERROR_PDF_UNPURCHASED_MESSAGE = 'Buy now to get unlimited access to this file.'
   SEARCH_PAGE_SIZE = 24
 
   # GET /sheets
@@ -41,7 +41,7 @@ class SheetsController < ApplicationController
   end
 
   def best_sellers
-    @sheets = Sheet.best_sellers.page(params[:page])
+    @sheets = Sheet.includes(:user).best_sellers.page(params[:page])
   end
 
   # GET /sheets/1

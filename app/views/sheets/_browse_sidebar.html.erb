@@ -20,25 +20,6 @@
   <div class="panel panel-info">
     <div class="panel-heading">
       <p class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#browse-composers">
-          <i class="fa fa-users"></i>
-          Composers
-        </a>
-      </p>
-    </div>
-
-    <div id="browse-composers" class="panel-collapse collapse">
-    <div class="panel-body">
-        <%= render 'tags', tags: composers %>
-        <br />
-        <a href="<%= composers_path %>">View All Composers</a>
-    </div>
-    </div>
-  </div>
-
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <p class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#browse-genres">
           <i class="fa fa-headphones"></i>
           Genres
@@ -51,6 +32,25 @@
         <%= render 'tags', tags: genres %>
         <br />
         <a href="<%= genres_path %>">View All Genres</a>
+    </div>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <p class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#browse-composers">
+          <i class="fa fa-users"></i>
+          Composers
+        </a>
+      </p>
+    </div>
+
+    <div id="browse-composers" class="panel-collapse collapse">
+    <div class="panel-body">
+        <%= render 'tags', tags: composers %>
+        <br />
+        <a href="<%= composers_path %>">View All Composers</a>
     </div>
     </div>
   </div>

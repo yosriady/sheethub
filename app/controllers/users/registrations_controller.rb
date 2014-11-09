@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  SUCCESS_UPDATE_PROFILE_MESSAGE = 'Your profile was successfully updated.'
+  SUCCESS_UPDATE_PROFILE_MESSAGE = "Nice! You've successfully updated your profile."
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
   before_action :set_user, :only => [:profile, :likes, :sheets]
@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def likes
-    @likes = @user.find_voted_items
+    @likes = @user.votes.includes(:votable).page(params[:page])
   end
 
   def purchases
