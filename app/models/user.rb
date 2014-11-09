@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
-  MISSING_AVATAR_URL = "/images/missing.png"
+  MISSING_AVATAR_URL = "/images/default_avatar.png"
   EXPIRATION_TIME = 600
   FREE_QUANTITY_OF_SHEETS = 150
   PREMIUM_QUANTITY_OF_SHEETS = 500
@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates_email_format_of :email, message: 'You have an invalid email address'
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   validate :validate_number_of_uploaded_sheets
+  before_save :downcase_username
   has_many :sheets, dependent: :destroy
   acts_as_voter
 
@@ -133,6 +134,10 @@ class User < ActiveRecord::Base
   end
 
   private
+    def downcase_username
+      username = username.downcase unless username.blank?
+    end
+
     def validate_number_of_uploaded_sheets
       errors.add(:sheets, "You have exceeded the number of sheets you can upload. Free users have 30, Premium can have up to 250. Upgrade your membership to continue publishing on SheetHub. ") if sheets.size > membership_sheet_quantity
     end
