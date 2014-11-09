@@ -1,16 +1,16 @@
 <% if current_user.present? %>
     <% if current_user.voted_for? sheet %>
-    <a href="<%= like_sheet_path(sheet) %>" data-method="post">
-        <button type="button" class="btn btn-block btn-default"><i class="fa fa-thumbs-up"></i> Liked!</button>
+    <a href="<%= favorite_sheet_path(sheet) %>" data-method="post">
+        <button type="button" class="btn btn-block btn-default"><i class="fa fa-star"></i> Favorited!</button>
     </a>
     <% else %>
-    <a href="<%= like_sheet_path(sheet) %>" data-method="post">
-        <button type="button" class="btn btn-block btn-success"><i class="fa fa-thumbs-up"></i> Like</button>
+    <a href="<%= favorite_sheet_path(sheet) %>" data-method="post">
+        <button type="button" class="btn btn-block btn-success"><i class="fa fa-star"></i> Favorite </button>
     </a>
     <% end %>
 <% else %>
     <!-- TODO: Show like button, but link to login/signup page -->
     <a href="<%= new_user_session_path %>">
-        <button type="button" class="btn btn-block btn-success"><i class="fa fa-thumbs-up"></i> Like</button>
+        <button type="button" class="btn btn-block btn-success"><i class="fa fa-star"></i> Favorite</button>
     </a>
 <% end %>

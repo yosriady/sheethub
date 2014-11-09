@@ -1,17 +1,17 @@
 <div class="panel panel-success">
-    <div class="panel-body bg-success">
+    <div class="panel-body bg-feathers">
         <% if current_user && sheet.uploaded_by?(current_user) %>
             <%= render 'edit_sheet_button', sheet: sheet %>
         <% elsif current_user && sheet.purchased_by?(current_user) %>
-            <span class="sheet-price text-center"><p><i class="fa fa-smile-o"></i> PURCHASED</p></span>
+            <span class="sheet-buy-now-text text-center"><p><i class="fa fa-smile-o"></i> PURCHASED</p></span>
         <% elsif sheet.is_free? %>
-            <span class="sheet-price text-center"><p><i class="fa fa-smile-o"></i> FREE</p></span>
+            <span class="sheet-buy-now-text text-center"><p><i class="fa fa-smile-o"></i> FREE</p></span>
         <% elsif current_user.nil? %>
+            <a href="<%= new_user_session_path %>"><button type="button" class="btn btn-success col-xs-8"><i class="fa fa-shopping-cart"></i> Buy Now</button></a>
             <span class="sheet-price col-xs-4"><p><%= "$#{sheet.price}" %></p></span>
-            <a href="<%= new_user_session_path %>"><button type="button" class="btn btn-success btn-lg col-xs-8"><i class="fa fa-shopping-cart"></i> Buy Now</button></a>
         <% else %>
+            <a data-toggle="modal" data-target="#buyNowModal"><button type="button" class="btn btn-success col-xs-8"><i class="fa fa-shopping-cart"></i> Buy Now</button></a>
             <span class="sheet-price col-xs-4"><p><%= "$#{sheet.price}" %></p></span>
-            <a data-toggle="modal" data-target="#buyNowModal"><button type="button" class="btn btn-success btn-lg col-xs-8">Buy Now</button></a>
         <% end %>
     </div>
 </div>

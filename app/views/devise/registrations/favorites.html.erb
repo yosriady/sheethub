@@ -1,5 +1,5 @@
 <% if @user %>
-  <% title "#{@user.username}'s Likes"  %>
+  <% title "#{@user.username}'s Favorites"  %>
 
   <%= render 'profile_banner', user:@user %>
 
@@ -11,18 +11,18 @@
           <ul class="nav nav-pills">
             <li><a href="<%= user_profile_path(@user.username) %>"><i class="fa fa-music"></i> Sheet Music </a></li>
 
-            <li class="active"><a href="<%= user_likes_path(@user.username) %>"><i class="fa fa-thumbs-up"></i> Likes <span class="badge"><%= @likes.size %></span></a></li>
+            <li class="active"><a href="<%= user_favorites_path(@user.username) %>"><i class="fa fa-star"></i> Favorites <span class="badge"><%= @favorites.size %></span></a></li>
           </ul>
 
-          <% if @likes.any? %>
-            <%= render 'likes', likes: @likes %>
+          <% if @favorites.any? %>
+            <%= render 'favorites', favorites: @favorites %>
           <% else %>
             <h2><i class="fa fa-eye-slash"></i></h2>
             <% if @user == current_user %>
-              <h2>You have no likes.</h2>
+              <h2>You have no favorites.</h2>
               <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-picture"></span> Browse</a>
             <% else %>
-              <h2>This user has no likes.</h2>
+              <h2>This user has no favorites.</h2>
             <% end %>
           <% end %>
 

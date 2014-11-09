@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   SUCCESS_UPDATE_PROFILE_MESSAGE = "Nice! You've successfully updated your profile."
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
-  before_action :set_user, :only => [:profile, :likes, :sheets]
+  before_action :set_user, :only => [:profile, :favorites, :sheets]
   before_action :validate_registration_finished
   before_action :validate_has_published, :only => [:sales]
   before_action :authenticate_user!, :only => [:purchases, :sales, :trash, :private_music]
@@ -20,8 +20,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @private_sheets = current_user.private_sheets.page(params[:page])
   end
 
-  def likes
-    @likes = @user.votes.includes(:votable).page(params[:page])
+  def favorites
+    @favorites = @user.votes.includes(:votable).page(params[:page])
   end
 
   def purchases

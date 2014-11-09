@@ -1,6 +1,6 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :update]
-  before_action :set_sheet_lazy, only: [:edit, :report, :flag, :like, :destroy, :download]
+  before_action :set_sheet_lazy, only: [:edit, :report, :flag, :favorite, :destroy, :download]
   before_action :set_deleted_sheet, only: [:restore]
   before_action :normalize_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
@@ -12,15 +12,15 @@ class SheetsController < ApplicationController
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
   DEFAULT_FLAG_MESSAGE = "No Message."
   SUCCESS_FLAG_MESSAGE = "Succesfully reported! We'll come back to you in 72 hours."
-  ERROR_UNSIGNED_LIKE_MESSAGE = 'You need to be signed in to like'
-  SUCCESS_LIKE_MESSAGE = 'Liked!'
-  SUCCESS_UNLIKE_MESSAGE = 'Unliked!'
-  SUCCESS_CREATE_SHEET_MESSAGE = "Woohoo! You've uploaded a new sheet!"
+  ERROR_UNSIGNED_FAVORITE_MESSAGE = 'You need to be signed in to favorite'
+  SUCCESS_FAVORITE_MESSAGE = 'Sweet! Added to favorites.'
+  SUCCESS_UNFAVORITE_MESSAGE = 'Removed from favorites.'
+  SUCCESS_CREATE_SHEET_MESSAGE = "Woohoo! You've uploaded a new sheet."
   SUCCESS_UPDATE_SHEET_MESSAGE = "Fine piece of work! You've updated your sheet."
   ERROR_UPDATE_SHEET_MESSAGE = 'Oops! You cannot edit this Sheet because you are not the owner.'
   SUCCESS_DESTROY_SHEET_MESSAGE = 'Sheet was successfully destroyed.'
   SUCCESS_RESTORE_SHEET_MESSAGE = 'Sheet was successfully restored.'
-  ERROR_SHEET_NOT_FOUND_MESSAGE = 'Sheet not found'
+  ERROR_SHEET_NOT_FOUND_MESSAGE = 'Oops! Sheet not found.'
   ERROR_CANNOT_RESTORE_UNDESTROYED_SHEET = 'You cannot restore an un-deleted Sheet.'
   ERROR_PDF_UNPURCHASED_MESSAGE = 'Buy now to get unlimited access to this file.'
   SEARCH_PAGE_SIZE = 24
@@ -70,17 +70,17 @@ class SheetsController < ApplicationController
     redirect_to sheet_path(@sheet), notice: SUCCESS_FLAG_MESSAGE
   end
 
-  # Likes/Unlikes a Sheet
-  def like
+  # Favorites/Unfavorites a Sheet
+  def favorite
     unless current_user
-      redirect_to new_user_session_path, error: ERROR_UNSIGNED_LIKE_MESSAGE
+      redirect_to new_user_session_path, error: ERROR_UNSIGNED_FAVORITE_MESSAGE
     end
     if @sheet && (!current_user.voted_for? @sheet)
       @sheet.liked_by current_user
-      redirect_to sheet_path(@sheet), notice: SUCCESS_LIKE_MESSAGE
+      redirect_to sheet_path(@sheet), notice: SUCCESS_FAVORITE_MESSAGE
     elsif @sheet && (current_user.voted_for? @sheet)
       @sheet.unliked_by current_user
-      redirect_to sheet_path(@sheet), notice: SUCCESS_UNLIKE_MESSAGE
+      redirect_to sheet_path(@sheet), notice: SUCCESS_UNFAVORITE_MESSAGE
     else
       redirect_to root_path, error: ERROR_SHEET_NOT_FOUND_MESSAGE
     end

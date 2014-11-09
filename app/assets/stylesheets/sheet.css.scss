@@ -16,21 +16,24 @@
 
     h4 {
         margin-top:0px;
-        margin-bottom:30px;
         color: #aaa;
     }
 
 }
 
-.sheet-price {
-    font-size: 20px;
-    line-height: 45px;
-    font-weight:700;
+.sheet-buy-now-text, .sheet-price {
+    font-size: 24px;
     color: #5cb85c;
+    font-weight: bold;
 
     p {
         margin-bottom:0px;
     }
+}
+
+.sheet-price {
+    line-height: 34px;
+    padding-left: 30px;
 }
 
 .sample_sheet {

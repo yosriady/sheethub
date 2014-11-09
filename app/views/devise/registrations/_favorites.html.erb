@@ -1,0 +1,11 @@
+<div id="favorites">
+  <% if favorites.each do |favorite| %>
+  <%= render 'sheets/sheet', sheet: favorite.votable %>
+  <% end.empty? %>
+  <h2><i class="fa fa-eye-slash"></i></h2>
+  <h2>No favorites yet!</h2>
+  <% end %>
+</div>
+<div id="paginator" class="text-center">
+  <%= paginate favorites %>
+</div>
