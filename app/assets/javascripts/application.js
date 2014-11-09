@@ -27,4 +27,5 @@
 //= require twitter
 //= require fb-sdk
 //= require paypal-checkout
+//= require profile-settings
 //= require_tree .

@@ -30,8 +30,8 @@
             <%= f.label :avatar %>
             <p class="bg-info"><span class="fa fa-picture"></span> Avatar dimensions can be up to 300x300 pixels or less. </p>
             <div class="avatar-input well">
-              <%= image_tag resource.avatar_url %>
-              <%= f.file_field :avatar %>
+              <%= image_tag resource.avatar_url, id: 'avatar-preview' %>
+              <%= f.file_field :avatar, onchange: "readUploadImage(this)" %>
             </div>
           </div>
 
