@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108113838) do
+ActiveRecord::Schema.define(version: 20141110072221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20141108113838) do
     t.float    "cached_weighted_average", default: 0.0
     t.integer  "price_cents",             default: 0,     null: false
     t.datetime "deleted_at"
-    t.integer  "publishing_right",                        null: false
+    t.integer  "license",                                 null: false
     t.integer  "total_sold",              default: 0
   end
 

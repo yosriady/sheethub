@@ -32,15 +32,19 @@ $(document).on("page:change", function() {
 
     $('#sheet_difficulty').selectize({});
 
-    $('#sheet_publishing_right').selectize({
+    $('#sheet_license').selectize({
         options: [{
-            "label":'This title is my original composition',
-            "value":'original'
+            "label":'All rights reserved. This title is my original work.',
+            "value":'all_rights_reserved'
         }, {
-            "label":'I have acquired the necessary publishing and worldwide distribution rights',
-            "value":'rights'
+            "label":'Creative Commons (Attribution-NonCommercial-NoDerivatives-ShareAlike).',
+            "value":'creative_commons'
         }, {
-            "label":'This is a public domain work',
+            "label":'Creative Commons Zero. ',
+            "value":'cc0'
+        },
+        {
+            "label":'This is a public domain work.',
             "value":'public_domain'
         }],
         valueField: 'value',

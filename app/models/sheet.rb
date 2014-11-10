@@ -16,7 +16,7 @@ class Sheet < ActiveRecord::Base
   extend FriendlyId
   friendly_id :sheet_slug, :use => :slugged
   validates :title, presence: true
-  validates :publishing_right, presence: true
+  validates :license, presence: true
   has_many :flags, :dependent => :destroy
 
   scope :is_public, -> { where(is_public: true) }
@@ -26,7 +26,7 @@ class Sheet < ActiveRecord::Base
 
   attr_accessor :instruments_list # For form parsing
   enum difficulty: %w{ beginner intermediate advanced }
-  enum publishing_right: %w{original rights public_domain}
+  enum license: %w{all_rights_reserved creative_commons cc0 public_domain}
   bitmask :instruments, :as => [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], :null => false
   validates :instruments, presence: true
   acts_as_taggable
@@ -51,9 +51,10 @@ class Sheet < ActiveRecord::Base
     :on => [:create, :update],
     :message => INVALID_ASSETS_MESSAGE
 
-  def rights
-    return "Original" if original?
-    return "With Publishing Rights" if rights?
+  def verbose_license
+    return "All rights reserved" if all_rights_reserved?
+    return "Creative Commons" if creative_commons?
+    return "CC0" if cc0?
     return "Public Domain" if public_domain?
   end
 

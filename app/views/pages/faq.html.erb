@@ -1,9 +1,7 @@
 <% title "Frequently Asked Questions"  %>
-
-<div id="banner">
-    <h1>Frequently Asked Questions</h1>
-</div>
 <div class="container">
+<h2>Help</h2>
+
 <div class="col-xs-9">
 
 <div class="panel-group" role="tablist" aria-multiselectable="true">
@@ -23,7 +21,6 @@
 <li>Publishing and distribution rights acquired - you have worked with a publisher or copyright holder and received approval to sell the sheet music on a worldwide basis</li>
 <li>Unique version of a public domain sheet music - you have arranged a public domain work in a unique way that differentiates it from products currently available for sale on SheetHub.</li>
 </ul>"%>
-  <%= render "faq_item", id:"infringement-flagging", question: "How do I let SheetHub know about a potential copyright infringement?", answer: "Send a message with all of the details and proof of copyright ownership and examples of the potential infringement via the “Report” button on the infringing sheet page"%>
   <%= render "faq_item", id:"copyright-report", question: "How do I report a copyright infringement?", answer:"<p>If you are a copyright owner or an agent of a copyright owner and believe that any User Material or other content that has been made available on or through the Website infringes upon your copyrights, provide the following information on the Report page:</p>
 
         <ul>
@@ -35,6 +32,26 @@
         <li>a statement by you that the information in the Notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the owner of the exclusive right that is allegedly infringed; and</li>
         <li>an electronic or physical signature (which may be a scanned copy) of a person authorized to act on behalf of owner of the work that is allegedly infringed.</li>
         </ul>" %>
+    <%= render "faq_item", id:"licenses", question: "What licenses do I choose?", answer:"<ul>
+<li><strong>None. (All rights reserved)</strong> As the copyright holder, you reserve, or hold for your own use, all the rights provided by copyright law on your work, such as distribution, performance, and creation of derivative works.</li>
+<li><strong>Creative Commons. </strong>
+Offering your work under a <a href='https://creativecommons.org/choose/'>Creative Commons</a> license does not mean giving up your copyright. It means offering some of your rights to any member of the public but only under certain conditions.
+<ul>
+<li>Attribution.
+You let others copy, distribute, display, and perform your copyrighted work but only if they give credit the way you request.</li>
+<li>Non-Commercial.
+You let others copy, distribute, display, and perform your work — and derivative works based upon it — but for noncommercial purposes only.</li>
+<li>No Derivative Works.
+You let others copy, distribute, display, and perform only verbatim copies of your work, not derivative works based upon it.</li>
+<li>Share Alike.
+You allow others to distribute derivative works only under a license identical to the license that governs your work.</li>
+</ul
+</li>
+<li><strong><a href='http://creativecommons.org/publicdomain/zero/1.0/'>Creative Commons Zero</a>.</strong> You waive the interest in your works and thereby place it as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright.</li>
+<li><strong>Public Domain Mark. </strong>
+The Public Domain Mark is recommended for works that are free of known copyright around the world. These will typically be very old works. It is not recommended for use with works that are in the public domain in some jurisdictions if they also known to be restricted by copyright in others.</li>
+</ul>
+    " %>
 </div>
 
 
