@@ -5,14 +5,27 @@
         <h3>Thank You For Your Purchase</h3>
         <div class="col-xs-8 white-container">
             <p class="bg-primary"><i class="fa fa-thumbs-up"></i> You now have <strong>Unlimited Access</strong> to <%= @order.sheet.title %></p>
-            <div id="sheets purchased-sheets">
+            <div id="sheets" class="wide-sheets">
                 <%= render 'sheets/sheet', sheet: @order.sheet %>
             </div>
 
             <div class="pull-left">
                 <strong>What happens next?</strong>
-                <p>You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy! </p>
+                <p>You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy! Be sure to share your purchase to the world!</p>
             </div>
+
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=Woohoo<%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-facebook">
+                    <i class="fa fa-facebook"></i> Share on Facebook
+                </a>
+                <a href="https://plus.google.com/share?url=<%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-google-plus">
+                    <i class="fa fa-google-plus"></i> Share on Google+
+                </a>
+                <a  href="https://twitter.com/home?status=<%= @order.sheet.title %> <%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-twitter">
+                    <i class="fa fa-twitter"></i> Share on Twitter
+                </a>
+            </div>
+
         </div>
         <div class="col-xs-4">
             <div class="well">
