@@ -1,6 +1,7 @@
 class Asset < ActiveRecord::Base
   ASSET_HASH_SECRET = "sheethubhashsecret"
   EXPIRATION_TIME = 600
+  MAX_FILESIZE = 20
 
   belongs_to :sheet
   acts_as_paranoid
@@ -9,6 +10,7 @@ class Asset < ActiveRecord::Base
   has_attached_file :file,
                     :hash_secret => ASSET_HASH_SECRET, #TODO: Use ENV for this
                     :preserve_files => "true"
+  validates_attachment_size :file, :in => 0.megabytes..MAX_FILESIZE.megabytes
   # TODO: validate attachment content type: MIDI, .ptb, .gp5, .tg, etc...
 
   def s3_key

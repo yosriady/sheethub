@@ -5,6 +5,7 @@ class Sheet < ActiveRecord::Base
   EXPIRATION_TIME = 600
   PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $1.99 - $999.99"
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
+  MAX_FILESIZE = 20
 
   before_create :record_publisher
   validate :validate_price
@@ -43,6 +44,7 @@ class Sheet < ActiveRecord::Base
                     :preserve_files => "true"
   validates_attachment_content_type :pdf,
       :content_type => [ 'application/pdf' ]
+  validates_attachment_size :pdf, :in => 0.megabytes..MAX_FILESIZE.megabytes
   validates :pdf, presence: true
 
   has_many :assets, :dependent => :destroy
