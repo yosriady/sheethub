@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <h3 class="text-center">Report <%= link_to @sheet.title, @sheet %></h3>
-    <div class="col-lg-4 col-lg-offset-4 white-container">
-        <p class="bg-info"><i class="fa fa-thumbs-up"></i> We take copyright infringements very seriously. <a href="<%= faq_path %>#publishing-rights"><i class="fa fa-question-circle"></i></a></p>
+    <div class="col-xs-4 col-xs-offset-4 white-container">
+        <p class="bg-info"><i class="fa fa-thumbs-up"></i> We take copyright infringements very seriously. <a href="<%= faq_path %>#copyright-report"><i class="fa fa-question-circle"></i></a></p>
         <%= simple_form_for Flag.new,
             :url => url_for(:action => 'flag', :controller => 'sheets'),
             :method => 'post',

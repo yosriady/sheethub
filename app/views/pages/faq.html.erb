@@ -24,7 +24,19 @@
 <li>Unique version of a public domain sheet music - you have arranged a public domain work in a unique way that differentiates it from products currently available for sale on SheetHub.</li>
 </ul>"%>
   <%= render "faq_item", id:"infringement-flagging", question: "How do I let SheetHub know about a potential copyright infringement?", answer: "Send a message with all of the details and proof of copyright ownership and examples of the potential infringement via the “Report” button on the infringing sheet page"%>
+  <%= render "faq_item", id:"copyright-report", question: "How do I report a copyright infringement?", answer:"<p>If you are a copyright owner or an agent of a copyright owner and believe that any User Material or other content that has been made available on or through the Website infringes upon your copyrights, provide the following information on the Report page:</p>
+
+        <ul>
+        <li> a statement that you have identified material on the Website which infringes your copyright or the copyright of a third party on whose behalf you are entitled to act;</li>
+        <li>a description of the copyrighted work that you claim has been infringed;</li>
+        <li>a description specifying the material that you claim is infringing and the location of the material on our (including, for example, a URL and/or screen shot);</li>
+        your full name, telephone number and e-mail address on which you can be contacted;
+        <li>a statement by you that you have a good faith belief that the disputed use of the material is not authorized by the copyright owner, its agent, or the law;</li>
+        <li>a statement by you that the information in the Notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the owner of the exclusive right that is allegedly infringed; and</li>
+        <li>an electronic or physical signature (which may be a scanned copy) of a person authorized to act on behalf of owner of the work that is allegedly infringed.</li>
+        </ul>" %>
 </div>
+
 
 </div>
 <div class="col-xs-3">
@@ -40,3 +52,10 @@
 </div>
 
 </div>
+
+<script>
+  $(document).on("page:change", function() {
+    var faq_id = location.hash;
+    $(location.hash).collapse("toggle");
+  });
+</script>
