@@ -43,11 +43,11 @@ class User < ActiveRecord::Base
   end
 
   def public_sheets
-    sheets.where(is_public: true)
+    sheets.where(visibility: Sheet.visibilities[:vpublic])
   end
 
   def private_sheets
-    sheets.where(is_public: false)
+    sheets.where(visibility: Sheet.visibilities[:vprivate])
   end
 
   def has_paypal_email?

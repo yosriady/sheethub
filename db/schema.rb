@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110072221) do
+ActiveRecord::Schema.define(version: 20141110110353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 20141110072221) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "sheets", force: true do |t|
-    t.boolean  "is_public",               default: true,  null: false
     t.boolean  "is_flagged",              default: false, null: false
     t.string   "title",                                   null: false
     t.text     "description",                             null: false
@@ -130,6 +129,7 @@ ActiveRecord::Schema.define(version: 20141110072221) do
     t.datetime "deleted_at"
     t.integer  "license",                                 null: false
     t.integer  "total_sold",              default: 0
+    t.integer  "visibility",              default: 0
   end
 
   add_index "sheets", ["cached_votes_down"], name: "index_sheets_on_cached_votes_down", using: :btree
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 20141110072221) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"

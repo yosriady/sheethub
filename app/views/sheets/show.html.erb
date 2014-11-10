@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div id="sheet-header" class="col-xs-8">
-            <% if !@sheet.is_public %>
+            <% if @sheet.privately_visible? %>
                 <strong><i class="fa fa-eye-slash"></i> PRIVATE</strong>
             <% end %>
 

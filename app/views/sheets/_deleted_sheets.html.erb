@@ -2,7 +2,7 @@
   <% if sheets.each do |sheet| %>
     <a href="<%= restore_sheet_path(sheet) %>" data-method="post"><div class="sheet" title="<%= sheet.title + " by " + sheet.composer_list.to_s.titleize if sheet.composer_list.any? %>">
       <div class="sheet-text">
-        <% if !sheet.is_public%>
+        <% if sheet.privately_visible?%>
           <span class="fa fa-eye-slash pull-right"></span>
         <% end %>
 

@@ -1,8 +1,8 @@
 <div class="panel panel-info">
   <div class="panel-body">
-    <strong class="publishing-rights"><i class="fa fa-certificate"></i> <%= sheet.verbose_license %> <a href="<%= faq_path %>#licenses"><i class="fa fa-question-circle"></i></a></strong>
     <p><%= sheet.description? ? sheet.description : 'No description.'%></p>
     <p><em>Published <%= distance_of_time_in_words(Time.now, sheet.created_at) %> ago</em></p>
+    <strong class="publishing-rights"><i class="fa fa-certificate"></i> <%= sheet.verbose_license %> <a href="<%= faq_path %>#licenses"><i class="fa fa-question-circle"></i></a></strong>
   </div>
 
     <ul class="list-group">

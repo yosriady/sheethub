@@ -18,15 +18,17 @@ class Sheet < ActiveRecord::Base
   friendly_id :sheet_slug, :use => :slugged
   validates :title, presence: true
   validates :license, presence: true
+  validates :visibility, presence: true
   has_many :flags, :dependent => :destroy
 
-  scope :is_public, -> { where(is_public: true) }
-  scope :is_private, -> { where(is_public: false) }
+  scope :is_public, -> { where(visibility: Sheet.visibilities[:vpublic]) }
+  scope :is_private, -> { where(visibility: Sheet.visibilities[:vprivate]) }
   scope :flagged, -> { where(is_flagged: true) }
   scope :best_sellers, -> { is_public.order(price_cents: :desc)}
 
   attr_accessor :instruments_list # For form parsing
-  enum difficulty: %w{ beginner intermediate advanced }
+  enum visibility: %w{ vpublic vprivate}
+  enum difficulty: %w{ beginner intermediate advanced}
   enum license: %w{all_rights_reserved creative_commons cc0 public_domain}
   bitmask :instruments, :as => [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], :null => false
   validates :instruments, presence: true
@@ -56,7 +58,7 @@ class Sheet < ActiveRecord::Base
   def verbose_license
     return "All rights reserved" if all_rights_reserved?
     return "Creative Commons" if creative_commons?
-    return "CC0" if cc0?
+    return "Creative Commons Zero" if cc0?
     return "Public Domain" if public_domain?
   end
 
@@ -68,6 +70,14 @@ class Sheet < ActiveRecord::Base
   def uploaded_by?(usr)
     return false unless usr
     user.id == usr.id
+  end
+
+  def publicly_visible?
+    return vpublic?
+  end
+
+  def privately_visible?
+    return vprivate?
   end
 
   def total_sales

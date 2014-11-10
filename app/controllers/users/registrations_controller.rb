@@ -85,7 +85,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def set_user
-      @user = User.find_by("lower(username) = ?", params[:username].downcase)
+      @user = User.find_by("username = ?", params[:username])
     end
 
     def registration_params

@@ -7,22 +7,29 @@
 <div class="panel-group" role="tablist" aria-multiselectable="true">
   <h4><i class="fa fa-book"></i> General</h4>
   <%= render "faq_item", id:"sheethub-benefits", question: "What does SheetHub give me?", answer: "TODO, see itch.io FAQ" %>
-  <%= render "faq_item", id:"sheethub-costs", question: "How much does SheetHub cost?", answer: "<p>SheetHub costs <strong>nothing</strong> to use. You are free to create sheet pages and upload files without ever having to pay anything. SheetHub makes money by sharing revenue from online transactions. When someone buys your sheet 20% of the cost goes to SheetHub as a fee for hosting your music. If you want a discount or don’t want the cut please feel free to contact us and explain why.
+  <%= render "faq_item", id:"sheethub-costs", question: "How much does SheetHub cost?", answer: "<p>SheetHub costs <strong>nothing</strong> to use. You are free to create sheet pages and upload files without ever having to pay anything. SheetHub makes money by sharing revenue from online transactions. When someone buys your sheet 20% of the listed selling price goes to SheetHub as a fee for hosting your music. You will earn 80% royalties, paid directly and immediately to your Paypal account the moment a user purchases your music. SheetHub does not hold any of your net earnings.
     </p>" %>
+  <%= render "faq_item", id:"earnings-calculation", question: "Someone buys my music for $10, how much do I get?", answer: "TODO"%>
   <%= render "faq_item", id:"howto-upload", question: "How do I upload my music on SheetHub?", answer: "TODO" %>
-  <%= render "faq_item", id:"upload-limit", question: "How many sheet pages can I create?", answer: "There is a soft limit of 25 sheets. The limit is in place to prevent abuse. If you wish to have more, then you should contact us." %>
   <hr>
 
+  <h4><i class="fa fa-music"></i> Sheet Music</h4>
+    <%= render "faq_item", id:"sheet-requirements", question: "What technical requirements do you have for submitted PDFs?", answer: "PDFs submitted must be: <ul><li>sized for printing to 8.5 x 11 inches</li> <li>portrait oriented</li> <li>free of password protection</li> <li>less than 20 MB in size</li></ul>"%>
+     <%= render "faq_item", id:"sheet-recommendations", question: "Any other recommendations on how to format my PDF?", answer: "Users will be able to view a cover page which will be automatically created from the first page of your PDF. Customers are better able to make a purchasing decision if they can see sample of your music that reflect the difficulty, range and uniqueness of your piece."%>
+     <%= render "faq_item", id:"sheet-metadata", question: "What other information can I submit with my sheet music?", answer: "By submitting additional information about your sheet music, you will help users find and ultimately purchase your sheet music. SheetHub also uses the information you supply - instruments, composers, genres, and sources - in our recommendations system. The more detailed information you provide, the more likely that your sheet music appears in related results. "%>
+     <%= render "faq_item", id:"sheet-additional-files", question: "Can I add additional files together with my PDF?", answer: "You can add up to 5 supporting files such as audio files and music notation software specific files through your sheet's edit page. Each file must be less than 20MB in size. "%>
+      <%= render "faq_item", id:"upload-limit", question: "How many sheets can I upload?", answer: "There is a soft limit of 25 sheets. The limit is in place to prevent abuse. If you wish to have more, then you should contact us." %>
+
+  <hr>
   <h4><i class="fa fa-shopping-cart"></i> Purchases</h4>
-    <%= render "faq_item", id:"my-purchases", question: "Where can I find my purchases?", answer: "You can view all your purchases on the <strong>Purchases</strong> page through the user dropdown. Click the individual files you wish to download from the sheet pages. Sheethub will generate expiring, signed URLs for you to start the download. "%>
+    <%= render "faq_item", id:"my-purchases", question: "Where can I find my purchases?", answer: "You can view all your purchases on the <strong>Purchases</strong> page through the user dropdown. Click the individual files you wish to download from the sheet pages. Sheethub will generate an expiring, signed URL for you to start the download. "%>
   <hr>
 
   <h4><i class="fa fa-line-chart"></i> Payments, Sales, and Earnings</h4>
   <%= render "faq_item", id:"payment-flow", question: "How does SheetHub handle payments?", answer: "TODO, see itch.io FAQ"%>
-  <%= render "faq_item", id:"earnings-calculation", question: "Someone buys my music for $10, how much do I get?", answer: "TODO"%>
   <%= render "faq_item", id:"sale-notification", question: "How do I know when I've made a sale?", answer: "TODO, see itch.io FAQ"%>
   <%= render "faq_item", id:"paypal-transfer", question: "What do you need my Paypal Email for?", answer: "You need it to directly receive your sales earnings."%>
-  <%= render "faq_item", id:"payment-information", question: "How do I update my payment information?", answer: "Go to your profile Settings."%>
+  <%= render "faq_item", id:"payment-information", question: "How do I update my payment information?", answer: "You can view and update your payment information by going to your profile <strong>Settings</strong> from the user dropdown."%>
   <%= render "faq_item", id:"payment-security", question: "Do you store my credit card information?", answer: "<strong>No credit card information is stored on our server!</strong> We use Paypal, one of the most secure and reputable payment processors available. PayPal automatically encrypts your confidential information in transit from your computer to ours using the Secure Sockets Layer protocol (SSL) with an encryption key length of 128-bits (the highest level commercially available.) Once your information reaches the PayPal site, it resides on a server that is heavily guarded both physically and electronically. PayPal servers sit behind an electronic firewall and are not directly connected to the internet, so your private information is available only to authorized computers. Visit <a href='https://www.paypal.com/sg/webapps/mpp/paypal-safety-and-security'>Paypal Security Center</a> for more details. "%>
 
   <hr>
@@ -72,7 +79,7 @@ The Public Domain Mark is recommended for works that are free of known copyright
 
   <hr>
   <h4><i class="fa fa-info-circle"></i> Miscellaneous</h4>
-    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "This person:__link_to_profile__. I’m primarily a programmer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent marketplace for written music and have been dissapointed so far, so I decided to try my hand at building one I would use. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think!" %>
+    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to 'This person', user_profile_path('Leventhan')}. I’m primarily a programmer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent marketplace for written music and have been disappointed so far, so I decided to try my hand at building one I would use. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's development. " %>
 
 </div>
 
