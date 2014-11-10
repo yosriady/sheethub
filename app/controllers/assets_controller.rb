@@ -5,8 +5,14 @@ class AssetsController < ApplicationController
   before_action :unescape_url, only: [:create]
 
   def create
-    @asset = Sheet.find(asset_params[:sheet_id]).assets.build(asset_params)
-    @asset.save
+    sheet = Sheet.find(asset_params[:sheet_id])
+    @asset = sheet.assets.build(asset_params)
+    if @asset.valid?
+      @asset.save
+    else
+      flash[:error] = @asset.errors.full_messages.to_sentence
+      redirect_to edit_sheet_path(sheet)
+    end
   end
 
   def destroy
@@ -17,6 +23,7 @@ class AssetsController < ApplicationController
     )
     asset = s3.buckets['sheethub'].objects[@asset.s3_key]
     asset.delete
+    flash[:notice] = "Yay! File succesfully deleted."
     redirect_to :back
   end
 

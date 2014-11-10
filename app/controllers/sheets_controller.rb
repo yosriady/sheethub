@@ -108,7 +108,6 @@ class SheetsController < ApplicationController
         format.json { render :show, status: :created, location: @sheet }
       else
         format.html { render :new }
-        binding.pry
         flash[:error] = @sheet.errors.full_messages.to_sentence
         format.json { render json: @sheet.errors.full_messages.to_sentence, status: :unprocessable_entity }
       end
