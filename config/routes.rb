@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     get 'sales' => "users/registrations#sales", :as => :user_sales
     get 'purchases' => "users/registrations#purchases", :as => :user_purchases
     get 'trash' => "users/registrations#trash", :as => :user_trash
+
+    get '/settings' => 'users/registrations#edit', :as => :user_settings
   end
 
   resources :sheets do
@@ -33,6 +35,8 @@ Rails.application.routes.draw do
       post 'restore'
     end
   end
+
+  get 'upload' => 'sheets#new', as: 'sheet_upload'
 
   resources :assets, only: [:create, :destroy]
   get 'assets/:id/download' => 'assets#download', as: 'download_asset'

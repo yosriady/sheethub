@@ -4,7 +4,7 @@
 
   <% if current_user.finished_registration? %>
     <li><a href="<%= user_profile_path(current_user.username) %>"><i class="fa fa-user"></i> Profile</a></li>
-    <li><a href="<%= edit_user_registration_path %>"><i class="fa fa-cog"></i> Settings</a></li>
+    <li><a href="<%= user_settings_path %>"><i class="fa fa-cog"></i> Settings</a></li>
     <hr>
     <li><a href="<%= user_purchases_path %>"><i class="fa fa-shopping-cart"></i> Purchases</a></li>
     <li><a href="<%= user_private_sheets_path %>"><i class="fa fa-eye-slash"></i> Private Sheets</a></li>

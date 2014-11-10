@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="<%= 'active' if params[:action] == 'index' %>"><a href="<%= root_path =%>"><i class="fa fa-picture-o"></i> Discover</a></li>
-        <li class="<%= 'active' if params[:action] == 'new' %>"><a href="<%= new_sheet_path =%>"><i class="fa fa-cloud-upload"></i> Upload</a></li>
+        <li class="<%= 'active' if params[:action] == 'new' %>"><a href="<%= sheet_upload_path =%>"><i class="fa fa-cloud-upload"></i> Upload</a></li>
 
       <% if user_signed_in? %>
         <%= render 'layouts/user_dropdown' %>
