@@ -19,10 +19,15 @@ class AssetsController < ApplicationController
   end
 
   def destroy
-    @asset.destroy
-    delete_s3_object(@asset.s3_key)
-    flash[:notice] = "Yay! File succesfully deleted."
-    redirect_to :back
+    sheet = @asset.sheet
+    if sheet.user == current_user
+      @asset.destroy
+      delete_s3_object(@asset.s3_key)
+      # TODO: flash messages not displayed, use render "sheets/edit" ?
+      redirect_to :back, notice: "File removed succesfully."
+    else
+      redirect_to :back, error: "You do not have permission to remove this file."
+    end
   end
 
   def download
@@ -36,27 +41,13 @@ class AssetsController < ApplicationController
     end
   end
 
-  def destroy
-    sheet = @asset.sheet
-    if sheet.user == current_user
-      @asset.destroy
-      # TODO: flash messages not displayed, use render "sheets/edit" ?
-      redirect_to :back, notice: "File removed succesfully."
-    else
-      redirect_to :back, error: "You do not have permission to remove this file."
-    end
-  end
-
   private
     def set_asset
       @asset = Asset.find(params[:id])
     end
 
     def delete_s3_object(key)
-      s3 = AWS::S3.new(:access_key_id => 'AKIAI32VLLBYAJJ2THYA',
-                      :secret_access_key => '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',
-                      :region => 'ap-southeast-1'
-      )
+      s3 = AWS::S3.new
       asset = s3.buckets['sheethub'].objects[key]
       asset.delete
     end

@@ -9,7 +9,8 @@ Rails.application.configure do
     :s3_credentials => {
       :bucket => "sheethub",
       :access_key_id => "AKIAI32VLLBYAJJ2THYA", #TODO: Use ENV for this
-      :secret_access_key => "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"  #TODO: Use ENV for this
+      :secret_access_key => "STIW0JGoAnCR5R0CscwUzE/lf0ucxnK4AvKoOGU9",  #TODO: Use ENV for this
+      :region => 'ap-southeast-1'
     }
   }
 
