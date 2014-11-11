@@ -10,7 +10,7 @@
         <h3><%= sheet.title %></h3>
         <p><%= sheet.composer_list.any? ? sheet.composer_list.to_s.titleize : "Unknown Composer" %></p>
       </div></a>
-      <a href="<%= restore_sheet_path(sheet) %>"><div class="sheet-restore" data-method="post">
+      <a href="<%= restore_sheet_path(sheet) %>" data-method="post"><div class="sheet-restore" data-method="post">
         <span class="fa fa-undo"></span> Click to Restore
       </div></a>
     </div>
