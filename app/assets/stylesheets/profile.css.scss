@@ -12,6 +12,7 @@
         max-width: 100px;
         border-radius: 12px;
         margin-top: 10px;
+        margin-right: 20px;
     }
 
     .profile-bio {
@@ -20,16 +21,23 @@
 
         p, h1 {
             margin: 0px;
-            margin-left: 20px;
         }
 
-        p, h1, a  {
-            color: rgba(255, 255, 255, 0.9);
+        p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        a {
+            color: rgba(255, 255, 255, 0.7);
+
+            &:hover, &:focus, &:active {
+                color: rgba(255, 255, 255, 1);
+            }
         }
 
         h1 {
-            font-size: 36px;
-            font-weight: 600;
+            color: rgba(255, 255, 255, 1);
+            font-size: 32px;
         }
 
         a {

@@ -76,20 +76,20 @@ class OrdersController < ApplicationController
       pay_request.receiverList.receiver[0].amount = sheet.royalty
       pay_request.receiverList.receiver[0].email  = sheet.user.paypal_email
       pay_request.receiverList.receiver[0].primary = true
-      pay_request.receiverList.receiver[0].paymentType = "DIGITALGOODS"
+      # pay_request.receiverList.receiver[0].paymentType = "DIGITALGOODS"
 
       # Secondary Receiver (Marketplace)
       pay_request.receiverList.receiver[1].amount = sheet.commission
       pay_request.receiverList.receiver[1].email  = MARKETPLACE_PAYPAL_EMAIL
       pay_request.receiverList.receiver[1].primary = false
-      pay_request.receiverList.receiver[1].paymentType = "DIGITALGOODS"
+      # pay_request.receiverList.receiver[1].paymentType = "DIGITALGOODS"
       return pay_request
     end
 
     def build_redirect_url(payKey)
       # TODO: This is Sandbox URL!
       # Normal goods
-      # return "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
-      return "https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay?paykey=#{payKey}"
+      return "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
+      # return "https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay?paykey=#{payKey}"
     end
 end
