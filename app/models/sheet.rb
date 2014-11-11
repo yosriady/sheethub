@@ -96,6 +96,10 @@ class Sheet < ActiveRecord::Base
     return price_cents.to_f / 100
   end
 
+  def price=(val)
+    write_attribute :price_cents, (val.to_f * 100).to_i
+  end
+
   def royalty
     return ((0.8 * price) - 0.8).round(1)
   end

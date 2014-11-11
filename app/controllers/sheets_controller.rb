@@ -2,7 +2,7 @@ class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :update]
   before_action :set_sheet_lazy, only: [:edit, :report, :flag, :favorite, :destroy, :download]
   before_action :set_deleted_sheet, only: [:restore]
-  before_action :normalize_tag_fields, only: [:create, :update]
+  before_action :format_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
@@ -212,8 +212,8 @@ class SheetsController < ApplicationController
       end
     end
 
-    def normalize_tag_fields
-      TAG_FIELDS.each { |tag_field| normalize_tags(tag_field)} # Clean up selectize tag values: genres, sources, composers, instruments
+    def format_tag_fields
+      TAG_FIELDS.each { |tag_field| format_tags(tag_field)} # Clean up selectize tag values: genres, sources, composers, instruments
     end
 
     def validate_instruments
@@ -242,13 +242,13 @@ class SheetsController < ApplicationController
       gon.instruments ||= Sheet.values_for_instruments
     end
 
-    def normalize_tags(tag_list)
+    def format_tags(tag_list)
       params[:sheet][tag_list].delete("")
       params[:sheet][tag_list] = params[:sheet][tag_list].map &:to_sym
     end
 
     def sheet_params
-      params[:sheet].permit(:user_id, :title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets_attributes, :visibility, :price_cents, :license)
+      params[:sheet].permit(:user_id, :title, :description, :instruments_list, :composer_list, :genre_list, :source_list,:pages, :difficulty, :pdf, :assets_attributes, :visibility, :price, :license)
     end
 
 end

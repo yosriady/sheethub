@@ -15,7 +15,7 @@
   <%= f.label "Price in US$" %>
   <div class="input-group">
   <span class="input-group-addon">$</span>
-    <%= f.input_field :price_cents, placeholder: "What's the minimum price to pay to get access to uploads?" %>
+    <%= f.input_field :price, placeholder: "e.g. 2.99", :value => number_to_currency(f.object.price, unit: "", precision: 2) %>
   </div>
 
   <%= f.label :instruments %>
