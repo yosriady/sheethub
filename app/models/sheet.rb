@@ -6,6 +6,7 @@ class Sheet < ActiveRecord::Base
   PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $1.99 - $999.99"
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
   MAX_FILESIZE = 20
+  USER_ROYALTY_PERCENTAGE = 0.75
 
   before_create :record_publisher
   validate :validate_price
@@ -101,7 +102,11 @@ class Sheet < ActiveRecord::Base
   end
 
   def royalty
-    return ((0.8 * price) - 0.8).round(1)
+    return (USER_ROYALTY_PERCENTAGE * price).round(2)
+  end
+
+  def commission
+    return ((1 - USER_ROYALTY_PERCENTAGE) * price).round(2)
   end
 
   def is_free?

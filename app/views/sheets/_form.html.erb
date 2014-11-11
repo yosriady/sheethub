@@ -12,9 +12,9 @@
 
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
 
-  <%= f.label "Price in US$" %>
+  <%= f.label "Price" %>
   <div class="input-group">
-  <span class="input-group-addon">$</span>
+  <span class="input-group-addon">US$</span>
     <%= f.input_field :price, placeholder: "e.g. 2.99", :value => number_to_currency(f.object.price, unit: "", precision: 2) %>
   </div>
 

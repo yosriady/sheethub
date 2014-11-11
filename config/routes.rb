@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   mount PgHero::Engine, at: "pghero"
 
   post 'checkout' => 'orders#checkout'
-  get 'orders/success'
+  get 'orders/ipn_notify'
+  get 'orders/success/:tracking_id', to:'orders#success', as: 'orders_success'
   get 'orders/cancel'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
