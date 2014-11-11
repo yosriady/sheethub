@@ -49,9 +49,11 @@
       width: 100%;
       padding: 10px;
       padding-bottom: 0px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+        h3, p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 
     .glyphicon {
