@@ -21,6 +21,10 @@ class Asset < ActiveRecord::Base
     url.sub(S3DirectUpload.config.url, '')
   end
 
+  def self.parse_s3_key(url)
+    return url.sub(S3DirectUpload.config.url, '')
+  end
+
   def s3_object
     s3 = AWS::S3.new
     bucket = s3.buckets[S3DirectUpload.config.bucket]

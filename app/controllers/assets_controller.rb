@@ -10,6 +10,8 @@ class AssetsController < ApplicationController
     if @asset.valid?
       @asset.save
     else
+      s3_key = Asset.parse_s3_key(params[:url])
+      delete_s3_object(s3_key)
       # TOOD: Fix this
       # flash[:error] = @asset.errors.full_messages.to_sentence
       # redirect_to edit_sheet_path(sheet)
@@ -18,12 +20,7 @@ class AssetsController < ApplicationController
 
   def destroy
     @asset.destroy
-    s3 = AWS::S3.new(:access_key_id => 'AKIAI32VLLBYAJJ2THYA',
-                    :secret_access_key => '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',
-                    :region => 'ap-southeast-1'
-    )
-    asset = s3.buckets['sheethub'].objects[@asset.s3_key]
-    asset.delete
+    delete_s3_object(@asset.s3_key)
     flash[:notice] = "Yay! File succesfully deleted."
     redirect_to :back
   end
@@ -53,6 +50,15 @@ class AssetsController < ApplicationController
   private
     def set_asset
       @asset = Asset.find(params[:id])
+    end
+
+    def delete_s3_object(key)
+      s3 = AWS::S3.new(:access_key_id => 'AKIAI32VLLBYAJJ2THYA',
+                      :secret_access_key => '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',
+                      :region => 'ap-southeast-1'
+      )
+      asset = s3.buckets['sheethub'].objects[key]
+      asset.delete
     end
 
     def asset_params
