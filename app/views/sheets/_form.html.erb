@@ -34,7 +34,8 @@
   <br>
   <%= f.input_field :source_list, collection: sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
-  <%= f.label :pdf %><br />
+  <%= f.label :pdf %>
+  <p class="bg-warning"><i class="fa fa-info-circle"></i> Max 20MB filesize</p>
   <% if params[:action] == "edit" && sheet.pdf.present? %>
   <ul id="sheet-files">
     <li>

@@ -10,8 +10,9 @@ class AssetsController < ApplicationController
     if @asset.valid?
       @asset.save
     else
-      flash[:error] = @asset.errors.full_messages.to_sentence
-      redirect_to edit_sheet_path(sheet)
+      # TOOD: Fix this
+      # flash[:error] = @asset.errors.full_messages.to_sentence
+      # redirect_to edit_sheet_path(sheet)
     end
   end
 

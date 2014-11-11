@@ -4,6 +4,7 @@ class Asset < ActiveRecord::Base
   MAX_FILESIZE = 20
   MAX_NUMBER_OF_ASSETS = 5
   ASSET_NUMBER_VALIDATION_MESSAGE = "You can only have 5 additional files per sheet"
+  INVALID_FILESIZE_MESSAGE = "Files must be less than 20 Megabytes in size"
 
   belongs_to :sheet
   validate :validate_number_of_assets
@@ -13,7 +14,7 @@ class Asset < ActiveRecord::Base
   has_attached_file :file,
                     :hash_secret => ASSET_HASH_SECRET, #TODO: Use ENV for this
                     :preserve_files => "true"
-  # validates_attachment_size :file, :in => 0.megabytes..MAX_FILESIZE.megabytes
+  validate :validate_file_size
   # TODO: validate attachment content type: MIDI, .ptb, .gp5, .tg, etc...
 
   def s3_key
@@ -41,6 +42,11 @@ class Asset < ActiveRecord::Base
       sheet = Sheet.find(sheet_id)
       valid_number_of_assets = sheet.assets.count < MAX_NUMBER_OF_ASSETS
       errors.add(:sheet_id, ASSET_NUMBER_VALIDATION_MESSAGE) unless valid_number_of_assets
+    end
+
+    def validate_file_size
+      valid_filesize = filesize.in?(0.megabytes..MAX_FILESIZE.megabytes)
+      errors.add(:filesize, INVALID_FILESIZE_MESSAGE) unless valid_filesize
     end
 
 end
