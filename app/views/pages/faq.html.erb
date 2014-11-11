@@ -14,7 +14,7 @@
   <hr>
 
   <h4><i class="fa fa-music"></i> Sheet Music</h4>
-    <%= render "faq_item", id:"sheet-requirements", question: "What technical requirements do you have for submitted PDFs?", answer: "PDFs submitted must be: <ul><li>sized for printing to 8.5 x 11 inches</li> <li>portrait oriented</li> <li>free of password protection</li> <li>less than 20 MB in size</li></ul>"%>
+    <%= render "faq_item", id:"sheet-requirements", question: "What technical requirements do you have for submitted PDFs?", answer: "PDFs submitted must be: <ul><li>sized for printing to 8.5 x 11 inches</li> <li>portrait oriented</li> <li>free of password protection</li> <li>less than 20 MB in size</li></ul><p>We require PDFs because it is a file format that is easily printable and require no specific music notation software installed. Users should be able to easily view and print your works.</p>"%>
      <%= render "faq_item", id:"sheet-recommendations", question: "Any other recommendations on how to format my PDF?", answer: "Users will be able to view a cover page which will be automatically created from the first page of your PDF. Customers are better able to make a purchasing decision if they can see a sample of your music that reflects the difficulty, range and uniqueness of your piece."%>
      <%= render "faq_item", id:"sheet-metadata", question: "What other information can I submit with my sheet music?", answer: "Submitting additional information about your sheet music - instruments, composers, genres, and sources - will help users find and ultimately purchase your sheet music. SheetHub also uses this information in our internal recommendations system. The more detailed information you provide, the more likely that your sheet music appears in recommended results. "%>
      <%= render "faq_item", id:"sheet-additional-files", question: "Can I add additional files together with my PDF?", answer: "<strong>Yes!</strong> You can add up to 5 supporting files such as audio files and music notation software specific files through your sheet's edit page. Each file must be less than 20MB in size. "%>
@@ -32,7 +32,7 @@
     <img src='http://i.imgur.com/RUCReKW.png' />
     <p>Clicking checkout will bring them to Paypal to authorize the purchase:</p>
     <img src='http://i.imgur.com/giJKV9C.png' style='width: 600px;'/>
-    <p>Once the user has completed the authorization process, you will receive your earnings directly to your Paypal account. The user will, upon a successful purchase, be able to download the files you've uploaded for your sheet. </p>
+    <p>Once the user has completed the authorization process, you will receive your earnings directly to your Paypal account. The user will, upon a successful purchase, be able to download the files you've uploaded for your sheet through SheetHub. Users cannot share their download links, as they are signed, expiring URLs. </p>
   "%>
   <%= render "faq_item", id:"sale-notification", question: "How do I know when I've made a sale?", answer: "<p>SheetHub will send a friendly email whenever you make a sale. It will be sent to the email address you registered with. If someone attempts to buy your music but the transaction cannot be completed (eg. due to invalid PayPal account information) then you will also be notified.</p><p>You can view detailed sales statistics - both recent and all-time sales - detailing who has bought your works, approximated earnings,  useful charts and other statistics from the <strong>Sales</strong> page. </p> "%>
   <%= render "faq_item", id:"paypal-transfer", question: "What do you need my PayPal Email for?", answer: "You need it to directly receive your sales earnings. SheetHub does not hold any of your net earnings, so we need a verified Paypal email account to directly send your earnings to. "%>
@@ -94,7 +94,7 @@ The Public Domain Mark is recommended for works that are free of known copyright
 </div>
 <div class="col-xs-4">
     <h3>Have more questions?</h3>
-    <div class="well">
+    <div class="well bg-feathers">
         <a href="mailto:yosriady@gmail.com" class="btn btn-block btn-lg btn-default"><i class="fa fa-paper-plane-o"></i> Contact Us</a>
     </div>
     <div class="panel panel-default">

@@ -3,7 +3,7 @@
     <h1>Editing <a href="<%= sheet_path(@sheet) %>"><%= @sheet.title %></a></h1>
 
     <div id="sheet-content" class="col-xs-8">
-        <%= image_tag("/assets/sheet.png", :class => "sample_sheet") %>
+        <%= image_tag(@sheet.pdf_preview_url, :class => "sample_sheet") %>
     </div>
 
     <div id="sheet-sidebar" class="col-xs-4">
