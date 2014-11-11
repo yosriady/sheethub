@@ -21,7 +21,7 @@ class AssetsController < ApplicationController
   def destroy
     sheet = @asset.sheet
     if sheet.user == current_user
-      @asset.destroy
+      @asset.really_destroy!
       delete_s3_object(@asset.s3_key)
       # TODO: flash messages not displayed, use render "sheets/edit" ?
       redirect_to :back, notice: "File removed succesfully."

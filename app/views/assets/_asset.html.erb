@@ -4,5 +4,5 @@
         <p><i class="fa fa-download"></i> <%= asset.filename %> <strong><%= number_to_human_size(asset.filesize) %></strong></p>
     </div>
     </a>
-    <%= link_to raw("<i class='fa fa-remove'></i>"), asset,  method: :delete, data: { confirm: 'This will remove this file. Are you sure?' }, class:"sheet-delete" if params[:action].in?(["edit", "create"])  %>
+    <%= link_to raw("<i class='fa fa-remove'></i>"), asset,  method: :delete, data: { confirm: 'This will permanently remove this file. Are you sure?' }, class:"sheet-delete" if params[:action].in?(["edit", "create"])  %>
 </li>
