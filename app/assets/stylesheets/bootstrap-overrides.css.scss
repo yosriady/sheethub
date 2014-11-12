@@ -85,3 +85,8 @@ body {
     border-radius: 4px;
     border: 1px solid #ddd;
 }
+
+q,
+blockquote {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+}

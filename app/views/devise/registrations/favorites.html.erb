@@ -2,18 +2,18 @@
   <% title "#{@user.username}'s Favorites"  %>
 
   <%= render 'profile_banner', user:@user %>
+  <div class="nav-strip nav-strip-profile">
+  <div class="container-fluid">
+  <ul class="list-inline">
+    <li><a href="<%= user_profile_path(@user.username) %>"><i class="fa fa-music"></i> Sheet Music</a></li>
+    <li class="active"><a href="<%= user_favorites_path(@user.username) %>"><i class="fa fa-star"></i> Favorites <span class="badge"><%= @favorites.count %></span></a></li>
+  </ul>
+  </div>
+  </div>
 
   <div class="container">
       <div class="row">
         <div class="col-xs-12">
-
-          <!-- Nav tabs -->
-          <ul class="nav nav-pills">
-            <li><a href="<%= user_profile_path(@user.username) %>"><i class="fa fa-music"></i> Sheet Music </a></li>
-
-            <li class="active"><a href="<%= user_favorites_path(@user.username) %>"><i class="fa fa-star"></i> Favorites <span class="badge"><%= @favorites.size %></span></a></li>
-          </ul>
-
           <% if @favorites.any? %>
             <%= render 'favorites', favorites: @favorites %>
           <% else %>

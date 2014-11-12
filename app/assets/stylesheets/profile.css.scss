@@ -54,3 +54,31 @@
 .avatar-input {
     padding-bottom: 20px;
 }
+
+.list-inline .badge {
+    background: #428bca;
+    border-radius: 4px;
+    margin-left: 3px;
+}
+
+.nav-strip-profile {
+    .container-fluid {
+        padding:0px 40px;
+    }
+}
+
+.nav-strip-profile .list-inline {
+    margin-left: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.nav-strip-profile .list-inline > li {
+    margin: 0px 10px;
+    padding-bottom: 8px;
+}
+
+.nav-strip-profile .list-inline > li.active {
+    border-bottom: 2px solid;
+    padding-bottom: 8px;
+}
