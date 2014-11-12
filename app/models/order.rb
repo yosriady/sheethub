@@ -1,6 +1,4 @@
 class Order < ActiveRecord::Base
-  MISSING_PAYER_ID_MESSAGE = "Payer ID is nil!"
-
   validates :sheet_id, uniqueness: { scope: :user_id,
                        message: "Users cannot have multiple orders of the same Sheet." }
 
@@ -10,8 +8,16 @@ class Order < ActiveRecord::Base
   enum status: %w(processing completed failed)
 
   def complete
-    self.update(status: Order.statuses[:completed], purchased_at: Time.now)
-    sheet.increment!(:total_sold)
+    if !completed?
+      self.update(status: Order.statuses[:completed], purchased_at: Time.now)
+      sheet.increment!(:total_sold)
+      send_sold_email_to_owner(self)
+    end
+  end
+
+  def send_sold_email_to_owner
+    # TODO
+    binding.pry
   end
 
   def self.get_adaptive_payment_details(payKey)

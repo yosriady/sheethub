@@ -5,11 +5,14 @@ class Sheet < ActiveRecord::Base
   EXPIRATION_TIME = 600
   PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $1.99 - $999.99"
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
+  TOO_MANY_TAGS_MESSAGE = "You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources."
   MAX_FILESIZE = 20
   USER_ROYALTY_PERCENTAGE = 0.75
+  MAX_NUMBER_OF_TAGS = 5
 
   before_create :record_publisher
   validate :validate_price
+  validate :validate_number_of_tags
   belongs_to :user
   acts_as_votable
   acts_as_paranoid
@@ -213,6 +216,11 @@ class Sheet < ActiveRecord::Base
     def validate_price
       valid_price = price_cents.zero? || price_cents.in?(199..99999)
       errors.add(:price_cents, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
+    end
+
+    def validate_number_of_tags
+      valid_number = genre_list.size <= MAX_NUMBER_OF_TAGS && source_list.size <= MAX_NUMBER_OF_TAGS && composer_list.size <= MAX_NUMBER_OF_TAGS
+      errors.add(:tags, TOO_MANY_TAGS_MESSAGE) unless valid_number
     end
 
     def record_publisher

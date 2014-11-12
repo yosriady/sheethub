@@ -7,7 +7,7 @@
   <%= f.input_field :visibility, :as => :select, :collection => Sheet.visibilities.keys %>
 
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
-  <%= f.label :license %> <a href="<%= faq_path %>#licenses"><i class="fa fa-question-circle"></i></a>
+  <%= f.label :license %> <a href="<%= faq_path %>#licenses" target="blank"><i class="fa fa-question-circle"></i></a>
   <%= f.input_field :license, :as => :select, :collection => Sheet.licenses.keys %>
 
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external links here" %>
@@ -34,7 +34,7 @@
   <br>
   <%= f.input_field :source_list, collection: sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
-  <%= f.label :pdf %>
+  <%= f.label :pdf %> <a href="<%= faq_path %>#sheet-requirements" target="blank"><i class="fa fa-question-circle"></i></a>
   <p class="bg-warning"><i class="fa fa-info-circle"></i> Max 20MB filesize</p>
   <% if params[:action] == "edit" && sheet.pdf.present? %>
   <ul id="sheet-files">
