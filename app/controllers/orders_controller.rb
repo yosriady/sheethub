@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
     sheet = Sheet.friendly.find(params[:sheet])
     payment_request = build_adaptive_payment_request(sheet)
     @pay_response = api.pay(payment_request)
+    binding.pry
     if @pay_response.success?
       redirectURL = build_redirect_url(@pay_response.payKey)
       @order.tracking_id = payment_request.trackingId
@@ -73,7 +74,7 @@ class OrdersController < ApplicationController
       pay_request.currencyCode = DEFAULT_CURRENCY
 
       # Primary receiver (Sheet Owner)
-      pay_request.receiverList.receiver[0].amount = sheet.royalty
+      pay_request.receiverList.receiver[0].amount = sheet.price
       pay_request.receiverList.receiver[0].email  = sheet.user.paypal_email
       pay_request.receiverList.receiver[0].primary = true
       # pay_request.receiverList.receiver[0].paymentType = "DIGITALGOODS"

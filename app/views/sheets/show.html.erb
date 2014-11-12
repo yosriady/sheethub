@@ -7,7 +7,7 @@
                 <strong><i class="fa fa-eye-slash"></i> PRIVATE</strong>
             <% end %>
 
-            <h1><%= @sheet.title %></h1>
+            <h1><%= link_to @sheet.title, sheet_path(@sheet) %></h1>
             <h4>from <a href="<%= user_profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.username %></a></h4>
         </div>
         <div class="col-xs-4">
