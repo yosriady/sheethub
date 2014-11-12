@@ -8,7 +8,7 @@
             <% end %>
 
             <h1><%= link_to @sheet.title, sheet_path(@sheet) %></h1>
-            <h4>by <a href="<%= user_profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.username %></a></h4>
+            <h4>by <a href="<%= user_profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.display_name %></a></h4>
         </div>
         <div class="col-xs-4">
             <%= render 'buy_now', sheet:@sheet %>

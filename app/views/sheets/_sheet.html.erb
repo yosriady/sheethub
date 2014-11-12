@@ -10,7 +10,7 @@
       <p><%= sheet.composer_list.any? ? sheet.composer_list.to_s.titleize : "Unknown Composer" %></p>
     </div></a>
     <a href="<%= user_profile_path(sheet.user.username) %>"><div class="sheet-user">
-      <i class="fa fa-user"></i> <%= sheet.user.username %>
+      <i class="fa fa-user"></i> <%= sheet.user.display_name %>
     </div></a>
 </div>
 </a>
