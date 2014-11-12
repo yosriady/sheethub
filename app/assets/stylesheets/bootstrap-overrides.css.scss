@@ -1,5 +1,19 @@
 body {
     background: #FBFBFB;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1, h2, h3 {
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, .modal-title {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+}
+
+h2 {
+    font-weight: 300;
 }
 
 .btn-block {
@@ -89,4 +103,8 @@ body {
 q,
 blockquote {
     quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+.nopaddingright {
+    padding-right: 0px;
 }

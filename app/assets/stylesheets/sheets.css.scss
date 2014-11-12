@@ -49,6 +49,12 @@
       width: 100%;
       padding: 10px;
       padding-bottom: 0px;
+        h3 {
+            font-family: 'Roboto Slab';
+            font-weight: 300;
+            font-size: 22px;
+        }
+
         h3, p {
             white-space: nowrap;
             overflow: hidden;

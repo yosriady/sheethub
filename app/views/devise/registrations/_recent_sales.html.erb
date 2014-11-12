@@ -1,5 +1,4 @@
 <% if sales.any? %>
-  <h3>Recent Sales</h3>
   <table class="table table-striped">
     <thead class="bg-info">
       <tr>
@@ -21,6 +20,6 @@
     </tbody>
   </table>
 <% else %>
-  <h2><i class="fa fa-eye-slash"></i></h2>
-  <h2>You have no sales yet.</h2>
+  <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
+  <h2 class="text-center">You have no sales yet.</h2>
 <% end %>

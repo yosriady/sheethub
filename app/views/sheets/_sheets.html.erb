@@ -2,8 +2,8 @@
   <% if sheets.each do |sheet| %>
   <%= render 'sheets/sheet', sheet: sheet %>
   <% end.empty? %>
-  <h2><i class="fa fa-eye-slash"></i></h2>
-  <h2>No Sheets yet!</h2>
+  <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
+  <h2 class="text-center">No Sheets yet!</h2>
   <% end %>
 </div>
 <div id="paginator" class="text-center">
