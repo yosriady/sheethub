@@ -25,13 +25,15 @@ class OrdersController < ApplicationController
       @order.save
       redirect_to redirectURL
     else
-      redirect_to :back, error: "We could not process your purchase. #{@pay_response.error}"
+      Rails.logger.info "Paypal Error #{@pay_response.error.first.errorId}: #{@pay_response.error.first.message}"
+      if invalid_account_details_error(@pay_response)
+        send_purchase_failure_email
+        flash[:error] = "We could not process your purchase. The uploader's Paypal email is invalid!"
+      else
+        flash[:error] = "We could not process your purchase. #{@pay_response.error.first.message}"
+      end
+      redirect_to sheet_path(sheet)
     end
-  end
-
-  def ipn_notify
-    # Test out IPN Notify
-    Flag.create(sheet_id:1, message:"ipn notification")
   end
 
   def success
@@ -87,9 +89,14 @@ class OrdersController < ApplicationController
     end
 
     def build_redirect_url(payKey)
-      # TODO: This is Sandbox URL!
-      # Normal goods
-      # return "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
       return "https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay?paykey=#{payKey}"
+    end
+
+    def send_purchase_failure_email
+      # TODO: Email user that purchase has failed because of invalid account details
+    end
+
+    def invalid_account_details_error?(pay_response)
+      pay_response.error.first.errorId == 520009
     end
 end
