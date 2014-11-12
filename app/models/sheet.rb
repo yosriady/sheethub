@@ -108,8 +108,16 @@ class Sheet < ActiveRecord::Base
     return (USER_ROYALTY_PERCENTAGE * price).round(2)
   end
 
+  def royalty_cents
+    return (USER_ROYALTY_PERCENTAGE * price_cents).round(0)
+  end
+
   def commission
     return ((1 - USER_ROYALTY_PERCENTAGE) * price).round(2)
+  end
+
+  def commission_cents
+    return ((1 - USER_ROYALTY_PERCENTAGE) * price_cents).round(0)
   end
 
   def is_free?

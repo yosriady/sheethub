@@ -13,8 +13,8 @@ class AssetsController < ApplicationController
       s3_key = Asset.parse_s3_key(params[:url])
       delete_s3_object(s3_key)
       # TOOD: Fix this
-      # flash[:error] = @asset.errors.full_messages.to_sentence
-      # redirect_to edit_sheet_path(sheet)
+      flash[:error] = @asset.errors.full_messages.to_sentence
+      redirect_to edit_sheet_path(sheet)
     end
   end
 
@@ -24,10 +24,11 @@ class AssetsController < ApplicationController
       @asset.really_destroy!
       delete_s3_object(@asset.s3_key)
       # TODO: flash messages not displayed, use render "sheets/edit" ?
-      redirect_to :back, notice: "File removed succesfully."
+      flash[:notice] = "File removed succesfully."
     else
-      redirect_to :back, error: "You do not have permission to remove this file."
+      flash[:error] = "You do not have permission to remove this file."
     end
+    redirect_to sheet_path(sheet)
   end
 
   def download

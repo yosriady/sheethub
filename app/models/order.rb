@@ -15,9 +15,9 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def send_sold_email_to_owner
+  def send_sold_email_to_owner(order)
     # TODO
-    binding.pry
+    # binding.pry
   end
 
   def self.get_adaptive_payment_details(payKey)

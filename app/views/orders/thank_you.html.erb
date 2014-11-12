@@ -13,23 +13,23 @@
                 <strong>What happens next?</strong>
                 <p>You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy! Be sure to share your purchase to the world!</p>
             </div>
-
-            <div class="share-buttons">
-                <a href="https://www.facebook.com/sharer/sharer.php?u=Woohoo<%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-facebook">
-                    <i class="fa fa-facebook"></i> Share on Facebook
-                </a>
-                <a href="https://plus.google.com/share?url=<%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-google-plus">
-                    <i class="fa fa-google-plus"></i> Share on Google+
-                </a>
-                <a  href="https://twitter.com/home?status=<%= @order.sheet.title %> <%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-twitter">
-                    <i class="fa fa-twitter"></i> Share on Twitter
-                </a>
-            </div>
-
         </div>
         <div class="col-xs-4">
             <div class="well">
                 <a href="<%= user_purchases_path %>" class="btn btn-block btn-success"><i class="fa fa-shopping-cart"></i> View Your Purchases</a>
+            </div>
+            <div class="white-container">
+                <div class="share-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=Woohoo<%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-facebook">
+                        <i class="fa fa-facebook"></i> Share on Facebook
+                    </a>
+                    <a href="https://plus.google.com/share?url=<%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-google-plus">
+                        <i class="fa fa-google-plus"></i> Share on Google+
+                    </a>
+                    <a  href="https://twitter.com/home?status=<%= @order.sheet.title %> <%= sheet_url(@order.sheet) %>" class="btn btn-block btn-social btn-twitter">
+                        <i class="fa fa-twitter"></i> Share on Twitter
+                    </a>
+                </div>
             </div>
         </div>
     </div>

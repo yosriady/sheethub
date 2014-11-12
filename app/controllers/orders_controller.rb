@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
       redirectURL = build_redirect_url(@pay_response.payKey)
       @order.tracking_id = payment_request.trackingId
       @order.payer_id = @pay_response.payKey
+      @order.royalty_cents = sheet.royalty_cents
       @order.save
       redirect_to redirectURL
     else
@@ -71,7 +72,6 @@ class OrdersController < ApplicationController
 
       pay_request.cancelUrl = orders_cancel_url
       pay_request.returnUrl = orders_success_url(trackingId)
-      pay_request.ipnNotificationUrl = orders_ipn_notify_url
       pay_request.currencyCode = DEFAULT_CURRENCY
 
       # Primary receiver (Sheet Owner)
