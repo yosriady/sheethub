@@ -6,6 +6,7 @@ class SheetsController < ApplicationController
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
+  before_action :validate_flagged, only: [:show]
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :restore]
   before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
 
@@ -23,6 +24,7 @@ class SheetsController < ApplicationController
   ERROR_SHEET_NOT_FOUND_MESSAGE = 'Oops! Sheet not found.'
   ERROR_CANNOT_RESTORE_UNDESTROYED_SHEET = 'You cannot restore an un-deleted Sheet.'
   ERROR_PDF_UNPURCHASED_MESSAGE = 'Buy now to get unlimited access to this file.'
+  FLAGGED_MESSAGE = 'This Sheet has been flagged for a copyright violation.'
   SEARCH_PAGE_SIZE = 24
 
   # GET /sheets
@@ -208,7 +210,14 @@ class SheetsController < ApplicationController
     def authenticate_owner
       unless @sheet.user == current_user
         flash[:error] = ERROR_UPDATE_SHEET_MESSAGE
-        redirect_to root_path
+        redirect_to sheets_path
+      end
+    end
+
+    def validate_flagged
+      if @sheet.is_flagged
+        flash[:error] = FLAGGED_MESSAGE
+        redirect_to sheets_path
       end
     end
 

@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   CANCEL_ORDER_PURCHASE_MESSAGE = "Purchase canceled."
 
   before_action :authenticate_user!, :only => [:checkout, :success, :cancel]
+  before_action :validate_flagged, only: [:checkout]
 
   def checkout
     sheet = Sheet.friendly.find(params[:sheet])
@@ -98,5 +99,13 @@ class OrdersController < ApplicationController
 
     def invalid_account_details_error?(pay_response)
       pay_response.error.first.errorId == 520009
+    end
+
+    def validate_flagged
+      sheet = Sheet.friendly.find(params[:sheet])
+      if sheet.is_flagged
+        flash[:error] = FLAGGED_MESSAGE
+        redirect_to sheets_path
+      end
     end
 end

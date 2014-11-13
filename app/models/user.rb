@@ -103,10 +103,6 @@ class User < ActiveRecord::Base
     Sheet.only_deleted.where(user_id: id)
   end
 
-  def full_name
-    (first_name.present? || last_name.present?) ? "#{first_name} #{last_name}" : name
-  end
-
   def avatar_url
     if avatar.url.present? && avatar.url != MISSING_AVATAR_URL
       avatar.expiring_url(EXPIRATION_TIME, :original)
