@@ -3,7 +3,9 @@ class Sheet < ActiveRecord::Base
   PDF_DEFAULT_URL = "nil"
   DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
   EXPIRATION_TIME = 600
-  PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $1.99 - $999.99"
+  PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $0.99 - $999.99"
+  MIN_PRICE = 99
+  MAX_PRICE = 99999
   INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
   TOO_MANY_TAGS_MESSAGE = "You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources."
   MAX_FILESIZE = 20
@@ -222,7 +224,7 @@ class Sheet < ActiveRecord::Base
     end
 
     def validate_price
-      valid_price = price_cents.zero? || price_cents.in?(199..99999)
+      valid_price = price_cents.zero? || price_cents.in?(MIN_PRICE..MAX_PRICE)
       errors.add(:price_cents, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
     end
 

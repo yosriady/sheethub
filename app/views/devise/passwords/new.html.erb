@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
-    <h2>Forgot your password?</h2>
+    <h1 class="text-center">Forgot Your Password?</h1>
     <div class="col-lg-4 col-lg-offset-4 white-container">
         <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, defaults: { input_html: { class: 'form-control' }}) do |f| %>
           <%= f.error_notification %>
 
           <div class="form-inputs">
-            <%= f.input :email, required: true, autofocus: true %>
+            <%= f.input :email, required: true, autofocus: true, placeholder: 'Your SheetHub account email address' %>
           </div>
 
           <div class="form-actions">

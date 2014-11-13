@@ -49,7 +49,7 @@ $(document).on("page:change", function() {
             "label":'All rights reserved. This title is my original work.',
             "value":'all_rights_reserved'
         }, {
-            "label":'Creative Commons (Attribution-NonCommercial-NoDerivatives-ShareAlike).',
+            "label":'Creative Commons.',
             "value":'creative_commons'
         }, {
             "label":'Creative Commons Zero. ',
