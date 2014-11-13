@@ -7,6 +7,7 @@ class SheetsController < ApplicationController
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
   before_action :validate_flagged, only: [:show]
+  before_action :hide_private_sheets, only: [:show, :report, :flag, :favorite, :download]
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :restore]
   before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
 
@@ -25,6 +26,7 @@ class SheetsController < ApplicationController
   ERROR_CANNOT_RESTORE_UNDESTROYED_SHEET = 'You cannot restore an un-deleted Sheet.'
   ERROR_PDF_UNPURCHASED_MESSAGE = 'Buy now to get unlimited access to this file.'
   FLAGGED_MESSAGE = 'This Sheet has been flagged for a copyright violation.'
+  ERROR_PRIVATE_SHEET_MESSAGE = 'This sheet is only visible to the owner.'
   SEARCH_PAGE_SIZE = 24
 
   # GET /sheets
@@ -205,6 +207,13 @@ class SheetsController < ApplicationController
       updated_params[:genre_list] = params[:sheet][:genre_list]
       updated_params[:source_list] = params[:sheet][:source_list]
       return updated_params
+    end
+
+    def hide_private_sheets
+      if @sheet.privately_visible? && current_user != @sheet.user
+        flash[:error] = ERROR_PRIVATE_SHEET_MESSAGE
+        redirect_to sheets_path
+      end
     end
 
     def authenticate_owner
