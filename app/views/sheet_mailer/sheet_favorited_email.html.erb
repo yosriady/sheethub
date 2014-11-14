@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%= @publisher.display_name %>, </p>
+    <p>Woohoo! <%= link_to @user.display_name, user_profile_url(@user.username) %> favorited <%= link_to @sheet.title, sheet_url(@sheet) %>!
+    </p>
+
+    <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
+
+    <p>Cheers,</p>
+    <p>SheetHub</p>
+  </body>
+</html>

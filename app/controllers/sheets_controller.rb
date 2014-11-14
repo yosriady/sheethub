@@ -80,10 +80,10 @@ class SheetsController < ApplicationController
       redirect_to new_user_session_path, error: ERROR_UNSIGNED_FAVORITE_MESSAGE
     end
     if @sheet && (!current_user.voted_for? @sheet)
-      @sheet.liked_by current_user
+      @sheet.favorited_by current_user
       redirect_to sheet_path(@sheet), notice: SUCCESS_FAVORITE_MESSAGE
     elsif @sheet && (current_user.voted_for? @sheet)
-      @sheet.unliked_by current_user
+      @sheet.unfavorited_by current_user
       redirect_to sheet_path(@sheet), notice: SUCCESS_UNFAVORITE_MESSAGE
     else
       redirect_to root_path, error: ERROR_SHEET_NOT_FOUND_MESSAGE

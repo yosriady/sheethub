@@ -133,6 +133,15 @@ class Sheet < ActiveRecord::Base
     ]
   end
 
+  def favorited_by(user)
+    self.liked_by user
+    SheetMailer.sheet_favorited_email(self, user).deliver
+  end
+
+  def unfavorited_by(user)
+    self.unliked_by user
+  end
+
   # Perceptual Hash methods
   def duplicate?(sheet, treshold=DEFAULT_PHASH_TRESHOLD)
     if (pdf.present? && sheet.pdf.present?)

@@ -15,7 +15,7 @@ class OrderMailer < ActionMailer::Base
     @buyer = order.user
     @order = order
     email_with_name = "#{@buyer.display_name} <#{@buyer.email}>"
-    mail(to: email_with_name, subject: 'Thank You for Your Purchase!')
+    mail(to: email_with_name, subject: 'Thank You for Your Purchase')
   end
 
   # For Seller/Publisher
@@ -25,8 +25,6 @@ class OrderMailer < ActionMailer::Base
     @buyer = order.user
     @publisher = @sheet.user
     email_with_name = "#{@publisher.display_name} <#{@publisher.email}>"
-    mail(to: email_with_name, subject: 'Sheet Purchased!')
+    mail(to: email_with_name, subject: 'Sheet Purchased')
   end
-
-
 end
