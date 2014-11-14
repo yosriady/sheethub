@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%= @publisher.display_name %>, </p>
+    <p>Someone tried to buy your sheet, <%= link_to @sheet.title, sheet_url(@sheet) %> but was unable to continue because you had an invalid Paypal email address.
+    </p>
+    <p>
+      Please go to your account <%= link_to "Settings", user_settings_url %> and update your Paypal account information.
+    </p>
+    <p>Cheers,</p>
+    <p>SheetHub</p>
+  </body>
+</html>

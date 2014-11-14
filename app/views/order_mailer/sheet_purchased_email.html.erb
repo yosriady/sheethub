@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%= @publisher.display_name %>, </p>
+    <p>Woohoo! You've made a sale! <%= link_to @sheet.title, sheet_url(@sheet) %> was bought by <%= link_to @buyer.display_name, user_profile_url(@buyer.username) %>.
+    </p>
+    <p>This email message will serve as your receipt.</p>
+    <hr>
+    <strong>Payment Info</strong>
+    <p>Sheet Purchased: <%= link_to @sheet.title, sheet_url(@sheet) %></p>
+    <p>Amount earned: <%= "US$#{@order.royalty}" %></p>
+    <p>Tracking Id: <%= @order.tracking_id %></p>
+    <p>Purchase Date: <%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
+    <hr>
+
+    <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
+
+    <p>Cheers,</p>
+    <p>SheetHub</p>
+  </body>
+</html>

@@ -11,13 +11,21 @@ class Order < ActiveRecord::Base
     if !completed?
       self.update(status: Order.statuses[:completed], purchased_at: Time.now)
       sheet.increment!(:total_sold)
-      send_sold_email_to_owner(self)
+      OrderMailer.purchase_receipt_email(self).deliver
+      OrderMailer.sheet_purchased_email(self).deliver
     end
   end
 
-  def send_sold_email_to_owner(order)
-    # TODO
-    # binding.pry
+  def amount
+    return amount_cents.to_f / 100
+  end
+
+  def royalty
+    return ((Sheet::USER_ROYALTY_PERCENTAGE * amount) - paypal_transaction_fees).round(2)
+  end
+
+  def paypal_transaction_fees
+    return (0.029 * amount) + 0.3
   end
 
   def self.get_adaptive_payment_details(payKey)

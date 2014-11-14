@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112165203) do
+ActiveRecord::Schema.define(version: 20141114132059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,15 +89,15 @@ ActiveRecord::Schema.define(version: 20141112165203) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "orders", force: true do |t|
-    t.integer  "sheet_id",                  null: false
-    t.integer  "user_id",                   null: false
+    t.integer  "sheet_id",                 null: false
+    t.integer  "user_id",                  null: false
     t.datetime "purchased_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",        default: 0
-    t.string   "payer_id",                  null: false
-    t.string   "tracking_id",               null: false
-    t.integer  "royalty_cents",             null: false
+    t.integer  "status",       default: 0
+    t.string   "payer_id",                 null: false
+    t.string   "tracking_id",              null: false
+    t.integer  "amount_cents",             null: false
   end
 
   add_index "orders", ["sheet_id"], name: "index_orders_on_sheet_id", using: :btree

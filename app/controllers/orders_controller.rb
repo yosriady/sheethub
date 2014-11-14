@@ -23,14 +23,14 @@ class OrdersController < ApplicationController
       redirectURL = build_redirect_url(@pay_response.payKey)
       @order.tracking_id = payment_request.trackingId
       @order.payer_id = @pay_response.payKey
-      @order.royalty_cents = sheet.royalty_cents
+      @order.amount_cents = sheet.price_cents #TODO: For pay what you want, update this OK?
       @order.save
       redirect_to redirectURL
     else
       Rails.logger.info "Paypal Error #{@pay_response.error.first.errorId}: #{@pay_response.error.first.message}"
-      if invalid_account_details_error(@pay_response)
-        send_purchase_failure_email
-        flash[:error] = "We could not process your purchase. The uploader's Paypal email is invalid!"
+      if invalid_account_details_error?(@pay_response)
+        OrderMailer.purchase_failure_email(@order).deliver
+        flash[:error] = "We could not process your purchase. The publisher's Paypal email is invalid! We've sent out an email."
       else
         flash[:error] = "We could not process your purchase. #{@pay_response.error.first.message}"
       end
@@ -91,10 +91,6 @@ class OrdersController < ApplicationController
 
     def build_redirect_url(payKey)
       return "https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay?paykey=#{payKey}"
-    end
-
-    def send_purchase_failure_email
-      # TODO: Email user that purchase has failed because of invalid account details
     end
 
     def invalid_account_details_error?(pay_response)

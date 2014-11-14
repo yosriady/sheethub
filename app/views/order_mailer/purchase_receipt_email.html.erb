@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%= @buyer.display_name %>, </p>
+    <p>Thank you for purchasing <%= link_to @sheet.title, sheet_url(@sheet) %>. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy!
+    </p>
+    <p>
+      To access all your purchases, log in to SheetHub and go to your <%= link_to "Purchases", user_purchases_url %> page. You can directly download the files here: <%= link_to @sheet.title, sheet_url(@sheet) %>.
+    </p>
+    <p>This email message will serve as your receipt.</p>
+
+    <hr>
+    <strong>Payment Info</strong>
+    <p>Sheet Purchased: <%= link_to @sheet.title, sheet_url(@sheet) %></p>
+    <p>Amount paid: <%= "US$#{@order.amount}" %></p>
+    <p>Tracking Id: <%= @order.tracking_id %></p>
+    <p>Purchase Date: <%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
+    <hr>
+
+    <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
+
+    <p>Cheers,</p>
+    <p>SheetHub</p>
+  </body>
+</html>
