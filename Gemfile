@@ -28,7 +28,7 @@ gem 'validates_email_format_of'
 gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
 
 # Static code analysis
-gem 'rubocop'
+# gem 'rubocop'
 
 # Search
 gem 'searchkick'

@@ -210,7 +210,7 @@ class SheetsController < ApplicationController
     end
 
     def hide_private_sheets
-      if @sheet.privately_visible? && current_user != @sheet.user
+      if !current_user.staff? && @sheet.privately_visible? && current_user != @sheet.user
         flash[:error] = ERROR_PRIVATE_SHEET_MESSAGE
         redirect_to sheets_path
       end

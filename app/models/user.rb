@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
 
-  enum membership_type: %w{ free premium }
+  enum membership_type: %w{ free premium staff }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   validates_acceptance_of :terms, acceptance: true
   validates_email_format_of :email, message: 'You have an invalid email address'
