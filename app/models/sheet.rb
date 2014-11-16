@@ -1,13 +1,14 @@
+# Sheet Model
 class Sheet < ActiveRecord::Base
-  SHEET_HASH_SECRET = "sheethubhashsecret"
-  PDF_DEFAULT_URL = "nil"
-  DEFAULT_PHASH_TRESHOLD = 5 #TODO: test out for ideal value
+  SHEET_HASH_SECRET = 'sheethubhashsecret'
+  PDF_DEFAULT_URL = 'nil'
+  DEFAULT_PHASH_TRESHOLD = 5 # TODO: test out for ideal value
   EXPIRATION_TIME = 600
-  PRICE_VALUE_VALIDATION_MESSAGE = "Price must be either $0 or between $0.99 - $999.99"
+  PRICE_VALUE_VALIDATION_MESSAGE = 'Price must be either $0 or between $0.99 - $999.99'
   MIN_PRICE = 99
   MAX_PRICE = 99999
-  INVALID_ASSETS_MESSAGE = "Sheet supporting files invalid"
-  TOO_MANY_TAGS_MESSAGE = "You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources."
+  INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
+  TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
   MAX_FILESIZE = 20
   USER_ROYALTY_PERCENTAGE = 0.75
   MAX_NUMBER_OF_TAGS = 5
@@ -21,22 +22,22 @@ class Sheet < ActiveRecord::Base
   before_destroy :soft_destroy_callback
   searchkick word_start: [:name]
   extend FriendlyId
-  friendly_id :sheet_slug, :use => :slugged
+  friendly_id :sheet_slug, use: :slugged
   validates :title, presence: true
   validates :license, presence: true
   validates :visibility, presence: true
-  has_many :flags, :dependent => :destroy
+  has_many :flags, dependent: :destroy
 
   scope :is_public, -> { where(visibility: Sheet.visibilities[:vpublic]) }
   scope :is_private, -> { where(visibility: Sheet.visibilities[:vprivate]) }
   scope :flagged, -> { where(is_flagged: true) }
-  scope :best_sellers, -> { is_public.order(price_cents: :desc)}
+  scope :best_sellers, -> { is_public.order(price_cents: :desc) }
 
   attr_accessor :instruments_list # For form parsing
-  enum visibility: %w{ vpublic vprivate}
-  enum difficulty: %w{ beginner intermediate advanced}
-  enum license: %w{all_rights_reserved creative_commons cc0 public_domain}
-  bitmask :instruments, :as => [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], :null => false
+  enum visibility: %w{ vpublic vprivate }
+  enum difficulty: %w{ beginner intermediate advanced }
+  enum license: %w{all_rights_reserved creative_commons cc0 public_domain }
+  bitmask :instruments, as: [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], null: false
   validates :instruments, presence: true
   acts_as_taggable
   acts_as_taggable_on :composers, :genres, :sources
@@ -70,7 +71,7 @@ class Sheet < ActiveRecord::Base
 
   def purchased_by?(user)
     return false unless user
-    return user.purchased?(id)
+    user.purchased?(id)
   end
 
   def uploaded_by?(usr)
@@ -79,11 +80,11 @@ class Sheet < ActiveRecord::Base
   end
 
   def publicly_visible?
-    return vpublic?
+    vpublic?
   end
 
   def privately_visible?
-    return vprivate?
+    vprivate?
   end
 
   def total_sales
@@ -99,7 +100,7 @@ class Sheet < ActiveRecord::Base
   end
 
   def price
-    return price_cents.to_f / 100
+    price_cents.to_f / 100
   end
 
   def price=(val)
@@ -107,23 +108,23 @@ class Sheet < ActiveRecord::Base
   end
 
   def royalty
-    return (USER_ROYALTY_PERCENTAGE * price).round(2)
+    (USER_ROYALTY_PERCENTAGE * price).round(2)
   end
 
   def royalty_cents
-    return (USER_ROYALTY_PERCENTAGE * price_cents).round(0)
+    (USER_ROYALTY_PERCENTAGE * price_cents).round(0)
   end
 
   def commission
-    return ((1 - USER_ROYALTY_PERCENTAGE) * price).round(2)
+    ((1 - USER_ROYALTY_PERCENTAGE) * price).round(2)
   end
 
   def commission_cents
-    return ((1 - USER_ROYALTY_PERCENTAGE) * price_cents).round(0)
+    ((1 - USER_ROYALTY_PERCENTAGE) * price_cents).round(0)
   end
 
   def is_free?
-    return price_cents == 0
+    price_cents == 0
   end
 
   def sheet_slug
@@ -134,12 +135,12 @@ class Sheet < ActiveRecord::Base
   end
 
   def favorited_by(user)
-    self.liked_by user
+    liked_by user
     SheetMailer.sheet_favorited_email(self, user).deliver
   end
 
   def unfavorited_by(user)
-    self.unliked_by user
+    unliked_by user
   end
 
   # Perceptual Hash methods
@@ -211,10 +212,6 @@ class Sheet < ActiveRecord::Base
   end
 
   protected
-    def soft_destroy_callback
-      # TODO: Send email to all buyers
-    end
-
     def tags
       [genre_list, composer_list, source_list].flatten
     end
@@ -245,4 +242,5 @@ class Sheet < ActiveRecord::Base
     def record_publisher
       user.update_attribute(:has_published, true) unless user.has_published
     end
+
 end
