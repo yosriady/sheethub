@@ -62,6 +62,16 @@ class Sheet < ActiveRecord::Base
     :on => [:create, :update],
     :message => INVALID_ASSETS_MESSAGE
 
+  auto_html_for :description do
+    html_escape
+    image
+    youtube(:width => 328, :height => 240, :autoplay => false)
+    vimeo(:width => 328, :height => 240)
+    soundcloud(:width => 328, :height => 165, :autoplay => false)
+    link :target => "_blank", :rel => "nofollow"
+    simple_format
+  end
+
   def verbose_license
     return "All rights reserved" if all_rights_reserved?
     return "Creative Commons" if creative_commons?
