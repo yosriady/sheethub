@@ -9,13 +9,9 @@
             <%= f.input :email, required: true, autofocus: true, placeholder: 'Your SheetHub account email address' %>
           </div>
 
-          <div class="form-actions">
-            <%= f.button :submit, "Send reset instructions", class:"btn btn-wide btn-success" %>
-          </div>
+          <%= f.button :submit, "Send me instructions", class:"btn btn-wide btn-success" %>
         <% end %>
-
-        <br/>
-        <%= render "devise/shared/links" %>
+        <br />
     </div>
 </div>
 </div>

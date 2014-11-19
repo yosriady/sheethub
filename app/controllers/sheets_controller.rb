@@ -7,7 +7,7 @@ class SheetsController < ApplicationController
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
   before_action :validate_flagged, only: [:show]
-  before_action :hide_private_sheets, only: [:show, :report, :flag, :favorite, :download]
+  before_action :hide_private_sheets, only: [:show, :report, :flag, :favorite, :download], if: :is_private_sheet
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :restore]
   before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
 
@@ -209,8 +209,14 @@ class SheetsController < ApplicationController
       return updated_params
     end
 
+    def is_private_sheet
+      @sheet && @sheet.privately_visible?
+    end
+
     def hide_private_sheets
-      if !current_user.staff? && @sheet.privately_visible? && current_user != @sheet.user
+      if current_user && current_user.staff?
+        # Allow Staff to view
+      elsif current_user != @sheet.user
         flash[:error] = ERROR_PRIVATE_SHEET_MESSAGE
         redirect_to sheets_path
       end
