@@ -1,5 +1,5 @@
 <% if @user %>
-  <% title "#{@user.username}'s Favorites"  %>
+  <% title "#{@user.display_name}'s Favorites"  %>
 
   <%= render 'profile_banner', user:@user %>
   <div class="nav-strip nav-strip-profile">

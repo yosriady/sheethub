@@ -5,7 +5,7 @@
     <div class="row">
     <div class="col-xs-12">
         <h1>My Private Sheets</h1>
-        <p class="bg-info"><i class="fa fa-eye-slash"></i> Private sheets are not publicly visible and does not appear in search results. </p>
+        <p class="bg-info"><i class="fa fa-eye-slash"></i> Private sheets appear only to you. They are not publicly visible and do not appear in search results. </p>
         <% if @private_sheets.any? %>
           <%= render '/sheets/sheets', sheets: @private_sheets %>
         <% else %>

@@ -7,7 +7,7 @@
     <p>Dear <%= @publisher.display_name %>, </p>
     <p>Woohoo! You've made a sale! <%= link_to @sheet.title, sheet_url(@sheet) %> was bought by <%= link_to @buyer.display_name, user_profile_url(@buyer.username) %>.
     </p>
-    <p>This email message will serve as your receipt. You can your sales from the <a href="<%= user_sales_url %>"> Sales</a> dashboard.</p>
+    <p>This email message will serve as your receipt. You can view more sales details from the <a href="<%= user_sales_url %>"> Sales</a> dashboard.</p>
     <hr>
     <strong>Payment Info</strong>
     <p>Sheet Purchased: <%= link_to @sheet.title, sheet_url(@sheet) %></p>
