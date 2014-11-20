@@ -6,9 +6,9 @@
 
     <%= simple_form_for current_user, url: finish_registration_path(current_user), method: :patch do |f| %>
       <%= f.input :username, label: 'Your username', placeholder: 'You can use both upper and lower case', autofocus: true %>
+      <%= f.input :paypal_email, label: 'Paypal Email', placeholder:'Paypal Email' %>
       <%= f.input :tagline, label: 'Your tagline (Optional)', placeholder: "Something interesting about you" %>
       <%= f.input :website, label: 'Your website (Optional)', placeholder: "Your personal website" %>
-      <%= f.input :paypal_email, label: 'Paypal Email', placeholder:'Required for sellers to accept purchases' %>
       <div id="form-terms">
         <%= f.check_box :terms %>
         <p>I accept SheetHub's <%= link_to "Terms of Use", terms_path %>

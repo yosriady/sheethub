@@ -15,6 +15,9 @@ class Order < ActiveRecord::Base
     unless completed?
       update(status: Order.statuses[:completed], purchased_at: Time.now)
       sheet.increment!(:total_sold)
+
+      # Start generating watermarked pdf
+
       OrderMailer.purchase_receipt_email(self).deliver
       OrderMailer.sheet_purchased_email(self).deliver
     end

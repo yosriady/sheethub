@@ -10,10 +10,6 @@ gem 'unicorn-rails'
 # DB analytics
 gem 'pghero'
 
-# Async task queue
-gem "resque", "~> 2.0.0.pre.1", github: "resque/resque"
-# gem 'resque-web', require: 'resque_web'
-
 # HTML Embed Links
 gem "auto_html"
 

@@ -16,6 +16,16 @@ h2 {
     font-weight: 300;
 }
 
+.btn {
+    box-shadow: rgba(0, 0, 0, 0.219608) 0px 1px 3px 0px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.219608) 0px 1px 3px 0px;
+
+    &:hover, &:focus {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+}
+
 .btn-block {
     text-transform: uppercase;
 }
@@ -105,6 +115,11 @@ blockquote {
     quotes: "\201C" "\201D" "\2018" "\2019";
 }
 
-.nopaddingright {
+.nopadding {
     padding-right: 0px;
+    padding-left: 0px;
+}
+
+.fade-text {
+    color: #8E959C;
 }

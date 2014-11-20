@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
-    <h1 class="text-center">Sign Up Free</h1>
+    <h1 class="text-center">Join SheetHub. Create your account now.</h1>
+    <h4 class="text-center fade-text">Get started in seconds and discover the extensible power of SheetHub.</h4>
 
     <div class="col-lg-4 col-lg-offset-4 white-container">
         <%= render "devise/shared/omniauth_links" %>
@@ -16,8 +17,8 @@
         </div>
 
         <div class="form-actions">
-            <%= f.button :submit, "Sign up", class:"btn btn btn-success btn-wide" %>
-            <%= link_to "Sign in", new_session_path(resource_name), class:"btn btn btn-default btn-wide" %>
+            <%= f.button :submit, "Sign Up", class:"btn btn btn-success btn-wide" %>
+            <%= link_to "Sign In", new_session_path(resource_name), class:"btn btn btn-default btn-wide" %>
         </div>
         <% end %>
 

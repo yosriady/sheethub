@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   validates_acceptance_of :terms, acceptance: true
   validates_email_format_of :email, message: 'You have an invalid email address'
+  validates :paypal_email, presence: true
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   validate :validate_number_of_uploaded_sheets
   has_many :sheets, dependent: :destroy
