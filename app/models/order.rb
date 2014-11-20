@@ -29,9 +29,9 @@ class Order < ActiveRecord::Base
 
   def generate_watermarked_pdf
     pdf_path = sheet.pdf_download_url
-    watermarked = MiniMagick::Image.open(pdf_path)
+    pdf = MiniMagick::Image.open(pdf_path)
     watermark = MiniMagick::Image.open(File.expand_path(WATERMARK_PATH))
-    composited = watermarked.pages.inject([]) do |composited, page|
+    composited = pdf.pages.inject([]) do |composited, page|
       composited << page.composite(watermark) do |c|
         c.compose "Over"
         c.gravity "SouthEast"
@@ -39,10 +39,13 @@ class Order < ActiveRecord::Base
     end
     MiniMagick::Tool::Convert.new do |b|
       composited.each { |page| b << page.path }
-      b << watermarked.path
+      b << pdf.path
     end
-    self.pdf = File.open(watermarked.path)
+    pdf.write(sheet.pdf_file_name)
+    watermarked = File.open(sheet.pdf_file_name)
+    self.pdf = watermarked
     self.save!
+    File.delete(watermarked) # Delete temp file
   end
 
   def has_latest_pdf?
@@ -52,7 +55,8 @@ class Order < ActiveRecord::Base
 
   def pdf_download_url
     return false unless completed? # If this evaluates true, user has not completed purchase
-    generate_watermarked_pdf unless has_latest_pdf?
+    # generate_watermarked_pdf unless has_latest_pdf?
+    generate_watermarked_pdf
     pdf.expiring_url(EXPIRATION_TIME)
   end
 

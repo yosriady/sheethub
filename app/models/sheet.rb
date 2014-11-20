@@ -44,7 +44,6 @@ class Sheet < ActiveRecord::Base
 
   has_attached_file :pdf,
                     :styles => {
-                      # :watermark => {},
                       :preview => {:geometry => "", :format => :png}
                     },
                     :processors => [:preview], # :watermark currently disabled

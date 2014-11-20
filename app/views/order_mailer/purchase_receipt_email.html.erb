@@ -5,7 +5,7 @@
   </head>
   <body>
     <p>Dear <%= @buyer.display_name %>, </p>
-    <p>Thank you for purchasing <strong><%= @sheet.title %></strong>. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. You can directly download the files from the sheet page <%= 'here', sheet_url(@sheet) %>. Enjoy!
+    <p>Thank you for purchasing <strong><%= @sheet.title %></strong>. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. You can directly download the files from the sheet page <%= link_to 'here', sheet_url(@sheet) %>. Enjoy!
     </p>
     <p>This email message will serve as your receipt.</p>
 
