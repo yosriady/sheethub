@@ -12,9 +12,9 @@
         <div class="form-inputs">
           <%= f.input :username %>
           <%= f.label :paypal_email %> <a href="<%= faq_path %>#paypal-transfer"><i class="fa fa-question-circle"></i></a>
+          <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
           <%= f.input :first_name %>
           <%= f.input :last_name %>
-          <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
 
           <%= f.input :tagline, placeholder: "Something interesting about you", autofocus: true %>
           <%= f.input :website, placeholder: "Your personal website", autofocus: true %>

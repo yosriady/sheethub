@@ -37,11 +37,21 @@ class Order < ActiveRecord::Base
     end
 
     composited = pdf.pages.inject([]) do |composited, page|
-      composited << page.composite(watermark) do |c|
+      processed_page = page.composite(watermark) do |c|
         c.density "300"
         c.compose "Over"
         c.gravity "NorthEast"
       end
+
+      # Write text here
+      processed_page = processed_page.combine_options do |c|
+        c.font "Helvetica"
+        c.gravity "NorthWest"
+        c.pointsize 14
+        c.draw "text 0,0 'Hello World'"
+      end
+
+      composited << processed_page
     end
     MiniMagick::Tool::Convert.new do |b|
       composited.each { |page| b << page.path }
