@@ -33,12 +33,15 @@ class Order < ActiveRecord::Base
     watermark = MiniMagick::Image.open(File.expand_path(WATERMARK_PATH))
     composited = pdf.pages.inject([]) do |composited, page|
       composited << page.composite(watermark) do |c|
+        c.density "200"
         c.compose "Over"
-        c.gravity "SouthEast"
+        c.geometry "+10+10"
       end
     end
     MiniMagick::Tool::Convert.new do |b|
-      composited.each { |page| b << page.path }
+      composited.each { |page|
+        b << page.path
+      }
       b << pdf.path
     end
     pdf.write(sheet.pdf_file_name)
