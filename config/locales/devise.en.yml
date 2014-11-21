@@ -10,7 +10,7 @@ en:
       already_authenticated: "You are already signed in."
       inactive: "Your account is not activated yet."
       invalid: "Invalid email or password."
-      locked: "Your account is locked."
+      locked: "Your account is locked. Please contact support from the Help page."
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Invalid email address or password."
       timeout: "Your session expired. Please sign in again to continue."
@@ -22,7 +22,7 @@ en:
       reset_password_instructions:
         subject: "Reset password instructions"
       unlock_instructions:
-        subject: "Unlock instructions"
+        subject: "Your SheetHub account has been locked"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
