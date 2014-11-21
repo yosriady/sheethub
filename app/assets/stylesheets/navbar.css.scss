@@ -25,9 +25,10 @@
     margin-bottom:0px;
     padding: 5px;
     border: none;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.219608) 0px 1px 3px 0px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.219608) 0px 1px 3px 0px;
-    box-shadow: rgba(0, 0, 0, 0.219608) 0px 1px 3px 0px;
+    -moz-box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
+    -ms-box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
+    -o-box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
+    box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
 
     .container-fluid {
         padding: 0 40px;

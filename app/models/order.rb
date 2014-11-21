@@ -38,7 +38,7 @@ class Order < ActiveRecord::Base
 
     composited = pdf.pages.inject([]) do |composited, page|
       processed_page = page.composite(watermark) do |c|
-        c.density "300"
+      c.density "200"
         c.compose "Over"
         c.gravity "NorthEast"
       end

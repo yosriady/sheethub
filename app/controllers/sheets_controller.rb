@@ -52,11 +52,11 @@ class SheetsController < ApplicationController
   # GET /sheets/1
   # GET /sheets/1.json
   def show
-    @favorites = @sheet.votes_for.includes(:voter).limit(5)
+    @favorites = @sheet.votes_for.includes(:voter).limit(6)
   end
 
   def favorites
-    @favorites = @sheet.votes_for.includes(:voter)
+    @favorites = @sheet.votes_for.includes(:voter).page(params[:page]).per(50)
   end
 
   # Downloads Sheet PDF

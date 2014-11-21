@@ -10,7 +10,7 @@ class Sheet < ActiveRecord::Base
   INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
   TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
   MAX_FILESIZE = 20
-  USER_ROYALTY_PERCENTAGE = 0.90
+  USER_ROYALTY_PERCENTAGE = 0.80
   MAX_NUMBER_OF_TAGS = 5
 
   before_create :record_publisher
