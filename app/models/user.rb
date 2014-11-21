@@ -3,9 +3,10 @@ class User < ActiveRecord::Base
   MISSING_AVATAR_URL = "/images/default_avatar.png"
   EXPIRATION_TIME = 600
   FREE_QUANTITY_OF_SHEETS = 25
-  PREMIUM_QUANTITY_OF_SHEETS = 250
+  PREMIUM_QUANTITY_OF_SHEETS = 150
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
+  EXCEED_QUOTA_MESSAGE = "You have exceeded the number of sheets you can upload. Free users have #{FREE_QUANTITY_OF_SHEETS}, Premium can have up to #{PREMIUM_QUANTITY_OF_SHEETS}. Upgrade your membership to continue publishing on SheetHub."
 
   enum membership_type: %w{ free premium staff }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
@@ -134,10 +135,6 @@ class User < ActiveRecord::Base
 
   private
     def validate_number_of_uploaded_sheets
-      errors.add(:sheets, "You have exceeded the number of sheets you can upload. Free users have 30, Premium can have up to 250. Upgrade your membership to continue publishing on SheetHub. ") if sheets.size > membership_sheet_quantity
-    end
-
-    def membership_sheet_quantity
-      free? ? FREE_QUANTITY_OF_SHEETS : PREMIUM_QUANTITY_OF_SHEETS
+      errors.add(:sheets, EXCEED_QUOTA_MESSAGE) if sheets.size > sheet_quota
     end
 end

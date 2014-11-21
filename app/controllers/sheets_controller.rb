@@ -6,9 +6,10 @@ class SheetsController < ApplicationController
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
+  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :restore]
+  before_action :validate_sheet_quota, only: [:new, :create]
   before_action :validate_flagged, only: [:show]
   before_action :hide_private_sheets, only: [:show, :report, :flag, :favorite, :download], if: :is_private_sheet
-  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :restore]
   before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
@@ -240,6 +241,13 @@ class SheetsController < ApplicationController
     def validate_flagged
       if @sheet.is_flagged
         flash[:error] = FLAGGED_MESSAGE
+        redirect_to sheets_path
+      end
+    end
+
+    def validate_sheet_quota
+      if current_user.sheets.size > current_user.sheet_quota
+        flash[:error] = User::EXCEED_QUOTA_MESSAGE
         redirect_to sheets_path
       end
     end
