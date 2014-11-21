@@ -6,7 +6,7 @@
     <div class="col-lg-4 col-lg-offset-4 white-container">
 
         <%= render "devise/shared/omniauth_links" %>
-        <hr>
+        <%= render "layouts/line_divider" %>
 
         <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), defaults: { input_html: { class: 'form-control' }}) do |f| %>
         <div class="form-inputs">
