@@ -33,7 +33,7 @@
         <div id="sheet-sidebar" class="col-xs-4">
             <%= render 'sheet_info', sheet:@sheet %>
             <%= render 'sheet_files', sheet: @sheet %>
-
+            <%= render 'sheet_favorites', sheet:@sheet, favorites: @favorites %>
             <%= render 'sheet_share', sheet: @sheet %>
 
             <div class="panel panel-default">

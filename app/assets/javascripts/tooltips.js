@@ -1,3 +1,3 @@
 $(document).on("page:change", function() {
-    $('.tag').tooltip();
+  $('[data-toggle="tooltip"]').tooltip()
 });

@@ -1,0 +1,19 @@
+<% title "#{@sheet.title}'s Fans" %>
+
+<div class="container">
+  <div class="row">
+  <div class="col-xs-12">
+      <h1 class="text-center"><%= @sheet.title %>'s Fans</h1>
+      <div id="sheets">
+        <% if @favorites.each do |vote| %>
+          <a href="<%= user_profile_path(vote.voter.username) %>">
+              <%= image_tag(vote.voter.avatar_url, class: "small-avatar", data: { toggle: 'tooltip', placement: 'top' }, title:vote.voter.display_name) %>
+          </a>
+        <% end.empty? %>
+          <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
+          <h2 class="text-center">No fans yet!</h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

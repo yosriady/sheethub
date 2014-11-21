@@ -1,14 +1,13 @@
 .navbar .nav > .active > a {
     color: #fff;
     background: rgba(0,0,0,0.15);
-    border-radius: 4px;
     padding: 10px 15px;
     margin: 5px;
+    border-radius: 100px;
 
     &:hover, &:focus, {
         color: #fff;
         background: rgba(0,0,0,0.3);
-        border-radius: 4px;
         padding: 10px 15px;
         margin: 5px;
     }
@@ -46,7 +45,7 @@
         &:hover, &:focus, &:active{
             color: #fff;
             background: rgba(0,0,0,0.3);
-            border-radius: 4px;
+            border-radius: 100px;
         }
 
     }

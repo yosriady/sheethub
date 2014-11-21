@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     end
 
     member do
+      get 'favorites'
       get 'download'
       post 'favorite'
       get 'report'

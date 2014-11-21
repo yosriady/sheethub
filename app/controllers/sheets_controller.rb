@@ -1,6 +1,6 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:show, :update]
-  before_action :set_sheet_lazy, only: [:edit, :report, :flag, :favorite, :destroy, :download]
+  before_action :set_sheet_lazy, only: [:edit, :report, :flag, :favorite, :favorites, :destroy, :download]
   before_action :set_deleted_sheet, only: [:restore]
   before_action :format_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
@@ -51,6 +51,11 @@ class SheetsController < ApplicationController
   # GET /sheets/1
   # GET /sheets/1.json
   def show
+    @favorites = @sheet.votes_for.includes(:voter).limit(5)
+  end
+
+  def favorites
+    @favorites = @sheet.votes_for.includes(:voter)
   end
 
   # Downloads Sheet PDF

@@ -122,4 +122,19 @@ blockquote {
 
 .fade-text {
     color: #8E959C;
+    -webkit-font-smoothing: antialiased;
+}
+
+.modal-backdrop {
+    opacity: 0.7
+}
+
+.badge {
+    background: #428bca;
+    border-radius: 4px;
+    margin-left: 3px;
+}
+
+.panel-info > .panel-heading {
+    color: #428bca;
 }

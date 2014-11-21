@@ -30,7 +30,7 @@
         <ul id="sheet-files">
             <!-- Main PDF file -->
             <% if sheet.pdf.present? %>
-            <li>
+            <li class="text-center">
                 <p><i class="fa fa-download"></i><strong> <%= sheet.pdf_file_name %></strong> (<%= number_to_human_size(sheet.pdf_file_size) %>)</p>
             </li>
             <% else %>
