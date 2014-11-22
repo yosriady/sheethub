@@ -1,7 +1,7 @@
 <% if tags.each do |tag| %>
-    <a href="<%= tag_path(tag) %>">
+    <a href="/<%= tag_type %>/<%= tag %>">
     <span class="tag" data-toggle="tooltip" data-placement="top">
-        <span class="fa fa-<%= tag_icon(tag.taggings[0].context.chomp('s')) %>"></span>
+        <i class="fa fa-<%= tag_icon(tag_type) %>"></i>
         <%= tag.name.titleize %>
     </span>
     </a>

@@ -16,6 +16,9 @@ gem "auto_html"
 # Admin
 gem 'activeadmin', github: 'activeadmin'
 
+# SEO Meta Tags
+gem 'metamagic'
+
 # Payments
 gem 'paypal-express'
 gem 'paypal-sdk-adaptivepayments'

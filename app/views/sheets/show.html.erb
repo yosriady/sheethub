@@ -1,4 +1,9 @@
-<% title "#{@sheet.title}"  %>
+<%
+title @sheet.title
+description @sheet.description
+keywords @sheet.cached_joined_tags
+%>
+
 
 <div class="container">
     <div class="row">

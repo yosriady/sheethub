@@ -1,5 +1,8 @@
 <% if @user %>
-  <% title "#{@user.display_name}"  %>
+  <%
+  title "#{@user.display_name}"
+  description @user.tagline
+  %>
 
   <%= render 'profile_banner', user:@user %>
   <div class="nav-strip nav-strip-profile">
