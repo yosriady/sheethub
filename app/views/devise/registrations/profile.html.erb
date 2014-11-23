@@ -8,8 +8,10 @@
   <div class="nav-strip nav-strip-profile">
   <div class="container-fluid">
   <ul class="list-inline">
+
     <li class="active"><a href="<%= user_profile_path(@user.username) %>"><i class="fa fa-music"></i> Sheet Music <span class="badge"><%= @sheets.count %></span></a></li>
     <li><a href="<%= user_favorites_path(@user.username) %>"><i class="fa fa-star"></i> Favorites </a></li>
+
   </ul>
   </div>
   </div>

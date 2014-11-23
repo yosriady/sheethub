@@ -9,8 +9,7 @@ class Order < ActiveRecord::Base
 
   has_attached_file :pdf,
                     :hash_secret => Sheet::SHEET_HASH_SECRET, #TODO: Use ENV for this
-                    :default_url => Sheet::PDF_DEFAULT_URL, #TODO: point to special Missing file route
-                    :preserve_files => "true"
+                    :default_url => Sheet::PDF_DEFAULT_URL
   validates_attachment_content_type :pdf, :content_type => [ 'application/pdf' ]
 
   belongs_to :user
@@ -32,31 +31,33 @@ class Order < ActiveRecord::Base
     pdf = MiniMagick::Image.open(pdf_path)
     watermark = MiniMagick::Image.open(File.expand_path(WATERMARK_PATH))
     watermark.combine_options do |c|
-      c.background '#FFFFFF'
+      c.transparent 'white'
       c.alpha 'remove'
     end
 
     composited = pdf.pages.inject([]) do |composited, page|
       processed_page = page.composite(watermark) do |c|
-      c.density "200"
+        c.density '300'
+        c.alpha 'remove'
         c.compose "Over"
+        c.geometry '+0+20'
         c.gravity "NorthEast"
       end
-
-      # Write text here
       processed_page = processed_page.combine_options do |c|
         c.font "Helvetica"
         c.gravity "NorthWest"
-        c.pointsize 14
-        c.draw "text 0,0 'Hello World'"
+        c.pointsize 32
+        c.draw "text 50,20 'Licensed to #{user.display_name} <#{user.email}>'"
       end
-
       composited << processed_page
     end
     MiniMagick::Tool::Convert.new do |b|
+      b.quality '92'
+      b.resize '60%'
       composited.each { |page| b << page.path }
       b << pdf.path
     end
+
     pdf.write(sheet.pdf_file_name)
     watermarked = File.open(sheet.pdf_file_name)
     self.pdf = watermarked
@@ -71,8 +72,8 @@ class Order < ActiveRecord::Base
 
   def pdf_download_url
     return false unless completed? # If this evaluates true, user has not completed purchase
-    # generate_watermarked_pdf unless has_latest_pdf?
-    generate_watermarked_pdf
+    return sheet.pdf.expiring_url unless sheet.enable_pdf_stamping
+    generate_watermarked_pdf unless has_latest_pdf?
     pdf.expiring_url(EXPIRATION_TIME)
   end
 
@@ -98,6 +99,16 @@ class Order < ActiveRecord::Base
     else
       fail "Payment Details for payKey #{payKey} Not Found"
     end
+  end
+
+  def s3_key
+    pdf.url.sub(S3DirectUpload.config.url, '')
+  end
+
+  def delete_s3_object(key)
+    s3 = AWS::S3.new
+    file = s3.buckets['sheethub'].objects[key]
+    file.delete
   end
 
 end

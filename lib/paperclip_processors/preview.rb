@@ -14,6 +14,7 @@ module Paperclip
       dst.binmode
       image= MiniMagick::Image.open(File.expand_path(@file.path))
       image.format('png')
+      image.quality('100')
       image.write(File.expand_path(dst.path))
       dst.flush
       return dst
