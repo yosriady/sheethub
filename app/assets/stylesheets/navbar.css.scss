@@ -78,6 +78,17 @@
             background: #2583EB;
             border-radius: 0px;
         }
+
+        &.bg-success {
+            color: #5cb85c;
+            &:hover, &:focus, &:active{
+                color: #fff;
+                background: #5cb85c;
+                border-radius: 0px;
+            }
+
+
+        }
     }
 }
 

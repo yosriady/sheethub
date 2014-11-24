@@ -10,7 +10,6 @@ class Sheet < ActiveRecord::Base
   INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
   TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
   MAX_FILESIZE = 20
-  USER_ROYALTY_PERCENTAGE = 0.80
   MAX_NUMBER_OF_TAGS = 5
 
   before_create :record_publisher
@@ -117,19 +116,19 @@ class Sheet < ActiveRecord::Base
   end
 
   def royalty
-    (USER_ROYALTY_PERCENTAGE * price).round(2)
+    (user.royalty_percentage * price).round(2)
   end
 
   def royalty_cents
-    (USER_ROYALTY_PERCENTAGE * price_cents).round(0)
+    (user.royalty_percentage * price_cents).round(0)
   end
 
   def commission
-    ((1 - USER_ROYALTY_PERCENTAGE) * price).round(2)
+    ((1 - user.royalty_percentage) * price).round(2)
   end
 
   def commission_cents
-    ((1 - USER_ROYALTY_PERCENTAGE) * price_cents).round(0)
+    ((1 - user.royalty_percentage) * price_cents).round(0)
   end
 
   def is_free?

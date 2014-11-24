@@ -2,13 +2,17 @@ class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
   MISSING_AVATAR_URL = "/images/default_avatar.png"
   EXPIRATION_TIME = 600
-  FREE_QUANTITY_OF_SHEETS = 25
-  PREMIUM_QUANTITY_OF_SHEETS = 150
+  BASIC_QUANTITY_OF_SHEETS = 25
+  PLUS_QUANTITY_OF_SHEETS = 150
+  PRO_QUANTITY_OF_SHEETS = 250
+  BASIC_ROYALTY_PERCENTAGE = 0.75
+  PLUS_ROYALTY_PERCENTAGE = 0.80
+  PRO_ROYALTY_PERCENTAGE = 0.90
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
-  EXCEED_QUOTA_MESSAGE = "You have exceeded the number of sheets you can upload. Free users have #{FREE_QUANTITY_OF_SHEETS}, Premium can have up to #{PREMIUM_QUANTITY_OF_SHEETS}. Upgrade your membership to continue publishing on SheetHub."
+  EXCEED_QUOTA_MESSAGE = "You have exceeded the number of sheets you can upload. Basic users get #{BASIC_QUANTITY_OF_SHEETS} uploads. Upgrade your membership to Plus or Pro to continue publishing on SheetHub."
 
-  enum membership_type: %w{ free premium staff }
+  enum membership_type: %w{ basic plus pro staff }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   validates_acceptance_of :terms, acceptance: true
   validates_email_format_of :email, message: 'You have an invalid email address'
@@ -30,6 +34,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+
+  def royalty_percentage
+    return BASIC_ROYALTY_PERCENTAGE if basic?
+    return PLUS_ROYALTY_PERCENTAGE if plus?
+    return PRO_ROYALTY_PERCENTAGE if pro?
+  end
 
   def joined_at
     created_at.strftime "%B %Y"

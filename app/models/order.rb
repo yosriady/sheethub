@@ -82,7 +82,7 @@ class Order < ActiveRecord::Base
   end
 
   def royalty
-    (Sheet::USER_ROYALTY_PERCENTAGE * amount - paypal_transaction_fees).round(2)
+    (user.royalty_percentage * amount - paypal_transaction_fees).round(2)
   end
 
   def paypal_transaction_fees

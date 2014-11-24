@@ -10,7 +10,7 @@
         <%= render "sales_stats", aggregated_sales: @aggregated_sales, recent_sales:@sales_past_month %>
 
         <div class="panel panel-info">
-          <div class="panel-heading"><i class="fa fa-line-chart"></i> Sales By Title (in USD)</div>
+          <div class="panel-heading"><i class="fa fa-line-chart"></i> Sales Earnings By Title (in USD)</div>
           <div class="panel-body">
             <%= pie_chart(@aggregated_sales) if @aggregated_sales.present? %>
           </div>
