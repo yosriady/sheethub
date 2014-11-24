@@ -59,4 +59,5 @@ Rails.application.routes.draw do
   get '/help', to: 'pages#faq', as: 'faq'
   get '/terms', to: 'pages#terms'
   get '/privacy', to: 'pages#privacy'
+  get '/upgrade', to: 'pages#upgrade'
 end

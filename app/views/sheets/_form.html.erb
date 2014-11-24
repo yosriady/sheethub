@@ -48,7 +48,13 @@
   </ul>
   <% end %>
   <%= f.file_field :pdf %>
-  <%= f.input :enable_pdf_stamping %>
+
+  <div class="checkbox">
+  <label>
+    <%= f.input_field :enable_pdf_stamping, inline_label: "Stamp PDF with the buyer's info" %>
+  </label>
+  <a href="<%= faq_path %>#what-pdf-stamping" class="pull-right" target="_blank"><i class="fa fa-question-circle"></i></a>
+  </div>
 
   <%= f.button :submit, class: "btn btn-success btn-lg btn-block"%>
 <% end %>

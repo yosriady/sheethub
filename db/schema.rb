@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 20141124065856) do
     t.integer  "visibility",              default: 0
     t.text     "description_html"
     t.string   "cached_joined_tags"
-    t.boolean  "enable_pdf_stamping",     default: false
+    t.boolean  "enable_pdf_stamping",     default: true
   end
 
   add_index "sheets", ["cached_votes_down"], name: "index_sheets_on_cached_votes_down", using: :btree

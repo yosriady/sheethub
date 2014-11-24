@@ -1,0 +1,60 @@
+#upgrade-page {
+    .col-xs-4 {
+        padding: 0px;
+    }
+
+
+    .list-group {
+        margin: 20px;
+    }
+
+    .list-group.basic-plan {
+        .list-group-item {
+            &:hover, &:focus {
+                cursor: help;
+                background: #f9fafb;
+            }
+
+            &:first-child {
+                background: #f5f5f5;
+            }
+        }
+    }
+
+    .list-group.plus-plan {
+        .list-group-item {
+            &:hover, &:focus {
+                cursor: help;
+                background: #ecf7fe;
+            }
+
+            &:first-child {
+                background: #2583EB;
+                color: #fff;
+            }
+        }
+    }
+
+    .list-group.pro-plan {
+        .list-group-item {
+            &:hover, &:focus {
+                cursor: help;
+                background: #ecface;
+            }
+
+            &:first-child {
+                background: #5cb85c;
+                color: #fff;
+            }
+        }
+    }
+
+    .pricing-box h2 {
+        font-family: 'Roboto Slab', serif;
+    }
+
+    .tooltip {
+        min-width: 150px;
+    }
+
+}

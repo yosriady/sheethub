@@ -13,6 +13,9 @@ class PagesController < ApplicationController
   def privacy
   end
 
+  def upgrade
+  end
+
   private
     def disable_navbar
       @disable_navbar = true

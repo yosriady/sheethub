@@ -120,6 +120,10 @@ blockquote {
     padding-left: 0px;
 }
 
+.zeropadding {
+    padding: 0px;
+}
+
 .fade-text {
     color: #8E959C;
     -webkit-font-smoothing: antialiased;
@@ -135,6 +139,25 @@ blockquote {
     margin-left: 3px;
 }
 
+.pro.badge {
+    background: #5cb85c;
+}
+
 .panel-info > .panel-heading {
     color: #428bca;
+}
+
+div.checkbox {
+    background-color: whitesmoke;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding-bottom: 10px;
+
+    .fa {
+        padding: 12.5px;
+    }
+}
+
+.fade-bg {
+    background: #bbb;
 }
