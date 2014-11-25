@@ -35,12 +35,11 @@ html, body {
 
 a {
     text-decoration:none;
-    -o-transition:.1s;
-    -ms-transition:.1s;
-    -moz-transition:.1s;
-    -webkit-transition:.1s;
-    /* ...and now for the proper property */
-    transition:.1s;
+    -o-transition:.05s;
+    -ms-transition:.05s;
+    -moz-transition:.05s;
+    -webkit-transition:.05s;
+    transition:.05s;
 
     &:hover, &:focus {
         text-decoration: none;

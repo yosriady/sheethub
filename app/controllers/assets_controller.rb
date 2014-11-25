@@ -28,7 +28,7 @@ class AssetsController < ApplicationController
     else
       flash[:error] = "You do not have permission to remove this file."
     end
-    redirect_to sheet_path(sheet)
+    redirect_to edit_sheet_path(sheet)
   end
 
   def download

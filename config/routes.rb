@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   mount PgHero::Engine, at: "pghero"
 
+
+  get 'upgrade/:membership' => 'upgrades#purchase', as: 'upgrades_purchase'
+
+
   post 'checkout' => 'orders#checkout'
   get 'orders/success/:tracking_id', to:'orders#success', as: 'orders_success'
   get 'orders/cancel'

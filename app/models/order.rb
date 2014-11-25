@@ -4,18 +4,15 @@ class Order < ActiveRecord::Base
   ORDER_UNIQUENESS_VALIDATION_MESSAGE = "Users cannot have multiple orders of the same Sheet."
   WATERMARK_PATH = "#{Rails.root}/public/images/watermark.png"
 
+  belongs_to :user
+  belongs_to :sheet
+  enum status: %w(processing completed failed)
   validates :sheet_id, uniqueness: { scope: :user_id,
                        message: ORDER_UNIQUENESS_VALIDATION_MESSAGE }
-
   has_attached_file :pdf,
                     :hash_secret => Sheet::SHEET_HASH_SECRET, #TODO: Use ENV for this
                     :default_url => Sheet::PDF_DEFAULT_URL
   validates_attachment_content_type :pdf, :content_type => [ 'application/pdf' ]
-
-  belongs_to :user
-  belongs_to :sheet
-
-  enum status: %w(processing completed failed)
 
   def complete
     unless completed?
@@ -82,7 +79,7 @@ class Order < ActiveRecord::Base
   end
 
   def royalty
-    (user.royalty_percentage * amount - paypal_transaction_fees).round(2)
+    (sheet.user.royalty_percentage * amount - paypal_transaction_fees).round(2)
   end
 
   def paypal_transaction_fees

@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-12 white-container">
         <h1>Recent Sales</h1>
         <%= render 'recent_sales', sales: @sales_past_month %>
 
@@ -10,7 +10,7 @@
         <%= render "sales_stats", aggregated_sales: @aggregated_sales, recent_sales:@sales_past_month %>
 
         <div class="panel panel-info">
-          <div class="panel-heading"><i class="fa fa-line-chart"></i> Sales Earnings By Title (in USD)</div>
+          <div class="panel-heading"><i class="fa fa-line-chart"></i> Sales Revenue By Title (in USD)</div>
           <div class="panel-body">
             <%= pie_chart(@aggregated_sales) if @aggregated_sales.present? %>
           </div>

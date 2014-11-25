@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   DEFAULT_CURRENCY = 'USD'
   SUCCESS_ORDER_PURCHASE_MESSAGE = 'Great success! Thank you for your purchase.'
   CANCEL_ORDER_PURCHASE_MESSAGE = 'Purchase canceled.'
+  FLAGGED_MESSAGE = 'You cannot purchase a flagged sheet.'
 
   before_action :authenticate_user!, only: [:checkout, :success, :cancel]
   before_action :validate_flagged, only: [:checkout]

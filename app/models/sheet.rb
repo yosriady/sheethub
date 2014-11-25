@@ -100,7 +100,7 @@ class Sheet < ActiveRecord::Base
   end
 
   def total_earnings
-    completed_orders.size * royalty
+    completed_orders.inject(0) { |total, order| total + order.royalty }
   end
 
   def completed_orders

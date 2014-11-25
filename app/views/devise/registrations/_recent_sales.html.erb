@@ -3,8 +3,9 @@
     <thead class="bg-info">
       <tr>
         <th><i class="fa fa-calendar"></i> Sale date</th>
-        <th><i class="fa fa-music"></i> Sheet</th>
+        <th><i class="fa fa-music"></i> Sheet Music</th>
         <th><i class="fa fa-user"></i> Buyer</th>
+        <th><i class="fa fa-usd"></i> Amount</th>
         <th><i class="fa fa-usd"></i> Estimated Earning <a href="<%= faq_path %>#earnings-calculation"><i class="fa fa-question-circle"></i></a></th>
       </tr>
     </thead>
@@ -14,7 +15,8 @@
             <td><%= order.purchased_at.strftime("%A, %d %b %Y %l:%M %p") %></td>
             <td><%= link_to order.sheet.title, sheet_path(order.sheet) %></td>
             <td><%= link_to order.user.username, user_profile_path(order.user.username) %></td>
-            <td><%= number_to_currency(order.sheet.royalty) %></td>
+            <td>$<%= order.amount %></td>
+            <td>$<%= order.royalty %></td>
           </tr>
         <% end %>
     </tbody>

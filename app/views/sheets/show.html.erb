@@ -38,7 +38,6 @@ keywords @sheet.cached_joined_tags
         <div id="sheet-sidebar" class="col-xs-4">
             <%= render 'sheet_info', sheet:@sheet %>
             <%= render 'sheet_files', sheet: @sheet %>
-            <%= render 'sheet_favorites', sheet:@sheet, favorites: @favorites %>
             <%= render 'sheet_share', sheet: @sheet %>
 
             <div class="panel panel-default">
@@ -46,6 +45,7 @@ keywords @sheet.cached_joined_tags
                 <%= render 'layouts/facebook_widget' %>
             </div>
 
+            <!-- <%= render 'sheet_favorites', sheet:@sheet, favorites: @favorites %> -->
             <%= render 'sign_up_blurb' %>
 
             <%= render 'flag_sheet_button', sheet: @sheet %>

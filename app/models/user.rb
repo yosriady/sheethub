@@ -3,10 +3,10 @@ class User < ActiveRecord::Base
   MISSING_AVATAR_URL = "/images/default_avatar.png"
   EXPIRATION_TIME = 600
   BASIC_QUANTITY_OF_SHEETS = 25
-  PLUS_QUANTITY_OF_SHEETS = 150
+  PLUS_QUANTITY_OF_SHEETS = 100
   PRO_QUANTITY_OF_SHEETS = 250
-  BASIC_ROYALTY_PERCENTAGE = 0.75
-  PLUS_ROYALTY_PERCENTAGE = 0.80
+  BASIC_ROYALTY_PERCENTAGE = 0.80
+  PLUS_ROYALTY_PERCENTAGE = 0.85
   PRO_ROYALTY_PERCENTAGE = 0.90
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def sales
-    Order.where(sheet_id: sheets.ids, status: Order.statuses[:completed])
+    Order.includes(:user).includes(:sheet).where(sheet_id: sheets.ids, status: Order.statuses[:completed])
   end
 
   def aggregated_sales
@@ -83,11 +83,7 @@ class User < ActiveRecord::Base
   end
 
   def aggregated_earnings
-    result = 0
-    sheets.each do |sheet|
-      result += sheet.total_earnings
-    end
-    return result
+    sheets.inject(0) { |total, sheet| total + sheet.total_earnings }
   end
 
   def sales_past_month
@@ -95,11 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def earnings_past_month
-    result = 0
-    sales_past_month.each do |order|
-      result += order.sheet.royalty
-    end
-    return result
+    sales_past_month.inject(0) { |total, order| total + order.royalty }
   end
 
   def purchased_orders
