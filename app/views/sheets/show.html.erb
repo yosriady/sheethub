@@ -24,7 +24,7 @@ keywords @sheet.cached_joined_tags
 
             <%= render 'sheet_preview', sheet:@sheet %>
             <a href="<%= user_profile_path(@sheet.user.username) %>">
-                <button type="button" class="btn btn-block btn-default">See more from this user <span class="fa fa-arrow-right"></span></button>
+                <button type="button" class="btn btn-block btn-default">See more from <%= @sheet.user.display_name %></button>
             </a>
             <%= render 'disqus' %>
         </div>

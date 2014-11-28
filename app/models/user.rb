@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :sheets, dependent: :destroy
   has_one :subscription
   acts_as_voter
+  before_save :cache_display_name
 
   has_attached_file :avatar,
                     :convert_options => {
@@ -67,15 +68,7 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    if first_name.present?
-      if last_name.present?
-        "#{first_name} #{last_name}"
-      else
-        first_name
-      end
-    else
-      username
-    end
+    cached_display_name || cache_display_name
   end
 
   def public_sheets
@@ -154,6 +147,22 @@ class User < ActiveRecord::Base
       end
       user.save
     end
+  end
+
+  def build_display_name
+    if first_name.present?
+      if last_name.present?
+        "#{first_name} #{last_name}"
+      else
+        first_name
+      end
+    else
+      username
+    end
+  end
+
+  def cache_display_name
+    self.cached_display_name = build_display_name
   end
 
   private

@@ -1,5 +1,5 @@
 <% if sales.any? %>
-  <table class="table table-striped">
+  <table class="table table-striped white-container">
     <thead class="bg-info">
       <tr>
         <th><i class="fa fa-calendar"></i> Sale date</th>
@@ -14,7 +14,7 @@
           <tr>
             <td><%= order.purchased_at.strftime("%A, %d %b %Y %l:%M %p") %></td>
             <td><%= link_to order.sheet.title, sheet_path(order.sheet) %></td>
-            <td><%= link_to order.user.username, user_profile_path(order.user.username) %></td>
+            <td><%= link_to order.user.display_name, user_profile_path(order.user.username) %></td>
             <td>$<%= order.amount %></td>
             <td>$<%= order.royalty %></td>
           </tr>

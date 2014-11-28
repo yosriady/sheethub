@@ -7,9 +7,9 @@
       <div class="col-xs-2">
         <ul class="nav nav-pills nav-stacked">
           <li role="presentation" class="active"><a href="<%= user_settings_path %>"><i class="fa fa-cog"></i> Profile</a></li>
+          <li role="presentation"><a href="<%= user_password_settings_path %>"><i class="fa fa-key"></i> Password</a></li>
           <li role="presentation"><a href="<%= user_membership_settings_path %>"><i class="fa fa-star"></i> Membership</a></li>
           <li role="presentation"><a href="<%= user_notifications_settings_path %>"><i class="fa fa-paper-plane"></i> Notifications</a></li>
-          <li role="presentation"><a href="<%= user_password_settings_path %>"><i class="fa fa-key"></i> Password</a></li>
         </ul>
       </div>
 
@@ -30,9 +30,8 @@
           <%= f.input :website, placeholder: "Your personal website", autofocus: true %>
 
           <div class="form-actions">
-            <%= f.button :submit, "Update", class: "btn btn-success btn-lg btn-block" %>
+            <%= f.button :submit, "Update Profile", class: "btn btn-success btn-lg btn-block" %>
           </div>
-          <%= link_to "Back to Profile", user_profile_path(current_user.username), class: "btn btn-default btn-block"%>
         </div>
 
         </div>
