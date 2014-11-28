@@ -6,7 +6,7 @@ class Subscription < ActiveRecord::Base
   PRO_SUBSCRIPTION_AMOUNT = 24.00
 
   belongs_to :user
-  enum status: %w(processing completed)
+  enum status: %w(processing completed suspended)
   enum membership_type: %w{ basic plus pro }
   validates :user_id, uniqueness: { scope: :membership_type, message: SUBSCRIPTION_UNIQUENESS_VALIDATION_MESSAGE }
   # Basic users should not have a Subscription object associated

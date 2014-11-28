@@ -42,6 +42,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit
   end
 
+  def edit_membership
+  end
+
+  def edit_notifications
+  end
+
+  def edit_password
+    @user = User.find(current_user.id)
+  end
+
+  def update_password
+    @user = User.find(current_user.id)
+    if @user.update_with_password(password_params)
+      sign_in @user, :bypass => true
+      flash[:notice] = "Password changed successfully"
+      redirect_to edit_password_settings_path
+    else
+      render "edit_password"
+    end
+  end
+
   # User profile edit/update
   def update
     account_update_params = registration_params
@@ -92,6 +113,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     def registration_params
       params[:user].permit(:username, :finished_registration?, :tagline, :website, :avatar, :terms, :paypal_email, :first_name, :last_name, :sheet_quota)
+    end
+
+    def password_params
+      params[:user].permit(:current_password, :password, :password_confirmation)
     end
 
     def downcase_username

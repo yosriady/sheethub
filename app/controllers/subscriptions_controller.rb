@@ -27,43 +27,41 @@ class SubscriptionsController < ApplicationController
   end
 
   def success
-    token = parseTokenFromQueryString(request)
-    @subscription = Subscription.find_by(tracking_id: token)
-    payment_request = build_payment_request(@subscription.membership_type)
-    profile = Paypal::Payment::Recurring.new(
-      :start_date => Time.now,
-      :description => Subscription.billing_agreement_description(@subscription.membership_type),
-      :auto_bill => 'AddToNextBilling',
-      :billing => {
-        :period        => :Month,
-        :frequency     => 1,
-        :amount        => Subscription.subscription_amount(@subscription.membership_type)
-      }
-    )
-    response = paypal_request.subscribe!(token, profile)
-    @subscription.complete(response.recurring.identifier)
+    @subscription = finalize_new_subscription(request)
+    # Cancel previous subscription if previous subscription is plus or pro
     render action: 'thank_you', notice: SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE
   end
 
-  def cancel
-    paypal_request.renew!(profile_id, :Cancel)
-    redirect_to upgrade_path, notice: CANCEL_SUBSCRIPTION_MESSAGE
-  end
-
-  def suspend
+  # TODO
+  def downgrade_to_basic
     paypal_request.renew!(profile_id, :Suspend)
     redirect_to upgrade_path, notice: SUSPEND_SUBSCRIPTION_MESSAGE
-  end
-
-  def reactivate
-    paypal_request.renew!(profile_id, :Reactivate)
-    redirect_to upgrade_path, notice: REACTIVATE_SUBSCRIPTION_MESSAGE
   end
 
   def thank_you
   end
 
   private
+    def finalize_new_subscription(request)
+      token = parseTokenFromQueryString(request)
+      subscription = Subscription.find_by(tracking_id: token)
+      payment_request = build_payment_request(subscription.membership_type)
+      profile = Paypal::Payment::Recurring.new(
+        :start_date => Time.now,
+        :description => Subscription.billing_agreement_description(subscription.membership_type),
+        :auto_bill => 'AddToNextBilling',
+        :billing => {
+          :period        => :Month,
+          :frequency     => 1,
+          :amount        => Subscription.subscription_amount(subscription.membership_type)
+        }
+      )
+      response = paypal_request.subscribe!(token, profile)
+      subscription.complete(response.recurring.identifier)
+      return subscription
+    end
+
+
     def parseTokenFromQueryString(request)
       request.query_parameters["token"]
     end
