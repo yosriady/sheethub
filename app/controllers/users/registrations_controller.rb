@@ -2,10 +2,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   SUCCESS_UPDATE_PROFILE_MESSAGE = "Nice! You've successfully updated your profile."
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
-  before_action :set_user, :only => [:profile, :favorites, :sheets]
+  before_filter :downcase_username, :only => [:profile, :favorites]
+  before_action :set_user, :only => [:profile, :favorites]
   before_action :validate_registration_finished
   before_action :validate_has_published, :only => [:sales]
-  before_action :authenticate_user!, :only => [:purchases, :sales, :trash, :private_music]
+  before_action :authenticate_user!, :except => [:profile, :favorites]
 
   # GET /user/:username
   def profile
@@ -24,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @favorites = @user.votes.includes(:votable).page(params[:page])
   end
 
-  def purchases
+  def library
     @purchases = current_user.purchased_orders.page(params[:page])
   end
 
@@ -67,7 +68,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if request.patch? && params[:user] && params[:user][:username]
       update_params = registration_params
       update_params[:finished_registration?] = true
-      update_params[:sheet_quota] = User::BASIC_QUANTITY_OF_SHEETS
+      update_params[:sheet_quota] = User::BASIC_SHEET_QUOTA
       if current_user.update(update_params)
         redirect_to user_profile_path(current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
@@ -86,11 +87,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def set_user
-      @user = User.find_by("username = ?", params[:username])
+      @user = User.find_by("username = ?", params[:username]) or not_found
     end
 
     def registration_params
       params[:user].permit(:username, :finished_registration?, :tagline, :website, :avatar, :terms, :paypal_email, :first_name, :last_name, :sheet_quota)
+    end
+
+    def downcase_username
+      params[:username] = params[:username].downcase
     end
 
     def validate_registration_finished

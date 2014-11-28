@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%= @buyer.display_name %>, </p>
+    <p>Congratulations on your new SheetHub <strong><%= @membership_type %></strong> Membership! You can now enjoy up to <%= User.membership_quota(@buyer) %> uploads and many additional features. Enjoy!</p>
+    <p>This email message will serve as your receipt.</p>
+
+    <hr>
+    <strong>Payment Info</strong>
+    <p>Membership: <%= @membership_type %></p>
+    <p>Amount: US$<%= Subscription.subscription_amount(@membership_type.downcase) %> / month</p>
+    <p>Tracking Id: <%= @subscription.tracking_id %></p>
+    <hr>
+    <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
+
+    <p>Cheers,</p>
+    <p>SheetHub</p>
+  </body>
+</html>

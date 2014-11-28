@@ -3,7 +3,7 @@ class Sheet < ActiveRecord::Base
   SHEET_HASH_SECRET = 'sheethubhashsecret'
   PDF_DEFAULT_URL = 'nil'
   DEFAULT_PHASH_TRESHOLD = 5 # TODO: test out for ideal value
-  EXPIRATION_TIME = 600
+  EXPIRATION_TIME = 30
   PRICE_VALUE_VALIDATION_MESSAGE = 'Price must be either $0 or between $0.99 - $999.99'
   MIN_PRICE = 99
   MAX_PRICE = 99999
@@ -63,9 +63,9 @@ class Sheet < ActiveRecord::Base
   auto_html_for :description do
     html_escape
     image
-    youtube(:width => 328, :height => 240, :autoplay => false)
-    vimeo(:width => 328, :height => 240)
-    soundcloud(:width => 328, :height => 165, :autoplay => false)
+    youtube(:width => "345", :height => 240, :autoplay => false)
+    vimeo(:width => "345", :height => 240)
+    soundcloud(:width => "345", :height => 165, :autoplay => false)
     link :target => "_blank", :rel => "nofollow"
     simple_format
   end

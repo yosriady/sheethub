@@ -1,6 +1,6 @@
 class Asset < ActiveRecord::Base
   ASSET_HASH_SECRET = "sheethubhashsecret"
-  EXPIRATION_TIME = 600
+  EXPIRATION_TIME = 30
   MAX_FILESIZE = 20
   MAX_NUMBER_OF_ASSETS = 5
   ASSET_NUMBER_VALIDATION_MESSAGE = "You can only have 5 additional files per sheet"

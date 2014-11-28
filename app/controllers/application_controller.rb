@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
   protected
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) << :username

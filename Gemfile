@@ -21,6 +21,7 @@ gem 'metamagic'
 
 # Payments
 gem 'paypal-express'
+# gem 'paypal-sdk-merchant'
 gem 'paypal-sdk-adaptivepayments'
 
 # Charts

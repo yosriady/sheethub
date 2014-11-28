@@ -3,10 +3,10 @@
     <div class="profile-bio">
       <h1><%= user.display_name %></h1>
       <ul class="list-inline">
+        <li><%= render 'layouts/user_badge', user: user%></li>
         <li><p><a href="<%= user_profile_path(user.username) %>"><i class="fa fa-user"></i> <%= user.username %></a></p></li>
         <% if user.website? %><li><p><a href="<%= url_with_protocol(user.website) %>" target="_blank"><i class="fa fa-globe"></i> <%= user.website %></a></p></li><% end %>
         <li><p><i class="fa fa-clock-o"></i> Joined <%= user.joined_at %></p></li>
-        <% if user.staff? %><span class="badge"> STAFF </span></a><% end %>
       </ul>
         <% if user.tagline? %><p><q><%= user.tagline %></q></p><% end %>
     </div>

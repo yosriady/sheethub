@@ -1,0 +1,31 @@
+<ul class="list-group basic-plan">
+  <li class="list-group-item">
+    <div class="pricing-box">
+        <h1>Basic</h1>
+        <h4>For everyone</h4>
+    </div>
+  </li>
+  <% unless current_user %>
+  <li class="list-group-item well">
+    <a href="<%= new_user_registration_path %>">
+        <button type="button" class="btn btn-block btn-default">Sign Up</button>
+    </a>
+  </li>
+  <% end %>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="right" title="Upload up to 25 pieces on SheetHub. Upgrade to Plus to upload more"><strong>25</strong> Uploads</li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="right" title="Earn 80% royalty for your sheet music. Upgrade to Plus to earn more">Earn money for your sheet music</li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="right" title="Upload private sheets visible only to you">Private Sheets</li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="right" title="View detailed sales and earnings statistics">Sales Dashboard</li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="right" title="We let your fans find your music on search engines by optimizing headings, titles and meta tags">Search Engine Optimized</li>
+  <li class="list-group-item">
+    <h1 class="membership-price"><span class="fade-text"> $ </span> 0 <span class="fade-text"> / mo</span></h1>
+    <p class="fade-text text-center">Free forever</p>
+  </li>
+  <% unless current_user %>
+  <li class="list-group-item well">
+    <a href="<%= new_user_registration_path %>">
+        <button type="button" class="btn btn-block btn-default">Sign Up</button>
+    </a>
+  </li>
+  <% end %>
+</ul>

@@ -2,15 +2,16 @@ class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
   MISSING_AVATAR_URL = "/images/default_avatar.png"
   EXPIRATION_TIME = 600
-  BASIC_QUANTITY_OF_SHEETS = 25
-  PLUS_QUANTITY_OF_SHEETS = 100
-  PRO_QUANTITY_OF_SHEETS = 250
+  BASIC_SHEET_QUOTA = 25
+  PLUS_SHEET_QUOTA = 100
+  PRO_SHEET_QUOTA = 250
   BASIC_ROYALTY_PERCENTAGE = 0.80
   PLUS_ROYALTY_PERCENTAGE = 0.85
   PRO_ROYALTY_PERCENTAGE = 0.90
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
-  EXCEED_QUOTA_MESSAGE = "You have exceeded the number of sheets you can upload. Basic users get #{BASIC_QUANTITY_OF_SHEETS} uploads. Upgrade your membership to Plus or Pro to continue publishing on SheetHub."
+  INVALID_MEMBERSHIP_TYPE_MESSAGE = "Membership type does not exist"
+  EXCEED_QUOTA_MESSAGE = "You have exceeded the number of sheets you can upload. Basic users get #{BASIC_SHEET_QUOTA} uploads. Upgrade your membership to Plus or Pro to continue publishing on SheetHub."
 
   enum membership_type: %w{ basic plus pro staff }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
@@ -19,6 +20,7 @@ class User < ActiveRecord::Base
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   validate :validate_number_of_uploaded_sheets
   has_many :sheets, dependent: :destroy
+  has_one :subscription
   acts_as_voter
 
   has_attached_file :avatar,
@@ -39,6 +41,25 @@ class User < ActiveRecord::Base
     return BASIC_ROYALTY_PERCENTAGE if basic?
     return PLUS_ROYALTY_PERCENTAGE if plus?
     return PRO_ROYALTY_PERCENTAGE if pro?
+  end
+
+  def self.membership_quota_of(membership_type)
+    m = membership_type.downcase
+    raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
+    return BASIC_SHEET_QUOTA if m == "basic"
+    return PLUS_SHEET_QUOTA if m == "plus"
+    return PRO_SHEET_QUOTA if m == "pro"
+  end
+
+  def update_membership_to(membership_type)
+    m = membership_type.downcase
+    raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
+    raise MISSING_SUBSCRIPTION_OBJECT_message unless has_subscription_for_membership(membership_type)
+    update(membership_type: m, sheet_quota: User.membership_quota_of(m))
+  end
+
+  def has_subscription_for_membership(membership_type)
+    Subscription.find_by(user:self, membership_type:Subscription.membership_types[membership_type], status: Subscription.statuses[:completed]).present?
   end
 
   def joined_at

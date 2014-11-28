@@ -13,29 +13,23 @@ keywords @sheet.cached_joined_tags
             <% end %>
 
             <h1><%= link_to @sheet.title, sheet_path(@sheet) %></h1>
-            <h4>by <a href="<%= user_profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.display_name %></a></h4>
+            <h4>by <a href="<%= user_profile_path(@sheet.user.username) %>" class="sheet-author"><%= @sheet.user.display_name %></a> <%= render 'layouts/user_badge', user: @sheet.user%></h4>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 zeropaddingleft">
             <%= render 'buy_now', sheet:@sheet %>
         </div>
     </div>
     <div class="row">
         <div id="sheet-content" class="col-xs-8">
 
-        <% if @sheet.has_pdf_preview? %>
-            <%= image_tag(@sheet.pdf_preview_url, :class => "sample_sheet") %>
-        <% else %>
-            <!-- TODO: finalize blank slate when no pdf preview -->
-            <%= image_tag("/assets/sheet.png", :class => "sample_sheet") %>
-        <% end %>
-
+            <%= render 'sheet_preview', sheet:@sheet %>
             <a href="<%= user_profile_path(@sheet.user.username) %>">
                 <button type="button" class="btn btn-block btn-default">See more from this user <span class="fa fa-arrow-right"></span></button>
             </a>
             <%= render 'disqus' %>
         </div>
 
-        <div id="sheet-sidebar" class="col-xs-4">
+        <div id="sheet-sidebar" class="col-xs-4 zeropaddingleft">
             <%= render 'sheet_info', sheet:@sheet %>
             <%= render 'sheet_files', sheet: @sheet %>
             <%= render 'sheet_share', sheet: @sheet %>

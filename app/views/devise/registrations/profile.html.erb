@@ -1,34 +1,28 @@
-<% if @user %>
-  <%
-  title "#{@user.display_name}"
-  description @user.tagline
-  %>
+<%
+title "#{@user.display_name}"
+description @user.tagline
+%>
 
-  <%= render 'profile_banner', user:@user %>
-  <div class="nav-strip nav-strip-profile">
-  <div class="container-fluid">
-  <ul class="list-inline">
+<%= render 'profile_banner', user:@user %>
+<div class="nav-strip nav-strip-profile">
+<div class="container-fluid">
+<ul class="list-inline">
 
-    <li class="active"><a href="<%= user_profile_path(@user.username) %>"><i class="fa fa-music"></i> Sheet Music <span class="badge"><%= @sheets.count %></span></a></li>
-    <li><a href="<%= user_favorites_path(@user.username) %>"><i class="fa fa-star"></i> Favorites </a></li>
+  <li class="active"><a href="<%= user_profile_path(@user.username) %>"><i class="fa fa-music"></i> Sheet Music <span class="badge"><%= @sheets.count %></span></a></li>
+  <li><a href="<%= user_favorites_path(@user.username) %>"><i class="fa fa-star"></i> Favorites </a></li>
 
-  </ul>
-  </div>
-  </div>
+</ul>
+</div>
+</div>
 
-  <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="tab-content">
-            <%= render 'sheets_tab_content', sheets: @sheets, user: @user %>
-          </div>
-
-
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="tab-content">
+          <%= render 'sheets_tab_content', sheets: @sheets, user: @user %>
         </div>
-    </div>
-  <% else %>
-    <% title "User not found" %>
-    <h2>User not found</h2>
-  <% end %>
 
+
+      </div>
   </div>
+</div>

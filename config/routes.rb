@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
   mount PgHero::Engine, at: "pghero"
 
+  get 'upgrade/purchase/:membership' => 'subscriptions#purchase', as: 'subscriptions_purchase'
+  post 'upgrade/checkout/:membership' => 'subscriptions#checkout', as: 'subscriptions_checkout'
+  get 'upgrade/success' =>  'subscriptions#success', as: 'subscriptions_success'
+  get 'upgrade/cancel' =>  'subscriptions#cancel', as: 'subscriptions_cancel'
 
-  get 'upgrade/:membership' => 'upgrades#purchase', as: 'upgrades_purchase'
 
-
+  # Sheet Purchase Routes
   post 'checkout' => 'orders#checkout'
   get 'orders/success/:tracking_id', to:'orders#success', as: 'orders_success'
   get 'orders/cancel'
+  # End of Sheet Purchase Routes
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -18,7 +22,7 @@ Rails.application.routes.draw do
     match 'users/finish_registration' => 'users/registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
     get 'private_sheets' => "users/registrations#private_sheets", :as => :user_private_sheets
     get 'sales' => "users/registrations#sales", :as => :user_sales
-    get 'purchases' => "users/registrations#purchases", :as => :user_purchases
+    get 'library' => "users/registrations#library", :as => :user_library
     get 'trash' => "users/registrations#trash", :as => :user_trash
 
     get '/settings' => 'users/registrations#edit', :as => :user_settings

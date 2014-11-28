@@ -18,16 +18,13 @@ class OrdersController < ApplicationController
     end
 
     # Start Adaptive Payments
-    api = PayPal::SDK::AdaptivePayments::API.new
     sheet = Sheet.friendly.find(params[:sheet])
-    payment_request = build_adaptive_payment_request(sheet)
-    @pay_response = api.pay(payment_request)
+    @pay_response = build_payment_response(sheet)
     if @pay_response.success?
       redirect_url = build_redirect_url(@pay_response.payKey)
-      @order.tracking_id = payment_request.trackingId
-      @order.payer_id = @pay_response.payKey
-      @order.amount_cents = sheet.price_cents #TODO: For pay what you want, update this OK?
-      @order.save
+      @order.update(tracking_id: payment_request.trackingId,
+                    payer_id: @pay_response.payKey,
+                    amount_cents: sheet.price_cents) #TODO: For pay what you want, update price_cents to user_specified_cents
       redirect_to redirect_url
     else
       Rails.logger.info "Paypal Error #{@pay_response.error.first.errorId}: #{@pay_response.error.first.message}"
@@ -88,6 +85,12 @@ class OrdersController < ApplicationController
       pay_request.receiverList.receiver[1].email  = MARKETPLACE_PAYPAL_EMAIL
       pay_request.receiverList.receiver[1].primary = false
       return pay_request
+    end
+
+    def build_payment_response(sheet)
+        api = PayPal::SDK::AdaptivePayments::API.new
+        payment_request = build_adaptive_payment_request(sheet)
+        api.pay(payment_request)
     end
 
     def build_redirect_url(payKey)

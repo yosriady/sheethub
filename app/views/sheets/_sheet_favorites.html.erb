@@ -1,12 +1,7 @@
 <% if favorites.present? %>
-<div class="panel panel-info">
-    <div class="panel-heading"><a href="<%= favorites_sheet_path(@sheet) %>"><i class="fa fa-cloud-download"></i> Favorites <span class="badge"><%= sheet.cached_votes_up %></span></a></div>
-    <div class="panel-body list-group">
       <% favorites.each do |vote| %>
         <a href="<%= user_profile_path(vote.voter.username) %>">
             <%= image_tag(vote.voter.avatar_url, class: "small-avatar", data: { toggle: 'tooltip', placement: 'top' }, title:vote.voter.display_name) %>
         </a>
       <% end %>
-    </div>
-</div>
 <% end %>
