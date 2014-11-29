@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
 
   def complete
     unless completed?
-      update(status: Order.statuses[:completed], purchased_at: Time.now)
+      update(status: Order.statuses[:completed], purchased_at: Time.now, royalty_cents:user.royalty_percentage * amount_cents)
       sheet.increment!(:total_sold)
       OrderMailer.purchase_receipt_email(self).deliver
       OrderMailer.sheet_purchased_email(self).deliver

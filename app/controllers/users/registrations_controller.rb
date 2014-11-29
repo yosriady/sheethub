@@ -43,13 +43,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_membership
-  end
-
-  def edit_notifications
+    @subscription = current_user.subscription
   end
 
   def edit_password
-    @user = User.find(current_user.id)
   end
 
   def update_password

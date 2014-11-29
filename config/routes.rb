@@ -27,7 +27,6 @@ Rails.application.routes.draw do
 
     get '/settings' => 'users/registrations#edit', :as => :user_settings
     get '/settings/membership' => 'users/registrations#edit_membership', :as => :user_membership_settings
-    get '/settings/notifications' => 'users/registrations#edit_notifications', :as => :user_notifications_settings
     get '/settings/password' => 'users/registrations#edit_password', :as => :user_password_settings
     patch '/settings/password' => 'users/registrations#update_password', :as => :user_password_update
   end

@@ -81,6 +81,7 @@ class Sheet < ActiveRecord::Base
     return "Public Domain" if public_domain?
   end
 
+
   def purchased_by?(user)
     return false unless user
     user.purchased?(id)

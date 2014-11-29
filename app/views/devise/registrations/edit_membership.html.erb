@@ -9,11 +9,40 @@
           <li role="presentation"><a href="<%= user_settings_path %>"><i class="fa fa-cog"></i> Profile</a></li>
           <li role="presentation"><a href="<%= user_password_settings_path %>"><i class="fa fa-key"></i> Password</a></li>
           <li role="presentation" class="active"><a href="<%= user_membership_settings_path %>"><i class="fa fa-star"></i> Membership</a></li>
-          <li role="presentation"><a href="<%= user_notifications_settings_path %>"><i class="fa fa-paper-plane"></i> Notifications</a></li>
         </ul>
       </div>
 
         <div class="col-xs-10 white-container">
+          <% unless (current_user && (current_user.membership_type == "plus" || current_user.membership_type == "pro")) %><p class="bg-info"><i class="fa fa-info-circle"></i><a href="<%= upgrade_path %>"> Upgrade</a> now to Plus or Pro to enjoy unlimited free uploads and extra features.</p><% end %>
+
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td>
+                  Membership
+                </td>
+                <td><strong><%= current_user.membership_type.titleize %></strong></td>
+              </tr>
+              <tr>
+                <td>
+                  Commercial Sheet Uploads
+                </td>
+                <td><strong>Unlimited</strong></td>
+              </tr>
+              <tr>
+                <td>
+                  Free Sheet Uploads
+                </td>
+                <td><strong><%= current_user.sheet_quota %></strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <% if @subscription.present? %>
+            <%= @subscription %>
+          <% end %>
+
+          <a href="<%= upgrade_path %>"><button type="button" class="btn btn-lg btn-success"><i class="fa fa-star"></i> Upgrade</button></a>
 
         </div>
   </div>
