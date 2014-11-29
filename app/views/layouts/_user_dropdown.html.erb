@@ -9,7 +9,7 @@
     <hr>
     <% if current_user.has_published %><li><a href="<%= user_sales_path %>"><i class="fa fa-line-chart"></i> Sales</a></li><% end %>
     <li><a href="<%= user_library_path %>"><i class="fa fa-shopping-cart"></i> My Library</a></li>
-    <li><a href="<%= user_private_sheets_path %>"><i class="fa fa-eye-slash"></i> My Private Sheets</a></li>
+    <% if current_user.pro? %><li><a href="<%= user_private_sheets_path %>"><i class="fa fa-eye-slash"></i> My Private Sheets</a></li><% end %>
     <li><a href="<%= user_trash_path %>"><i class="fa fa-trash"></i> My Trash</a></li>
   <% end %>
     <hr>

@@ -31,6 +31,12 @@
               </tr>
               <tr>
                 <td>
+                  Percentage earnings
+                </td>
+                <td><strong><%= "#{number_to_percentage(@user.royalty_percentage * 100, precision: 0)}" %></strong></td>
+              </tr>
+              <tr>
+                <td>
                   Free Sheet Uploads
                 </td>
                 <td><strong><%= @user.remaining_free_sheet_quota%> of <%= @user.sheet_quota %> remaining</strong></td>

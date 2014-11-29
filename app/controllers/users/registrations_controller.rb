@@ -3,6 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
   before_action :validate_user_signed_in, :except => [:profile, :favorites]
+  before_action :validate_user_is_pro, :only => [:private_sheets]
   before_filter :downcase_username, :only => [:profile, :favorites]
   before_action :set_profile_user, :only => [:profile, :favorites]
   before_action :validate_registration_finished
@@ -107,6 +108,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
     def validate_user_signed_in
         redirect_to new_user_session_path unless user_signed_in?
+    end
+
+    def validate_user_is_pro
+      redirect_to :back unless current_user.pro?
     end
 
     def set_current_user
