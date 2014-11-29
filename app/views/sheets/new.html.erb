@@ -29,7 +29,7 @@
     <div class="col-xs-3">
         <div class="panel panel-warning">
         <div class="panel-body bg-warning">
-            <p>You can upload <strong><%= current_user.free_sheets.size - current_user.sheet_quota %></strong> more free sheets on SheetHub. You have <strong>unlimited</strong> uploads for commercial sheets.</p>
+            <p>You can upload <strong><%= current_user.remaining_free_sheet_quota %></strong> more free sheets on SheetHub. You have <strong>unlimited</strong> uploads for commercial sheets.</p>
             <% if current_user.membership_type != "pro" %>
                 <p><%= link_to "Upgrade", upgrade_path %> to enjoy unlimited free uploads and extra features!</p>
             <% end %>

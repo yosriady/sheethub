@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141128195923) do
+ActiveRecord::Schema.define(version: 20141129150952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20141128195923) do
     t.string   "pdf_content_type"
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
+    t.integer  "royalty_cents"
   end
 
   add_index "orders", ["sheet_id"], name: "index_orders_on_sheet_id", using: :btree

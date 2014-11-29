@@ -2,11 +2,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   SUCCESS_UPDATE_PROFILE_MESSAGE = "Nice! You've successfully updated your profile."
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
+  before_action :validate_user_signed_in, :except => [:profile, :favorites]
   before_filter :downcase_username, :only => [:profile, :favorites]
-  before_action :set_user, :only => [:profile, :favorites]
+  before_action :set_profile_user, :only => [:profile, :favorites]
   before_action :validate_registration_finished
   before_action :validate_has_published, :only => [:sales]
-  before_action :authenticate_user!, :except => [:profile, :favorites]
+  before_action :set_current_user, only: [:edit_password, :edit_membership]
 
   # GET /user/:username
   def profile
@@ -104,7 +105,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
-    def set_user
+    def validate_user_signed_in
+        redirect_to new_user_session_path unless user_signed_in?
+    end
+
+    def set_current_user
+      @user = current_user
+    end
+
+    def set_profile_user
       @user = User.find_by("username = ?", params[:username]) or not_found
     end
 

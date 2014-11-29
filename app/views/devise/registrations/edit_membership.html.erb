@@ -13,7 +13,7 @@
       </div>
 
         <div class="col-xs-10 white-container">
-          <% unless (current_user && (current_user.membership_type == "plus" || current_user.membership_type == "pro")) %><p class="bg-info"><i class="fa fa-info-circle"></i><a href="<%= upgrade_path %>"> Upgrade</a> now to Plus or Pro to enjoy unlimited free uploads and extra features.</p><% end %>
+          <% unless (@user && (@user.membership_type == "plus" || @user.membership_type == "pro")) %><p class="bg-info"><i class="fa fa-info-circle"></i><a href="<%= upgrade_path %>"> Upgrade</a> now to Plus or Pro to enjoy unlimited free uploads and extra features.</p><% end %>
 
           <table class="table table-bordered">
             <tbody>
@@ -21,7 +21,7 @@
                 <td>
                   Membership
                 </td>
-                <td><strong><%= current_user.membership_type.titleize %></strong></td>
+                <td><strong><%= @user.membership_type.titleize %></strong></td>
               </tr>
               <tr>
                 <td>
@@ -33,7 +33,7 @@
                 <td>
                   Free Sheet Uploads
                 </td>
-                <td><strong><%= current_user.sheet_quota %></strong></td>
+                <td><strong><%= @user.remaining_free_sheet_quota%> of <%= @user.sheet_quota %> remaining</strong></td>
               </tr>
             </tbody>
           </table>
