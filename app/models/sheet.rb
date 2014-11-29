@@ -40,7 +40,7 @@ class Sheet < ActiveRecord::Base
   enum visibility: %w{ vpublic vprivate }
   enum difficulty: %w{ beginner intermediate advanced }
   enum license: %w{all_rights_reserved creative_commons cc0 public_domain }
-  bitmask :instruments, as: [:guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :others], null: false
+  bitmask :instruments, as: [:others, :guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :viola, :oboe, :cello, :bassoon, :organ, :harp, :accordion, :lute, :tuba, :ocarina], null: false
   validates :instruments, presence: true
   acts_as_taggable
   acts_as_taggable_on :composers, :genres, :sources
