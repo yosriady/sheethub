@@ -4,7 +4,7 @@
             <%= render 'edit_sheet_button', sheet: sheet %>
         <% elsif current_user && sheet.purchased_by?(current_user) %>
             <span class="sheet-buy-now-text text-center"><p><i class="fa fa-smile-o"></i> PURCHASED</p></span>
-        <% elsif sheet.is_free? %>
+        <% elsif sheet.free? %>
             <span class="sheet-buy-now-text text-center"><p><i class="fa fa-smile-o"></i> FREE</p></span>
         <% elsif current_user.nil? %>
             <a href="<%= new_user_session_path %>"><button type="button" class="btn btn-success col-xs-8"><i class="fa fa-shopping-cart"></i> Buy Now</button></a>

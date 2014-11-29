@@ -11,14 +11,16 @@ class Sheet < ActiveRecord::Base
   TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
   MAX_FILESIZE = 20
   MAX_NUMBER_OF_TAGS = 5
+  HIT_QUOTA_MESSAGE = "You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub."
 
   before_create :record_publisher
   validate :validate_price
+  before_save :validate_free_sheet_quota
   validate :validate_number_of_tags
   belongs_to :user
   acts_as_votable
   acts_as_paranoid
-  before_destroy :soft_destroy_callback
+  # before_destroy :soft_destroy_callback
   searchkick word_start: [:name]
   extend FriendlyId
   friendly_id :sheet_slug, use: :slugged
@@ -131,7 +133,7 @@ class Sheet < ActiveRecord::Base
     ((1 - user.royalty_percentage) * price_cents).round(0)
   end
 
-  def is_free?
+  def free?
     price_cents == 0
   end
 
@@ -144,7 +146,8 @@ class Sheet < ActiveRecord::Base
 
   def favorited_by(user)
     liked_by user
-    SheetMailer.sheet_favorited_email(self, user).deliver
+    # Disable favorite emails to cut costs
+    # SheetMailer.sheet_favorited_email(self, user).deliver
   end
 
   def unfavorited_by(user)
@@ -237,6 +240,11 @@ class Sheet < ActiveRecord::Base
       return output[0..-2] # Strip trailing comma
     end
 
+    def validate_free_sheet_quota
+      invalid_quota = self.free? && user.hit_free_sheet_quota?
+      errors.add(:sheet_quota, HIT_QUOTA_MESSAGE) if invalid_quota
+    end
+
     def validate_price
       valid_price = price_cents.zero? || price_cents.in?(MIN_PRICE..MAX_PRICE)
       errors.add(:price_cents, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
@@ -250,5 +258,4 @@ class Sheet < ActiveRecord::Base
     def record_publisher
       user.update_attribute(:has_published, true) unless user.has_published
     end
-
 end

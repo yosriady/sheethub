@@ -5,7 +5,7 @@
   </head>
   <body>
     <p>Dear <%= @buyer.display_name %>, </p>
-    <p>Congratulations on your new SheetHub <strong><%= @membership_type %></strong> Membership! You can now enjoy up to <%= User.membership_quota(@buyer) %> uploads and many additional features. Enjoy!</p>
+    <p>Congratulations on your new SheetHub <strong><%= @membership_type %></strong> Membership! You can now enjoy up to <%= User.free_sheet_quota(@buyer) %> free uploads, unlimited commercial uploads, and many additional features. Enjoy!</p>
     <p>This email message will serve as your receipt.</p>
 
     <hr>

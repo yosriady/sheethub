@@ -7,7 +7,6 @@ class SheetsController < ApplicationController
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :restore]
-  before_action :validate_sheet_quota, only: [:new, :create]
   before_action :validate_flagged, only: [:show]
   before_action :hide_private_sheets, only: [:show, :report, :flag, :favorite, :download], if: :is_private_sheet
   before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
@@ -61,7 +60,7 @@ class SheetsController < ApplicationController
 
   # Downloads Sheet PDF
   def download
-    if @sheet.is_free? || @sheet.uploaded_by?(current_user)
+    if @sheet.free? || @sheet.uploaded_by?(current_user)
       redirect_to @sheet.pdf_download_url
     elsif @sheet.purchased_by?(current_user)
       order = Order.find_by(user: current_user, sheet: @sheet)
@@ -242,13 +241,6 @@ class SheetsController < ApplicationController
     def validate_flagged
       if @sheet.is_flagged
         flash[:error] = FLAGGED_MESSAGE
-        redirect_to sheets_path
-      end
-    end
-
-    def validate_sheet_quota
-      if current_user.sheets.size > current_user.sheet_quota
-        flash[:error] = User::EXCEED_QUOTA_MESSAGE
         redirect_to sheets_path
       end
     end

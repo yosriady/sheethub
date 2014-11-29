@@ -2,23 +2,21 @@ class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
   MISSING_AVATAR_URL = "/images/default_avatar.png"
   EXPIRATION_TIME = 600
-  BASIC_SHEET_QUOTA = 25
-  PLUS_SHEET_QUOTA = 100
-  PRO_SHEET_QUOTA = 250
+  BASIC_FREE_SHEET_QUOTA = 25
+  PLUS_FREE_SHEET_QUOTA = 80
+  PRO_FREE_SHEET_QUOTA = 250
   BASIC_ROYALTY_PERCENTAGE = 0.80
-  PLUS_ROYALTY_PERCENTAGE = 0.85
-  PRO_ROYALTY_PERCENTAGE = 0.90
+  PLUS_ROYALTY_PERCENTAGE = 0.80
+  PRO_ROYALTY_PERCENTAGE = 0.85
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
   INVALID_MEMBERSHIP_TYPE_MESSAGE = "Membership type does not exist"
-  EXCEED_QUOTA_MESSAGE = "You have exceeded the number of sheets you can upload. Basic users get #{BASIC_SHEET_QUOTA} uploads. Upgrade your membership to Plus or Pro to continue publishing on SheetHub."
 
   enum membership_type: %w{ basic plus pro staff }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
   validates_acceptance_of :terms, acceptance: true
   validates_email_format_of :email, message: 'You have an invalid email address'
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
-  validate :validate_number_of_uploaded_sheets
   has_many :sheets, dependent: :destroy
   has_one :subscription
   acts_as_voter
@@ -44,19 +42,19 @@ class User < ActiveRecord::Base
     return PRO_ROYALTY_PERCENTAGE if pro?
   end
 
-  def self.membership_quota_of(membership_type)
+  def self.free_sheet_quota_of(membership_type)
     m = membership_type.downcase
     raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
-    return BASIC_SHEET_QUOTA if m == "basic"
-    return PLUS_SHEET_QUOTA if m == "plus"
-    return PRO_SHEET_QUOTA if m == "pro"
+    return BASIC_FREE_SHEET_QUOTA if m == "basic"
+    return PLUS_FREE_SHEET_QUOTA if m == "plus"
+    return PRO_FREE_SHEET_QUOTA if m == "pro"
   end
 
   def update_membership_to(membership_type)
     m = membership_type.downcase
     raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
     raise MISSING_SUBSCRIPTION_OBJECT_message unless has_subscription_for_membership(membership_type)
-    update(membership_type: m, sheet_quota: User.membership_quota_of(m))
+    update(membership_type: m, sheet_quota: User.free_sheet_quota_of(m))
   end
 
   def has_subscription_for_membership(membership_type)
@@ -81,6 +79,14 @@ class User < ActiveRecord::Base
 
   def has_paypal_email?
     paypal_email.present?
+  end
+
+  def free_sheets
+    sheets.where(price_cents: 0)
+  end
+
+  def hit_free_sheet_quota?
+    free_sheets.size >= sheet_quota
   end
 
   def sales
@@ -164,9 +170,4 @@ class User < ActiveRecord::Base
   def cache_display_name
     self.cached_display_name = build_display_name
   end
-
-  private
-    def validate_number_of_uploaded_sheets
-      errors.add(:sheets, EXCEED_QUOTA_MESSAGE) if sheets.size > sheet_quota
-    end
 end
