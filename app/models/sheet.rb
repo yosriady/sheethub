@@ -12,11 +12,13 @@ class Sheet < ActiveRecord::Base
   MAX_FILESIZE = 20
   MAX_NUMBER_OF_TAGS = 5
   HIT_QUOTA_MESSAGE = "You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub."
+  PRIVATE_FREE_VALIDATION_MESSAGE = "Private Sheets must be free."
 
   before_create :record_publisher
   validate :validate_price
   before_save :validate_free_sheet_quota
   validate :validate_number_of_tags
+  validate :validate_private_sheet_must_be_free
   belongs_to :user
   acts_as_votable
   acts_as_paranoid
@@ -240,6 +242,11 @@ class Sheet < ActiveRecord::Base
       return output[0..-2] # Strip trailing comma
     end
 
+    def validate_private_sheet_must_be_free
+      invalid = self.vprivate? && !self.free?
+      errors.add(:price, PRIVATE_FREE_VALIDATION_MESSAGE) if invalid
+    end
+
     def validate_free_sheet_quota
       invalid_quota = self.free? && user.hit_free_sheet_quota?
       errors.add(:sheet_quota, HIT_QUOTA_MESSAGE) if invalid_quota
@@ -247,7 +254,7 @@ class Sheet < ActiveRecord::Base
 
     def validate_price
       valid_price = price_cents.zero? || price_cents.in?(MIN_PRICE..MAX_PRICE)
-      errors.add(:price_cents, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
+      errors.add(:price, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
     end
 
     def validate_number_of_tags

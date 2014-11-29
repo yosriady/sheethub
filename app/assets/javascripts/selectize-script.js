@@ -37,7 +37,7 @@ $(document).on("page:change", function() {
             "label":'Public',
             "value":'vpublic'
         }, {
-            "label":'Private',
+            "label":'Private (Visible only to me)',
             "value":'vprivate'
         }],
         valueField: 'value',

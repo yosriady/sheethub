@@ -3,8 +3,10 @@
 
   <%=f.hidden_field :user_id, value: current_user.id %>
 
-  <%= f.label :visibility %>
-  <%= f.input_field :visibility, :as => :select, :collection => Sheet.visibilities.keys %>
+  <% if current_user.pro? %>
+    <%= f.label :visibility %>
+    <%= f.input_field :visibility, :as => :select, :collection => Sheet.visibilities.keys %>
+  <% end %>
 
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
   <%= f.label :license %> <a href="<%= faq_path %>#licenses" target="blank"><i class="fa fa-question-circle"></i></a>
@@ -49,12 +51,15 @@
   <% end %>
   <%= f.file_field :pdf %>
 
+
+  <% if current_user.plus? || current_user.pro? %>
   <div class="checkbox">
   <label>
     <%= f.input_field :enable_pdf_stamping, inline_label: "Stamp PDF with the buyer's info" %>
   </label>
   <a href="<%= faq_path %>#what-pdf-stamping" class="pull-right" target="_blank"><i class="fa fa-question-circle"></i></a>
   </div>
+  <% end %>
 
   <%= f.button :submit, class: "btn btn-success btn-lg btn-block"%>
 <% end %>
