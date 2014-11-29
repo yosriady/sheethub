@@ -12,12 +12,12 @@
     <hr>
     <strong>Payment Info</strong>
     <p>Sheet Purchased: <%= link_to @sheet.title, sheet_url(@sheet) %></p>
-    <p>Amount paid: <%= "US$#{@order.amount}" %></p>
+    <p>Amount paid: US$<%= @order.amount %></p>
     <p>Tracking Id: <%= @order.tracking_id %></p>
     <p>Purchase Date: <%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
     <hr>
     <p>
-      To access all your purchases, log in to SheetHub and go to your <%= link_to "Purchases", user_purchases_url %> page.
+      To access all your purchases, log in to SheetHub and go to your <%= link_to "Library", user_library_url %>.
     </p>
     <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
 

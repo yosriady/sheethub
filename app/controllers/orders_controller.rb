@@ -19,7 +19,8 @@ class OrdersController < ApplicationController
 
     # Start Adaptive Payments
     sheet = Sheet.friendly.find(params[:sheet])
-    @pay_response = build_payment_response(sheet)
+    payment_request = build_adaptive_payment_request(sheet)
+    @pay_response = get_adaptive_payment_response(payment_request)
     if @pay_response.success?
       redirect_url = build_redirect_url(@pay_response.payKey)
       @order.update(tracking_id: payment_request.trackingId,
@@ -87,10 +88,9 @@ class OrdersController < ApplicationController
       return pay_request
     end
 
-    def build_payment_response(sheet)
-        api = PayPal::SDK::AdaptivePayments::API.new
-        payment_request = build_adaptive_payment_request(sheet)
-        api.pay(payment_request)
+    def get_adaptive_payment_response(payment_request)
+      api = PayPal::SDK::AdaptivePayments::API.new
+      api.pay(payment_request)
     end
 
     def build_redirect_url(payKey)

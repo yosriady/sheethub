@@ -79,7 +79,15 @@ class Order < ActiveRecord::Base
   end
 
   def royalty
-    (royalty.to_f / 100 - paypal_transaction_fees).round(2)
+    (royalty_without_transaction_fees - paypal_transaction_fees).round(2)
+  end
+
+  def royalty_without_transaction_fees
+    royalty_cents.to_f / 100
+  end
+
+  def commission
+    amount - royalty_without_transaction_fees
   end
 
   def paypal_transaction_fees
