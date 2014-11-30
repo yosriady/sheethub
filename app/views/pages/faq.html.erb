@@ -14,7 +14,7 @@ keywords %w(help faq support frequently/ asked/ questions)
 <div class="col-xs-8 white-container">
 <div class="panel-group" role="tablist" aria-multiselectable="true">
   <h4><i class="fa fa-book"></i> General</h4>
-  <%= render "faq_item", id:"sheethub-benefits", question: "What does SheetHub give me?", answer: "<p>SheetHub gives you the ability to self publish your sheet music/tablature/score online. You can easily create a page where your fans can view and purchase your works. Signing up also gives you an online profile that enables people to see and purchase all the works you've published on SheetHub. </p><p>All files are securely hosted on SheetHub so you don't need to worry about building a website or storing your files anywhere. Usage information is collected and displayed to you, such as how many times your music are being viewed, downloaded, and purchased.</p><p>SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on your musical pursuits. No setup fees, no monthly fees, no hosting fees to worry about. </p> " %>
+  <%= render "faq_item", id:"sheethub-benefits", question: "What does SheetHub give me?", answer: "<p>SheetHub gives you the ability to easily publish and share  your sheet music/tablature/score online. You can easily create a page where your fans can view and purchase your works. Signing up also gives you an online profile that enables people to see and purchase all the works you've published on SheetHub. </p><p>All files are securely hosted on SheetHub so you don't need to worry about building a website or storing your files anywhere. Usage information is collected and displayed to you, such as how many times your music are being viewed, downloaded, and purchased.</p><p>SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on your musical pursuits. No setup fees, no monthly fees, no hosting fees to worry about. </p> " %>
   <%= render "faq_item", id:"sheethub-costs", question: "How much does SheetHub cost?", answer: "<p> You are free to #{link_to 'sign up', new_registration_path(User)} and upload files without ever having to pay anything. You only pay when you make a sale. When someone buys your sheet, you receive 80% of the listed selling price. The remaining 20% goes to SheetHub to pay for hosting and server costs, and to fund the development of new features. Your royalties are paid directly and immediately to your PayPal account the moment a user purchases your music. SheetHub does not hold any of your net earnings. </p>
     </p>" %>
   <%= render "faq_item", id:"howto-upload", question: "How do I upload my music on SheetHub?", answer: "After signing up, <a href='#{sheet_upload_path}'>Upload</a> to start publishing! You will need at least a printable PDF version of your sheet music to start." %>
@@ -105,12 +105,13 @@ The Public Domain Mark is recommended for works that are free of known copyright
 
   <hr>
   <h4><i class="fa fa-info-circle"></i> Miscellaneous</h4>
-    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to 'This person', user_profile_path('Leventhan')}. I’m primarily a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent marketplace for written music and have been disappointed so far, so I decided to try my hand at building one I would use. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's development. " %>
+    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "I’m primarily a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent marketplace/community for written music and have been disappointed so far, so I decided to try my hand at building one I would use. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's development. " %>
 </div>
 
 
 </div>
 <div class="col-xs-4">
+    <p class="bg-info"><i class="fa fa-info-circle"></i> We are currently in public alpha, which means things may not work perfectly – yet. If you encounter something that looks broken, please let us know!</p>
     <h3>Have more questions?</h3>
     <div class="well bg-feathers">
         <a href="mailto:yosriady@gmail.com" class="btn btn-block btn-lg btn-default"><i class="fa fa-paper-plane-o"></i> Contact Us</a>

@@ -11,8 +11,10 @@
             <%= render 'sheet_tags', sheet:sheet %>
         </li>
 
-        <li class="list-group-item well">
+        <li class="list-group-item well zeromargin">
             <%= render 'like_sheet_button', sheet:sheet %>
         </li>
+
+        <%= render 'sheet_favorites', sheet:sheet, favorites: favorites %>
     </ul>
 </div>

@@ -4,10 +4,14 @@ description @sheet.description
 keywords @sheet.cached_joined_tags
 %>
 
+<%= render 'layouts/nav_strip' %>
 <div class="container">
   <div class="row">
+  <div class="col-xs-12" id="sheet-header">
+    <h1><%= link_to @sheet.title, sheet_path(@sheet) %>'s Fans</h1>
+    <br />
+  </div>
   <div class="col-xs-12">
-      <h1><%= link_to @sheet.title, sheet_path(@sheet) %>'s Fans</h1>
       <div id="sheets">
         <% if @favorites.each do |vote| %>
           <a href="<%= user_profile_path(vote.voter.username) %>">

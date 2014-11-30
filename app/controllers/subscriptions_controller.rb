@@ -61,7 +61,6 @@ class SubscriptionsController < ApplicationController
       return subscription
     end
 
-
     def parseTokenFromQueryString(request)
       request.query_parameters["token"]
     end

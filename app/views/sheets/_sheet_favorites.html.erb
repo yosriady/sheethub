@@ -1,7 +1,10 @@
 <% if favorites.present? %>
+<li class="list-group-item">
       <% favorites.each do |vote| %>
         <a href="<%= user_profile_path(vote.voter.username) %>">
             <%= image_tag(vote.voter.avatar_url, class: "small-avatar", data: { toggle: 'tooltip', placement: 'top' }, title:vote.voter.display_name) %>
         </a>
       <% end %>
+      <a href="<%= favorites_sheet_path(sheet) %>" class="bg-info" style="padding: 5px 15px;"><i class="fa fa-ellipsis-h"></i></a>
+</li>
 <% end %>

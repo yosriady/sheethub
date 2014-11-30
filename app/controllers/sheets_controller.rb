@@ -51,7 +51,7 @@ class SheetsController < ApplicationController
   # GET /sheets/1
   # GET /sheets/1.json
   def show
-    @favorites = @sheet.votes_for.includes(:voter).limit(6)
+    @favorites = @sheet.votes_for.includes(:voter).limit(5)
   end
 
   def favorites

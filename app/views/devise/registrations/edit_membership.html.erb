@@ -13,7 +13,11 @@
       </div>
 
         <div class="col-xs-10 white-container">
-          <% unless (@user && (@user.membership_type == "plus" || @user.membership_type == "pro")) %><p class="bg-info"><i class="fa fa-info-circle"></i><a href="<%= upgrade_path %>"> Upgrade</a> now to Plus or Pro to enjoy unlimited free uploads and extra features.</p><% end %>
+          <% if @user && !@user.pro? %>
+            <p class="bg-info"><i class="fa fa-info-circle"></i><a href="<%= upgrade_path %>"> Upgrade</a> now to enjoy unlimited free uploads and extra features.</p>
+          <% elsif @user && @user.pro?%>
+            <p class="bg-info"><i class="fa fa-smile-o"></i> Thank you for supporting SheetHub!</p>
+          <% end %>
 
           <table class="table table-bordered">
             <tbody>
@@ -45,10 +49,16 @@
           </table>
 
           <% if @subscription.present? %>
-            <%= @subscription %>
+            <hr>
+            <strong>Membership Subscription info</strong>
+            <p><%= @subscription %></p>
+            <hr>
           <% end %>
 
-          <a href="<%= upgrade_path %>"><button type="button" class="btn btn-lg btn-success"><i class="fa fa-star"></i> Upgrade</button></a>
+          <% unless @user.pro? %>
+            <a href="<%= upgrade_path %>"><button type="button" class="btn btn-lg btn-success"><i class="fa fa-star"></i> Upgrade</button></a>
+          <% end %>
+
 
         </div>
   </div>
