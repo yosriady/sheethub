@@ -23,7 +23,7 @@
 //= require twitter/typeahead
 //= require twitter/typeahead.min
 //= require turbolinks
-//= require uservoice
+//= require userreport
 //= require twitter
 //= require fb-sdk
 //= require paypal-checkout
