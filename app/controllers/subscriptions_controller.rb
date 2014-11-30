@@ -34,7 +34,7 @@ class SubscriptionsController < ApplicationController
 
   # TODO
   def downgrade_to_basic
-    paypal_request.renew!(profile_id, :Suspend)
+    Subscription.paypal_request.renew!(profile_id, :Suspend)
     redirect_to upgrade_path, notice: SUSPEND_SUBSCRIPTION_MESSAGE
   end
 
@@ -56,7 +56,7 @@ class SubscriptionsController < ApplicationController
           :amount        => Subscription.subscription_amount(subscription.membership_type)
         }
       )
-      response = paypal_request.subscribe!(token, profile)
+      response = Subscription.paypal_request.subscribe!(token, profile)
       subscription.complete(response.recurring.identifier)
       return subscription
     end
@@ -82,19 +82,11 @@ class SubscriptionsController < ApplicationController
 
     def build_payment_response(membership_type)
       payment_request = build_payment_request(subscriptions_params[:membership])
-      payment_response = paypal_request.setup(
+      payment_response = Subscription.paypal_request.setup(
                           payment_request,
                           subscriptions_success_url,
                           subscriptions_cancel_url
                         )
-    end
-
-    def paypal_request
-      Paypal::Express::Request.new(
-        :username   => PAYPAL_USERNAME,
-        :password   => PAYPAL_PASSWORD,
-        :signature  => PAYPAL_SIGNATURE
-      )
     end
 
     def validate_membership

@@ -1,0 +1,35 @@
+<table class="table table-bordered">
+<h3>Membership Details</h3>
+  <tbody>
+    <tr>
+      <td>
+        Membership
+      </td>
+      <td>
+        <% if user.premium? %>
+          <%= render 'layouts/user_badge', user: user%>
+        <% else %>
+          <strong>Basic</strong>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Commercial Sheet Uploads
+      </td>
+      <td><strong>Unlimited</strong></td>
+    </tr>
+    <tr>
+      <td>
+        Percentage earnings
+      </td>
+      <td><strong><%= "#{number_to_percentage(user.royalty_percentage * 100, precision: 0)}" %></strong></td>
+    </tr>
+    <tr>
+      <td>
+        Free Sheet Uploads
+      </td>
+      <td><strong><%= user.remaining_free_sheet_quota%> of <%= user.sheet_quota %> remaining</strong></td>
+    </tr>
+  </tbody>
+</table>

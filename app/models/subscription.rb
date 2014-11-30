@@ -31,4 +31,18 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+  def get_payment_details
+    response = Subscription.paypal_request.subscription(profile_id)
+    response.recurring
+  end
+
+  def self.paypal_request
+    Paypal::Express::Request.new(
+      :username   => PAYPAL_USERNAME,
+      :password   => PAYPAL_PASSWORD,
+      :signature  => PAYPAL_SIGNATURE
+    )
+  end
+
+
 end

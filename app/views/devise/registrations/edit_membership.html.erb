@@ -13,51 +13,21 @@
       </div>
 
         <div class="col-xs-10 white-container">
-          <% if @user && !@user.pro? %>
+          <% if @user && @user.basic? %>
             <p class="bg-info"><i class="fa fa-info-circle"></i><a href="<%= upgrade_path %>"> Upgrade</a> now to enjoy unlimited free uploads and extra features.</p>
-          <% elsif @user && @user.pro?%>
-            <p class="bg-info"><i class="fa fa-smile-o"></i> Thank you for supporting SheetHub!</p>
+          <% elsif @user && (@user.plus? || @user.pro?) %>
+            <p class="bg-primary"><i class="fa fa-smile-o"></i> Thank you for supporting SheetHub! Together we can make SheetHub a great community for musicians! </p>
           <% end %>
 
-          <table class="table table-bordered">
-            <tbody>
-              <tr>
-                <td>
-                  Membership
-                </td>
-                <td><strong><%= @user.membership_type.titleize %></strong></td>
-              </tr>
-              <tr>
-                <td>
-                  Commercial Sheet Uploads
-                </td>
-                <td><strong>Unlimited</strong></td>
-              </tr>
-              <tr>
-                <td>
-                  Percentage earnings
-                </td>
-                <td><strong><%= "#{number_to_percentage(@user.royalty_percentage * 100, precision: 0)}" %></strong></td>
-              </tr>
-              <tr>
-                <td>
-                  Free Sheet Uploads
-                </td>
-                <td><strong><%= @user.remaining_free_sheet_quota%> of <%= @user.sheet_quota %> remaining</strong></td>
-              </tr>
-            </tbody>
-          </table>
 
-          <% if @subscription.present? %>
-            <hr>
-            <strong>Membership Subscription info</strong>
-            <p><%= @subscription %></p>
-            <hr>
-          <% end %>
+          <%= render 'membership_details', user:@user %>
+          <%= render 'membership_billing_details', payment_details: @payment_details %>
 
           <% unless @user.pro? %>
             <a href="<%= upgrade_path %>"><button type="button" class="btn btn-lg btn-success"><i class="fa fa-star"></i> Upgrade</button></a>
           <% end %>
+
+          <%= render 'downgrade_panel', user:@user %>
 
 
         </div>

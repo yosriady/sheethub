@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
     Subscription.find_by(user:self, membership_type:Subscription.membership_types[membership_type], status: Subscription.statuses[:completed]).present?
   end
 
+  def premium?
+    plus? || pro?
+  end
+
   def joined_at
     created_at.strftime "%B %Y"
   end

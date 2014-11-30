@@ -1,0 +1,51 @@
+<% if @payment_details.present? %>
+  <hr>
+  <h3>Membership Billing Details</h3>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>
+          Billing Description
+        </td>
+        <td><strong><%= @payment_details.description %></strong></td>
+      </tr>
+      <tr>
+        <td>
+          Billing Status
+        </td>
+        <td><strong><%= @payment_details.status %></strong></td>
+      </tr>
+      <tr>
+        <td>
+          Join date
+        </td>
+        <td><strong><%= DateTime.parse(@payment_details.start_date).strftime("%a, %e %b %Y %H:%M:%S") %></strong></td>
+      </tr>
+      <tr>
+      <tr>
+        <td>
+          Monthly Amount
+        </td>
+        <td><strong>US$<%= @payment_details.billing.amount.total %></strong></td>
+      </tr>
+        <td>
+          Next billing date
+        </td>
+        <td><strong><%= DateTime.parse(@payment_details.summary.next_billing_date).strftime("%a, %e %b %Y %H:%M:%S") %></strong></td>
+      </tr>
+      <tr>
+        <td>
+          Last payment date
+        </td>
+        <td><strong><%= @payment_details.summary.last_payment_date || "No payments made yet" %></strong></td>
+      </tr>
+      <tr>
+        <td>
+          Outstanding balance
+        </td>
+        <td><strong><%= @payment_details.summary.outstanding_balance.zero? ? "No outstanding payments" : "US$#{@payment_details.summary.outstanding_balance}" %></strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+<% end %>

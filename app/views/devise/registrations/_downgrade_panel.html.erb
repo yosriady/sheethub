@@ -1,0 +1,23 @@
+<% if user.premium? %>
+<hr>
+<div class="panel panel-default" style="width: 20%">
+  <div class="panel-heading" role="tab">
+    <h4 class="panel-title">
+      <a class="collapsed" data-toggle="collapse" href="#downgrade" aria-expanded="false">
+        Downgrade
+      </a>
+    </h4>
+  </div>
+  <div id="downgrade" class="panel-collapse collapse" role="tabpanel">
+    <div class="panel-body">
+        <p class="bg-danger"><i class="fa fa-info-circle"></i> You may need to delete some free sheets before downgrading to a lower plan. </p>
+        <p class="bg-danger"><i class="fa fa-info-circle"></i> You will lose access to your current <%= user.membership_type.titleize %>features. </p>
+
+      <% if user.pro? %>
+        <a href="#"><button type="button" class="btn btn-default"><i class="fa fa-frown-o"></i> Downgrade to Plus</button></a>
+      <% end %>
+        <a href="#"><button type="button" class="btn btn-default"><i class="fa fa-frown-o"></i> Downgrade to Basic</button></a>
+    </div>
+  </div>
+</div>
+<% end %>
