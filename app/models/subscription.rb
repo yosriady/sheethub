@@ -39,7 +39,6 @@ class Subscription < ActiveRecord::Base
 
   def cancel
     response = Subscription.paypal_request.renew!(profile_id, :Cancel)
-    binding.pry
   end
 
   def self.get_payment_details(profile_id)

@@ -26,16 +26,21 @@ class SubscriptionsController < ApplicationController
 
   def success
     @subscription = finalize_new_subscription(request)
-    # Cancel previous subscription if previous subscription is plus or pro
+
+    # Cancel previous subscription if exists
+    user_subscriptions = Subscription.where(user:current_user).order(:updated_at)
+    has_previous_subscription = (user_subscriptions.size > 1)
+    if has_previous_subscription
+      user_subscriptions.first.destroy
+    end
+
     render action: 'thank_you', notice: SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE
   end
 
   # TODO
   def downgrade
     membership = subscriptions_params[:membership]
-    binding.pry
     current_user.subscription.destroy
-    binding.pry
     current_user.update_membership_to(membership)
     redirect_to user_membership_settings_path, notice: DOWNGRADE_TO_BASIC_SUBSCRIPTION_MESSAGE
   end
