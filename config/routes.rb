@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   get 'upgrade/purchase/:membership' => 'subscriptions#purchase', as: 'subscriptions_purchase'
   post 'upgrade/checkout/:membership' => 'subscriptions#checkout', as: 'subscriptions_checkout'
-  get 'upgrade/success' =>  'subscriptions#success', as: 'subscriptions_success'
   get 'upgrade/cancel' =>  'subscriptions#cancel', as: 'subscriptions_cancel'
-
+  get 'upgrade/success' =>  'subscriptions#success', as: 'subscriptions_success'
+  get 'downgrade/:membership' =>  'subscriptions#downgrade', as: 'subscriptions_downgrade'
 
   # Sheet Purchase Routes
   post 'checkout' => 'orders#checkout'

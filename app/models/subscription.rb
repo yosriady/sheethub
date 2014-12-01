@@ -10,6 +10,7 @@ class Subscription < ActiveRecord::Base
   enum membership_type: %w{ basic plus pro }
   validates :user_id, uniqueness: { scope: :membership_type, message: SUBSCRIPTION_UNIQUENESS_VALIDATION_MESSAGE }
   # Basic users should not have a Subscription object associated
+  before_destroy :cancel
 
   def self.subscription_amount(membership_type)
     return PLUS_SUBSCRIPTION_AMOUNT if membership_type == "plus"
@@ -32,6 +33,16 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_payment_details
+    response = Subscription.paypal_request.subscription(profile_id)
+    response.recurring
+  end
+
+  def cancel
+    response = Subscription.paypal_request.renew!(profile_id, :Cancel)
+    binding.pry
+  end
+
+  def self.get_payment_details(profile_id)
     response = Subscription.paypal_request.subscription(profile_id)
     response.recurring
   end

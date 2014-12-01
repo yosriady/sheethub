@@ -18,7 +18,13 @@
 
 
         .fa, .close {
-            font-size: 28px;
+            font-size: 24px;
+        }
+
+        .close {
+            padding: 0px 15px;
+            background: #ccc;
+            border-radius: 100px;
         }
     }
 

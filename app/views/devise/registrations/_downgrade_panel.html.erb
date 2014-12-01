@@ -11,12 +11,12 @@
   <div id="downgrade" class="panel-collapse collapse" role="tabpanel">
     <div class="panel-body">
         <p class="bg-danger"><i class="fa fa-info-circle"></i> You may need to delete some free sheets before downgrading to a lower plan. </p>
-        <p class="bg-danger"><i class="fa fa-info-circle"></i> You will lose access to your current <%= user.membership_type.titleize %>features. </p>
+        <p class="bg-danger"><i class="fa fa-info-circle"></i> You will lose access to your current <%= user.membership_type.titleize %> membership features. </p>
 
       <% if user.pro? %>
-        <a href="#"><button type="button" class="btn btn-default"><i class="fa fa-frown-o"></i> Downgrade to Plus</button></a>
+        <a href="<%= subscriptions_downgrade_path(:plus) %>"><button type="button" class="btn btn-default"><i class="fa fa-frown-o"></i> Downgrade to Plus</button></a>
       <% end %>
-        <a href="#"><button type="button" class="btn btn-default"><i class="fa fa-frown-o"></i> Downgrade to Basic</button></a>
+        <a href="<%= subscriptions_downgrade_path(:basic) %>"><button type="button" class="btn btn-default"><i class="fa fa-frown-o"></i> Downgrade to Basic</button></a>
     </div>
   </div>
 </div>

@@ -7,6 +7,7 @@ class SubscriptionMailer < ActionMailer::Base
     @membership_type = subscription.membership_type.titleize
     @buyer = subscription.user
     email_with_name = "#{@buyer.display_name} <#{@buyer.email}>"
-    mail(to: email_with_name, subject: 'Welcome to SheetHub #{membership_type}!')
+    email_subject = "Welcome to SheetHub #{@membership_type}!"
+    mail(to: email_with_name, subject: email_subject)
   end
 end

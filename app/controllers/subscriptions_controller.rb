@@ -1,14 +1,12 @@
 class SubscriptionsController < ApplicationController
   SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE = ""
-  SUSPEND_SUBSCRIPTION_MESSAGE = ""
-  REACTIVATE_SUBSCRIPTION_MESSAGE = ""
-  CANCEL_SUBSCRIPTION_MESSAGE = ""
+  DOWNGRADE_TO_BASIC_SUBSCRIPTION_MESSAGE = "You've Downgraded to a Basic membership. We're sorry to see you go."
   CANCEL_UPGRADE_PURCHASE_MESSAGE = "Upgrade purchase canceled."
   ERROR_UPGRADE_PURCHASE_MESSAGE = "Upgrade purchase error. Please contact support."
 
   before_action :authenticate_user!
   before_action :validate_membership, only: [:purchase, :checkout, :cancel, :suspend, :reactivate]
-  before_action :validate_existing_membership, only: [:purchase, :checkout]
+  before_action :validate_existing_membership, only: [:purchase, :checkout, :downgrade]
 
   def purchase
   end
@@ -33,9 +31,13 @@ class SubscriptionsController < ApplicationController
   end
 
   # TODO
-  def downgrade_to_basic
-    Subscription.paypal_request.renew!(profile_id, :Suspend)
-    redirect_to upgrade_path, notice: SUSPEND_SUBSCRIPTION_MESSAGE
+  def downgrade
+    membership = subscriptions_params[:membership]
+    binding.pry
+    current_user.subscription.destroy
+    binding.pry
+    current_user.update_membership_to(membership)
+    redirect_to user_membership_settings_path, notice: DOWNGRADE_TO_BASIC_SUBSCRIPTION_MESSAGE
   end
 
   def thank_you

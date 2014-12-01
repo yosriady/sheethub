@@ -11,7 +11,7 @@
             <p>You now have access to premium <%= @subscription.membership_type.titleize %> features and benefits. We've also sent you an email receipt containing your payment details. Enjoy, and let your friends know about SheetHub! Together we can create a fantastic community for musicians! </p>
             <hr>
 
-            <a href="<%= user_profile_path(@subscription.user.username) %>"><button type="button" class="btn btn-lg btn-success pull-right"><i class="fa fa-user"></i> Go to your Profile</button></a>
+            <a href="<%= user_membership_settings_path %>"><button type="button" class="btn btn-lg btn-success pull-right"><i class="fa fa-user"></i> Go to your Profile</button></a>
         </div>
         <div class="col-xs-4">
             <p class="bg-info"><i class="fa fa-star"></i> You now enjoy all <%= @subscription.membership_type.titleize %> membership benefits: </p>

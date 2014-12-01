@@ -1,18 +1,20 @@
 <table class="table table-bordered">
 <h3>Membership Details</h3>
-  <tbody>
-    <tr>
-      <td>
+  <thead>
+    <tr class="info">
+      <th>
         Membership
-      </td>
-      <td>
+      </th>
+      <th>
         <% if user.premium? %>
           <%= render 'layouts/user_badge', user: user%>
         <% else %>
           <strong>Basic</strong>
         <% end %>
-      </td>
+      </th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>
         Commercial Sheet Uploads

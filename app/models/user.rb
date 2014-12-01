@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
   INVALID_MEMBERSHIP_TYPE_MESSAGE = "Membership type does not exist"
+  MISSING_SUBSCRIPTION_OBJECT_MESSAGE = "Error: Subscription object missing. Contact support."
 
   enum membership_type: %w{ basic plus pro staff }
   validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
@@ -53,7 +54,7 @@ class User < ActiveRecord::Base
   def update_membership_to(membership_type)
     m = membership_type.downcase
     raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
-    raise MISSING_SUBSCRIPTION_OBJECT_message unless has_subscription_for_membership(membership_type)
+    raise MISSING_SUBSCRIPTION_OBJECT_MESSAGE unless has_subscription_for_membership(membership_type) || membership_type == "basic"
     update(membership_type: m, sheet_quota: User.free_sheet_quota_of(m))
   end
 
