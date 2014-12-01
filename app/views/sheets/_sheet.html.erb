@@ -11,6 +11,7 @@
     </div></a>
     <div class="sheet-user">
       <a href="<%= user_profile_path(sheet.user.username) %>"><i class="fa fa-user"></i> <%= sheet.user.display_name %></a>
+      <span class="pull-right sheet-star"><%= sheet.cached_votes_up %> <i class="fa fa-star-o"></i></span>
     </div>
 </div>
 </a>

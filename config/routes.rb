@@ -46,13 +46,15 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'upload' => 'sheets#new', as: 'sheet_upload'
-
   resources :assets, only: [:create, :destroy]
   get 'assets/:id/download' => 'assets#download', as: 'download_asset'
 
-  get 'best_sellers' => 'sheets#best_sellers'
+  root 'sheets#index'
+  get 'browse' => 'sheets#index', as: 'browse'
+  get 'upload' => 'sheets#new', as: 'sheet_upload'
   get 'search' => 'sheets#search'
+  get 'best_sellers' => 'sheets#best_sellers'
+  get 'most_favorites' => 'sheets#most_favorites'
 
   get 'instruments' => 'sheets#instruments'
   get 'instrument/:slug' => 'sheets#by_instrument', as: 'instrument'
@@ -66,7 +68,6 @@ Rails.application.routes.draw do
   get 'sources' => 'sheets#sources'
   get 'source/:slug' => 'sheets#by_source', as: 'source'
 
-  root 'sheets#index'
   get '/help', to: 'pages#faq', as: 'faq'
   get '/terms', to: 'pages#terms'
   get '/privacy', to: 'pages#privacy'

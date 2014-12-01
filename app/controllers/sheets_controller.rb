@@ -48,6 +48,10 @@ class SheetsController < ApplicationController
     @sheets = Sheet.includes(:user).best_sellers.page(params[:page])
   end
 
+  def most_favorites
+    @sheets = Sheet.includes(:user).most_favorites.page(params[:page])
+  end
+
   # GET /sheets/1
   # GET /sheets/1.json
   def show

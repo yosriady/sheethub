@@ -35,6 +35,7 @@ class Sheet < ActiveRecord::Base
   scope :is_private, -> { where(visibility: Sheet.visibilities[:vprivate]) }
   scope :flagged, -> { where(is_flagged: true) }
   scope :best_sellers, -> { is_public.order(price_cents: :desc) }
+  scope :most_favorites, -> { is_public.order(cached_votes_up: :desc) }
 
   attr_accessor :instruments_list # For form parsing
   enum visibility: %w{ vpublic vprivate }

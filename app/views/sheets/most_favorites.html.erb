@@ -1,0 +1,19 @@
+<%
+title "All-time favorites"
+description "Discover all-time favorite sheets on SheetHub"
+%>
+
+<%= render 'layouts/nav_strip' %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1><i class="fa fa-star-o"></i> All-time Favorite Sheets</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render 'sheets', sheets: @sheets %>
+    </div>
+  </div>
+</div>
