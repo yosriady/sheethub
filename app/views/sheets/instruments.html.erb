@@ -1,14 +1,18 @@
 <%
 title "All Instruments"
-description "Discover music for different instruments on SheetHub"
+description "Discover music for all instruments on SheetHub"
 %>
 
-<%= render 'layouts/nav_strip' %>
 <div class="container">
     <div class="row">
-
-        <h1><i class="fa fa-magic"></i> All Instruments</h1>
+    <div class="col-xs-12">
+      <ol class="breadcrumb">
+        <li><i class="fa fa-magic"></i> <a href="<%= browse_path %>">Browse</a></li>
+        <li><a href="<%= instruments_path %>">All Instruments</a></li>
+      </ol>
+        <div class="white-container">
         <%= render 'instruments', instruments: @instruments %>
-
+        </div>
+    </div>
     </div>
 </div>

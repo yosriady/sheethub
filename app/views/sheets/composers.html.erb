@@ -3,12 +3,16 @@ title "All Composers"
 description "Discover music by acclaimed composers on SheetHub"
 %>
 
-<%= render 'layouts/nav_strip' %>
 <div class="container">
     <div class="row">
-
-        <h1><i class="fa fa-users"></i> All Composers</h1>
+        <div class="col-xs-12">
+        <ol class="breadcrumb">
+          <li><i class="fa fa-users"></i> <a href="<%= browse_path %>">Browse</a></li>
+          <li><a href="<%= composers_path %>">All Composers</a></li>
+        </ol>
+        <div class="white-container">
         <%= render 'lean_tags', tags: @composers, tag_type:"composer" %>
-
+        </div>
+        </div>
     </div>
 </div>

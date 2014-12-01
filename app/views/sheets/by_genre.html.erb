@@ -1,15 +1,13 @@
 <% title "Browse by Genre | #{params[:slug].titleize}" %>
 
-<%= render 'layouts/nav_strip' %>
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h1><span><%= params[:slug].titleize %> Genre</span></h1>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
+      <ol class="breadcrumb">
+        <li><i class="fa fa-headphones"></i> <a href="<%= browse_path %>">Browse</a></li>
+        <li></i> <a href="<%= genres_path %>">All Genres</a></li>
+        <li><a href="<%= genre_path(params[:slug]) %>"><%= params[:slug].titleize %></a></li>
+      </ol>
       <%= render 'sheets', sheets: @sheets %>
     </div>
   </div>

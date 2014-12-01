@@ -1,0 +1,16 @@
+.breadcrumb {
+    list-style-type: none;
+    background: #eee;
+    border-radius: 50px;
+    padding: 10px;
+    padding-left: 20px;
+    display: block;
+}
+.breadcrumb .fa {
+    opacity: 0.3;
+    padding-right: 5px;
+}
+.breadcrumb li {display:inline; font-size: 18px;}
+.breadcrumb a {color: rgba(66, 139, 202, 1);}
+.breadcrumb a:hover {color: #2583EB;}
+.breadcrumb>li+li:before {color: rgba(204, 204, 204, 1); content: "\002F\00a0"; padding: 0px 5px;}
