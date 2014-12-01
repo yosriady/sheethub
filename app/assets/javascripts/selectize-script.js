@@ -31,6 +31,7 @@ $(document).on("page:change", function() {
     });
 
     $('#sheet_difficulty').selectize({});
+    $('#user_timezone').selectize({});
 
     $('#sheet_visibility').selectize({
         options: [{

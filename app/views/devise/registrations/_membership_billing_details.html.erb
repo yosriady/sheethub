@@ -19,7 +19,7 @@
         <td>
           Join date
         </td>
-        <td><strong><%= DateTime.parse(@payment_details.start_date).strftime("%a, %e %b %Y %H:%M:%S") %></strong></td>
+        <td><strong><%= Time.zone.parse(@payment_details.start_date).strftime("%A, %e %B %Y %l:%M %p %Z") %></strong></td>
       </tr>
       <tr>
       <tr>
@@ -31,7 +31,7 @@
         <td>
           Next billing date
         </td>
-        <td><strong><%= DateTime.parse(@payment_details.summary.next_billing_date).strftime("%a, %e %b %Y %H:%M:%S") %></strong></td>
+        <td><strong><%= Time.zone.parse(@payment_details.summary.next_billing_date).strftime("%A %e %B %Y %l:%M %p %Z") %></strong></td>
       </tr>
       <tr>
         <td>

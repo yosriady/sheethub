@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :ensure_registration_finishes
   after_filter :store_location
+  before_filter :set_timezone
+
+  def set_timezone
+    tz = current_user ? current_user.timezone : nil
+    Time.zone = tz || ActiveSupport::TimeZone["UTC"]
+  end
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.

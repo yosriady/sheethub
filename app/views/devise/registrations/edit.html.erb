@@ -22,6 +22,10 @@
           <%= f.input :username %>
           <%= f.label :paypal_email %> <a href="<%= faq_path %>#paypal-transfer"><i class="fa fa-question-circle"></i></a>
           <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
+
+          <%= f.label :timezone %><br />
+          <%= f.time_zone_select :timezone %>
+
           <%= f.input :first_name %>
           <%= f.input :last_name %>
 

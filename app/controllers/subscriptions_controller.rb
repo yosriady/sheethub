@@ -54,7 +54,7 @@ class SubscriptionsController < ApplicationController
       subscription = Subscription.find_by(tracking_id: token)
       payment_request = build_payment_request(subscription.membership_type)
       profile = Paypal::Payment::Recurring.new(
-        :start_date => Time.now,
+        :start_date => Time.zone.now,
         :description => Subscription.billing_agreement_description(subscription.membership_type),
         :auto_bill => 'AddToNextBilling',
         :billing => {
