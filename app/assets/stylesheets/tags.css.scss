@@ -23,6 +23,27 @@
     }
 }
 
+.flat-tags .tag {
+    color: #1b9dec;
+    border: 1px solid rgba(0,0,0, 0.15);
+    text-shadow: none;
+    box-shadow: none;
+    background:none;
+    background-image:none;
+    opacity: 1;
+
+    &:hover, &:focus {
+        background-color: #1b9dec;
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1da7ee), to(#178ee9));
+        background-image: -webkit-linear-gradient(top, #1da7ee, #178ee9);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#1da7ee), to(#178ee9));
+        background-image: linear-gradient(to bottom, #1da7ee, #178ee9);
+        background-repeat: repeat-x;
+        color: #fff
+    }
+
+}
+
 .tag-count {
     padding-left: 2px;
     opacity: 0.8;
