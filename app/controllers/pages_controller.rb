@@ -13,6 +13,9 @@ class PagesController < ApplicationController
   def privacy
   end
 
+  def community_guidelines
+  end
+
   def upgrade
   end
 

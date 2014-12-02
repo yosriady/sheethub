@@ -4,14 +4,15 @@
       <% if sheet.privately_visible?%>
         <span class="fa fa-eye-slash pull-right"></span>
       <% end %>
-
+      <% unless sheet.cached_votes_up.zero? %>
+      <span class="pull-right sheet-star"><%= sheet.cached_votes_up %> <i class="fa fa-star-o"></i></span>
+      <% end %>
       <p class="sheet-instruments"><%= sheet.instruments.join(", ") %></p>
       <h3><%= sheet.title %></h3>
       <p><%= sheet.composer_list.any? ? sheet.composer_list.to_s.titleize : "Unknown Composer" %></p>
     </div></a>
     <div class="sheet-user">
       <a href="<%= user_profile_path(sheet.user.username) %>"><i class="fa fa-user"></i> <%= sheet.user.display_name %></a>
-      <span class="pull-right sheet-star"><%= sheet.cached_votes_up %> <i class="fa fa-star-o"></i></span>
     </div>
 </div>
 </a>
