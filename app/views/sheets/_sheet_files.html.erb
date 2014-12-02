@@ -1,29 +1,24 @@
- <div class="panel panel-info">
-    <div class="panel-heading"><i class="fa fa-cloud-download"></i> Files</div>
-    <div class="panel-body list-group">
-        <ul id="sheet-files">
-            <!-- Main PDF file -->
-            <% if sheet.pdf.present? %>
-            <li>
-                <a href="<%= download_sheet_path(sheet) %>" title="Last updated on <%= sheet.pdf_updated_at.strftime('%d %b %Y') %>" data-no-turbolink='true' data-toggle='tooltip' data-placement='top'>
-                    <div class="sheet-file">
-                    <p><i class="fa fa-download"></i> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
-                    </div>
-                </a>
-            </li>
-            <% else %>
-                <li>
-                    <div class="sheet-file-missing bg-danger">
-                        <p><i class="fa fa-eye-slash"></i> No PDF File Found.</p>
-                    </div>
-                </li>
-            <% end %>
-
-
-            <!-- Additional files -->
-            <% for asset in sheet.assets %>
-                <%= render 'assets/asset', asset: asset %>
-            <% end %>
-            </ul>
+<ul id="sheet-files">
+<!-- Main PDF file -->
+<% if sheet.pdf.present? %>
+<li>
+    <a href="<%= download_sheet_path(sheet) %>" title="Last updated on <%= sheet.pdf_updated_at.strftime('%d %b %Y') %>" data-no-turbolink='true' data-toggle='tooltip' data-placement='top'>
+        <div class="sheet-file">
+        <p><i class="fa fa-download"></i> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
         </div>
-    </div>
+    </a>
+</li>
+<% else %>
+    <li>
+        <div class="sheet-file-missing bg-danger">
+            <p><i class="fa fa-eye-slash"></i> No PDF File Found.</p>
+        </div>
+    </li>
+<% end %>
+
+
+<!-- Additional files -->
+<% for asset in sheet.assets %>
+    <%= render 'assets/asset', asset: asset %>
+<% end %>
+</ul>

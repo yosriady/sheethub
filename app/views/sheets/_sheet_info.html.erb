@@ -10,11 +10,8 @@
         <li class="list-group-item">
             <%= render 'sheet_tags', sheet:sheet %>
         </li>
-
-        <li class="list-group-item well zeromargin">
-            <%= render 'favorite_sheet_button', sheet:sheet %>
+        <li class="list-group-item">
+            <%= render 'sheet_files', sheet: sheet %>
         </li>
-
-        <%= render 'sheet_favorites', sheet:sheet, favorites: favorites %>
     </ul>
 </div>
