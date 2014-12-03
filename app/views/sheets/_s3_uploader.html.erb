@@ -17,7 +17,7 @@
       callback_url: assets_path,
       acl: "private",
       # expiration: 24.hours.from_now.utc.iso8601,
-      max_file_size: 20.megabytes do %>
+      max_file_size: Asset::MAX_FILESIZE.megabytes do %>
       <%= file_field_tag :file, multiple: true %>
     <% end %>
 

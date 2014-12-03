@@ -12,7 +12,7 @@
     <strong>Payment Info</strong>
     <p>Sheet Purchased: <%= link_to @sheet.title, sheet_url(@sheet) %></p>
     <p>Amount Paid: US$<%= @order.amount %></p>
-    <p>Estimated Earnings (before gateway fees): US$<%= @order.royalty_without_transaction_fees %></p>
+    <p>Estimated Earnings (before PayPal fees): US$<%= @order.royalty_without_transaction_fees %></p>
     <p>Tracking Id: <%= @order.tracking_id %></p>
     <p>Purchase Date: <%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
     <hr>
