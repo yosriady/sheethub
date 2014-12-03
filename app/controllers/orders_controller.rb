@@ -53,6 +53,7 @@ class OrdersController < ApplicationController
   def thank_you
   end
 
+
   def cancel
     redirect_to sheets_path, notice: CANCEL_ORDER_PURCHASE_MESSAGE
   end

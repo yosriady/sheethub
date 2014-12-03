@@ -1,5 +1,4 @@
 class Asset < ActiveRecord::Base
-  ASSET_HASH_SECRET = "sheethubhashsecret"
   EXPIRATION_TIME = 30
   MAX_FILESIZE = 20
   MAX_NUMBER_OF_ASSETS = 5
@@ -12,7 +11,7 @@ class Asset < ActiveRecord::Base
   validates_presence_of :sheet
 
   has_attached_file :file,
-                    :hash_secret => ASSET_HASH_SECRET, #TODO: Use ENV for this
+                    :hash_secret => Rails.application.secrets.asset_hash_secret,
                     :preserve_files => "true"
   validate :validate_file_size
   # TODO: validate attachment content type: MIDI, .ptb, .gp5, .tg, etc...

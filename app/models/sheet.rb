@@ -1,6 +1,5 @@
 # Sheet Model
 class Sheet < ActiveRecord::Base
-  SHEET_HASH_SECRET = 'sheethubhashsecret'
   PDF_DEFAULT_URL = 'nil'
   DEFAULT_PHASH_TRESHOLD = 5 # TODO: test out for ideal value
   EXPIRATION_TIME = 30
@@ -51,7 +50,7 @@ class Sheet < ActiveRecord::Base
                       :preview => {:geometry => "", :format => :png}
                     },
                     :processors => [:preview],
-                    :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
+                    :hash_secret => Rails.application.secrets.sheet_hash_secret,
                     :default_url => PDF_DEFAULT_URL, #TODO: point to special Missing file route
                     :preserve_files => "true"
   validates_attachment_content_type :pdf,

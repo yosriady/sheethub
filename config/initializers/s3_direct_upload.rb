@@ -1,8 +1,7 @@
-# TODO: Refactor this to ENV
 S3DirectUpload.config do |c|
-  c.access_key_id = "AKIAI32VLLBYAJJ2THYA"
-  c.secret_access_key = "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"
-  c.bucket = "sheethub"
-  c.region = "ap-southeast-1"
-  c.url = "https://sheethub.s3.amazonaws.com/"
+  c.access_key_id = Rails.application.secrets.s3_access_key_id
+  c.secret_access_key = Rails.application.secrets.s3_secret_access_key
+  c.bucket = Rails.application.secrets.s3_bucket
+  c.region = Rails.application.secrets.s3_region
+  c.url = Rails.application.secrets.s3_bucket_url
 end

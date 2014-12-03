@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   validates :sheet_id, uniqueness: { scope: :user_id,
                        message: ORDER_UNIQUENESS_VALIDATION_MESSAGE }
   has_attached_file :pdf,
-                    :hash_secret => Sheet::SHEET_HASH_SECRET, #TODO: Use ENV for this
+                    :hash_secret => Rails.application.secrets.sheet_hash_secret,
                     :default_url => Sheet::PDF_DEFAULT_URL
   validates_attachment_content_type :pdf, :content_type => [ 'application/pdf' ]
 
