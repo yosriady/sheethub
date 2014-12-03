@@ -223,8 +223,6 @@ GEM
       multi_json (~> 1.0)
       xml-simple
     pg (0.17.1)
-    pghero (0.1.6)
-      activerecord
     phashion (1.1.1)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
@@ -416,7 +414,6 @@ DEPENDENCIES
   paypal-express
   paypal-sdk-adaptivepayments
   pg
-  pghero
   phashion
   pry-rails
   pry-remote

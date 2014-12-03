@@ -7,9 +7,6 @@ gem 'rails', '4.1.1'
 gem 'pg'
 gem 'unicorn-rails'
 
-# DB analytics
-gem 'pghero'
-
 # HTML Embed Links
 gem "auto_html"
 

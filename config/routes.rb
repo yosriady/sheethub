@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  mount PgHero::Engine, at: "pghero"
-
   get 'upgrade/purchase/:membership' => 'subscriptions#purchase', as: 'subscriptions_purchase'
   post 'upgrade/checkout/:membership' => 'subscriptions#checkout', as: 'subscriptions_checkout'
   get 'upgrade/cancel' =>  'subscriptions#cancel', as: 'subscriptions_cancel'
