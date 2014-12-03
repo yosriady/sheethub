@@ -14,11 +14,11 @@ class Sheet < ActiveRecord::Base
   HIT_QUOTA_MESSAGE = "You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub."
   PRIVATE_FREE_VALIDATION_MESSAGE = "Private Sheets must be free."
 
-  before_create :record_publisher
   validate :validate_price
-  before_save :validate_free_sheet_quota
   validate :validate_number_of_tags
   validate :validate_private_sheet_must_be_free
+  before_create :record_publisher
+  before_save :validate_free_sheet_quota
   belongs_to :user
   acts_as_votable
   acts_as_paranoid
@@ -50,7 +50,7 @@ class Sheet < ActiveRecord::Base
                     :styles => {
                       :preview => {:geometry => "", :format => :png}
                     },
-                    :processors => [:preview], # :watermark currently disabled
+                    :processors => [:preview],
                     :hash_secret => SHEET_HASH_SECRET, #TODO: Use ENV for this
                     :default_url => PDF_DEFAULT_URL, #TODO: point to special Missing file route
                     :preserve_files => "true"
@@ -81,7 +81,6 @@ class Sheet < ActiveRecord::Base
     return "Creative Commons Zero" if cc0?
     return "Public Domain" if public_domain?
   end
-
 
   def purchased_by?(user)
     return false unless user

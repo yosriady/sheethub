@@ -98,6 +98,10 @@ class User < ActiveRecord::Base
     free_sheets.size >= sheet_quota
   end
 
+  def hit_free_sheet_quota_for_basic?
+    free_sheets.size >= BASIC_FREE_SHEET_QUOTA
+  end
+
   def sales
     Order.includes(:user).includes(:sheet).where(sheet_id: sheets.ids, status: Order.statuses[:completed])
   end
