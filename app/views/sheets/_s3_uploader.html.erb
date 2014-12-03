@@ -16,8 +16,8 @@
       key_starts_with: "files/",
       callback_url: assets_path,
       acl: "private",
-      expiration: 24.hours.from_now.utc.iso8601,
-      max_file_size: 10.megabytes do %>
+      # expiration: 24.hours.from_now.utc.iso8601,
+      max_file_size: 20.megabytes do %>
       <%= file_field_tag :file, multiple: true %>
     <% end %>
 

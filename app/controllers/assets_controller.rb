@@ -49,7 +49,7 @@ class AssetsController < ApplicationController
 
     def delete_s3_object(key)
       s3 = AWS::S3.new
-      asset = s3.buckets['sheethub'].objects[key]
+      asset = s3.buckets[S3DirectUpload.config.bucket].objects[key]
       asset.delete
     end
 
