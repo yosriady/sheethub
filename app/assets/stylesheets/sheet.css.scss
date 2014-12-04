@@ -48,11 +48,9 @@
 }
 
 #sheet-sidebar {
-    em {
+    .publish-date {
         color: #aaa;
     }
-
-
 }
 
 #sheet {
@@ -164,4 +162,8 @@
 div.wide-sheets div.sheet {
     width: 50%;
     margin: 20px;
+}
+
+.sheet-star {
+    color: #aaa;
 }

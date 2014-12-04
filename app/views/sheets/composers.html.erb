@@ -8,9 +8,9 @@ description "Discover music by acclaimed composers on SheetHub"
         <div class="col-xs-12">
         <ol class="breadcrumb">
           <li><i class="fa fa-users"></i> <a href="<%= browse_path %>">Browse</a></li>
-          <li><a href="<%= composers_path %>">All Composers</a></li>
+          <li><a href="<%= composers_path %>">Composers</a></li>
         </ol>
-        <div class="white-container">
+        <div class="white-container flat-tags">
         <%= render 'lean_tags', tags: @composers, tag_type:"composer" %>
         </div>
         </div>

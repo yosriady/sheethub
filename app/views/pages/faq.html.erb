@@ -15,7 +15,7 @@ keywords %w(help faq support frequently/ asked/ questions)
 <div class="panel-group" role="tablist" aria-multiselectable="true">
   <h4><i class="fa fa-book"></i> General</h4>
   <%= render "faq_item", id:"sheethub-benefits", question: "What does SheetHub give me?", answer: "<p>SheetHub gives you the ability to easily publish and share  your sheet music/tablature/score online. You can easily create a page where your fans can view and purchase your works. Signing up also gives you an online profile that enables people to see and purchase all the works you've published on SheetHub. </p><p>All files are securely hosted on SheetHub so you don't need to worry about building a website or storing your files anywhere. Usage information is collected and displayed to you, such as how many times your music are being viewed, downloaded, and purchased.</p><p>SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on your musical pursuits. No setup fees, no monthly fees, no hosting fees to worry about. </p> " %>
-  <%= render "faq_item", id:"sheethub-costs", question: "How much does SheetHub cost?", answer: "<p> You are free to #{link_to 'sign up', new_registration_path(User)} and upload files without ever having to pay anything. You only pay when you make a sale. When someone buys your sheet, you receive 80% of the listed selling price. The remaining 20% goes to SheetHub to pay for hosting and server costs, and to fund the development of new features. Your royalties are paid directly and immediately to your PayPal account the moment a user purchases your music. SheetHub does not hold any of your net earnings. </p>
+  <%= render "faq_item", id:"sheethub-costs", question: "How much does SheetHub cost?", answer: "<p> You are free to #{link_to 'sign up', new_registration_path(User)} and upload files without ever having to pay anything. You only pay when you make a sale. When someone buys your sheet, you receive 80% of the listed selling price. The remaining 20% goes to SheetHub to pay for hosting and server costs, and to fund the development of new features. Your royalties are paid directly and immediately to your PayPal account the moment a user purchases your music. SheetHub does not hold any of your earnings. </p>
     </p>" %>
   <%= render "faq_item", id:"howto-upload", question: "How do I upload my music on SheetHub?", answer: "After signing up, <a href='#{sheet_upload_path}'>Upload</a> to start publishing! You will need at least a printable PDF version of your sheet music to start." %>
   <hr>
@@ -25,8 +25,8 @@ keywords %w(help faq support frequently/ asked/ questions)
      <%= render "faq_item", id:"sheet-recommendations", question: "Any other recommendations on how to format my PDF?", answer: "Users will be able to view a cover page which will be automatically created from the first page of your PDF. Customers are better able to make a purchasing decision if they can see a sample of your music that reflects the difficulty, range and uniqueness of your piece."%>
      <%= render "faq_item", id:"sheet-metadata", question: "What other information can I submit with my sheet music?", answer: "Submitting additional information about your sheet music - instruments, composers, genres, and sources - will help other users find and ultimately purchase your sheet music. SheetHub also uses this information in our internal recommendations system. The more detailed information you provide, the more likely that your sheet music appears in recommended results. "%>
      <%= render "faq_item", id:"sheet-additional-files", question: "Can I add additional files together with my PDF?", answer: "<strong>Yes!</strong> You can add up to 5 supporting files such as audio files and music notation software specific files through your sheet's edit page. Each file must be less than 20MB in size. "%>
-      <%= render "faq_item", id:"upload-limit", question: "How many sheets can I upload?", answer: "There is a soft limit of 25 sheets. The limit is in place to prevent abuse. If you wish to have more, then you should contact us." %>
-      <%= render "faq_item", id:"howto-embed-links", question: "How can I link to my Youtube/Vimeo/Soundcloud?", answer: "<p>In your sheet description, you can add links to your hosted videos and SheetHub will automatically generate the video player for you. See an example below. Youtube, Vimeo, and Soundcloud embeds are supported. </p> <img src='http://i.imgur.com/NoYhHmC.png' /><img src='http://i.imgur.com/ijjnhv6.png' />" %>
+      <%= render "faq_item", id:"upload-limit", question: "How many sheets can I upload?", answer: "You get unlimited uploads for commercial sheets. There is a soft limit of 25 free (non-commercial) sheets. The limit is in place to prevent abuse. If you wish to have more, then you can #{link_to 'Upgrade', upgrade_path} whenever you are ready." %>
+      <%= render "faq_item", id:"howto-embed-links", question: "How can I link to my Youtube/Vimeo/Soundcloud?", answer: "<p>In your sheet description, you can add links to your hosted videos and SheetHub will automatically generate the video player for you. See an example below. Youtube, Vimeo, and Soundcloud embeds are supported. For example: </p> <img src='http://i.imgur.com/NoYhHmC.png' /><p>The above description becomes:</p><img src='http://i.imgur.com/ijjnhv6.png' />" %>
 
   <hr>
   <h4><i class="fa fa-shopping-cart"></i> Purchases</h4>
@@ -54,7 +54,7 @@ keywords %w(help faq support frequently/ asked/ questions)
 
   <h4><i class="fa fa-legal"></i> Publishing Rights and Copyright</h4>
     <%= render "faq_item", id:"licenses", question: "What licenses do I choose?", answer:"<ul>
-<li><strong>None. (All rights reserved)</strong> As the copyright holder, you reserve, or hold for your own use, all the rights provided by copyright law on your work, such as distribution, performance, and creation of derivative works.</li>
+<li><strong>All rights reserved.</strong> As the copyright holder, you reserve, or hold for your own use, all the rights provided by copyright law on your work, such as distribution, performance, and creation of derivative works.</li>
 <li><strong>Creative Commons. </strong>
 Offering your work under a <a href='https://creativecommons.org/choose/'>Creative Commons</a> license does not mean giving up your copyright. It means offering some of your rights to any member of the public but only under certain conditions.
 <ul>
@@ -107,10 +107,10 @@ The Public Domain Mark is recommended for works that are free of known copyright
 
 </div>
 <div class="col-xs-4">
-    <p class="bg-info"><i class="fa fa-info-circle"></i> We are currently in public alpha, which means things may not work perfectly – yet. If you encounter something that looks broken, please let us know!</p>
-    <h3>Have more questions?</h3>
-    <div class="well bg-feathers">
-        <a href="mailto:yosriady@gmail.com" class="btn btn-block btn-lg btn-default"><i class="fa fa-paper-plane-o"></i> Contact Us</a>
+    <div class="bg-info blurb"><strong><i class="fa fa-info-circle"></i> Alpha</strong> <p>We are currently in public alpha, which means things may not work perfectly – yet. If you encounter something that looks broken, please let us know!</p></div>
+    <hr>
+    <div class="well">
+        <a href="mailto:yosriady@gmail.com" class="btn btn-block btn-default"><i class="fa fa-paper-plane-o"></i> Contact Us</a>
     </div>
     <div class="panel panel-default">
         <%= render 'layouts/twitter_widget' %>

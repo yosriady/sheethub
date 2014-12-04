@@ -57,3 +57,26 @@
         content: ")";
     }
 }
+
+.tag-container {
+    background: white;
+    padding: 20px 40px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+
+    .tag-group-text {
+        margin-top: 10px;
+
+        p {
+            margin-bottom: 0px;
+            padding-left: 10px;
+        }
+
+        h3 {
+            padding-left: 10px;
+            margin-top: 0px;
+        }
+
+    }
+
+}

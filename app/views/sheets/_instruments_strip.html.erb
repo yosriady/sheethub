@@ -1,0 +1,13 @@
+<div class="container-fluid tag-container">
+<div class="col-xs-2">
+    <div class="tag-group-text">
+        <p class="fade-text">BROWSE</p>
+        <h3> <a href="<%= instruments_path %>">Instruments</a></h3>
+    </div>
+</div>
+<div class="col-xs-10">
+  <div class="row flat-tags">
+    <%= render 'instruments', instruments: @instruments %>
+  </div>
+</div>
+</div>

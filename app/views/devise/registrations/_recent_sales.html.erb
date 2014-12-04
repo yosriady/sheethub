@@ -15,8 +15,8 @@
             <td><%= order.purchased_at.strftime("%A, %e %B %Y %l:%M %p %Z") %></td>
             <td><%= link_to order.sheet.title, sheet_path(order.sheet) %></td>
             <td><%= link_to order.user.display_name, user_profile_path(order.user.username) %></td>
-            <td>$<%= order.amount %></td>
-            <td>$<%= order.royalty %></td>
+            <td><%= number_to_currency(order.amount) %></td>
+            <td><%= number_to_currency(order.royalty) %></td>
           </tr>
         <% end %>
     </tbody>

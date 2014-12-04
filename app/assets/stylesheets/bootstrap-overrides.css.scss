@@ -31,7 +31,6 @@ h2 {
 }
 
 .navbar-nav > li > .dropdown-menu {
-    margin-top: 5px;
     border-top: none;
 }
 
@@ -176,4 +175,12 @@ div.checkbox {
 
 .list-group-item {
     padding: 10px;
+}
+
+.blurb {
+    padding: 15px 20px;
+
+    p {
+        margin: 0px;
+    }
 }

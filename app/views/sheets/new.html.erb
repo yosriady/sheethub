@@ -5,11 +5,11 @@
     <div class="row">
     <div class="col-xs-3 ">
         <div class="well" style="margin-top:45%;">
-            Read more about picking the right license for your music <a href="<%= faq_path %>#licenses" target="blank">here</a>.
+            Learn more about picking the right license for your music <a href="<%= faq_path %>#licenses" target="blank">here</a>.
         </div>
 
         <div class="well margintop30">
-            We recommend a price between <strong>$1.99 - $7.49</strong> for single pieces. Leave price at 0.00 to make it freely available.
+            We recommend a price between <strong>$1.99 - $9.99</strong> for single pieces. Leave price at $0.00 to make it a free sheet.
         </div>
 
         <div class="well margintop30">
@@ -28,10 +28,11 @@
 
     <div class="col-xs-3">
         <div class="panel panel-warning">
-        <div class="panel-body bg-warning">
-            <p>You can upload <strong><%= current_user.remaining_free_sheet_quota %></strong> more free sheets on SheetHub. You have <strong>unlimited</strong> uploads for commercial sheets.</p>
+        <div class="panel-body bg-warning blurb">
+            <p>You have <strong>unlimited</strong> uploads for commercial sheets. You can upload <strong><%= current_user.remaining_free_sheet_quota %></strong> more free sheets on SheetHub. </p>
+            <br/>
             <% if current_user.membership_type != "pro" %>
-                <p><%= link_to "Upgrade", upgrade_path %> to enjoy unlimited free uploads and extra features!</p>
+                <p><%= link_to "Upgrade", upgrade_path %> to enjoy unlimited free sheet uploads and extra features!</p>
             <% end %>
         </div>
         </div>
