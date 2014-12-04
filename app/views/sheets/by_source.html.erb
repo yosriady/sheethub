@@ -3,11 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <ol class="breadcrumb">
-        <li><i class="fa fa-book"></i> <a href="<%= browse_path %>">Browse</a></li>
-        <li></i> <a href="<%= sources_path %>">Sources</a></li>
-        <li><a href="<%= source_path(params[:slug]) %>"><%= params[:slug].titleize %></a></li>
-      </ol>
+      <%= render 'tag_breadcrumb', tag:params[:slug] ,tag_type:"source" %>
       <%= render 'sheets', sheets: @sheets %>
     </div>
   </div>

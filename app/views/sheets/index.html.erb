@@ -13,3 +13,6 @@ title "Browse"
 </div>
 
 <%= render 'instruments_strip', instruments: @instruments %>
+<%= render 'tag_strip', tags: @genres, tag_type:'genre' %>
+<%= render 'tag_strip', tags: @composers, tag_type:'composer' %>
+<%= render 'tag_strip', tags: @sources, tag_type:'source' %>

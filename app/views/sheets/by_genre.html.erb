@@ -3,11 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <ol class="breadcrumb">
-        <li><i class="fa fa-headphones"></i> <a href="<%= browse_path %>">Browse</a></li>
-        <li></i> <a href="<%= genres_path %>">Genres</a></li>
-        <li><a href="<%= genre_path(params[:slug]) %>"><%= params[:slug].titleize %></a></li>
-      </ol>
+      <%= render 'tag_breadcrumb', tag:params[:slug] ,tag_type:"genre" %>
       <%= render 'sheets', sheets: @sheets %>
     </div>
   </div>

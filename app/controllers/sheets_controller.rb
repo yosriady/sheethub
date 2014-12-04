@@ -34,9 +34,9 @@ class SheetsController < ApplicationController
   def index
     @instruments = Sheet.values_for_instruments
     @sheets = Sheet.is_public.includes(:user).page(params[:page])
-    @composers = Sheet.tags_on(:composers).includes(:taggings).limit(10)
-    @genres = Sheet.tags_on(:genres).includes(:taggings).limit(10)
-    @sources = Sheet.tags_on(:sources).includes(:taggings).limit(10)
+    @composers = Sheet.tags_on(:composers).limit(16)
+    @genres = Sheet.tags_on(:genres).limit(16)
+    @sources = Sheet.tags_on(:sources).limit(16)
   end
 
   # GET /search

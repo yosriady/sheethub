@@ -6,11 +6,8 @@ description "Discover music of different genres on SheetHub"
 <div class="container">
     <div class="row">
     <div class="col-xs-12">
-      <ol class="breadcrumb">
-        <li><i class="fa fa-headphones"></i> <a href="<%= browse_path %>">Browse</a></li>
-        <li></i> <a href="<%= genres_path %>">Genres</a></li>
-      </ol>
-        <div class="white-container flat-tags">
+        <%= render 'tag_type_breadcrumb', tag_type:"genre" %>
+        <div class="flat-tags">
         <%= render 'lean_tags', tags: @genres, tag_type:"genre" %>
         </div>
     </div>

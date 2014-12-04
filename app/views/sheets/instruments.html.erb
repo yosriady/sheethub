@@ -6,11 +6,8 @@ description "Discover music for all instruments on SheetHub"
 <div class="container">
     <div class="row">
     <div class="col-xs-12">
-      <ol class="breadcrumb">
-        <li><i class="fa fa-magic"></i> <a href="<%= browse_path %>">Browse</a></li>
-        <li><a href="<%= instruments_path %>">Instruments</a></li>
-      </ol>
-        <div class="white-container flat-tags">
+        <%= render 'tag_type_breadcrumb', tag_type:"instrument" %>
+        <div class="flat-tags">
         <%= render 'instruments', instruments: @instruments %>
         </div>
     </div>

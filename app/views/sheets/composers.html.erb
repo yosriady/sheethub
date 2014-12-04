@@ -5,14 +5,11 @@ description "Discover music by acclaimed composers on SheetHub"
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
-        <ol class="breadcrumb">
-          <li><i class="fa fa-users"></i> <a href="<%= browse_path %>">Browse</a></li>
-          <li><a href="<%= composers_path %>">Composers</a></li>
-        </ol>
-        <div class="white-container flat-tags">
+    <div class="col-xs-12">
+        <%= render 'tag_type_breadcrumb', tag_type:"composer" %>
+        <div class="flat-tags">
         <%= render 'lean_tags', tags: @composers, tag_type:"composer" %>
         </div>
-        </div>
+    </div>
     </div>
 </div>

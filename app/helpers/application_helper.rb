@@ -4,7 +4,7 @@ module ApplicationHelper
     /^http/i.match(url) ? url : "http://#{url}"
   end
 
-  # TOOD: Refactor tag.taggings[0].context
+  # TOOD: Refactor tag.taggings[0].context, this is called in related
   def tag_path(tag)
     context = tag.taggings[0].context
     case context
@@ -27,6 +27,8 @@ module ApplicationHelper
       "users"
     when "source"
       "book"
+    when "instrument"
+      "magic"
     else
       "magic"
     end
