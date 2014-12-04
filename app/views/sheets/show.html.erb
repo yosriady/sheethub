@@ -34,13 +34,13 @@ keywords @sheet.cached_joined_tags
 
             <%= render 'sheet_favorite', sheet: @sheet, favorites:@favorites %>
             <%= render 'sheet_share', sheet: @sheet %>
+            <%= render 'sign_up_blurb' %>
 
             <div class="panel panel-default">
                 <%= render 'layouts/twitter_widget' %>
                 <%= render 'layouts/facebook_widget' %>
             </div>
 
-            <%= render 'sign_up_blurb' %>
             <p class="bg-info"><i class="fa fa-smile-o"></i> Hey there! Please respect copyright and be nice to other users. More on <%= link_to "Community Guidelines", community_guidelines_path %>. </p>
             <%= render 'flag_sheet_button', sheet: @sheet %>
         </div>

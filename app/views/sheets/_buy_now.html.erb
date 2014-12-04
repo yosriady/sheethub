@@ -11,7 +11,7 @@
             <span class="sheet-price col-xs-4"><p><%= "$#{sheet.price}" %></p></span>
         <% else %>
             <a data-toggle="modal" data-target="#buyNowModal"><button type="button" class="btn btn-success col-xs-8"><i class="fa fa-shopping-cart"></i> Buy Now</button></a>
-            <span class="sheet-price col-xs-4"><p><%= "$#{sheet.price}" %></p></span>
+            <span class="sheet-price col-xs-4"><p><%= number_to_currency(sheet.price) %></p></span>
         <% end %>
     </div>
 </div>
@@ -21,12 +21,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button id="modal-close-btn" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="flagModal">Buy '<%= link_to sheet.title, sheet %>'</h4>
+        <h4 class="modal-title" id="flagModal">Buy <%= link_to sheet.title, sheet %> for <span class="sheet-price-text"><%= number_to_currency(sheet.price) %></span></h4>
       </div>
       <div class="modal-body">
         <p class="bg-info"><i class="fa fa-unlock"></i> You're one step away from <strong>Unlimited Access</strong> to <%= sheet.title %></p>
 
-        <p class="text-center"><em>You will receive:</em></p>
+        <br/>
+        <p class="text-center">You will receive:</p>
         <ul id="sheet-files">
             <!-- Main PDF file -->
             <% if sheet.pdf.present? %>
@@ -45,11 +46,12 @@
                 <p><i class="fa fa-download"></i><strong> <%= asset.filename %></strong>(<%= number_to_human_size(asset.filesize) %>)</p>
             </li>
             <% end %>
-            </ul>
+        </ul>
+        <br/>
 
         <hr>
         <strong>What happens next?</strong>
-        <p>You'll be able to view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. And we'll send you an email receipt containing your full purchase details. Enjoy! </p>
+        <p>Once you complete your purchase, you'll be able to view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. And we'll send you an email receipt containing your full purchase details. Enjoy! </p>
 
       </div>
       <div class="modal-footer">

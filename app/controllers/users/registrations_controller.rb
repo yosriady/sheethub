@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   SUCCESS_UPDATE_PROFILE_MESSAGE = "Nice! You've successfully updated your profile."
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
 
-  before_action :validate_user_signed_in, :except => [:profile, :favorites]
+  before_action :validate_user_signed_in, :except => [:new, :create, :profile, :favorites]
   before_action :validate_user_is_pro, :only => [:private_sheets]
   before_filter :downcase_username, :only => [:profile, :favorites]
   before_action :set_profile_user, :only => [:profile, :favorites]
