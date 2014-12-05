@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   SUCCESS_UPDATE_PROFILE_MESSAGE = "Nice! You've successfully updated your profile."
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
+  ONLY_PRO_MESSAGE = 'That feature is only available to Pro Users. Upgrade to Pro today!'
 
   before_action :validate_user_signed_in, :except => [:new, :create, :profile, :favorites]
   before_action :validate_user_is_pro, :only => [:private_sheets]
@@ -116,7 +117,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def validate_user_is_pro
-      redirect_to :back unless current_user.pro?
+      flash[:error] = ONLY_PRO_MESSAGE
+      redirect_to upgrade_path unless current_user.pro?
     end
 
     def set_current_user
