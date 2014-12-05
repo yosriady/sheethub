@@ -19,6 +19,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @sheets = @user.public_sheets.page(params[:page]) if @user
   end
 
+  def dashboard
+    @sheets = current_user.sheets.page(params[:page])
+  end
+
   def private_sheets
     @private_sheets = current_user.private_sheets.page(params[:page])
   end

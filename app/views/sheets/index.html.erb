@@ -3,10 +3,12 @@ title "Browse"
 %>
 
 <%= render 'layouts/nav_strip' %>
+
 <div id="animated-banner">
     <h1>A simple way to find and share sheet music</h1>
     <h2>Connect over great music on SheetHub</h2>
 </div>
+
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
@@ -20,7 +22,4 @@ title "Browse"
 <%= render 'tag_strip', tags: @composers, tag_type:'composer' %>
 <%= render 'tag_strip', tags: @sources, tag_type:'source' %>
 
-<div id="animated-banner" class="footer-banner">
-    <h1>Join a growing community of musicians</h1>
-    <a href="<%= new_user_registration_path %>" class="btn btn-success btn-banner btn-lg center-block"> Sign Up Today</a>
-</div>
+<%= render 'layouts/sign_up_banner' %>

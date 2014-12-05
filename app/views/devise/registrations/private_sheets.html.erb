@@ -1,21 +1,16 @@
 <% title "Private Sheets" %>
 
-<% if current_user %>
-  <div class="container">
-    <div class="row">
-    <div class="col-xs-12">
-        <h1>My Private Sheets</h1>
-        <p class="bg-info"><i class="fa fa-eye-slash"></i> Private sheets appear only to you. They are not publicly visible and do not appear in search results. </p>
-        <% if @private_sheets.any? %>
-          <%= render '/sheets/sheets', sheets: @private_sheets %>
-        <% else %>
-          <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
-          <h2 class="text-center">You have no private sheets.</h2>
-          <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-cloud-upload"></span> Upload</a>
-        <% end %>
-    </div>
+<div class="container">
+  <div class="row">
+  <div class="col-xs-12">
+      <h1>My Private Sheets</h1>
+      <p class="bg-info"><i class="fa fa-eye-slash"></i> Private sheets appear only to you. They are not publicly visible and do not appear in search results. </p>
+      <% if @private_sheets.any? %>
+        <%= render '/sheets/sheets', sheets: @private_sheets %>
+      <% else %>
+        <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
+        <h2 class="text-center">You have no private sheets.</h2>
+        <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-cloud-upload"></span> Upload</a>
+      <% end %>
   </div>
-<% else %>
-  <h2>You need to be logged in</h2>
-<% end %>
-  </div>
+</div>

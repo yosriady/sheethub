@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     get 'user/:username' => "users/registrations#profile", :as => :user_profile
     get 'user/:username/favorites' => "users/registrations#favorites", :as => :user_favorites
     match 'users/finish_registration' => 'users/registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
-    get 'private_sheets' => "users/registrations#private_sheets", :as => :user_private_sheets
+    get 'dashboard' => "users/registrations#dashboard", :as => :user_dashboard
+    get 'private-sheets' => "users/registrations#private_sheets", :as => :user_private_sheets
     get 'sales' => "users/registrations#sales", :as => :user_sales
     get 'library' => "users/registrations#library", :as => :user_library
     get 'trash' => "users/registrations#trash", :as => :user_trash
@@ -67,8 +68,8 @@ Rails.application.routes.draw do
   get 'source/:slug' => 'sheets#by_source', as: 'source'
 
   get '/help', to: 'pages#faq', as: 'faq'
-  get '/terms', to: 'pages#terms'
-  get '/privacy', to: 'pages#privacy'
+  get '/terms-of-service', to: 'pages#terms', as: 'terms'
+  get '/privacy-policy', to: 'pages#privacy', as: 'privacy'
   get '/community-guidelines', to: 'pages#community_guidelines'
   get '/upgrade', to: 'pages#upgrade'
 end

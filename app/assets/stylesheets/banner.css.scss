@@ -1,9 +1,7 @@
 #banner {
     height: 150px;
     position: relative;
-    background: #1a1a1a url("http://33.media.tumblr.com/8d41610b4f5e7d5b68e4430b736fbeb3/tumblr_n4vbj2Vv8h1st5lhmo1_1280.jpg") no-repeat bottom center;
-    background: #1a1a1a url("http://unsplash.imgix.net/reserve/z7R1rjT6RhmZdqWbM5hg_R0001139.jpg?fit=crop&fm=jpg&h=695&q=75&w=1050") no-repeat center center;
-    background: #1a1a1a url("http://i.imgur.com/Zdj9r8o.jpg") no-repeat center center;
+    background: #333;
     -webkit-background-size: cover;
     background-size: cover;
     padding: 10px 40px;
@@ -70,7 +68,6 @@
 
     h2 {
         margin: 10px;
-        text-transform: uppercase;
         font-size: 18px;
         color: #b8c0c7;
         font-weight: 400;

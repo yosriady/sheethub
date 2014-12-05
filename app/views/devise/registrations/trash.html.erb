@@ -1,22 +1,18 @@
 <% title "Trash" %>
 
-<% if current_user %>
-  <div class="container">
-    <div class="row">
-    <div class="col-xs-12">
-        <h1>My Deleted Sheets</h1>
-        <p class="bg-danger"><i class="fa fa-trash"></i> Here you can restore your deleted sheets at any time.</p>
-        <div id="deleted-sheets">
-          <% if @deleted_sheets.any? %>
-            <%= render '/sheets/deleted_sheets', sheets: @deleted_sheets %>
-          <% else %>
-            <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
-            <h2 class="text-center">You have no deleted sheets.</h2>
-          <% end %>
-        </div>
-    </div>
+<div class="container">
+  <div class="row">
+  <div class="col-xs-12">
+      <h1>My Deleted Sheets</h1>
+      <p class="bg-danger"><i class="fa fa-trash"></i> Here you can restore your deleted sheets at any time.</p>
+      <div id="deleted-sheets">
+        <% if @deleted_sheets.any? %>
+          <%= render '/sheets/deleted_sheets', sheets: @deleted_sheets %>
+        <% else %>
+          <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
+          <h2 class="text-center">You have no deleted sheets.</h2>
+        <% end %>
+      </div>
   </div>
-<% else %>
-  <h2>You need to be logged in</h2>
-<% end %>
   </div>
+</div>

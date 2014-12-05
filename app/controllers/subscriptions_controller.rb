@@ -13,7 +13,6 @@ class SubscriptionsController < ApplicationController
 
   def checkout
     payment_response = build_payment_response(subscriptions_params[:membership])
-    # TODO: Handle existing Subscription object case, changing plans
 
     if payment_response.ack == "Success"
       Subscription.create(tracking_id: payment_response.token, membership_type: subscriptions_params[:membership], user_id:current_user.id)
@@ -37,7 +36,6 @@ class SubscriptionsController < ApplicationController
     render action: 'thank_you', notice: SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE
   end
 
-  # TODO
   def downgrade
     if current_user.hit_free_sheet_quota_for_basic?
       binding.pry
@@ -81,8 +79,8 @@ class SubscriptionsController < ApplicationController
     def paypal_options
       return {
         no_shipping: true,
-        allow_note: false, # if you want to disable notes
-        pay_on_paypal: true #if you want to commit the transaction in paypal instead of your site
+        allow_note: false,
+        pay_on_paypal: true
       }
     end
 
