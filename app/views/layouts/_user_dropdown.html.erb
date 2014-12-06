@@ -4,16 +4,16 @@
 
   <% if current_user.finished_registration? %>
     <li><a href="<%= user_profile_path(current_user.username) %>"><i class="fa fa-user"></i> Profile</a></li>
-    <!-- <li><a href="<%= upgrade_path %>" class="bg-success"><i class="fa fa-star"></i> Upgrade</a></li> -->
-    <li><a href="<%= user_settings_path %>"><i class="fa fa-cog"></i> Settings</a></li>
-    <hr>
-    <% if current_user.has_published %><li><a href="<%= user_dashboard_path %>"><i class="fa fa-dashboard"></i> Dashboard</a></li><% end %>
-    <% if current_user.has_published %><li><a href="<%= user_sales_path %>"><i class="fa fa-line-chart"></i> Sales</a></li><% end %>
     <li><a href="<%= user_library_path %>"><i class="fa fa-shopping-cart"></i> My Library</a></li>
+    <!-- <li><a href="<%= upgrade_path %>" class="bg-success"><i class="fa fa-star"></i> Upgrade</a></li> -->
+    <hr>
+    <% if current_user.has_published %><li><a href="<%= user_dashboard_path %>"><i class="fa fa-inbox"></i> Dashboard</a></li><% end %>
+    <% if current_user.has_published %><li><a href="<%= user_sales_path %>"><i class="fa fa-line-chart"></i> Sales</a></li><% end %>
     <% if current_user.pro? %><li><a href="<%= user_private_sheets_path %>"><i class="fa fa-eye-slash"></i> My Private Sheets</a></li><% end %>
-    <li><a href="<%= user_trash_path %>"><i class="fa fa-trash"></i> My Trash</a></li>
+    <li><a href="<%= user_trash_path %>"><i class="fa fa-trash"></i> Trash Bin</a></li>
   <% end %>
     <hr>
+    <li><a href="<%= user_settings_path %>"><i class="fa fa-cog"></i> Settings</a></li>
     <li><%= link_to destroy_user_session_path, :method => :delete do %><i class="fa fa-sign-out"></i> Log out<% end %></li>
   </ul>
 </li>

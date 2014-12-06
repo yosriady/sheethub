@@ -270,8 +270,17 @@ div.wide-sheets div.sheet {
 
 }
 
+.dashboard-sheet {
+    width: auto;
+    margin: auto;
+    float:none;
+    border-radius: 0px;
+}
+
 .small-avatar {
     width: 50px;
     height: 50px;
     border-radius: 4px;
 }
+
+

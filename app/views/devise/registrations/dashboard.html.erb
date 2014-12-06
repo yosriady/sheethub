@@ -3,7 +3,29 @@
 <div class="container">
   <div class="row">
   <div class="col-xs-12">
-      <h1>Dashboard</h1>
+      <h1>My Works</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sheet</th>
+          <th>Shareable Link</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% if @sheets.each do |sheet| %>
+          <%= render 'sheets/sheet_dashboard', sheet: sheet %>
+          <% end.empty? %>
+          <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
+          <h2 class="text-center">No Sheets yet!</h2>
+          <% end %>
+      </tbody>
+    </table>
+    <div id="paginator" class="text-center">
+      <%= paginate @sheets %>
+    </div>
+
 
   </div>
 </div>

@@ -5,17 +5,6 @@
         <label class="control-label"><i class="fa fa-link"></i> Direct URL</label>
         <input id="sheet-direct-url" onClick="this.select();" class="form-control" readonly value="<%= sheet_url(sheet) %>">
     </div>
-    <div class="share-buttons">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= sheet_url(sheet) %>" class="btn btn-block btn-social btn-facebook">
-            <i class="fa fa-facebook"></i> Share on Facebook
-        </a>
-        <a href="https://plus.google.com/share?url=<%= sheet_url(sheet) %>" class="btn btn-block btn-social btn-google-plus">
-            <i class="fa fa-google-plus"></i> Share on Google+
-        </a>
-        <a  href="https://twitter.com/home?status=<%= sheet.title %> <%= sheet_url(sheet) %>" class="btn btn-block btn-social btn-twitter">
-            <i class="fa fa-twitter"></i> Share on Twitter
-        </a>
-
-    </div>
+    <%= render 'share_buttons', sheet: sheet %>
 </div>
 </div>

@@ -1,0 +1,11 @@
+<div class="share-buttons">
+    <a href="https://www.facebook.com/sharer/sharer.php?u=<%= sheet_url(sheet) %>">
+        <button class="btn btn-facebook btn-social"><i class="fa fa-facebook"></i>SHARE</button>
+    </a>
+    <a href="https://plus.google.com/share?url=<%= sheet_url(sheet) %>">
+        <button class="btn btn-google-plus btn-social"><i class="fa fa-google-plus"></i>SHARE</button>
+    </a>
+    <a href="https://twitter.com/home?status=<%= sheet.title %> <%= sheet_url(sheet) %>">
+        <button class="btn btn-twitter btn-social"><i class="fa fa-twitter"></i>SHARE</button>
+    </a>
+</div>
