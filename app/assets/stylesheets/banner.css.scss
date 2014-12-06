@@ -52,7 +52,7 @@
 
 #animated-banner {
     height: 150px;
-    background: url("http://docs.mashape.com/imgs/pttrn.a7201f56.svg");
+    background: url(image_path('bg.svg'));
     border-bottom: 1px rgba(0,0,0,0.1) solid;
     -webkit-animation: bgscroll 30s infinite linear;
     -moz-animation: bgscroll 30s infinite linear;
