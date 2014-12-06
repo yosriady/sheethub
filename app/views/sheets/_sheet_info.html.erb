@@ -3,7 +3,7 @@
     <p><%= sheet.description? ? sheet.description_html : 'No description.'%></p>
 
     <strong class="publishing-rights"><i class="fa fa-certificate"></i> <%= sheet.verbose_license %> <a href="<%= faq_path %>#licenses"><i class="fa fa-question-circle"></i></a></strong>
-    <p data-toggle="tooltip" data-placement="left" title="Published <%= sheet.created_at.strftime('%d %B %Y') %>"><span class="publish-date">Published <%= distance_of_time_in_words(Time.zone.now, sheet.created_at) %> ago</span></p>
+    <p data-toggle="tooltip" data-placement="left" title="Last Updated <%= sheet.created_at.strftime('%d %B %Y') %>"><span class="publish-date">Updated <%= distance_of_time_in_words(Time.zone.now, sheet.updated_at) %> ago</span></p>
   </div>
 
     <ul class="list-group">

@@ -1,0 +1,24 @@
+<table class="table white-rows">
+  <thead>
+    <tr class="active">
+      <th>Sheet</th>
+      <th>Shareable Link</th>
+      <th>Files</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% if sheets.each do |sheet| %>
+      <%= render 'sheets/sheet_dashboard', sheet: sheet %>
+      <% end.empty? %>
+        <tr>
+            <td><i class="fa fa-eye-slash"></i> No Sheets yet!</td>
+            <td></td>
+            <td><a href="<%= new_sheet_path %>" class="btn btn-success"><span class="fa fa-cloud-upload"></span> Upload</a></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
+<div id="paginator" class="text-center">
+  <%= paginate sheets %>
+</div>

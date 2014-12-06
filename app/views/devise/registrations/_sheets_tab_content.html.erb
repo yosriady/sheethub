@@ -5,7 +5,7 @@
     <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
     <% if user == current_user %>
       <h2 class="text-center">You have no sheets.</h2>
-      <a href="<%= new_sheet_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-cloud-upload"></span> Upload</a>
+      <a href="<%= new_sheet_path %>" class="btn btn-success btn-sleek center-block"><span class="fa fa-cloud-upload"></span> Upload</a>
     <% else %>
       <h2 class="text-center">This user has no sheets.</h2>
     <% end %>

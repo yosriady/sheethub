@@ -1,20 +1,10 @@
-<% title "Library" %>
+<% title "My Library" %>
 
 <div class="container">
   <div class="row">
   <div class="col-xs-12">
       <h1>My Library</h1>
-      <div id="sheets">
-        <% if @purchases.any? %>
-          <p class="bg-info"><i class="fa fa-thumbs-up"></i> Thank you for your purchase! Enjoy <strong>Unlimited Access</strong> and future updates forever.</p>
-          <%= render 'orders', orders: @purchases %>
-        <% else %>
-          <p class="bg-info"><i class="fa fa-shopping-cart"></i> Add sheets to your collection and check out amazing music on SheetHub. You can review and download your purchased sheets here.</p>
-          <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
-          <h2 class="text-center">You have not purchased any sheets.</h2>
-          <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-picture"></span> Browse</a>
-        <% end %>
-      </div>
+      <%= render 'library_sheets', orders: @purchases %>
   </div>
 </div>
 </div>

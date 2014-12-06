@@ -1,10 +1,8 @@
 <div class="panel panel-info">
   <div class="panel-heading"><i class="fa fa-share-alt"></i> Share</div>
   <div class="panel-body">
-      <div class="form-group">
-        <label class="control-label"><i class="fa fa-link"></i> Direct URL</label>
-        <input id="sheet-direct-url" onClick="this.select();" class="form-control" readonly value="<%= sheet_url(sheet) %>">
-    </div>
-    <%= render 'share_buttons', sheet: sheet %>
+      <label class="control-label"><i class="fa fa-link"></i> Direct URL</label>
+      <%= render 'sheets/sheet_direct_url', sheet: sheet %>
+      <%= render 'share_buttons', sheet: sheet %>
 </div>
 </div>

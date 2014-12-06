@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def dashboard
-    @sheets = current_user.sheets.page(params[:page])
+    @sheets = current_user.sheets.includes(:assets).page(params[:page])
   end
 
   def private_sheets
