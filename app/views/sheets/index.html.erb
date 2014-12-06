@@ -22,4 +22,12 @@ title "Browse"
 <%= render 'tag_strip', tags: @composers, tag_type:'composer' %>
 <%= render 'tag_strip', tags: @sources, tag_type:'source' %>
 
+<div class="container">
+    <div class="col-xs-12">
+      <div class="row">
+            <%= render 'featured_sheets', sheets: @featured %>
+      </div>
+    </div>
+</div>
+
 <%= render 'layouts/sign_up_banner' %>

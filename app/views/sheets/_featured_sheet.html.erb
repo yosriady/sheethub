@@ -1,0 +1,8 @@
+<div class="sheet">
+    <%= render 'sheet_text', sheet: sheet %>
+    <%= image_tag(sheet.pdf_preview_url, title:"This is a preview page.", class: "sheet_preview") %>
+    <div class="sheet-user">
+      <a href="<%= user_profile_path(sheet.user.username) %>"><i class="fa fa-user"></i> <%= sheet.user.display_name %></a>
+    </div>
+</div>
+</a>

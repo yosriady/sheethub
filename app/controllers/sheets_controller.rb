@@ -34,6 +34,7 @@ class SheetsController < ApplicationController
   def index
     @instruments = Sheet.values_for_instruments
     @sheets = Sheet.is_public.includes(:user).page(params[:page])
+    @featured = Sheet.includes(:user).best_sellers.limit(3)
     @composers = Sheet.tags_on(:composers).limit(16)
     @genres = Sheet.tags_on(:genres).limit(16)
     @sources = Sheet.tags_on(:sources).limit(16)
