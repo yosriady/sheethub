@@ -19,13 +19,13 @@ class OrdersController < ApplicationController
 
     # Start Adaptive Payments
     sheet = Sheet.friendly.find(params[:sheet])
-    payment_request = build_adaptive_payment_request(sheet)
+    payment_request = build_adaptive_payment_request(sheet) # For pay what you want, update sheet to Order since it's not sheet.price but order.amount
     @pay_response = get_adaptive_payment_response(payment_request)
     if @pay_response.success?
       redirect_url = build_redirect_url(@pay_response.payKey)
       @order.update(tracking_id: payment_request.trackingId,
                     payer_id: @pay_response.payKey,
-                    amount_cents: sheet.price_cents) #TODO: For pay what you want, update price_cents to user_specified_cents
+                    amount_cents: sheet.price_cents) #TODO: For pay what you want, update price_cents to user_specified_cents retrieved from form
       redirect_to redirect_url
     else
       Rails.logger.info "Paypal Error #{@pay_response.error.first.errorId}: #{@pay_response.error.first.message}"

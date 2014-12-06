@@ -12,6 +12,7 @@ title "Browse"
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
+            <h3 class="sheets-heading">Recent works</h3>
             <%= render 'sheets', sheets: @sheets %>
       </div>
     </div>
@@ -25,6 +26,7 @@ title "Browse"
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
+            <a href="<%= community_favorites_path %>"><h2 class="sheets-heading"><i class="fa fa-star-o"></i> Community Favorites</h2></a>
             <%= render 'featured_sheets', sheets: @featured %>
       </div>
     </div>

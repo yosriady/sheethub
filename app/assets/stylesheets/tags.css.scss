@@ -61,7 +61,7 @@
 .tag-container {
     background: white;
     padding: 20px 40px;
-    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 
     .tag-group-text {
         margin-top: 10px;
@@ -78,4 +78,8 @@
 
     }
 
+}
+
+.bordered-top {
+    border-top: 1px solid #ddd;
 }

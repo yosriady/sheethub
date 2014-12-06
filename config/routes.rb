@@ -52,8 +52,8 @@ Rails.application.routes.draw do
   get 'browse' => 'sheets#index', as: 'browse'
   get 'upload' => 'sheets#new', as: 'sheet_upload'
   get 'search' => 'sheets#search'
-  get 'best_sellers' => 'sheets#best_sellers'
-  get 'most_favorites' => 'sheets#most_favorites'
+  get 'best-sellers' => 'sheets#best_sellers'
+  get 'community-favorites' => 'sheets#community_favorites'
 
   get 'instruments' => 'sheets#instruments'
   get 'instrument/:slug' => 'sheets#by_instrument', as: 'instrument'

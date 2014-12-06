@@ -34,7 +34,7 @@ class SheetsController < ApplicationController
   def index
     @instruments = Sheet.values_for_instruments
     @sheets = Sheet.is_public.includes(:user).page(params[:page])
-    @featured = Sheet.includes(:user).best_sellers.limit(3)
+    @featured = Sheet.includes(:user).community_favorites.limit(3)
     @composers = Sheet.tags_on(:composers).limit(16)
     @genres = Sheet.tags_on(:genres).limit(16)
     @sources = Sheet.tags_on(:sources).limit(16)
@@ -49,8 +49,8 @@ class SheetsController < ApplicationController
     @sheets = Sheet.includes(:user).best_sellers.page(params[:page])
   end
 
-  def most_favorites
-    @sheets = Sheet.includes(:user).most_favorites.page(params[:page])
+  def community_favorites
+    @sheets = Sheet.includes(:user).community_favorites.page(params[:page])
   end
 
   # GET /sheets/1
