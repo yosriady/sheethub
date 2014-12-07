@@ -48,9 +48,9 @@ class Subscription < ActiveRecord::Base
 
   def self.paypal_request
     Paypal::Express::Request.new(
-      :username   => PAYPAL_USERNAME,
-      :password   => PAYPAL_PASSWORD,
-      :signature  => PAYPAL_SIGNATURE
+      :username   => Rails.application.secrets.paypal_username,
+      :password   => Rails.application.secrets.paypal_password,
+      :signature  => Rails.application.secrets.paypal_signature
     )
   end
 

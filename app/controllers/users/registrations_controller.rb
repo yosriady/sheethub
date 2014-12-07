@@ -94,7 +94,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if request.patch? && params[:user] && params[:user][:username]
       update_params = registration_params
       update_params[:finished_registration?] = true
-      update_params[:sheet_quota] = User::BASIC_SHEET_QUOTA
+      update_params[:sheet_quota] = User::BASIC_FREE_SHEET_QUOTA
       if current_user.update(update_params)
         redirect_to user_profile_path(current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
