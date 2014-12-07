@@ -1,5 +1,5 @@
 <div class="sheet">
-    <%= render 'sheet_text', sheet: sheet %>
+    <%= render 'sheets/sheet_text', sheet: sheet %>
     <div class="sheet-user">
       <a href="<%= user_profile_path(sheet.user.username) %>"><i class="fa fa-user"></i> <%= sheet.user.display_name %></a>
     </div>
