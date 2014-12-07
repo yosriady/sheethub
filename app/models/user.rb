@@ -160,7 +160,7 @@ class User < ActiveRecord::Base
 
       # Get normal quality picture if using omniauth-facebook
       if auth.provider == "facebook"
-        user.image = auth.info.image + "?type=normal"
+        user.image = auth.info.image + "?type=large"
       else
         user.image = auth.info.image
       end
