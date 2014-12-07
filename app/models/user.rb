@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   AVATAR_HASH_SECRET = "sheethubhashsecret"
-  MISSING_AVATAR_URL = "/images/default_avatar.png"
+  MISSING_AVATAR_URL = "default_avatar.png"
   EXPIRATION_TIME = 600
   BASIC_FREE_SHEET_QUOTA = 25
   PLUS_FREE_SHEET_QUOTA = 60
