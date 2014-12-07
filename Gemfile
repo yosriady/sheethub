@@ -7,8 +7,11 @@ gem 'rails', '4.1.1'
 gem 'pg'
 gem 'unicorn'
 
+# Opbeat
+gem 'opbeat'
+
 # HTML Embed Links
-gem "auto_html"
+gem 'auto_html'
 
 # Admin
 gem 'activeadmin', github: 'activeadmin'
