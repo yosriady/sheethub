@@ -5,10 +5,7 @@ gem 'rails', '4.1.1'
 
 # Server and DB
 gem 'pg'
-gem 'unicorn-rails'
-
-# Opbeat
-gem 'opbeat'
+gem 'unicorn'
 
 # HTML Embed Links
 gem "auto_html"
@@ -21,7 +18,6 @@ gem 'metamagic'
 
 # Payments
 gem 'paypal-express'
-# gem 'paypal-sdk-merchant'
 gem 'paypal-sdk-adaptivepayments'
 
 # Charts

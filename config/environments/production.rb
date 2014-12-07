@@ -2,6 +2,15 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.action_mailer.default_url_options = { host: 'http://www.sheethub.co'}
+  config.action_mailer.smtp_settings = {
+    :address   => "smtp.mandrillapp.com",
+    :port      => 25,
+    :enable_starttls_auto => true,
+    :user_name => "yosriady@gmail.com",
+    :password  => "p2bTAyyDBKV57KlGqMG6Qw",
+    :authentication => 'login',
+    :domain => 'sheethub.co',
+  }
 
   # Paperclip file storage config
   config.paperclip_defaults = {
