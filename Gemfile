@@ -7,7 +7,8 @@ gem 'rails', '4.1.1'
 gem 'pg'
 gem 'unicorn'
 
-# Opbeat
+# Application Monitoring
+gem 'newrelic_rpm'
 gem 'opbeat'
 
 # HTML Embed Links
