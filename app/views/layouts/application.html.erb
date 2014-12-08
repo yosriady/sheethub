@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <%= metamagic site: "SheetHub", title: [:title, :site], separator: " - ", description: "SheetHub is a super simple way to publish and share your sheet music, score, and tablature online. Publish, search, rate, and share your favourite musical pieces on SheetHub.", keywords: %w(sheet\ music score tablature self\ publishing platform) %>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= include_gon %>
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <meta charset="UTF-8">
   <%= csrf_meta_tags %>
   <%= render 'layouts/mixpanel_sdk' %>
 </head>
