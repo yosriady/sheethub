@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   DEFAULT_CURRENCY = 'USD'
   SUCCESS_ORDER_PURCHASE_MESSAGE = 'Great success! Thank you for your purchase.'
   CANCEL_ORDER_PURCHASE_MESSAGE = 'Purchase canceled.'
+  PURCHASE_INVALID_PAYPAL_EMAIL_MESSAGE = "We could not process your purchase. The uploader's Paypal email is invalid! We've sent the uploader an email. In the meantime, why not take a look at other works on SheetHub?"
   FLAGGED_MESSAGE = 'You cannot purchase a flagged sheet.'
 
   before_action :authenticate_user!, only: [:checkout, :success, :cancel]
@@ -31,7 +32,7 @@ class OrdersController < ApplicationController
       Rails.logger.info "Paypal Error #{@pay_response.error.first.errorId}: #{@pay_response.error.first.message}"
       if invalid_account_details_error?(@pay_response)
         OrderMailer.purchase_failure_email(@order).deliver
-        flash[:error] = "We could not process your purchase. The publisher's Paypal email is invalid! We've sent out an email."
+        flash[:error] = PURCHASE_INVALID_PAYPAL_EMAIL_MESSAGE
       else
         flash[:error] = "We could not process your purchase. #{@pay_response.error.first.message}"
       end

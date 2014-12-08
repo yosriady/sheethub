@@ -1,5 +1,5 @@
 class OrderMailer < ActionMailer::Base
-  DEFAULT_FROM_EMAIL = "notifications@sheethub.co"
+  DEFAULT_FROM_EMAIL = "SheetHub <notifications@sheethub.co>"
   default from: DEFAULT_FROM_EMAIL
 
   def purchase_failure_email(order)
