@@ -1,24 +1,21 @@
-<table class="table white-rows">
-  <thead>
-    <tr class="active">
-      <th>Sheet</th>
-      <th>Shareable Link</th>
-      <th>Files</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-      <% if sheets.each do |sheet| %>
-        <%= render 'sheets/sheet_dashboard', sheet: sheet %>
-      <% end.empty? %>
-        <tr>
-            <td><i class="fa fa-eye-slash"></i> No Sheets yet!</td>
-            <td></td>
-            <td><a href="<%= new_sheet_path %>" class="btn btn-success"><span class="fa fa-cloud-upload"></span> Upload</a></td>
-        </tr>
-      <% end %>
-  </tbody>
-</table>
-<div id="paginator" class="text-center">
-  <%= paginate sheets %>
-</div>
+<% if sheets.each do |sheet| %>
+  <table class="table white-rows">
+    <thead>
+      <tr class="active">
+        <th>Sheet</th>
+        <th>Shareable Link</th>
+        <th>Files</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render 'sheets/sheet_dashboard', sheet: sheet %>
+    </tbody>
+  </table>
+  <div id="paginator" class="text-center">
+    <%= paginate sheets %>
+  </div>
+<% end.empty? %>
+  <h2 class="text-center"><i class="fa fa-eye-slash"></i> You have no published works</h2>
+  <a href="<%= new_sheet_path %>" class="btn btn-success btn-sleek center-block"><span class="fa fa-cloud-upload"></span> Upload</a>
+<% end %>
