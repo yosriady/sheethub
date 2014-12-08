@@ -3,9 +3,11 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.1'
 
-# Server and DB
+# DB
 gem 'pg'
-gem 'unicorn'
+
+# Application Server
+gem 'passenger'
 
 # Memcached
 gem 'dalli'
