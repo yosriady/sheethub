@@ -5,6 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   before_action :validate_user_signed_in, :except => [:new, :create, :profile, :favorites]
   before_action :validate_user_is_pro, :only => [:private_sheets]
+  before_action :disable_for_omniauth, :only => [:edit_password]
   before_filter :downcase_username, :only => [:profile, :favorites]
   before_action :set_profile_user, :only => [:profile, :favorites]
   before_action :validate_registration_finished
@@ -117,8 +118,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def validate_user_is_pro
-      flash[:error] = ONLY_PRO_MESSAGE
-      redirect_to upgrade_path unless current_user.pro?
+      unless current_user.pro?
+        flash[:error] = ONLY_PRO_MESSAGE
+        redirect_to upgrade_path
+      end
+    end
+
+    def disable_for_omniauth
+      if current_user.provider?
+        flash[:error] = "Users logged in via Facebook/Google+ cannot change their password"
+        redirect_to :back
+      end
     end
 
     def set_current_user
