@@ -98,15 +98,15 @@ class User < ActiveRecord::Base
     sheets.where(price_cents: 0)
   end
 
-  def remaining_free_sheet_quota
+  def remaining_sheet_quota
     sheet_quota - free_sheets.size
   end
 
-  def hit_free_sheet_quota?
+  def hit_sheet_quota?
     free_sheets.size >= sheet_quota
   end
 
-  def hit_free_sheet_quota_for_basic?
+  def hit_sheet_quota_for_basic?
     free_sheets.size >= BASIC_FREE_SHEET_QUOTA
   end
 

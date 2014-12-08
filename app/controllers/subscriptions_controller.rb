@@ -43,7 +43,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def downgrade
-    if current_user.hit_free_sheet_quota_for_basic?
+    if current_user.hit_sheet_quota_for_basic?
       flash[:error] = "You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets."
       redirect_to user_membership_settings_path
     else

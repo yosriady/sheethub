@@ -264,7 +264,7 @@ class Sheet < ActiveRecord::Base
     end
 
     def validate_free_sheet_quota
-      invalid_quota = self.free? && user.hit_free_sheet_quota?
+      invalid_quota = self.free? && user.hit_sheet_quota?
       errors.add(:sheet_quota, HIT_QUOTA_MESSAGE) if invalid_quota
     end
 
