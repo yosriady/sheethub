@@ -7,7 +7,9 @@
 </div>
 <div class="col-xs-10">
   <div class="row flat-tags">
-    <%= render 'lean_tags', tags: tags, tag_type: tag_type %>
+    <% cache(expires_in: 1.day) do %>
+        <%= render 'lean_tags', tags: tags, tag_type: tag_type %>
+    <% end %>
   </div>
 </div>
 </div>

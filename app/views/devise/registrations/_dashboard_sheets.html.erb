@@ -9,7 +9,7 @@
   </thead>
   <tbody>
       <% if sheets.each do |sheet| %>
-      <%= render 'sheets/sheet_dashboard', sheet: sheet %>
+        <%= render 'sheets/sheet_dashboard', sheet: sheet %>
       <% end.empty? %>
         <tr>
             <td><i class="fa fa-eye-slash"></i> No Sheets yet!</td>

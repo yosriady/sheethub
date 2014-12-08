@@ -74,6 +74,18 @@ class Sheet < ActiveRecord::Base
     simple_format
   end
 
+  def self.get_best_sellers
+    Rails.cache.fetch("best_sellers", :expires_in => 1.day) do
+      Sheet.includes(:user).best_sellers
+    end
+  end
+
+  def self.get_community_favorites
+    Rails.cache.fetch("community_favorites", :expires_in => 1.day) do
+      Sheet.includes(:user).community_favorites
+    end
+  end
+
   def verbose_license
     return "All rights reserved" if all_rights_reserved?
     return "Creative Commons" if creative_commons?
@@ -206,14 +218,18 @@ class Sheet < ActiveRecord::Base
     GROUP BY sheets.id ORDER BY count DESC
     LIMIT 3
     "
-    Sheet.find_by_sql(sql)
+    Rails.cache.fetch("related_sheets_to_#{self}", :expires_in => 1.day) do
+      Sheet.find_by_sql(sql)
+    end
   end
 
   def related_tags
-    related_sheets = Sheet.tagged_with(joined_tags, :any => true).includes(:sources, :composers, :genres).limit(5)
-    related_tags = Set.new
-    related_sheets.each{ |sheet| related_tags.merge sheet.tag_objects }
-    related_tags.to_a
+    Rails.cache.fetch("related_tags_to_#{self}", :expires_in => 1.day) do
+      related_sheets = Sheet.tagged_with(joined_tags, :any => true).includes(:sources, :composers, :genres).limit(5)
+      related_tags = Set.new
+      related_sheets.each{ |sheet| related_tags.merge sheet.tag_objects }
+      related_tags.to_a
+    end
   end
 
   def self.instruments_to_bitmask(instruments)

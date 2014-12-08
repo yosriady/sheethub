@@ -46,11 +46,11 @@ class SheetsController < ApplicationController
   end
 
   def best_sellers
-    @sheets = Sheet.includes(:user).best_sellers.page(params[:page])
+    @sheets = Sheet.get_best_sellers.page(params[:page])
   end
 
   def community_favorites
-    @sheets = Sheet.includes(:user).community_favorites.page(params[:page])
+    @sheets = Sheet.get_community_favorites.page(params[:page])
   end
 
   # GET /sheets/1

@@ -1,6 +1,8 @@
-<ol class="breadcrumb">
-<li><i class="fa fa-<%= tag_icon(tag_type) %>"></i><a href="<%= browse_path %>">Browse</a></li>
-<li></i><a href="/<%= tag_type %>s"><%= tag_type.titleize.pluralize %></a></li>
-<li><a href="<%= "/#{tag_type}/#{tag}" %>"><%= tag.titleize %></a></li>
-</ol>
-<hr>
+<% cache("breadcrumb_for_#{tag}") do %>
+    <ol class="breadcrumb">
+    <li><i class="fa fa-<%= tag_icon(tag_type) %>"></i><a href="<%= browse_path %>">Browse</a></li>
+    <li></i><a href="/<%= tag_type %>s"><%= tag_type.titleize.pluralize %></a></li>
+    <li><a href="<%= "/#{tag_type}/#{tag}" %>"><%= tag.titleize %></a></li>
+    </ol>
+    <hr>
+<% end %>
