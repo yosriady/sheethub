@@ -9,7 +9,7 @@ keywords @sheet.cached_joined_tags
     <div class="row">
         <div id="sheet-header" class="col-xs-8">
             <% if @sheet.privately_visible? %>
-                <strong><i class="fa fa-eye-slash"></i> PRIVATE</strong>
+                <strong><em class="fa fa-eye-slash"></em> PRIVATE</strong>
             <% end %>
 
             <h1><%= link_to @sheet.title, sheet_path(@sheet) %></h1>
@@ -41,7 +41,7 @@ keywords @sheet.cached_joined_tags
                 <%= render 'layouts/facebook_widget' %>
             </div>
 
-            <p class="bg-info"><i class="fa fa-smile-o"></i> Hey there! Please respect copyright and be nice to other users. More on <%= link_to "Community Guidelines", community_guidelines_path %>. </p>
+            <p class="bg-info"><em class="fa fa-smile-o"></em> Hey there! Please respect copyright and be nice to other users. More on <%= link_to "Community Guidelines", community_guidelines_path %>. </p>
             <%= render 'flag_sheet_button', sheet: @sheet %>
         </div>
     </div>

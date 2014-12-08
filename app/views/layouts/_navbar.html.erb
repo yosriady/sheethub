@@ -7,8 +7,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<%= browse_path =%>"><i class="fa fa-picture-o"></i> Browse</a></li>
-        <li><a href="<%= sheet_upload_path =%>"><i class="fa fa-cloud-upload"></i> Upload</a></li>
+        <li><a href="<%= browse_path =%>"><em class="fa fa-picture-o"></em> Browse</a></li>
+        <li><a href="<%= sheet_upload_path =%>"><em class="fa fa-cloud-upload"></em> Upload</a></li>
 
       <% if user_signed_in? %>
         <%= render 'layouts/user_dropdown' %>
@@ -18,11 +18,11 @@
       <% end %>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><em class="fa fa-bars"></em></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="<%= faq_path %>"><i class="fa fa-question-circle"></i> Help</a></li>
-            <li><a href="<%= community_guidelines_path %>"><i class="fa fa-smile-o"></i> Guidelines</a></li>
-            <li><%= link_to terms_path do %><i class="fa fa-legal"></i> Terms of Service<% end %></li>
+            <li><a href="<%= faq_path %>"><em class="fa fa-question-circle"></em> Help</a></li>
+            <li><a href="<%= community_guidelines_path %>"><em class="fa fa-smile-o"></em> Guidelines</a></li>
+            <li><%= link_to terms_path do %><em class="fa fa-legal"></em> Terms of Service<% end %></li>
           </ul>
         </li>
       </ul>

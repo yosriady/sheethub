@@ -4,7 +4,7 @@
     <span class="fa fa-eye-slash pull-right"></span>
   <% end %>
   <% unless sheet.cached_votes_up.zero? %>
-  <span class="pull-right sheet-star"><%= sheet.cached_votes_up %> <i class="fa fa-star-o"></i></span>
+  <span class="pull-right sheet-star"><%= sheet.cached_votes_up %> <em class="fa fa-star-o"></em></span>
   <% end %>
   <p class="sheet-instruments"><%= sheet.instruments.join(", ") %></p>
   <h3><%= sheet.title %></h3>

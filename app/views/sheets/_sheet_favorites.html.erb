@@ -5,6 +5,6 @@
             <%= image_tag(vote.voter.avatar_url, class: "small-avatar", data: { toggle: 'tooltip', placement: 'top' }, title:vote.voter.display_name) %>
         </a>
       <% end %>
-      <a href="<%= favorites_sheet_path(sheet) %>" class="bg-info" style="padding: 5px 15px;" data-toggle="tooltip" data-placement="top" title="View All <%= sheet.cached_votes_up %> Fans"><i class="fa fa-ellipsis-h"></i></a>
+      <a href="<%= favorites_sheet_path(sheet) %>" class="bg-info" style="padding: 5px 15px;" data-toggle="tooltip" data-placement="top" title="View All <%= sheet.cached_votes_up %> Fans"><em class="fa fa-ellipsis-h"></em></a>
 </li>
 <% end %>

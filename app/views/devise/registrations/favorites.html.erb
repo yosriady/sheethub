@@ -16,7 +16,7 @@
         <% if @favorites.any? %>
           <%= render 'favorites', favorites: @favorites %>
         <% else %>
-          <h2 class="text-center"><i class="fa fa-eye-slash"></i></h2>
+          <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
           <% if @user == current_user %>
             <h2 class="text-center">You have no favorites.</h2>
             <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-picture"></span> Browse</a>

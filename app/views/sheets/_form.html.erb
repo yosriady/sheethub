@@ -9,7 +9,7 @@
   <% end %>
 
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
-  <%= f.label :license %> <a href="<%= faq_path %>#licenses" target="blank"><i class="fa fa-question-circle"></i></a>
+  <%= f.label :license %> <a href="<%= faq_path %>#licenses" target="blank"><em class="fa fa-question-circle"></em></a>
   <%= f.input_field :license, :as => :select, :collection => Sheet.licenses.keys %>
 
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, external video links. Adding Youtube, Vimeo, and Soundcloud links will automagically generate their respective embeds." %>
@@ -36,14 +36,14 @@
   <br>
   <%= f.input_field :source_list, collection: sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
-  <%= f.label :pdf %> <a href="<%= faq_path %>#sheet-requirements" target="blank"><i class="fa fa-question-circle"></i></a>
-  <p class="bg-warning"><i class="fa fa-info-circle"></i> Max 20MB filesize</p>
+  <%= f.label :pdf %> <a href="<%= faq_path %>#sheet-requirements" target="blank"><em class="fa fa-question-circle"></em></a>
+  <p class="bg-warning"><em class="fa fa-info-circle"></em> Max 20MB filesize</p>
   <% if params[:action] == "edit" && sheet.pdf.present? %>
   <ul id="sheet-files">
     <li>
         <a href="<%= download_sheet_path(sheet) %>">
             <div class="sheet-file">
-            <p><i class="fa fa-download"></i> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
+            <p><em class="fa fa-download"></em> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
             </div>
         </a>
     </li>
@@ -56,7 +56,7 @@
   <label>
     <%= f.input_field :enable_pdf_stamping, inline_label: "Stamp PDF with the buyer's info" %>
   </label>
-  <a href="<%= faq_path %>#what-pdf-stamping" class="pull-right" target="_blank"><i class="fa fa-question-circle"></i></a>
+  <a href="<%= faq_path %>#what-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
   </div>
 
   <%= f.button :submit, class: "btn btn-success btn-lg btn-block"%>

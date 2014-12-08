@@ -1,7 +1,7 @@
 <ul class="list-group pro-plan">
   <li class="list-group-item">
     <div class="pricing-box">
-        <h1><i class="pull-right fa fa-certificate"></i></h1>
+        <h1><em class="pull-right fa fa-certificate"></em></h1>
         <h1>Pro</h1>
         <h4>For teachers and professionals</h4>
     </div>
@@ -9,14 +9,14 @@
   <% unless nobutton || (current_user && (current_user.membership_type == "pro")) %>
   <li class="list-group-item well">
     <a href="<%= subscriptions_purchase_path(:pro) %>">
-        <button type="button" class="btn btn-block btn-success"><i class="fa fa-star"></i> Upgrade to Pro</button>
+        <button type="button" class="btn btn-block btn-success"><em class="fa fa-star"></em> Upgrade to Pro</button>
     </a>
   </li>
   <% end %>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Upload unlimited commercial sheets on SheetHub"><strong>Unlimited</strong> Uploads</li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Upload up to 250 free sheets on SheetHub"><strong>250</strong> Free Sheets <span class="pro badge">PRO</span></li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Earn up to 85% per transaction!">Earn money for your sheet music <span class="pro badge">PRO</span></li>
-  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Enabling PDF Stamping will stamp the buyer's name and email address on their PDF download"> PDF Stamping <a href="<%= faq_path %>#what-pdf-stamping" class="pull-right" target="_blank"><i class="fa fa-question-circle"></i></a></li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Enabling PDF Stamping will stamp the buyer's name and email address on their PDF download"> PDF Stamping <a href="<%= faq_path %>#what-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a></li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="View detailed sales and earnings statistics">Sales Dashboard</li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="We let your fans find your music on search engines by optimizing headings, titles and meta tags">Search Engine Optimized</li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Even faster replies to email responses"> VIP Support <span class="pro badge">PRO</span></li>
@@ -31,7 +31,7 @@
   <% unless nobutton || (current_user && (current_user.membership_type == "pro")) %>
   <li class="list-group-item well">
     <a href="<%= subscriptions_purchase_path(:pro) %>">
-        <button type="button" class="btn btn-block btn-success"><i class="fa fa-star"></i> Upgrade to Pro</button>
+        <button type="button" class="btn btn-block btn-success"><em class="fa fa-star"></em> Upgrade to Pro</button>
     </a>
   </li>
   <% end %>

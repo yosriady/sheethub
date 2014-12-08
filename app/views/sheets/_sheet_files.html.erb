@@ -4,14 +4,14 @@
 <li>
     <a href="<%= download_sheet_path(sheet) %>" title="Last updated on <%= sheet.pdf_updated_at.strftime('%e %b %Y') %>" data-no-turbolink='true' data-toggle='tooltip' data-placement='top'>
         <div class="sheet-file">
-        <p><i class="fa fa-download"></i> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
+        <p><em class="fa fa-download"></em> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
         </div>
     </a>
 </li>
 <% else %>
     <li>
         <div class="sheet-file-missing bg-danger">
-            <p><i class="fa fa-eye-slash"></i> No PDF File Found.</p>
+            <p><em class="fa fa-eye-slash"></em> No PDF File Found.</p>
         </div>
     </li>
 <% end %>

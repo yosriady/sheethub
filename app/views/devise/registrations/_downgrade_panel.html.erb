@@ -10,10 +10,10 @@
   </div>
   <div id="downgrade" class="panel-collapse collapse" role="tabpanel">
     <div class="panel-body">
-        <p class="bg-danger"><i class="fa fa-info-circle"></i> You may need to delete some free and/or private sheets before downgrading to a lower plan. </p>
-        <p class="bg-danger"><i class="fa fa-info-circle"></i> You will lose access to your current <%= user.membership_type.titleize %> membership features. </p>
+        <p class="bg-danger"><em class="fa fa-info-circle"></em> You may need to delete some free and/or private sheets before downgrading to a lower plan. </p>
+        <p class="bg-danger"><em class="fa fa-info-circle"></em> You will lose access to your current <%= user.membership_type.titleize %> membership features. </p>
 
-        <a href="<%= subscriptions_downgrade_path(:basic) %>"><button type="button" class="btn btn-default"><i class="fa fa-frown-o"></i> Downgrade to Basic</button></a>
+        <a href="<%= subscriptions_downgrade_path(:basic) %>"><button type="button" class="btn btn-default"><em class="fa fa-frown-o"></em> Downgrade to Basic</button></a>
     </div>
   </div>
 </div>

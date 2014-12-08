@@ -1,5 +1,5 @@
 <% if orders.any? %>
-    <p class="bg-info"><i class="fa fa-thumbs-up"></i> Thank you for your purchase! Enjoy <strong>Unlimited Access</strong> and future updates forever.</p>
+    <p class="bg-info"><em class="fa fa-thumbs-up"></em> Thank you for your purchase! Enjoy <strong>Unlimited Access</strong> and future updates forever.</p>
 <% end %>
 
 <% if orders.each do |order| %>
@@ -19,6 +19,6 @@
     <%= paginate orders %>
   </div>
 <% end.empty? %>
-  <h2 class="text-center"><i class="fa fa-eye-slash"></i> You have not purchased any sheets.</h2>
+  <h2 class="text-center"><em class="fa fa-eye-slash"></em> You have not purchased any sheets.</h2>
   <a href="<%= root_path %>" class="btn btn-success btn-sleek center-block"><span class="fa fa-picture"></span> Browse</a>
 <% end %>

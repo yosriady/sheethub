@@ -11,7 +11,7 @@ keywords %w(upgrade pro plus premium)
     </div>
 
     <% if current_user %>
-    <p class="bg-info"><i class="fa fa-info-circle"></i> You are currently on the <em><%= current_user.membership_type.titleize %></em> plan. <% unless (current_user && (current_user.membership_type == "plus" || current_user.membership_type == "pro")) %><a href="<%= subscriptions_purchase_path(:pro) %>">Upgrade</a> now to Plus or Pro to enjoy unlimited free uploads and extra features.<% end %></p>
+    <p class="bg-info"><em class="fa fa-info-circle"></em> You are currently on the <em><%= current_user.membership_type.titleize %></em> plan. <% unless (current_user && (current_user.membership_type == "plus" || current_user.membership_type == "pro")) %><a href="<%= subscriptions_purchase_path(:pro) %>">Upgrade</a> now to Plus or Pro to enjoy unlimited free uploads and extra features.<% end %></p>
     <% end %>
 
     <div class="col-xs-4">

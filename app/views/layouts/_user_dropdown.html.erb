@@ -1,19 +1,19 @@
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.username %></a>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><em class="fa fa-user"></em> <%= current_user.username %></a>
   <ul class="dropdown-menu" role="menu">
 
   <% if current_user.finished_registration? %>
-    <li><a href="<%= user_settings_path %>"><i class="fa fa-cog"></i> Settings</a></li>
-    <li><a href="<%= user_library_path %>"><i class="fa fa-shopping-cart"></i> My Library</a></li>
+    <li><a href="<%= user_settings_path %>"><em class="fa fa-cog"></em> Settings</a></li>
+    <li><a href="<%= user_library_path %>"><em class="fa fa-shopping-cart"></em> My Library</a></li>
     <hr>
-    <li><a href="<%= user_profile_path(current_user.username) %>"><i class="fa fa-user"></i> Profile</a></li>
-    <% if current_user.has_published %><li><a href="<%= user_dashboard_path %>"><i class="fa fa-inbox"></i> Dashboard</a></li><% end %>
-    <% if current_user.has_published %><li><a href="<%= user_sales_path %>"><i class="fa fa-line-chart"></i> Sales</a></li><% end %>
-    <% if current_user.pro? %><li><a href="<%= user_private_sheets_path %>"><i class="fa fa-eye-slash"></i> My Private Sheets</a></li><% end %>
-    <li><a href="<%= user_trash_path %>"><i class="fa fa-trash"></i> Trash Bin</a></li>
+    <li><a href="<%= user_profile_path(current_user.username) %>"><em class="fa fa-user"></em> Profile</a></li>
+    <% if current_user.has_published %><li><a href="<%= user_dashboard_path %>"><em class="fa fa-inbox"></em> Dashboard</a></li><% end %>
+    <% if current_user.has_published %><li><a href="<%= user_sales_path %>"><em class="fa fa-line-chart"></em> Sales</a></li><% end %>
+    <% if current_user.pro? %><li><a href="<%= user_private_sheets_path %>"><em class="fa fa-eye-slash"></em> My Private Sheets</a></li><% end %>
+    <li><a href="<%= user_trash_path %>"><em class="fa fa-trash"></em> Trash Bin</a></li>
   <% end %>
     <hr>
-    <!-- <li><a href="<%= upgrade_path %>" class="bg-success"><i class="fa fa-star"></i> Upgrade</a></li> -->
-    <li><%= link_to destroy_user_session_path, :method => :delete do %><i class="fa fa-sign-out"></i> Log out<% end %></li>
+    <!-- <li><a href="<%= upgrade_path %>" class="bg-success"><em class="fa fa-star"></em> Upgrade</a></li> -->
+    <li><%= link_to destroy_user_session_path, :method => :delete do %><em class="fa fa-sign-out"></em> Log out<% end %></li>
   </ul>
 </li>
