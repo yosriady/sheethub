@@ -62,7 +62,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.update_with_password(password_params)
       sign_in @user, :bypass => true
       flash[:notice] = "Password changed successfully"
-      redirect_to edit_password_settings_path
+      redirect_to user_password_settings_path
     else
       render "edit_password"
     end
