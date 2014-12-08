@@ -50,7 +50,7 @@
     to {background-position:520px -520px;}
 }
 
-#animated-banner {
+.animated-banner {
     height: 150px;
     background: url(image_path('bg.svg'));
     border-bottom: 1px rgba(0,0,0,0.1) solid;
@@ -79,7 +79,7 @@
 
 }
 
-#animated-banner.footer-banner {
+.animated-banner.footer-banner {
     height: 200px;
     border-top: 1px solid #ddd;
 

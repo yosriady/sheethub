@@ -4,7 +4,7 @@ description "SheetHub Help and Frequently Asked Questions"
 keywords %w(help faq support frequently/ asked/ questions)
 %>
 
-<div id="animated-banner">
+<div class="animated-banner">
     <h1>SheetHub Help</h1>
     <h2>Frequently Asked Questions</h2>
 </div>
@@ -25,7 +25,7 @@ keywords %w(help faq support frequently/ asked/ questions)
      <%= render "faq_item", id:"sheet-metadata", question: "What other information can I submit with my sheet music?", answer: "Submitting additional information about your sheet music - instruments, composers, genres, and sources - will help other users find and ultimately purchase your sheet music. SheetHub also uses this information in our internal recommendations system. The more detailed information you provide, the more likely that your sheet music appears in recommended results. "%>
      <%= render "faq_item", id:"sheet-additional-files", question: "Can I add additional files together with my PDF?", answer: "<strong>Yes!</strong> You can add up to 5 supporting files such as audio files and music notation software specific files through your sheet's edit page. Each file must be less than 20MB in size. "%>
       <%= render "faq_item", id:"upload-limit", question: "How many sheets can I upload?", answer: "You get unlimited uploads for commercial sheets. There is a soft limit of 25 free (non-commercial) sheets. The limit is in place to prevent abuse. If you wish to have more, #{link_to 'Upgrade', upgrade_path} whenever you are ready." %>
-      <%= render "faq_item", id:"howto-embed-links", question: "How can I link to my Youtube/Vimeo/Soundcloud?", answer: "<p>In your sheet description, you can add links to your hosted videos and SheetHub will automagically generate the video player for you. See an example below. Youtube, Vimeo, and Soundcloud embeds are supported. For example: </p> <img src='http://i.imgur.com/NoYhHmC.png' /><p>The above description becomes:</p><img src='http://i.imgur.com/ijjnhv6.png' />" %>
+      <%= render "faq_item", id:"howto-embed-links", question: "How can I link to my Youtube/Vimeo/Soundcloud?", answer: "<p>In your sheet description, you can add links to your hosted videos and SheetHub will automagically generate the video player for you. See an example below. Youtube, Vimeo, and Soundcloud embeds are supported. For example: </p> <img src='http://i.imgur.com/NoYhHmC.png' alt='Sheet Description Box' /><p>The above description becomes:</p><img src='http://i.imgur.com/ijjnhv6.png' alt='Automagically generated media players' />" %>
 
   <hr>
   <h4><i class="fa fa-shopping-cart"></i> Purchases</h4>
@@ -34,11 +34,11 @@ keywords %w(help faq support frequently/ asked/ questions)
 
   <h4><i class="fa fa-line-chart"></i> Payments, Sales, and Earnings</h4>
   <%= render "faq_item", id:"payment-flow", question: "How does SheetHub handle payments?", answer: "<p>SheetHub uses PayPal to process payments. PayPal is available in multiple countries and currencies, and accepts multiple modes of payment. Let's briefly walk through a buying user's purchasing flow. From your sheet's page, users will see a Buy Now button:</p>
-    <img src='http://i.imgur.com/BazYJiN.png' />
+    <img src='http://i.imgur.com/BazYJiN.png' alt='Buy Now button' />
     <p>Which will open a modal overlay:</p>
-    <img src='http://i.imgur.com/RUCReKW.png' />
+    <img src='http://i.imgur.com/RUCReKW.png' alt='Buy Now modal overlay' />
     <p>Clicking checkout will bring them to Paypal to authorize the purchase:</p>
-    <img src='http://i.imgur.com/giJKV9C.png' style='width: 600px;'/>
+    <img src='http://i.imgur.com/giJKV9C.png' style='width: 600px;' alt='Paypal authorization'/>
     <p>Once the user has completed the authorization process, you will receive your earnings directly to your Paypal account. The user will, upon a successful purchase, be able to download the files you've uploaded for your sheet through SheetHub. Users cannot share their download links, as they are private URLs. PDF Downloads may also be individually stamped with the user's name and email to discourage unauthorized sharing. </p>
   "%>
   <%= render "faq_item", id:"payment-security", question: "Do you store my credit card information?", answer: "<strong>No credit card information is stored on our server!</strong> We use PayPal, one of the most secure and reputable payment processors available. PayPal automatically encrypts your confidential information in transit using the Secure Sockets Layer protocol (SSL) with an encryption key length of 128-bits (the highest level commercially available.) Once your information reaches the PayPal site, it resides on a server that is heavily guarded both physically and electronically. PayPal servers sit behind an electronic firewall and are not directly connected to the internet, so your private information is available only to authorized computers. Visit <a href='https://www.paypal.com/sg/webapps/mpp/paypal-safety-and-security'>Paypal Security Center</a> for more details. "%>
@@ -96,7 +96,7 @@ The Public Domain Mark is recommended for works that are free of known copyright
   <hr>
   <h4><i class="fa fa-certificate"></i> PDF Stamping</h4>
     <%= render "faq_item", id:"what-pdf-stamping", question: "What does PDF Stamping look like?", answer: "<p>It looks like this:</p>
-<img src='http://i.imgur.com/vHm8dMh.png' style='width: 100%'/> <p>Enabling PDF Stamping will stamp the buyer's name and email address on their PDF download. It serves as a disincentive for customers who might abuse their ownership of your work.</p><p>PDF Stamps are only applied for commercial sheets.</p>"%>
+<img src='http://i.imgur.com/vHm8dMh.png' style='width: 100%' alt='PDF Stamping sample'/> <p>Enabling PDF Stamping will stamp the buyer's name and email address on their PDF download. It serves as a disincentive for customers who might abuse their ownership of your work.</p><p>PDF Stamps are only applied for commercial sheets.</p>"%>
 
   <hr>
   <h4><i class="fa fa-info-circle"></i> Miscellaneous</h4>
