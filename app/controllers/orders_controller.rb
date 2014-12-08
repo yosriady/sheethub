@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
     end
 
     def invalid_account_details_error?(pay_response)
-      pay_response.error.first.errorId == 520009
+      pay_response.error.first.errorId == 580001
     end
 
     def validate_flagged
