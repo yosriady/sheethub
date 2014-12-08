@@ -51,7 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_membership
-    subscription = current_user.subscription
+    subscription = current_user.premium_membership
     @payment_details = subscription.get_payment_details if subscription.present?
   end
 

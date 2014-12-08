@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     Subscription.find_by(user:self, membership_type:Subscription.membership_types[membership_type], status: Subscription.statuses[:completed]).present?
   end
 
+  def premium_membership
+    Subscription.find_by(user:self, status: Subscription.statuses[:completed])
+  end
+
   def premium?
     plus? || pro?
   end
