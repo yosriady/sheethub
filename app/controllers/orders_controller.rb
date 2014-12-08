@@ -21,20 +21,20 @@ class OrdersController < ApplicationController
     # Start Adaptive Payments
     sheet = Sheet.friendly.find(params[:sheet])
     payment_request = build_adaptive_payment_request(sheet) # For pay what you want, update sheet to Order since it's not sheet.price but order.amount
-    @pay_response = get_adaptive_payment_response(payment_request)
-    if @pay_response.success?
-      redirect_url = build_redirect_url(@pay_response.payKey)
+    payment_response = get_adaptive_payment_response(payment_request)
+    if payment_response.success?
+      redirect_url = build_redirect_url(payment_response.payKey)
       @order.update(tracking_id: payment_request.trackingId,
-                    payer_id: @pay_response.payKey,
+                    payer_id: payment_response.payKey,
                     amount_cents: sheet.price_cents) #TODO: For pay what you want, update price_cents to user_specified_cents retrieved from form
       redirect_to redirect_url
     else
-      Rails.logger.info "Paypal Error #{@pay_response.error.first.errorId}: #{@pay_response.error.first.message}"
-      if invalid_account_details_error?(@pay_response)
+      Rails.logger.info "Paypal Order Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
+      if invalid_account_details_error?(payment_response)
         OrderMailer.purchase_failure_email(@order).deliver
         flash[:error] = PURCHASE_INVALID_PAYPAL_EMAIL_MESSAGE
       else
-        flash[:error] = "We could not process your purchase. #{@pay_response.error.first.message}"
+        flash[:error] = "We could not process your purchase. #{payment_response.error.first.message}"
       end
       redirect_to sheet_path(sheet)
     end

@@ -11,7 +11,7 @@
     <hr>
     <strong>Payment Info</strong>
     <p>Membership: <%= @membership_type %></p>
-    <p>Amount: US$<%= number_to_currency(Subscription.subscription_amount(@membership_type.downcase)) %> / month</p>
+    <p>Amount: <%= number_to_currency(Subscription.subscription_amount(@membership_type.downcase)) %> / month</p>
     <p>Tracking Id: <%= @subscription.tracking_id %></p>
     <hr>
     <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>

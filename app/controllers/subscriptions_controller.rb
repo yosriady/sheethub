@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
   ERROR_UPGRADE_PURCHASE_MESSAGE = "Upgrade purchase error. Please contact support."
 
   before_action :authenticate_user!
-  before_action :validate_membership, only: [:purchase, :checkout, :cancel, :suspend, :reactivate]
+  before_action :validate_membership, only: [:purchase, :checkout, :suspend, :reactivate]
   before_action :validate_existing_membership, only: [:purchase, :checkout, :downgrade]
 
   def purchase
@@ -15,10 +15,12 @@ class SubscriptionsController < ApplicationController
     payment_response = build_payment_response(subscriptions_params[:membership])
 
     if payment_response.ack == "Success"
-      Subscription.create(tracking_id: payment_response.token, membership_type: subscriptions_params[:membership], user_id:current_user.id)
+      # Finds previous in-progress subscription if exists
+      @subscription = Subscription.find_or_initialize_by(membership_type: Subscription.membership_types[subscriptions_params[:membership]], user_id:current_user.id, status: Subscription.statuses[:processing])
+      @subscription.update(tracking_id: payment_response.token)
       redirect_to payment_response.redirect_uri
     else
-      # TODO: Log errors
+      Rails.logger.info "Paypal Subscription Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
       redirect_to upgrade_path, notice: ERROR_UPGRADE_PURCHASE_MESSAGE
     end
   end
@@ -26,8 +28,8 @@ class SubscriptionsController < ApplicationController
   def success
     @subscription = finalize_new_subscription(request)
 
-    # Cancel previous subscription if exists
-    user_subscriptions = Subscription.where(user:current_user).order(:updated_at)
+    # Cancels previous subscription if exists
+    user_subscriptions = @subscription.user.completed_subscriptions
     has_previous_subscription = (user_subscriptions.size > 1)
     if has_previous_subscription
       user_subscriptions.first.destroy
@@ -36,9 +38,12 @@ class SubscriptionsController < ApplicationController
     render action: 'thank_you', notice: SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE
   end
 
+  def cancel
+    redirect_to upgrade_path, notice: CANCEL_UPGRADE_PURCHASE_MESSAGE
+  end
+
   def downgrade
     if current_user.hit_free_sheet_quota_for_basic?
-      binding.pry
       flash[:error] = "You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets."
       redirect_to user_membership_settings_path
     else

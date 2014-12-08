@@ -32,13 +32,13 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  def get_payment_details
-    response = Subscription.paypal_request.subscription(profile_id)
-    response.recurring
-  end
-
   def cancel
     response = Subscription.paypal_request.renew!(profile_id, :Cancel)
+    user.update_membership_to("basic") if user.completed_subscriptions.empty?
+  end
+
+  def get_payment_details
+    Subscription.get_payment_details(profile_id)
   end
 
   def self.get_payment_details(profile_id)

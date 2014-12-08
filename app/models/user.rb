@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   MISSING_AVATAR_URL = "default_avatar.png"
   EXPIRATION_TIME = 600
   BASIC_FREE_SHEET_QUOTA = 25
-  PLUS_FREE_SHEET_QUOTA = 60
+  PLUS_FREE_SHEET_QUOTA = 75
   PRO_FREE_SHEET_QUOTA = 250
   BASIC_ROYALTY_PERCENTAGE = 0.80
   PLUS_ROYALTY_PERCENTAGE = 0.80
@@ -62,8 +62,12 @@ class User < ActiveRecord::Base
     Subscription.find_by(user:self, membership_type:Subscription.membership_types[membership_type], status: Subscription.statuses[:completed]).present?
   end
 
-  def premium_membership
+  def premium_subscription
     Subscription.find_by(user:self, status: Subscription.statuses[:completed])
+  end
+
+  def completed_subscriptions
+    Subscription.where(user:self, status: Subscription.statuses[:completed]).order(:updated_at)
   end
 
   def premium?
