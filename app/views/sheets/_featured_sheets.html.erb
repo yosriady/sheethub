@@ -1,10 +1,8 @@
-<% cache("featured_sheets", :expires_in => 1.day) do %>
-    <div id="sheets">
-      <% if sheets.each do |sheet| %>
-      <%= render 'sheets/featured_sheet', sheet: sheet %>
-      <% end.empty? %>
-      <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
-      <h2 class="text-center">No Sheets yet!</h2>
-      <% end %>
-    </div>
-<% end %>
+<div id="sheets">
+  <% if sheets.each do |sheet| %>
+  <%= render 'sheets/featured_sheet', sheet: sheet %>
+  <% end.empty? %>
+  <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
+  <h2 class="text-center">No Sheets yet!</h2>
+  <% end %>
+</div>
