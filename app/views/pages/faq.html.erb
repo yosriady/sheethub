@@ -13,10 +13,10 @@ keywords %w(help faq support frequently/ asked/ questions)
 <div class="col-xs-8 white-container">
 <div class="panel-group" role="tablist" aria-multiselectable="true">
   <h4><i class="fa fa-book"></i> General</h4>
-  <%= render "faq_item", id:"sheethub-benefits", question: "What does SheetHub give me?", answer: "<p>SheetHub gives you the ability to easily publish and share  your sheet music, tablature, and score online. You can easily create a page where your fans can view and purchase your works. Signing up also gives you an online profile that enables people to see and purchase all the works you've published on SheetHub. </p><p>All files are securely hosted on SheetHub so you don't need to worry about building a website or storing your files anywhere. Usage information is collected and displayed to you, such as how many times your music are being viewed, downloaded, and purchased.</p><p>SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on your musical pursuits. No setup fees, no monthly fees, no hosting fees to worry about. </p> " %>
+  <%= render "faq_item", id:"sheethub-benefits", question: "What does SheetHub give me?", answer: "<p>SheetHub gives you the ability to easily publish and share  your sheet music, tablature, and score online. You can easily create a page where your fans can view and purchase your works. Signing up also gives you an online profile that enables people to see and purchase all the works you've published on SheetHub. </p><p>All files are securely hosted on SheetHub so you don't need to worry about building a website or storing your files anywhere. SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on your creative pursuits! No setup fees, no monthly fees, no hosting fees to worry about!</p><p>#{link_to 'Sign Up', new_registration_path(User)} today. </p> " %>
   <%= render "faq_item", id:"sheethub-costs", question: "How much does SheetHub cost?", answer: "<p> You are free to #{link_to 'Sign Up', new_registration_path(User)} and upload unlimited commercial sheets without ever having to pay anything.</p><p> We only make money when you do. When someone buys your sheet, you receive up to 80% of the total amount. The remaining 20% goes to SheetHub to pay for hosting fees, server fees, and to fund new features. You are paid instantly and directly to your PayPal account the moment a user completes a purchase. SheetHub does not hold any of your earnings. </p>
     </p>" %>
-  <%= render "faq_item", id:"howto-upload", question: "How do I upload my music on SheetHub?", answer: "After signing up, <a href='#{sheet_upload_path}'>Upload</a> to start publishing! You will need at least a printable PDF version of your sheet music to start." %>
+  <%= render "faq_item", id:"howto-upload", question: "How do I upload my music on SheetHub?", answer: "<a href='#{new_user_registration_path }'>Sign Up</a> and <a href='#{sheet_upload_path}'>Upload</a> to start publishing! You will need at least a printable PDF version of your sheet music to start." %>
   <hr>
 
   <h4><i class="fa fa-music"></i> Sheet Music</h4>
@@ -100,7 +100,8 @@ The Public Domain Mark is recommended for works that are free of known copyright
 
   <hr>
   <h4><i class="fa fa-info-circle"></i> Miscellaneous</h4>
-    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to "This person.", "https://github.com/Leventhan"} I’m primarily a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for written music and have been disappointed so far, so I decided to try my hand at building one. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's continuous development. " %>
+    <%= render "faq_item", id:"howto-help", question: "I want to help support SheetHub!", answer: "Let your friends know about us! And be sure to leave your ideas, comments, and suggestions on our #{link_to "Community Hub", "https://admin.userreport.com/Websites/CrowdIntelligenceExample.aspx?WebsiteId=78c6cc74-05f2-4833-804c-c7acf9e3c9a7#ci/ideas"}. Help decide what we build next. You shape the future of SheetHub!" %>
+    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to "This person.", "https://github.com/Leventhan"} I’m primarily a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for written music and have been disappointed so far, so I decided to try my hand at building one. <a href='mailto:support@sheethub.co'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's continuous development. " %>
 </div>
 
 
@@ -109,7 +110,7 @@ The Public Domain Mark is recommended for works that are free of known copyright
     <div class="bg-info blurb"><strong><i class="fa fa-info-circle"></i> Alpha</strong> <p>We are currently in public alpha, which means things may not work perfectly – yet. If you encounter something that looks broken, please let us know!</p></div>
     <hr>
     <div class="well">
-        <a href="mailto:yosriady@gmail.com" class="btn btn-block btn-default"><i class="fa fa-paper-plane-o"></i> Contact Us</a>
+        <a href="mailto:support@sheethub.co" class="btn btn-block btn-default"><i class="fa fa-paper-plane-o"></i> Contact Us</a>
     </div>
     <div class="panel panel-default">
         <%= render 'layouts/twitter_widget' %>

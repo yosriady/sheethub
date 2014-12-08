@@ -8,7 +8,7 @@
             <span class="sheet-buy-now-text text-center"><p><i class="fa fa-smile-o"></i> FREE</p></span>
         <% elsif current_user.nil? %>
             <a href="<%= new_user_session_path %>"><button type="button" class="btn btn-success col-xs-8"><i class="fa fa-shopping-cart"></i> Buy Now</button></a>
-            <span class="sheet-price col-xs-4"><p><%= "$#{sheet.price}" %></p></span>
+            <span class="sheet-price col-xs-4"><p><%= number_to_currency(sheet.price) %></p></span>
         <% else %>
             <a data-toggle="modal" data-target="#buyNowModal"><button type="button" class="btn btn-success col-xs-8"><i class="fa fa-shopping-cart"></i> Buy Now</button></a>
             <span class="sheet-price col-xs-4"><p><%= number_to_currency(sheet.price) %></p></span>
