@@ -12,6 +12,9 @@ gem 'passenger'
 # Memcached
 gem 'dalli'
 
+# Memory profiling
+gem 'oink'
+
 # Application Monitoring
 gem 'newrelic_rpm'
 gem 'opbeat'
