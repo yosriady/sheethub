@@ -33,7 +33,9 @@ class Subscription < ActiveRecord::Base
   end
 
   def cancel
-    response = Subscription.paypal_request.renew!(profile_id, :Cancel)
+    unless get_payment_details.status == "Cancelled"
+      Subscription.paypal_request.renew!(profile_id, :Cancel)
+    end
     user.update_membership_to("basic") if user.completed_subscriptions.empty?
   end
 
