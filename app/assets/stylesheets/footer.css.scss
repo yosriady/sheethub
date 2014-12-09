@@ -3,6 +3,7 @@ footer {
         color: #777;
         font-family: 'Roboto Slab', serif;
         font-size: 24px;
+        margin-right: 5px;
     }
 
     .copyright {
@@ -34,4 +35,13 @@ footer {
             color: #ddd;
         }
      }
+
+    .social-link {
+        display:inline-block;
+        font-size: 32px;
+        color: #555;
+        &:hover, &:focus {
+            color: #777;
+        }
+    }
 }

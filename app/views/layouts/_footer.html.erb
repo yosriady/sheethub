@@ -1,18 +1,23 @@
 <footer class="panel-footer">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-10">
                 <a class="brand" href="<%= root_path %>" >SheetHub</a>
                 <p class="copyright">An open platform built for musicians</p>
                 <ul class="list-inline">
-                    <li><%= link_to "Help", faq_path %></li>
-                    <li> · </li>
                     <li><%= link_to "Guidelines", community_guidelines_path %></li>
+                    <li> · </li>
+                    <li><%= link_to "Help", faq_path %></li>
                     <li> · </li>
                     <li><%= link_to "Terms", terms_path %></li>
                     <li> · </li>
                     <li><a href="mailto:support@sheethub.co">Contact</a></li>
                 </ul>
+            </div>
+            <div class="col-xs-2">
+                <a href="https://www.facebook.com/SheetHub" class="social-link"><em class="fa fa-facebook-square"></em></a>
+                <a href="https://twitter.com/SheetHub" class="social-link"><em class="fa fa-twitter-square"></em></a>
+                <a href="https://plus.google.com/+SheethubCommunity" class="social-link"><em class="fa fa-google-plus-square"></em></a>
             </div>
     </div>
     </div>
