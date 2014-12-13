@@ -3,11 +3,11 @@
     <%= render 'sheets/sheet_text', sheet: sheet %>
   </td>
   <td>
-    <%= render 'sheets/sheet_direct_url', sheet: sheet %>
-    <%= render 'sheets/share_buttons', sheet: sheet %>
+    <%= render 'sheets/sheet_files', sheet: sheet %>
   </td>
   <td>
-    <%= render 'sheets/sheet_files', sheet: sheet %>
+    <%= render 'sheets/sheet_direct_url', sheet: sheet %>
+    <%= render 'sheets/share_buttons', sheet: sheet %>
   </td>
   <td>
     <a href="<%= edit_sheet_path(sheet) %>">

@@ -1,24 +1,23 @@
 <% if orders.any? %>
-    <p class="bg-info"><em class="fa fa-thumbs-up"></em> Thank you for your purchase! Enjoy <strong>Unlimited Access</strong> and future updates forever.</p>
-<% end %>
-
-<% if orders.each do |order| %>
+  <p class="bg-info"><em class="fa fa-thumbs-up"></em> Thank you for your purchase! Enjoy <strong>Unlimited Access</strong> and future updates forever.</p>
   <table class="table white-rows">
     <thead>
       <tr class="active">
         <th>Sheet</th>
-        <th>Shareable Link</th>
-        <th>Files</th>
+        <th>Download Files</th>
+        <th>Share</th>
       </tr>
     </thead>
     <tbody>
-        <%= render 'sheets/sheet_library', sheet: order.sheet %>
+    <% orders.each do |order| %>
+      <%= render 'sheets/sheet_library', order: order, sheet: order.sheet %>
+    <% end %>
     </tbody>
   </table>
   <div id="paginator" class="text-center">
     <%= paginate orders %>
   </div>
-<% end.empty? %>
+<% else %>
   <h2 class="text-center"><em class="fa fa-eye-slash"></em> You have not purchased any sheets.</h2>
   <a href="<%= root_path %>" class="btn btn-success btn-sleek center-block"><span class="fa fa-picture"></span> Browse</a>
 <% end %>

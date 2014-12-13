@@ -12,9 +12,6 @@ gem 'passenger'
 # Memcached
 gem 'dalli'
 
-# Memory profiling
-gem 'oink'
-
 # Application Monitoring
 gem 'newrelic_rpm'
 gem 'opbeat'
@@ -98,6 +95,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :production do
   gem 'heroku-deflater'
   gem 'rails_12factor'
+
+  # Memory profiling
+  gem 'oink'
 end
 
 group :development do

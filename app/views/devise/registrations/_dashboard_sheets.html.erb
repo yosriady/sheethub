@@ -1,21 +1,23 @@
-<% if sheets.each do |sheet| %>
+<% if sheets.any? %>
   <table class="table white-rows">
     <thead>
       <tr class="active">
         <th>Sheet</th>
-        <th>Shareable Link</th>
         <th>Files</th>
+        <th>Share</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <%= render 'sheets/sheet_dashboard', sheet: sheet %>
+      <% sheets.each do |sheet| %>
+        <%= render 'sheets/sheet_dashboard', sheet: sheet %>
+      <% end %>
     </tbody>
   </table>
   <div id="paginator" class="text-center">
     <%= paginate sheets %>
   </div>
-<% end.empty? %>
+<% else %>
   <h2 class="text-center"><em class="fa fa-eye-slash"></em> You have no published works</h2>
   <a href="<%= new_sheet_path %>" class="btn btn-success btn-sleek center-block"><span class="fa fa-cloud-upload"></span> Upload</a>
 <% end %>
