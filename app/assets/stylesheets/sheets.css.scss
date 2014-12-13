@@ -85,6 +85,10 @@
                 text-decoration: none;
         }
     }
+
+    a.disabled .sheet-file {
+        background: #eee;
+    }
 }
 
 #sheet-direct-url {
