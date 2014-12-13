@@ -97,7 +97,7 @@ class SubscriptionsController < ApplicationController
 
     def build_payment_response(membership_type)
       payment_request = build_payment_request(subscriptions_params[:membership])
-      payment_response = Subscription.paypal_request.setup(
+      payment_response = paypal_request.setup(
                           payment_request,
                           subscriptions_success_url,
                           subscriptions_cancel_url
@@ -116,6 +116,14 @@ class SubscriptionsController < ApplicationController
         flash[:error] = "You are already a #{current_user.membership_type.titleize} member."
         redirect_to upgrade_path
       end
+    end
+
+    def paypal_request
+      Paypal::Express::Request.new(
+        :username   => Rails.application.secrets.paypal_username,
+        :password   => Rails.application.secrets.paypal_password,
+        :signature  => Rails.application.secrets.paypal_signature
+      )
     end
 
     def subscriptions_params

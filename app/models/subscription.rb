@@ -47,14 +47,4 @@ class Subscription < ActiveRecord::Base
     response = Subscription.paypal_request.subscription(profile_id)
     response.recurring
   end
-
-  def self.paypal_request
-    Paypal::Express::Request.new(
-      :username   => Rails.application.secrets.paypal_username,
-      :password   => Rails.application.secrets.paypal_password,
-      :signature  => Rails.application.secrets.paypal_signature
-    )
-  end
-
-
 end
