@@ -30,12 +30,6 @@
   <br>
   <%= f.input_field :source_list, collection: sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
-  <%= f.label "Price" %>
-  <div class="input-group">
-  <span class="input-group-addon">$</span>
-    <%= f.input_field :price, placeholder: "e.g. 2.99", :value => number_to_currency(f.object.price, unit: "", precision: 2) %>
-  </div>
-
   <hr>
   <%= f.label :pdf %> <a href="<%= faq_path %>#sheet-requirements" target="blank"><em class="fa fa-question-circle"></em></a>
   <% if params[:action] == "edit" && sheet.pdf.present? %>
@@ -52,6 +46,13 @@
   <%= f.file_field :pdf %>
 
   <hr>
+
+  <%= f.label "Price" %>
+  <div class="input-group">
+  <span class="input-group-addon">$</span>
+    <%= f.input_field :price, placeholder: "e.g. 2.99", :value => number_to_currency(f.object.price, unit: "", precision: 2) %>
+  </div>
+
   <div class="checkbox">
   <label>
     <%= f.input_field :enable_pdf_stamping, inline_label: "Stamp PDF with the buyer's info" %>
