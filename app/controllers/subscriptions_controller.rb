@@ -34,7 +34,6 @@ class SubscriptionsController < ApplicationController
     if has_previous_subscription
       user_subscriptions.first.destroy
     end
-
     render action: 'thank_you', notice: SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE
   end
 
@@ -63,7 +62,7 @@ class SubscriptionsController < ApplicationController
       subscription = Subscription.find_by(tracking_id: token)
       payment_request = build_payment_request(subscription.membership_type)
       profile = Paypal::Payment::Recurring.new(
-        :start_date => Time.zone.now,
+        :start_date => Time.now,
         :description => Subscription.billing_agreement_description(subscription.membership_type),
         :auto_bill => 'AddToNextBilling',
         :billing => {
