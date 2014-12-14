@@ -87,6 +87,7 @@ class SheetsController < ApplicationController
 
   # POST /sheets/1/flag
   def flag
+    track('Flag sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     message = params[:flag][:message].present? ? params[:flag][:message] : DEFAULT_FLAG_MESSAGE
     Flag.create(user:current_user, sheet:@sheet, message:message, email:params[:flag][:email])
     redirect_to sheet_path(@sheet), notice: SUCCESS_FLAG_MESSAGE

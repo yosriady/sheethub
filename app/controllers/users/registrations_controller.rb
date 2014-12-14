@@ -18,39 +18,48 @@ class Users::RegistrationsController < Devise::RegistrationsController
       raise ActionController::RoutingError.new('User Not Found')
     end
 
+    track('View profile', {user_id: @user.id, username: @user.username})
     @sheets = @user.public_sheets.page(params[:page]) if @user
   end
 
   def dashboard
+    track('View dashboard')
     @sheets = current_user.sheets.includes(:assets).page(params[:page])
   end
 
   def private_sheets
+    track('View private sheets')
     @private_sheets = current_user.private_sheets.page(params[:page])
   end
 
   def favorites
+    track('View favorites')
     @favorites = @user.votes.includes(:votable).page(params[:page])
   end
 
   def library
+    track('View library')
     @purchases = current_user.purchased_orders.page(params[:page])
   end
 
   def sales
+    track('View sales')
     @aggregated_sales = current_user.aggregated_sales
     @sales_past_month = current_user.sales_past_month
   end
 
   def trash
-     @deleted_sheets = current_user.deleted_sheets
+    track('View trash')
+    @deleted_sheets = current_user.deleted_sheets
   end
 
   # GET /resource/edit
   def edit
+    track('View settings')
   end
 
   def edit_membership
+    track('View membership settings')
     subscription = current_user.premium_subscription
     @payment_details = subscription.get_payment_details if subscription.present?
   end
@@ -97,6 +106,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       update_params[:finished_registration?] = true
       update_params[:sheet_quota] = User::BASIC_FREE_SHEET_QUOTA
       if current_user.update(update_params)
+        track('Finished registration')
         redirect_to user_profile_path(current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
         flash[:error] = current_user.errors.full_messages.to_sentence

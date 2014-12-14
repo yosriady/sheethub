@@ -9,10 +9,11 @@ class AssetsController < ApplicationController
     @asset = sheet.assets.build(asset_params)
     if @asset.valid?
       @asset.save
+      track('Upload sheet asset', {asset_name: @asset.filename, sheet_id: sheet.id, sheet_title: sheet.title})
     else
       s3_key = Asset.parse_s3_key(params[:url])
       delete_s3_object(s3_key)
-      # TOOD: Fix this
+      # TOOD: This error message is not displayed
       flash[:error] = @asset.errors.full_messages.to_sentence
       redirect_to edit_sheet_path(sheet)
     end
@@ -23,6 +24,7 @@ class AssetsController < ApplicationController
     if sheet.user == current_user
       @asset.really_destroy!
       delete_s3_object(@asset.s3_key)
+      track('Delete sheet asset', {asset_name: @asset.filename, sheet_id: sheet.id, sheet_title: sheet.title})
       # TODO: flash messages not displayed, use render "sheets/edit" ?
       flash[:notice] = "File removed succesfully."
     else
@@ -33,6 +35,7 @@ class AssetsController < ApplicationController
 
   def download
     sheet = @asset.sheet
+    track('Download sheet asset', {asset_name: @asset.filename, sheet_id: sheet.id, sheet_title: sheet.title})
     if sheet.free? || sheet.purchased_by?(current_user) || sheet.uploaded_by?(current_user)
       redirect_to @asset.download_url
     else

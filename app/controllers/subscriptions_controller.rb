@@ -9,6 +9,7 @@ class SubscriptionsController < ApplicationController
   before_action :validate_existing_membership, only: [:purchase, :checkout, :downgrade]
 
   def purchase
+    track('Visit subscription purchase page', {membership_type: subscriptions_params[:membership]})
   end
 
   def checkout
@@ -18,6 +19,7 @@ class SubscriptionsController < ApplicationController
       # Finds previous in-progress subscription if exists
       @subscription = Subscription.find_or_initialize_by(membership_type: Subscription.membership_types[subscriptions_params[:membership]], user_id:current_user.id, status: Subscription.statuses[:processing])
       @subscription.update(tracking_id: payment_response.token)
+      track('Redirected to Paypal for subscription purchase', {membership_type: subscriptions_params[:membership], tracking_id: @subscription.tracking_id})
       redirect_to payment_response.redirect_uri
     else
       Rails.logger.info "Paypal Subscription Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
@@ -27,13 +29,13 @@ class SubscriptionsController < ApplicationController
 
   def success
     @subscription = finalize_new_subscription(request)
-
     # Cancels previous subscription if exists
     user_subscriptions = @subscription.user.completed_subscriptions
     has_previous_subscription = (user_subscriptions.size > 1)
     if has_previous_subscription
       user_subscriptions.first.destroy
     end
+    track('Completed subscription purchase', {membership_type: subscriptions_params[:membership], tracking_id: @subscription.tracking_id})
     render action: 'thank_you', notice: SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE
   end
 
@@ -42,6 +44,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def downgrade
+    track('Attempted downgrade')
     if current_user.hit_sheet_quota_for_basic?
       flash[:error] = "You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets."
       redirect_to user_membership_settings_path
