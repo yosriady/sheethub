@@ -42,20 +42,24 @@ class SheetsController < ApplicationController
 
   # GET /search
   def search
+    track('View search results', {query: params[:q]})
     @sheets = Sheet.is_public.search params[:q], page: params[:page], per_page: SEARCH_PAGE_SIZE
   end
 
   def best_sellers
+    track('View best sellers')
     @sheets = Sheet.get_best_sellers.page(params[:page])
   end
 
   def community_favorites
+    track('View community favorites')
     @sheets = Sheet.get_community_favorites.page(params[:page])
   end
 
   # GET /sheets/1
   # GET /sheets/1.json
   def show
+    track('View sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     @favorites = @sheet.votes_for.includes(:voter).limit(5)
   end
 
@@ -90,6 +94,7 @@ class SheetsController < ApplicationController
 
   # Favorites/Unfavorites a Sheet
   def favorite
+    track('Favorite sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     unless current_user
       redirect_to new_user_session_path, error: ERROR_UNSIGNED_FAVORITE_MESSAGE
     end
@@ -106,6 +111,7 @@ class SheetsController < ApplicationController
 
   # GET /sheets/new
   def new
+    track('View upload form')
     @sheet = Sheet.new
   end
 
@@ -122,6 +128,7 @@ class SheetsController < ApplicationController
 
     respond_to do |format|
       if @sheet.save
+        track('Upload sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
         format.html { redirect_to @sheet, notice: SUCCESS_CREATE_SHEET_MESSAGE }
         format.json { render :show, status: :created, location: @sheet }
       else
@@ -140,6 +147,7 @@ class SheetsController < ApplicationController
 
     respond_to do |format|
       if @sheet.update(update_params)
+        track('Update sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
         format.html { redirect_to @sheet, notice: SUCCESS_UPDATE_SHEET_MESSAGE }
         format.json { render :show, status: :ok, location: @sheet }
       else
@@ -154,6 +162,7 @@ class SheetsController < ApplicationController
   # DELETE /sheets/1.json
   def destroy
     @sheet.destroy
+    track('Delete sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     respond_to do |format|
       format.html { redirect_to sheets_path, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
       format.json { head :no_content }
@@ -163,6 +172,7 @@ class SheetsController < ApplicationController
   # Reverses soft-deletion
   def restore
     Sheet.restore(@sheet, :recursive => true)
+    track('Restore sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     respond_to do |format|
       format.html { redirect_to sheet_path(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE }
       format.json { head :no_content }
@@ -171,45 +181,54 @@ class SheetsController < ApplicationController
 
   # GET /instruments
   def instruments
-      @instruments = Sheet.values_for_instruments
+    track('View instruments')
+    @instruments = Sheet.values_for_instruments
   end
 
   # GET /instrument/:slug
   def by_instrument
-      @sheets = Sheet.with_exact_instruments(params[:slug]).page(params[:page])
+    track('View instrument', {query: params[:slug]})
+    @sheets = Sheet.with_exact_instruments(params[:slug]).page(params[:page])
   end
 
   # GET /genres
   def genres
+    track('View genres')
     @genres = Sheet.is_public.tags_on(:genres)
   end
 
   # GET /genre/:slug
   def by_genre
+    track('View genre', {query: params[:slug]})
     @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :genres).includes(:user).page(params[:page])
   end
 
   # GET /composers
   def composers
+    track('View composers')
     @composers = Sheet.is_public.tags_on(:composers)
   end
 
   # GET /composer/:slug
   def by_composer
+    track('View composer', {query: params[:slug]})
     @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :composers).includes(:user).page(params[:page])
   end
 
   # GET /sources
   def sources
+    track('View sources')
     @sources = Sheet.is_public.tags_on(:sources)
   end
 
   # GET /source/:slug
   def by_source
+    track('View source', {query: params[:slug]})
     @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :sources).includes(:user).page(params[:page])
   end
 
   def autocomplete
+    track('Searched for', {query: params[:query]})
     render json: Sheet.is_public.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_path(s)}}
   end
 

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   before_filter :set_timezone
 
-  def track(event_name, data)
+  def track(event_name, data={})
     Analytics.track(current_user.id || session.id, event_name, data)
   end
 
