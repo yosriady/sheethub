@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <% sheets.each do |sheet| %>
+      <% sheets.find_each do |sheet| %>
         <%= render 'sheets/sheet_dashboard', sheet: sheet %>
       <% end %>
     </tbody>

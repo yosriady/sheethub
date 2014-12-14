@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-        <% sales.each do |order| %>
+        <% sales.find_each do |order| %>
           <tr>
             <td><%= order.purchased_at.strftime("%A, %e %B %Y %l:%M %p") %></td>
             <td><%= link_to order.sheet.title, sheet_path(order.sheet) %></td>

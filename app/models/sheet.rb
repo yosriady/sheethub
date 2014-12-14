@@ -227,7 +227,7 @@ class Sheet < ActiveRecord::Base
     Rails.cache.fetch("related_tags_to_#{self}", :expires_in => 1.day) do
       related_sheets = Sheet.tagged_with(joined_tags, :any => true).includes(:sources, :composers, :genres).limit(5)
       related_tags = Set.new
-      related_sheets.each{ |sheet| related_tags.merge sheet.tag_objects }
+      related_sheets.find_each{ |sheet| related_tags.merge sheet.tag_objects }
       related_tags.to_a
     end
   end

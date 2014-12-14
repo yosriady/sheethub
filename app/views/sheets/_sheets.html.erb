@@ -1,11 +1,13 @@
 <div id="sheets">
   <% cache(cache_key_for_sheets, :expires_in => 1.hour) do %>
-      <% if sheets.each do |sheet| %>
-      <%= render 'sheets/sheet', sheet: sheet %>
-      <% end.empty? %>
-      <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
-      <h2 class="text-center">No Sheets yet!</h2>
-      <% end %>
+    <% sheets.find_each do |sheet| %>
+        <%= render 'sheets/sheet', sheet: sheet %>
+    <% end %>
+
+    <% if sheets.empty? %>
+        <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
+        <h2 class="text-center">No Sheets yet!</h2>
+    <% end %>
   <% end %>
 </div>
 <div id="paginator" class="text-center">

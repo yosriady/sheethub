@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
 
   def aggregated_sales
     result = {}
-    sheets.each do |sheet|
+    sheets.find_each do |sheet|
       total_sales = sheet.total_sales
       result[sheet.title] = total_sales if total_sales > 0
     end

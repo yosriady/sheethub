@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-    <% orders.each do |order| %>
+    <% orders.find_each do |order| %>
       <%= render 'sheets/sheet_library', order: order, sheet: order.sheet %>
     <% end %>
     </tbody>

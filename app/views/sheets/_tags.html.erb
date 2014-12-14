@@ -1,11 +1,12 @@
-<% if tags.each do |tag| %>
+<% tags.each do |tag| %>
     <a href="<%= tag_path(tag) %>">
     <span class="tag" data-toggle="tooltip" data-placement="top">
         <span class="fa fa-<%= tag_icon(tag.taggings[0].context.chomp('s')) %>"></span>
         <%= tag.name.titleize %>
     </span>
     </a>
-<% end.empty? %>
+<% end %>
+<% if tags.empty? %>
     <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
     <h2 class="text-center">None yet!</h2>
 <% end %>
