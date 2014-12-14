@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_timezone
 
   def track(event_name, data={})
-    Analytics.track(current_user.id || session.id, event_name, data)
+    identifier = (user_signed_in? ? current_user.id : session.id)
+    Analytics.track(identifier, event_name, data)
   end
 
   def set_timezone
