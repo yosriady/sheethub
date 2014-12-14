@@ -6,9 +6,18 @@ module Analytics
 
   end
 
-  def track(user_id, event_name, data)
+  def track(user_id, event_name, data={})
     # TODO: put on queue instead for better performance
     tracker.track(user_id, event_name, data)
+  end
+
+  def track_charge(order)
+    sheet = order.sheet
+    tracker.people.track_charge(order.user_id, order.amount, {
+      '$time' => order.purchased_at,
+      'sheet_id' => sheet.id,
+      'sheet_title' => sheet.title
+    })
   end
 
   def update_profile(user)

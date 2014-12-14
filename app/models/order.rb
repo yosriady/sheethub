@@ -20,6 +20,7 @@ class Order < ActiveRecord::Base
       sheet.increment!(:total_sold)
       OrderMailer.purchase_receipt_email(self).deliver
       OrderMailer.sheet_purchased_email(self).deliver
+      Analytics.track_charge(self)
     end
   end
 

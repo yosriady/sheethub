@@ -12,7 +12,7 @@
     <hr>
     <strong>Payment Info</strong>
     <p>Sheet Purchased: <%= link_to @sheet.title, sheet_url(@sheet) %></p>
-    <p>Amount paid: US$<%= @order.amount %></p>
+    <p>Amount paid: <%= number_to_currency(@order.amount) %></p>
     <p>Tracking Id: <%= @order.tracking_id %></p>
     <p>Purchase Date: <%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
     <hr>

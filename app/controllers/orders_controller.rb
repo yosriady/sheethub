@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
 
   def checkout
     sheet = Sheet.friendly.find(params[:sheet])
+    track('Checking out sheet', {sheet_id: sheet.id, sheet_title: sheet.title})
     @order = Order.find_or_initialize_by(user_id: current_user.id,
                                          sheet_id: sheet.id)
     if @order.completed?
@@ -45,6 +46,8 @@ class OrdersController < ApplicationController
     @order = Order.find_by(tracking_id: tracking_id)
     if @order
       @order.complete
+      sheet = @order.sheet
+      track('Complete sheet purchase', {order_id: @order.id, sheet_id:sheet.id, sheet_title: sheet.title})
       render action: 'thank_you', notice: SUCCESS_ORDER_PURCHASE_MESSAGE
     else
       fail 'Invalid Tracking Id'
@@ -56,6 +59,7 @@ class OrdersController < ApplicationController
 
 
   def cancel
+    track('Cancel sheet purchase', {sheet_id: sheet.id, sheet_title: sheet.title})
     redirect_to sheets_path, notice: CANCEL_ORDER_PURCHASE_MESSAGE
   end
 
