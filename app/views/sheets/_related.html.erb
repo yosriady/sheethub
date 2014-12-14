@@ -1,22 +1,28 @@
 <% unless sheet.joined_tags.empty? || sheet.related_tags.blank? %>
 <div id="related">
-    <div id="related-tags">
-        <h1><em class="fa fa-heart-o"></em> Recommended for you</h1>
-        <%= render 'sheets/tags', tags: sheet.related_tags %>
-    </div>
-    <div id="related-sheets">
-        <% for sheet in sheet.related_sheets %>
-            <a href="<%= sheet_path(sheet) %>">
-            <div class="related-sheet">
-                <em class="pull-right fa fa-bookmark"></em>
-                <em><%= sheet.instruments.join(", ") %></em>
-                <h4><%= sheet.title %></h4>
-                <h5>
-                <%= sheet.source_list.to_s.titleize %>
-                </h5>
-            </div>
-            </a>
-        <% end %>
-    </div>
+    <% if user_signed_in? %>
+        <div id="related-tags">
+            <h1><em class="fa fa-heart-o"></em> Recommended for you</h1>
+            <%= render 'sheets/tags', tags: sheet.related_tags %>
+        </div>
+        <div id="related-sheets">
+            <% for sheet in sheet.related_sheets %>
+                <a href="<%= sheet_path(sheet) %>">
+                <div class="related-sheet">
+                    <em class="pull-right fa fa-bookmark"></em>
+                    <em><%= sheet.instruments.join(", ") %></em>
+                    <h4><%= sheet.title %></h4>
+                    <h5>
+                    <%= sheet.source_list.to_s.titleize %>
+                    </h5>
+                </div>
+                </a>
+            <% end %>
+        </div>
+    <% else %>
+        <br /><br />
+        <h1 class="text-center"><em class="fa fa-heart-o"></em> Sign In to view recommended works</h1>
+        <a href="<%= new_user_session_path %>" class="btn btn-success btn-lg center-block"> Sign In</a>
+    <% end %>
 </div>
 <% end %>
