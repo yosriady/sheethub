@@ -1,3 +1,5 @@
+require 'mixpanel-ruby'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -6,6 +8,11 @@ class ApplicationController < ActionController::Base
   before_action :ensure_registration_finishes
   after_filter :store_location
   before_filter :set_timezone
+
+  # Mixpanel event tracker singleton
+  def tracker
+    @tracker ||= Mixpanel::Tracker.new(Rails.application.secrets.mixpanel_token)
+  end
 
   def set_timezone
     tz = current_user ? current_user.timezone : nil

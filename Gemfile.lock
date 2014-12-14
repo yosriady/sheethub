@@ -189,6 +189,7 @@ GEM
     mini_magick (4.0.0.rc)
     mini_portile (0.6.1)
     minitest (5.4.3)
+    mixpanel-ruby (1.6.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -418,6 +419,7 @@ DEPENDENCIES
   letter_opener
   metamagic
   mini_magick (= 4.0.0.rc)
+  mixpanel-ruby
   newrelic_rpm
   nprogress-rails
   oink

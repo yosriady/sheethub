@@ -12,6 +12,9 @@ gem 'passenger'
 # Memcached
 gem 'dalli'
 
+# Event Analytics
+gem 'mixpanel-ruby'
+
 # Application Monitoring
 gem 'newrelic_rpm'
 gem 'opbeat'
