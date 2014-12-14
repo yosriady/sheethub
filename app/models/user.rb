@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_one :subscription
   acts_as_voter
   before_save :cache_display_name
+  after_save :update_mixpanel_profile
 
   has_attached_file :avatar,
                     :convert_options => {
@@ -191,4 +192,9 @@ class User < ActiveRecord::Base
   def cache_display_name
     self.cached_display_name = build_display_name
   end
+
+  def update_mixpanel_profile
+    Analytics.update_profile(self)
+  end
+
 end

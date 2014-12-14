@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   before_filter :set_timezone
 
-  # Mixpanel event tracker singleton
-  def tracker
-    @tracker ||= Mixpanel::Tracker.new(Rails.application.secrets.mixpanel_token)
+  def track(event_name, data)
+    Analytics.track(current_user.id || session.id, event_name, data)
   end
 
   def set_timezone

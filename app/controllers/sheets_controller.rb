@@ -65,6 +65,7 @@ class SheetsController < ApplicationController
 
   # Downloads Sheet PDF
   def download
+    track('Download sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     if @sheet.free? || @sheet.uploaded_by?(current_user)
       redirect_to @sheet.pdf_download_url
     elsif @sheet.purchased_by?(current_user)
