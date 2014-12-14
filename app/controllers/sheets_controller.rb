@@ -10,6 +10,7 @@ class SheetsController < ApplicationController
   before_action :validate_flagged, only: [:show]
   before_action :hide_private_sheets, only: [:show, :report, :flag, :favorite, :download], if: :is_private_sheet
   before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
+  skip_before_filter :limit_subdomain_access
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
   DEFAULT_FLAG_MESSAGE = "No Message."

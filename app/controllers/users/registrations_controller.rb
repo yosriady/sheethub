@@ -6,15 +6,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :validate_user_signed_in, :except => [:new, :create, :profile, :favorites]
   before_action :validate_user_is_pro, :only => [:private_sheets]
   before_action :disable_for_omniauth, :only => [:edit_password]
-  before_filter :downcase_username, :only => [:profile, :favorites]
   before_action :set_profile_user, :only => [:profile, :favorites]
   before_action :validate_registration_finished
   before_action :validate_has_published, :only => [:sales]
   before_action :set_current_user, only: [:edit_password, :edit_membership]
+  skip_before_filter :limit_subdomain_access
 
   # GET /user/:username
   def profile
-    unless params[:username]
+    unless @user
       raise ActionController::RoutingError.new('User Not Found')
     end
 
@@ -146,7 +146,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def set_profile_user
-      @user = User.find_by("username = ?", params[:username]) or not_found
+      @user = User.find_by("username = ?", request.subdomain.downcase) or not_found
     end
 
     def registration_params

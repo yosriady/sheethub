@@ -8,8 +8,8 @@ description @user.tagline
 <div class="container-fluid">
 <ul class="list-inline">
 
-  <li class="active"><a href="<%= user_profile_path(@user.username) %>">Works <span class="badge"><%= @sheets.count %></span></a></li>
-  <li><a href="<%= user_favorites_path(@user.username) %>"> Favorites </a></li>
+  <li class="active"><a href="<%= user_profile_url(subdomain: @user.username) %>">Works <span class="badge"><%= @sheets.count %></span></a></li>
+  <li><a href="<%= user_favorites_url(subdomain: @user.username) %>"> Favorites </a></li>
 
 </ul>
 </div>

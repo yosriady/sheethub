@@ -15,8 +15,14 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
-    get 'user/:username' => "users/registrations#profile", :as => :user_profile
-    get 'user/:username/favorites' => "users/registrations#favorites", :as => :user_favorites
+
+    get '/' => 'sheets#index', :constraints => { :subdomain => 'www' }
+    get '/' => 'users/registrations#profile', :constraints => { :subdomain => /.+/ }, :as => :user_profile
+    get '/favorites' => 'sheets#index', :constraints => { :subdomain => 'www' }
+    get '/favorites' => 'users/registrations#favorites', :constraints => { :subdomain => /.+/ }, :as => :user_favorites
+
+    # get 'user/:username' => "users/registrations#profile", :as => :user_profile
+    # get 'user/:username/favorites' => "users/registrations#favorites", :as => :user_favorites
     match 'users/finish_registration' => 'users/registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
     get 'dashboard' => "users/registrations#dashboard", :as => :user_dashboard
     get 'private-sheets' => "users/registrations#private_sheets", :as => :user_private_sheets

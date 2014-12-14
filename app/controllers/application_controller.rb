@@ -1,13 +1,13 @@
 require 'mixpanel-ruby'
 
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  include UrlHelper
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :ensure_registration_finishes
   after_filter :store_location
   before_filter :set_timezone
+  before_filter :limit_subdomain_access
 
   def track(event_name, data={})
     identifier = (user_signed_in? ? current_user.id : session.id)
@@ -54,4 +54,10 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) << :username
     end
+
+    def limit_subdomain_access
+      if request.subdomain.present?
+        redirect_to root_url(:subdomain => false)
+      end
+      end
 end
