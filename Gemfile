@@ -10,7 +10,7 @@ gem 'pg'
 gem 'passenger'
 
 # Memcached
-gem 'dalli'
+# gem 'dalli'
 
 # Event Analytics
 gem 'mixpanel-ruby'

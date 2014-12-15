@@ -1,12 +1,10 @@
 <% if tags.each do |tag| %>
-    <% cache(tag) do %>
-    <a href="/<%= tag_type %>/<%= tag %>">
-    <span class="tag" data-toggle="tooltip" data-placement="top">
+    <a href="<%= "/#{tag_type}/#{tag}" %>">
+    <span class="tag">
         <em class="fa fa-<%= tag_icon(tag_type) %>"></em>
         <%= tag.name.titleize %>
     </span>
     </a>
-    <% end %>
 <% end.empty? %>
     <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
     <h2 class="text-center">None yet!</h2>

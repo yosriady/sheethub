@@ -19,6 +19,10 @@ module ApplicationHelper
     end
   end
 
+  def tag_url(tag_type, tag)
+    "#{['www.', request.domain, request.port_string].join}/#{tag_type}/#{tag}"
+  end
+
   def tag_icon(tag_type)
     case tag_type
     when "genre"
