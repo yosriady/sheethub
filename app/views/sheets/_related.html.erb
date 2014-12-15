@@ -1,6 +1,6 @@
 <% unless sheet.joined_tags.empty? || sheet.related_tags.blank? %>
 <div id="related">
-    <% if user_signed_in? %>
+
         <div id="related-tags">
             <h1><em class="fa fa-heart-o"></em> Recommended for you</h1>
             <%= render 'sheets/tags', tags: sheet.related_tags %>
@@ -19,10 +19,6 @@
                 </a>
             <% end %>
         </div>
-    <% else %>
-        <br /><br />
-        <h1 class="text-center"><em class="fa fa-heart-o"></em> Sign In to view recommended works</h1>
-        <a href="<%= new_user_session_url %>" class="btn btn-success btn-lg center-block"> Sign In</a>
-    <% end %>
+
 </div>
 <% end %>

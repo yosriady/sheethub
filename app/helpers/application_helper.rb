@@ -4,23 +4,17 @@ module ApplicationHelper
     /^http/i.match(url) ? url : "http://#{url}"
   end
 
-  # TOOD: Refactor tag.taggings[0].context, this is called in related
-  def tag_path(tag)
-    context = tag.taggings[0].context
-    case context
-    when "genres"
-      "/genre/#{tag.name}"
-    when "composers"
-      "/composer/#{tag.name}"
-    when "sources"
-      "/source/#{tag.name}"
-    else
-      "/404"
-    end
-  end
-
   def tag_url(tag_type, tag)
-    "#{['www.', request.domain, request.port_string].join}/#{tag_type}/#{tag}"
+    case tag_type
+    when "genre"
+      genre_url(tag)
+    when "composer"
+      composer_url(tag)
+    when "source"
+      source_url(tag)
+    else
+      ""
+    end
   end
 
   def tag_icon(tag_type)
