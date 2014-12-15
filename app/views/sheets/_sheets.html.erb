@@ -1,5 +1,4 @@
 <div id="sheets">
-  <% cache(cache_key_for_sheets, :expires_in => 1.hour) do %>
     <% sheets.find_each do |sheet| %>
         <%= render 'sheets/sheet', sheet: sheet %>
     <% end %>
@@ -8,7 +7,6 @@
         <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
         <h2 class="text-center">No Sheets yet!</h2>
     <% end %>
-  <% end %>
 </div>
 <div id="paginator" class="text-center">
   <%= paginate sheets %>

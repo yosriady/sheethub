@@ -2,7 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   Paypal.sandbox!
 
-  config.action_mailer.default_url_options = { host: 'http://www.sheethub.co'}
+  config.action_mailer.default_url_options = { host: 'www.sheethub.co'}
   config.action_mailer.smtp_settings = {
     :address   => "smtp.mandrillapp.com",
     :port      => 25,
@@ -10,7 +10,7 @@ Rails.application.configure do
     :user_name => "yosriady@gmail.com",
     :password  => "p2bTAyyDBKV57KlGqMG6Qw",
     :authentication => 'login',
-    :domain => 'sheethub.co',
+    :domain => 'www.sheethub.co',
   }
 
   # Code is not reloaded between requests.

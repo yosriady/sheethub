@@ -23,7 +23,7 @@ keywords @sheet.cached_joined_tags
         <div id="sheet-content" class="col-xs-8">
 
             <%= render 'sheet_preview', sheet:@sheet %>
-            <a href="<%= user_profile_path(@sheet.user.username) %>">
+            <a href="<%= user_profile_url(subdomain: @sheet.user.username) %>">
                 <button type="button" class="btn btn-block btn-default">See more from <%= @sheet.user.display_name %></button>
             </a>
             <%= render 'disqus' %>

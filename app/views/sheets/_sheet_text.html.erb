@@ -1,4 +1,4 @@
-<a href="<%= sheet_url(sheet) %>">
+<a href="<%= sheet_url(sheet, subdomain: sheet.user.username) %>">
 <div class="sheet-text">
   <% if sheet.privately_visible?%>
     <span class="fa fa-eye-slash pull-right"></span>

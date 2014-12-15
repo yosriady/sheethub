@@ -10,7 +10,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :validate_registration_finished
   before_action :validate_has_published, :only => [:sales]
   before_action :set_current_user, only: [:edit_password, :edit_membership]
-  skip_before_filter :limit_subdomain_access
 
   # GET /user/:username
   def profile
@@ -107,7 +106,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       update_params[:sheet_quota] = User::BASIC_FREE_SHEET_QUOTA
       if current_user.update(update_params)
         track('Finished registration')
-        redirect_to user_profile_path(current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
+        redirect_to user_profile_url(subdomain: current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
         flash[:error] = current_user.errors.full_messages.to_sentence
         redirect_to finish_registration_path, error: FAILURE_UPDATE_PROFILE_MESSAGE
