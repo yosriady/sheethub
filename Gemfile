@@ -22,9 +22,6 @@ gem 'opbeat'
 # HTML Embed Links
 gem 'auto_html'
 
-# Admin
-gem 'activeadmin', github: 'activeadmin'
-
 # SEO Meta Tags
 gem 'metamagic'
 

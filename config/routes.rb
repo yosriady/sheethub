@@ -12,8 +12,6 @@ Rails.application.routes.draw do
     get 'orders/cancel'
     # End of Sheet Purchase Routes
 
-    devise_for :admin_users, ActiveAdmin::Devise.config
-    ActiveAdmin.routes(self)
     devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
     devise_scope :user do
 
