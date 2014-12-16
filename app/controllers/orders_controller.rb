@@ -77,6 +77,7 @@ class OrdersController < ApplicationController
       pay_request = api.build_pay
       pay_request.trackingId = tracking_id
       pay_request.actionType = 'PAY'
+      pay_request.feesPayer = 'PRIMARYRECEIVER'
 
       pay_request.cancelUrl = orders_cancel_url
       pay_request.returnUrl = orders_success_url(tracking_id)
