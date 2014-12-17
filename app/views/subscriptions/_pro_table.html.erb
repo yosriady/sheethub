@@ -16,17 +16,17 @@
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Upload unlimited commercial sheets on SheetHub"><strong>Unlimited</strong> Uploads</li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Upload up to 250 free sheets on SheetHub"><strong>250</strong> Free Sheets <span class="pro badge">PRO</span></li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Earn up to 85% per transaction!">Earn money for your sheet music <span class="pro badge">PRO</span></li>
-  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Enabling PDF Stamping will stamp the buyer's name and email address on their PDF download"> PDF Stamping <a href="<%= faq_path %>#what-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a></li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="View detailed sales and earnings statistics">Sales Dashboard</li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="We let your fans find your music on search engines by optimizing headings, titles and meta tags">Search Engine Optimized</li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="You get a dedicated subdomain e.g. username.sheethub.co">Custom subdomain</li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Enabling PDF Stamping will stamp the buyer's name and email address on their PDF download"> PDF Stamping <a href="<%= faq_path %>#what-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a></li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Even faster replies to email responses"> VIP Support <span class="pro badge">PRO</span></li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Lets users pay above and beyond your listed price">Pay-what-you-want pricing <span class='badge fade-bg'>SOON</span></li>
-  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="You get a dedicated subdomain e.g. username.sheethub.co">Custom subdomain</li>
-  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Upload private sheets visible only to you">Private Sheets <span class="pro badge">PRO</span></li>
-  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Share your private sheets through a link. Useful for group sharing">Private Sharing <span class='badge fade-bg'>PLANNED</span></li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Grant access to your work through one-time download keys - perfect for Patreon rewards!">Download Keys <span class='badge fade-bg'>PLANNED</span></li>
+  <li class="list-group-item" data-toggle="tooltip" data-placement="left" title="Share your private sheets through a link. Useful for group sharing">Private Sheets <span class='badge fade-bg'>PLANNED</span></li>
   <li class="list-group-item">
     <h1 class="membership-price"><span class="fade-text"> $ </span> 24 <span class="fade-text"> / mo</span></h1>
-    <p class="fade-text text-center">You should at least earn this back every month and you can cancel at any time</p>
+    <p class="fade-text text-center">You should at least earn this back every month! You can cancel at any time</p>
   </li>
   <% unless nobutton || (current_user && (current_user.membership_type == "pro")) %>
   <li class="list-group-item well">

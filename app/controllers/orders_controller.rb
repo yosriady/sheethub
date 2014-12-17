@@ -27,7 +27,8 @@ class OrdersController < ApplicationController
       redirect_url = build_redirect_url(payment_response.payKey)
       @order.update(tracking_id: payment_request.trackingId,
                     payer_id: payment_response.payKey,
-                    amount_cents: sheet.price_cents) #TODO: For pay what you want, update price_cents to user_specified_cents retrieved from form
+                    amount_cents: sheet.price_cents,
+                    price_cents: sheet.price_cents) #TODO: For pay what you want, update price_cents to user_specified_cents retrieved from form
       redirect_to redirect_url
     else
       Rails.logger.info "Paypal Order Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"

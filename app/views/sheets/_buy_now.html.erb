@@ -21,10 +21,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button id="modal-close-btn" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="flagModal">Buy <%= sheet.title %></h4>
+        <h4 class="modal-title" id="flagModal">Buy &lsquo;<%= sheet.title %>&rsquo;</h4>
       </div>
       <div class="modal-body">
-        <p class="bg-info"><em class="fa fa-unlock"></em> Get Unlimited Access to <%= link_to sheet.title, sheet %> by purchasing it for <strong><%= number_to_currency(sheet.price) %></strong></p>
+        <p class="bg-info"><em class="fa fa-unlock"></em> Download <%= sheet.title %> by purchasing it for <strong><%= number_to_currency(sheet.price) %></strong> USD or more.</p>
 
         <br/>
         <p class="text-center">You will receive:</p>
@@ -35,15 +35,15 @@
                 <p><em class="fa fa-download"></em><strong> <%= sheet.pdf_file_name %></strong> (<%= number_to_human_size(sheet.pdf_file_size) %>)</p>
             </li>
             <% else %>
-            <li>
+            <li class="text-center">
                 <p class="bg-danger"><em class="fa fa-eye-slash"></em> No PDF File Found.</p>
             </li>
             <% end %>
 
             <!-- Additional files -->
             <% for asset in sheet.assets %>
-            <li>
-                <p><em class="fa fa-download"></em><strong> <%= asset.filename %></strong>(<%= number_to_human_size(asset.filesize) %>)</p>
+            <li class="text-center">
+                <p><em class="fa fa-download"></em><strong> <%= asset.filename %></strong> (<%= number_to_human_size(asset.filesize) %>)</p>
             </li>
             <% end %>
         </ul>
