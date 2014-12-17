@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216060845) do
+ActiveRecord::Schema.define(version: 20141216142806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20141216060845) do
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
     t.integer  "royalty_cents"
+    t.integer  "price_cents",                  null: false
   end
 
   add_index "orders", ["sheet_id"], name: "index_orders_on_sheet_id", using: :btree
@@ -106,6 +107,7 @@ ActiveRecord::Schema.define(version: 20141216060845) do
     t.text     "description_html"
     t.string   "cached_joined_tags"
     t.boolean  "enable_pdf_stamping",     default: true
+    t.boolean  "pay_what_you_want",       default: false
   end
 
   add_index "sheets", ["cached_votes_down"], name: "index_sheets_on_cached_votes_down", using: :btree
