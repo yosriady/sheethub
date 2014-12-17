@@ -101,7 +101,7 @@ class OrdersController < ApplicationController
     end
 
     def build_redirect_url(payKey)
-      return "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
+      return "https://#{Rails.application.secrets.paypal_domain}/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
     end
 
     def invalid_account_details_error?(pay_response)
