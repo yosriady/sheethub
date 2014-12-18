@@ -1,7 +1,7 @@
 <div class="panel panel-info">
     <div class="panel-heading"><em class="fa fa-cloud-download"></em> Additional Files</div>
     <div class="panel-body">
-    <p class="bg-warning"><em class="fa fa-info-circle"></em> Upload up to 5 additional files per sheet</p>
+    <p class="bg-warning"><em class="fa fa-info-circle"></em> Upload up to 5 additional files</p>
     <ul id="sheet-files" class="editable">
     <% for asset in sheet.assets %>
         <%= render 'assets/asset', asset: asset %>

@@ -189,7 +189,7 @@ class SheetsController < ApplicationController
   # GET /instrument/:slug
   def by_instrument
     track('View instrument', {query: params[:slug]})
-    @sheets = Sheet.with_exact_instruments(params[:slug]).page(params[:page])
+    @sheets = Sheet.with_any_instruments(params[:slug]).page(params[:page])
   end
 
   # GET /genres
