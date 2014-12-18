@@ -15,8 +15,15 @@ class OrdersController < ApplicationController
   def checkout
     sheet = Sheet.friendly.find(params[:sheet])
     track('Checking out sheet', {sheet_id: sheet.id, sheet_title: sheet.title})
-    amount = params[:amount].to_f
-    amount_cents = amount * 100
+
+    if sheet.pay_what_you_want
+      amount = params[:amount].to_f
+      amount_cents = amount * 100
+    else
+      amount = sheet.price
+      amount_cents = sheet.price_cents
+    end
+
     @order = Order.find_or_initialize_by(user_id: current_user.id,
                                          sheet_id: sheet.id)
     if @order.completed?
@@ -125,10 +132,12 @@ class OrdersController < ApplicationController
 
     def validate_min_amount
       sheet = Sheet.friendly.find(params[:sheet])
-      above_minimum = params[:amount].to_f >= sheet.price
-      unless above_minimum
-        flash[:error] = INVALID_PRICE_MESSAGE
-        redirect_to sheet
+      if sheet.pay_what_you_want
+        above_minimum = params[:amount].to_f >= sheet.price
+        unless above_minimum
+          flash[:error] = INVALID_PRICE_MESSAGE
+          redirect_to sheet
+        end
       end
     end
 end
