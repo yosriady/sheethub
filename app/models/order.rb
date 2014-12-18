@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
 
   def complete
     unless completed?
-      update(status: Order.statuses[:completed], purchased_at: Time.zone.now, royalty_cents:user.royalty_percentage * amount_cents)
+      update(status: Order.statuses[:completed], purchased_at: Time.zone.now)
       sheet.increment!(:total_sold)
       OrderMailer.purchase_receipt_email(self).deliver
       OrderMailer.sheet_purchased_email(self).deliver
@@ -80,19 +80,19 @@ class Order < ActiveRecord::Base
   end
 
   def royalty
-    (royalty_without_transaction_fees - paypal_transaction_fees).round(2)
-  end
-
-  def royalty_without_transaction_fees
     royalty_cents.to_f / 100
   end
 
   def commission
-    amount - royalty_without_transaction_fees
+    amount - royalty
   end
 
-  def paypal_transaction_fees
-    (0.029 * amount) + 0.3
+  def self.calculate_commission(author, amount)
+    ((1 - author.royalty_percentage) * amount).round(2)
+  end
+
+  def self.calculate_royalty_cents(author, amount_cents)
+    author.royalty_percentage * amount_cents
   end
 
   def self.get_adaptive_payment_details(payKey)

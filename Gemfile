@@ -68,6 +68,7 @@ gem 'nprogress-rails'
 # Form
 gem 'simple_form'
 gem 'selectize-rails'
+gem 'maskmoney-rails'
 
 # Frontend
 gem 'bootstrap-sass', '~> 3.1.1'

@@ -6,29 +6,35 @@ class OrdersController < ApplicationController
   CANCEL_ORDER_PURCHASE_MESSAGE = 'Purchase canceled.'
   PURCHASE_INVALID_PAYPAL_EMAIL_MESSAGE = "We could not process your purchase. The uploader's Paypal email is invalid! We've sent the uploader an email. In the meantime, why not take a look at other works on SheetHub?"
   FLAGGED_MESSAGE = 'You cannot purchase a flagged sheet.'
+  INVALID_PRICE_MESSAGE = 'Amount must be at least the minimum price.'
 
   before_action :authenticate_user!, only: [:checkout, :success, :cancel]
   before_action :validate_flagged, only: [:checkout]
+  before_action :validate_min_amount, only: [:checkout]
 
   def checkout
     sheet = Sheet.friendly.find(params[:sheet])
     track('Checking out sheet', {sheet_id: sheet.id, sheet_title: sheet.title})
+    amount = params[:amount].to_f
+    amount_cents = amount * 100
     @order = Order.find_or_initialize_by(user_id: current_user.id,
                                          sheet_id: sheet.id)
     if @order.completed?
       redirect_to :back, error: "You've already purchased #{sheet.title}"
     end
 
-    # Start Adaptive Payments
     sheet = Sheet.friendly.find(params[:sheet])
-    payment_request = build_adaptive_payment_request(sheet) # For pay what you want, update sheet to Order since it's not sheet.price but order.amount
+    author = sheet.user
+    # Start Adaptive Payments
+    payment_request = build_adaptive_payment_request(sheet, amount)
     payment_response = get_adaptive_payment_response(payment_request)
     if payment_response.success?
       redirect_url = build_redirect_url(payment_response.payKey)
       @order.update(tracking_id: payment_request.trackingId,
                     payer_id: payment_response.payKey,
-                    amount_cents: sheet.price_cents,
-                    price_cents: sheet.price_cents) #TODO: For pay what you want, update price_cents to user_specified_cents retrieved from form
+                    amount_cents: amount_cents,
+                    royalty_cents: Order.calculate_royalty_cents(author, amount_cents),
+                    price_cents: sheet.price_cents)
       redirect_to redirect_url
     else
       Rails.logger.info "Paypal Order Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
@@ -60,7 +66,7 @@ class OrdersController < ApplicationController
 
 
   def cancel
-    track('Cancel sheet purchase', {sheet_id: sheet.id, sheet_title: sheet.title})
+    track('Cancel sheet purchase')
     redirect_to sheets_path, notice: CANCEL_ORDER_PURCHASE_MESSAGE
   end
 
@@ -72,28 +78,28 @@ class OrdersController < ApplicationController
       end
     end
 
-    def build_adaptive_payment_request(sheet)
+    def build_adaptive_payment_request(sheet, amount)
+      author = sheet.user
       tracking_id = generate_token
       api = PayPal::SDK::AdaptivePayments::API.new
-      pay_request = api.build_pay
-      pay_request.trackingId = tracking_id
-      pay_request.actionType = 'PAY'
-      pay_request.feesPayer = 'PRIMARYRECEIVER'
-
-      pay_request.cancelUrl = orders_cancel_url
-      pay_request.returnUrl = orders_success_url(tracking_id)
-      pay_request.currencyCode = DEFAULT_CURRENCY
+      r = api.build_pay
+      r.trackingId = tracking_id
+      r.actionType = 'PAY'
+      r.feesPayer = 'PRIMARYRECEIVER'
+      r.cancelUrl = orders_cancel_url
+      r.returnUrl = orders_success_url(tracking_id)
+      r.currencyCode = DEFAULT_CURRENCY
 
       # Primary receiver (Sheet Owner)
-      pay_request.receiverList.receiver[0].amount = sheet.price
-      pay_request.receiverList.receiver[0].email  = sheet.user.paypal_email
-      pay_request.receiverList.receiver[0].primary = true
+      r.receiverList.receiver[0].amount = amount
+      r.receiverList.receiver[0].email  = sheet.user.paypal_email
+      r.receiverList.receiver[0].primary = true
 
       # Secondary Receiver (Marketplace)
-      pay_request.receiverList.receiver[1].amount = sheet.commission
-      pay_request.receiverList.receiver[1].email  = MARKETPLACE_PAYPAL_EMAIL
-      pay_request.receiverList.receiver[1].primary = false
-      return pay_request
+      r.receiverList.receiver[1].amount = Order.calculate_commission(author, amount)
+      r.receiverList.receiver[1].email  = MARKETPLACE_PAYPAL_EMAIL
+      r.receiverList.receiver[1].primary = false
+      return r
     end
 
     def get_adaptive_payment_response(payment_request)
@@ -114,6 +120,15 @@ class OrdersController < ApplicationController
       if sheet.is_flagged
         flash[:error] = FLAGGED_MESSAGE
         redirect_to sheets_path
+      end
+    end
+
+    def validate_min_amount
+      sheet = Sheet.friendly.find(params[:sheet])
+      above_minimum = params[:amount].to_f >= sheet.price
+      unless above_minimum
+        flash[:error] = INVALID_PRICE_MESSAGE
+        redirect_to sheet
       end
     end
 end

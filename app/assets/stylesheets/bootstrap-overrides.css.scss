@@ -189,3 +189,26 @@ a.disabled {
    pointer-events: none;
    cursor: default;
 }
+
+.input-group {
+    .input-group-addon {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+}
+
+.input-group-bordered {
+    border: 1px solid #dedede;
+    padding: 1px;
+    border-radius: 6px;
+}
+
+.modal-content {
+    hr {
+        border-top: 1px dashed #dadada;
+    }
+}
+
+.modal-body {
+    padding: 25px;
+}

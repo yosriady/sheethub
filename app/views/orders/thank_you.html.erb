@@ -11,7 +11,7 @@
 
             <div class="pull-left">
                 <strong>What happens next?</strong>
-                <p>A receipt will be emailed to you shortly. Your purchased sheet is now registered to your account on SheetHub. To access your purchases, simply visit your Library and download your files whenever you're ready.</p>
+                <p><%= link_to @sheet.title, sheet_path(@sheet) %> is now registered to your SheetHub account. Visit <% link_to 'My Library', user_library_path %> to download your files whenever you're ready.</p>
                 <p>You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy!</p>
             </div>
         </div>
