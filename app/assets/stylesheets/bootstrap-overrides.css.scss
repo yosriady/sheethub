@@ -140,10 +140,6 @@ blockquote {
     -webkit-font-smoothing: antialiased;
 }
 
-.modal-backdrop {
-    opacity: 0.7
-}
-
 .badge {
     background: #2583eb;
     border-radius: 4px;
@@ -201,14 +197,4 @@ a.disabled {
     border: 1px solid #dedede;
     padding: 1px;
     border-radius: 6px;
-}
-
-.modal-content {
-    hr {
-        border-top: 1px dashed #dadada;
-    }
-}
-
-.modal-body {
-    padding: 25px 40px;
 }

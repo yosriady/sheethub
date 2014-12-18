@@ -1,0 +1,19 @@
+#add_buttons {
+    margin-top: 10px;
+
+    button {
+        span {
+            font-size: 18px;
+        }
+
+        em {
+            font-size: 14px;
+        }
+
+        &:hover, &:active, &:focus {
+            background: #5cb85c
+        }
+
+    }
+
+}
