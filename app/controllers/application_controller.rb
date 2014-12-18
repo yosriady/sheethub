@@ -34,14 +34,14 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    session[:previous_url] || root_path
+    session[:previous_url] || root_url
   end
 
   def ensure_registration_finishes
     return if action_name == 'finish_registration'
 
     if current_user && !current_user.finished_registration?
-      redirect_to finish_registration_path
+      redirect_to finish_registration_url
     end
   end
 
