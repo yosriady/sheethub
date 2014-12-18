@@ -32,7 +32,6 @@ class OrdersController < ApplicationController
 
     sheet = Sheet.friendly.find(params[:sheet])
     author = sheet.user
-    # Start Adaptive Payments
     payment_request = build_adaptive_payment_request(sheet, amount)
     payment_response = get_adaptive_payment_response(payment_request)
     if payment_response.success?

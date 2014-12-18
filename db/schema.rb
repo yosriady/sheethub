@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216142806) do
+ActiveRecord::Schema.define(version: 20141218180905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20141216142806) do
     t.integer  "visibility",              default: 0
     t.text     "description_html"
     t.string   "cached_joined_tags"
-    t.boolean  "enable_pdf_stamping",     default: true
+    t.boolean  "enable_pdf_stamping",     default: false
     t.boolean  "pay_what_you_want",       default: false
   end
 
