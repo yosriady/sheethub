@@ -53,22 +53,5 @@
     <%= f.input_field :price, placeholder: "e.g. 2.99", :value => number_to_currency(f.object.price, unit: "", precision: 2) %>
   </div>
 
-<!-- PDF Stamping disabled for now-->
-<!--   <div class="checkbox">
-  <label>
-    <%= f.input_field :enable_pdf_stamping, inline_label: "Stamp PDF with the buyer's info" %>
-  </label>
-  <a href="<%= faq_path %>#help-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
-  </div>
- -->
-
-  <!-- Pay what you want disabled for now -->
-  <!-- <div class="checkbox">
-  <label>
-    <%= f.input_field :pay_what_you_want, inline_label: "Enable Pay-What-You-Want pricing" %>
-  </label>
-  <a href="<%= faq_path %>#help-pay-what-you-want" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
-  </div> -->
-
   <%= f.button :submit, class: "btn btn-success btn-lg btn-block"%>
 <% end %>
