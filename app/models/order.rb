@@ -83,8 +83,12 @@ class Order < ActiveRecord::Base
     royalty_cents.to_f / 100
   end
 
+  def price
+    price_cents.to_f / 100
+  end
+
   def commission
-    amount - royalty
+    (amount - royalty).round(2)
   end
 
   def self.calculate_commission(author, amount)

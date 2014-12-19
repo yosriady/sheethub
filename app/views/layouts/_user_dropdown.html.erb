@@ -9,7 +9,6 @@
     <li><a href="<%= user_profile_url(subdomain:current_user.username) %>"><em class="fa fa-user"></em> Profile</a></li>
     <% if current_user.has_published %><li><a href="<%= user_dashboard_path %>"><em class="fa fa-inbox"></em> Dashboard</a></li><% end %>
     <% if current_user.has_published %><li><a href="<%= user_sales_path %>"><em class="fa fa-line-chart"></em> Sales</a></li><% end %>
-    <% if current_user.pro? %><li><a href="<%= user_private_sheets_path %>"><em class="fa fa-eye-slash"></em> My Private Sheets</a></li><% end %>
     <li><a href="<%= user_trash_path %>"><em class="fa fa-trash"></em> Trash Bin</a></li>
   <% end %>
     <hr>

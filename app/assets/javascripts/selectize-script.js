@@ -33,18 +33,6 @@ $(document).on("page:change", function() {
     $('#sheet_difficulty').selectize({});
     $('#user_timezone').selectize({});
 
-    $('#sheet_visibility').selectize({
-        options: [{
-            "label":'Public',
-            "value":'vpublic'
-        }, {
-            "label":'Private (Visible only to me)',
-            "value":'vprivate'
-        }],
-        valueField: 'value',
-        labelField: 'label'
-    });
-
     $('#sheet_license').selectize({
         options: [{
             "label":'All rights reserved. This title is my original work.',

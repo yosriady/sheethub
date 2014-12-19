@@ -2,13 +2,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   SUCCESS_UPDATE_PROFILE_MESSAGE = "Nice! You've successfully updated your profile."
   FAILURE_UPDATE_PROFILE_MESSAGE = 'Your profile was not successfully updated.'
   ONLY_PRO_MESSAGE = 'That feature is only available to Pro Users. Upgrade to Pro today!'
+  PUBLISHER_ONLY_FEATURE_MESSAGE = "This feature is only available when you have a published sheet."
 
   before_action :validate_user_signed_in, :except => [:new, :create, :profile, :favorites]
-  before_action :validate_user_is_pro, :only => [:private_sheets]
   before_action :disable_for_omniauth, :only => [:edit_password]
   before_action :set_profile_user, :only => [:profile, :favorites]
   before_action :validate_registration_finished
-  before_action :validate_has_published, :only => [:sales]
+  before_action :validate_has_published, :only => [:sales, :dashboard]
   before_action :set_current_user, only: [:edit_password, :edit_membership]
 
   # GET /user/:username
@@ -24,11 +24,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def dashboard
     track('View dashboard')
     @sheets = current_user.sheets.includes(:assets).page(params[:page])
-  end
-
-  def private_sheets
-    track('View private sheets')
-    @private_sheets = current_user.private_sheets.page(params[:page])
   end
 
   def favorites
@@ -71,13 +66,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.update_with_password(password_params)
       sign_in @user, :bypass => true
       flash[:notice] = "Password changed successfully"
-      redirect_to user_password_settings_path
+      redirect_to user_password_settings_url
     else
       render "edit_password"
     end
   end
 
-  # User profile edit/update
   def update
     account_update_params = registration_params
 
@@ -91,7 +85,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.update_attributes(account_update_params)
       set_flash_message :notice, :updated
       sign_in @user, :bypass => true
-      redirect_to user_settings_path
+      redirect_to user_settings_url
     else
       flash[:error] = @user.errors.full_messages.to_sentence
       render "edit"
@@ -109,7 +103,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         redirect_to user_profile_url(subdomain: current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
         flash[:error] = current_user.errors.full_messages.to_sentence
-        redirect_to finish_registration_path, error: FAILURE_UPDATE_PROFILE_MESSAGE
+        redirect_to finish_registration_url, error: FAILURE_UPDATE_PROFILE_MESSAGE
       end
     else
       # Render Form
@@ -123,14 +117,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def validate_user_signed_in
-        redirect_to new_user_session_path unless user_signed_in?
-    end
-
-    def validate_user_is_pro
-      unless current_user.pro?
-        flash[:error] = ONLY_PRO_MESSAGE
-        redirect_to upgrade_path
-      end
+        redirect_to new_user_session_url unless user_signed_in?
     end
 
     def disable_for_omniauth
@@ -161,12 +148,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def validate_registration_finished
-      if params[:action] == "finish_registration" && (!current_user || current_user.finished_registration?)
-        redirect_to root_path
+      if params[:action] == "finish_registration" && (!user_signed_in || current_user.finished_registration?)
+        redirect_to root_url
       end
     end
 
     def validate_has_published
-      redirect_to root_path, notice: "Sales is only available when you have a published sheet." unless current_user.has_published
+      redirect_to root_url, notice: PUBLISHER_ONLY_FEATURE_MESSAGE unless current_user.has_published
     end
 end

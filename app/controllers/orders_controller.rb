@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
       redirect_to redirect_url
     else
       Rails.logger.info "Paypal Order Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
-      if invalid_account_details_error?(payment_response)
+      if invalid_account_details?(payment_response)
         OrderMailer.purchase_failure_email(@order).deliver
         flash[:error] = PURCHASE_INVALID_PAYPAL_EMAIL_MESSAGE
       else
@@ -69,7 +69,6 @@ class OrdersController < ApplicationController
 
   def thank_you
   end
-
 
   def cancel
     track('Cancel sheet purchase')
@@ -117,7 +116,7 @@ class OrdersController < ApplicationController
       return "https://#{Rails.application.secrets.paypal_domain}/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
     end
 
-    def invalid_account_details_error?(pay_response)
+    def invalid_account_details?(pay_response)
       pay_response.error.first.errorId == 580001
     end
 

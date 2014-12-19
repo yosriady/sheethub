@@ -1,34 +1,40 @@
 # Sheet Model
 class Sheet < ActiveRecord::Base
+  include Deduplicatable
+  include Relatable
+
   PDF_DEFAULT_URL = 'nil'
-  DEFAULT_PHASH_TRESHOLD = 5 # TODO: test out for ideal value
   EXPIRATION_TIME = 30
-  PRICE_VALUE_VALIDATION_MESSAGE = 'Price must be either $0 or between $0.99 - $999.99'
   MIN_PRICE = 99
   MAX_PRICE = 99999
-  INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
-  TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
   MAX_FILESIZE = 20
   MAX_NUMBER_OF_TAGS = 5
+  PRICE_VALUE_VALIDATION_MESSAGE = 'Price must be either $0 or between $0.99 - $999.99'
+  INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
+  TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
   HIT_QUOTA_MESSAGE = "You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub."
   PRIVATE_FREE_VALIDATION_MESSAGE = "Private Sheets must be free."
+
+  belongs_to :user
+  has_many :flags, dependent: :destroy
+  before_create :record_publisher_status
+  before_save :validate_free_sheet_quota
+
+  acts_as_votable
+  acts_as_paranoid
+  acts_as_taggable
+  acts_as_taggable_on :composers, :genres, :sources
+  searchkick word_start: [:name]
+  extend FriendlyId
+  friendly_id :sheet_slug, use: :slugged
 
   validate :validate_price
   validate :validate_number_of_tags
   validate :validate_private_sheet_must_be_free
-  before_create :record_publisher
-  before_save :validate_free_sheet_quota
-  belongs_to :user
-  acts_as_votable
-  acts_as_paranoid
-  # before_destroy :soft_destroy_callback
-  searchkick word_start: [:name]
-  extend FriendlyId
-  friendly_id :sheet_slug, use: :slugged
   validates :title, presence: true
   validates :license, presence: true
   validates :visibility, presence: true
-  has_many :flags, dependent: :destroy
+  validates :instruments, presence: true
 
   scope :is_public, -> { where(visibility: Sheet.visibilities[:vpublic]) }
   scope :is_private, -> { where(visibility: Sheet.visibilities[:vprivate]) }
@@ -36,14 +42,12 @@ class Sheet < ActiveRecord::Base
   scope :best_sellers, -> { is_public.order(price_cents: :desc) }
   scope :community_favorites, -> { is_public.order(cached_votes_up: :desc) }
 
-  attr_accessor :instruments_list # For form parsing
   enum visibility: %w{ vpublic vprivate }
   enum difficulty: %w{ beginner intermediate advanced }
   enum license: %w{all_rights_reserved creative_commons cc0 public_domain }
+
+  attr_accessor :instruments_list # For form parsing
   bitmask :instruments, as: [:others, :guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :viola, :oboe, :cello, :bassoon, :organ, :harp, :accordion, :lute, :tuba, :ocarina], null: false
-  validates :instruments, presence: true
-  acts_as_taggable
-  acts_as_taggable_on :composers, :genres, :sources
 
   has_attached_file :pdf,
                     :styles => {
@@ -111,16 +115,16 @@ class Sheet < ActiveRecord::Base
     vprivate?
   end
 
+  def completed_orders
+    Order.where(sheet_id: id, status: Order.statuses[:completed])
+  end
+
   def total_sales
     completed_orders.size * price
   end
 
   def total_earnings
     completed_orders.inject(0) { |total, order| total + order.royalty }
-  end
-
-  def completed_orders
-    Order.where(sheet_id: id, status: Order.statuses[:completed])
   end
 
   def price
@@ -148,7 +152,7 @@ class Sheet < ActiveRecord::Base
   end
 
   def free?
-    price_cents == 0
+    price_cents.zero?
   end
 
   def sheet_slug
@@ -160,36 +164,11 @@ class Sheet < ActiveRecord::Base
 
   def favorited_by(user)
     liked_by user
-    # Disable favorite emails to cut costs
-    # SheetMailer.sheet_favorited_email(self, user).deliver
   end
 
   def unfavorited_by(user)
     unliked_by user
   end
-
-  # Perceptual Hash methods
-  def duplicate?(sheet, treshold=DEFAULT_PHASH_TRESHOLD)
-    if (pdf.present? && sheet.pdf.present?)
-      this = Phashion::Image.new(pdf.url)
-      other = Phashion::Image.new(sheet.pdf.url)
-      this.duplicate?(other, treshold:treshold)
-    end
-  end
-
-  def distance_from(sheet)
-    if (pdf.present? && sheet.pdf.present?)
-      this = Phashion::Image.new(pdf.url)
-      other = Phashion::Image.new(sheet.pdf.url)
-      this.distance_from(other)
-    end
-  end
-
-  def fingerprint
-    this = Phashion::Image.new(pdf.url)
-    this.fingerprint
-  end
-  # END of phash methods
 
   def has_pdf_preview?
     preview_url = pdf_preview_url
@@ -202,34 +181,6 @@ class Sheet < ActiveRecord::Base
 
   def pdf_download_url
     pdf.expiring_url(EXPIRATION_TIME)
-  end
-
-  # TODO: currently related_sheets is limited to 3 results for performance, refactor with ElasticSearch
-  def related_sheets
-    return [] if joined_tags.empty?
-    sql = "
-    SELECT sheets.*, COUNT(tags.id) AS count
-    FROM sheets, tags, taggings
-    WHERE (sheets.id != #{id}
-           AND sheets.id = taggings.taggable_id
-           AND taggings.taggable_type = 'Sheet'
-           AND taggings.tag_id = tags.id
-           AND tags.name IN (#{joined_tags}))
-    GROUP BY sheets.id ORDER BY count DESC
-    LIMIT 3
-    "
-    Rails.cache.fetch("related_sheets_to_#{self}", :expires_in => 1.day) do
-      Sheet.find_by_sql(sql)
-    end
-  end
-
-  def related_tags
-    Rails.cache.fetch("related_tags_to_#{self}", :expires_in => 1.day) do
-      related_sheets = Sheet.tagged_with(joined_tags, :any => true).includes(:sources, :composers, :genres).limit(5)
-      related_tags = Set.new
-      related_sheets.find_each{ |sheet| related_tags.merge sheet.tag_objects }
-      related_tags.to_a
-    end
   end
 
   def self.instruments_to_bitmask(instruments)
@@ -278,7 +229,7 @@ class Sheet < ActiveRecord::Base
       errors.add(:tags, TOO_MANY_TAGS_MESSAGE) unless valid_number
     end
 
-    def record_publisher
+    def record_publisher_status
       user.update_attribute(:has_published, true) unless user.has_published
     end
 end

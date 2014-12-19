@@ -24,7 +24,6 @@ Rails.application.routes.draw do
       # get 'user/:username/favorites' => "users/registrations#favorites", :as => :user_favorites
       match 'users/finish_registration' => 'users/registrations#finish_registration', via: [:get, :patch], :as => :finish_registration
       get 'dashboard' => "users/registrations#dashboard", :as => :user_dashboard
-      get 'private-sheets' => "users/registrations#private_sheets", :as => :user_private_sheets
       get 'sales' => "users/registrations#sales", :as => :user_sales
       get 'library' => "users/registrations#library", :as => :user_library
       get 'trash' => "users/registrations#trash", :as => :user_trash
