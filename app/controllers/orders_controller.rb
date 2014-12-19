@@ -120,20 +120,17 @@ class OrdersController < ApplicationController
     end
 
     def validate_flagged
-      if @sheet.is_flagged
-        flash[:error] = FLAGGED_MESSAGE
-        redirect_to sheets_path
-      end
+      return unless @sheet.is_flagged
+      flash[:error] = FLAGGED_MESSAGE
+      redirect_to sheets_path
     end
 
     def validate_min_amount
-      if @sheet.pay_what_you_want
-        above_minimum = params[:amount].to_f >= @sheet.price
-        unless above_minimum
-          flash[:error] = INVALID_PRICE_MESSAGE
-          redirect_to @sheet
-        end
-      end
+      return unless @sheet.pay_what_you_want
+      above_minimum = params[:amount].to_f >= @sheet.price
+      return if above_minimum
+      flash[:error] = INVALID_PRICE_MESSAGE
+      redirect_to @sheet
     end
 
     def set_sheet
