@@ -1,18 +1,18 @@
 # Encapsulates Orders, an association class between Sheets and Buyers.
 class Order < ActiveRecord::Base
   EXPIRATION_TIME = 600
-  ORDER_UNIQUENESS_VALIDATION_MESSAGE = "Users cannot have multiple orders of the same Sheet."
+  ORDER_UNIQUENESS_VALIDATION_MESSAGE = 'Users cannot have multiple orders of the same Sheet.'
   WATERMARK_PATH = "#{Rails.root}/public/images/watermark.png"
 
   belongs_to :user
   belongs_to :sheet
   enum status: %w(processing completed failed)
   validates :sheet_id, uniqueness: { scope: :user_id,
-                       message: ORDER_UNIQUENESS_VALIDATION_MESSAGE }
+                                   message: ORDER_UNIQUENESS_VALIDATION_MESSAGE }
   has_attached_file :pdf,
-                    :hash_secret => Rails.application.secrets.sheet_hash_secret,
-                    :default_url => Sheet::PDF_DEFAULT_URL
-  validates_attachment_content_type :pdf, :content_type => [ 'application/pdf' ]
+                    hash_secret: Rails.application.secrets.sheet_hash_secret,
+                    default_url: Sheet::PDF_DEFAULT_URL
+  validates_attachment_content_type :pdf, content_type: ['application/pdf']
 
   def complete
     unless completed?
@@ -37,13 +37,13 @@ class Order < ActiveRecord::Base
       processed_page = page.composite(watermark) do |c|
         c.density '300'
         c.alpha 'remove'
-        c.compose "Over"
+        c.compose 'Over'
         c.geometry '+0+20'
         c.gravity "NorthEast"
       end
       processed_page = processed_page.combine_options do |c|
-        c.font "Helvetica"
-        c.gravity "NorthWest"
+        c.font 'Helvetica'
+        c.gravity 'NorthWest'
         c.pointsize 32
         c.draw "text 50,20 'Licensed to #{user.display_name} <#{user.email}>'"
       end
@@ -63,15 +63,15 @@ class Order < ActiveRecord::Base
     File.delete(watermarked) # Delete temp file
   end
 
-  def has_latest_pdf?
+  def latest_pdf?
     return false unless pdf.updated_at
     sheet.pdf.updated_at < pdf.updated_at
   end
 
   def pdf_download_url
-    return false unless completed? # If this evaluates true, user has not completed purchase
+    return false unless completed?
     return sheet.pdf.expiring_url unless sheet.enable_pdf_stamping
-    generate_watermarked_pdf unless has_latest_pdf?
+    generate_watermarked_pdf unless latest_pdf?
     pdf.expiring_url(EXPIRATION_TIME)
   end
 

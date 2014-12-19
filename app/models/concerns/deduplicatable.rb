@@ -2,7 +2,7 @@ module Deduplicatable
   extend ActiveSupport::Concern
 
   included do
-      DEFAULT_PHASH_TRESHOLD = 5 # TODO: test out for ideal value
+    DEFAULT_PHASH_TRESHOLD = 5 # TODO: test out for ideal value
   end
 
   def duplicate?(sheet, treshold=DEFAULT_PHASH_TRESHOLD)
