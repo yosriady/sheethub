@@ -3,17 +3,17 @@ class Sheet < ActiveRecord::Base
   include Deduplicatable
   include Relatable
 
-  PDF_DEFAULT_URL = 'nil'
+  PDF_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
   EXPIRATION_TIME = 30
   MIN_PRICE = 99
-  MAX_PRICE = 99999
+  MAX_PRICE = 999_99
   MAX_FILESIZE = 20
   MAX_NUMBER_OF_TAGS = 5
   PRICE_VALUE_VALIDATION_MESSAGE = 'Price must be either $0 or between $0.99 - $999.99'
   INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
   TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
-  HIT_QUOTA_MESSAGE = "You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub."
-  PRIVATE_FREE_VALIDATION_MESSAGE = "Private Sheets must be free."
+  HIT_QUOTA_MESSAGE = 'You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub.'
+  PRIVATE_FREE_VALIDATION_MESSAGE = 'Private Sheets must be free.'
 
   belongs_to :user
   has_many :flags, dependent: :destroy
@@ -42,59 +42,63 @@ class Sheet < ActiveRecord::Base
   scope :best_sellers, -> { is_public.order(price_cents: :desc) }
   scope :community_favorites, -> { is_public.order(cached_votes_up: :desc) }
 
-  enum visibility: %w{ vpublic vprivate }
-  enum difficulty: %w{ beginner intermediate advanced }
-  enum license: %w{all_rights_reserved creative_commons cc0 public_domain }
+  enum visibility: %w( vpublic vprivate )
+  enum difficulty: %w( beginner intermediate advanced )
+  enum license: %w( all_rights_reserved creative_commons cc0 public_domain )
 
   attr_accessor :instruments_list # For form parsing
-  bitmask :instruments, as: [:others, :guitar, :piano, :bass, :mandolin, :banjo, :ukulele, :violin, :flute, :harmonica, :trombone, :trumpet, :clarinet, :saxophone, :viola, :oboe, :cello, :bassoon, :organ, :harp, :accordion, :lute, :tuba, :ocarina], null: false
+  bitmask :instruments, as: [:others, :guitar, :piano, :bass, :mandolin, :banjo,
+                             :ukulele, :violin, :flute, :harmonica, :trombone,
+                             :trumpet, :clarinet, :saxophone, :viola, :oboe,
+                             :cello, :bassoon, :organ, :harp, :accordion, :lute,
+                             :tuba, :ocarina], null: false
 
   has_attached_file :pdf,
-                    :styles => {
-                      :preview => {:geometry => "", :format => :png}
+                    styles: {
+                      preview: { geometry: '', format: :png }
                     },
-                    :processors => [:preview],
-                    :hash_secret => Rails.application.secrets.sheet_hash_secret,
-                    :default_url => PDF_DEFAULT_URL, #TODO: point to special Missing file route
-                    :preserve_files => "true"
+                    processors: [:preview],
+                    hash_secret: Rails.application.secrets.sheet_hash_secret,
+                    default_url: PDF_DEFAULT_URL,
+                    preserve_files: 'true'
   validates_attachment_content_type :pdf,
-      :content_type => [ 'application/pdf' ]
-  validates_attachment_size :pdf, :in => 0.megabytes..MAX_FILESIZE.megabytes
+                                    content_type: ['application/pdf']
+  validates_attachment_size :pdf, in: 0.megabytes..MAX_FILESIZE.megabytes
   validates :pdf, presence: true
 
-  has_many :assets, :dependent => :destroy
+  has_many :assets, dependent: :destroy
   accepts_nested_attributes_for :assets
   validates_associated :assets,
-    :on => [:create, :update],
-    :message => INVALID_ASSETS_MESSAGE
+                       on: [:create, :update],
+                       message: INVALID_ASSETS_MESSAGE
 
   auto_html_for :description do
     html_escape
     image
-    youtube(:width => "345", :height => 240, :autoplay => false)
-    vimeo(:width => "345", :height => 240)
-    soundcloud(:width => "345", :height => 165, :autoplay => false)
-    link :target => "_blank", :rel => "nofollow"
+    youtube(width: 345, height: 240, autoplay: false)
+    vimeo(width: 345, height: 240)
+    soundcloud(width: 345, height: 165, autoplay: false)
+    link target: '_blank', rel: 'nofollow'
     simple_format
   end
 
   def self.get_best_sellers
-    Rails.cache.fetch("best_sellers", :expires_in => 1.day) do
+    Rails.cache.fetch('best_sellers', expires_in: 1.day) do
       Sheet.includes(:user).best_sellers
     end
   end
 
   def self.get_community_favorites
-    Rails.cache.fetch("community_favorites", :expires_in => 1.day) do
+    Rails.cache.fetch('community_favorites', expires_in: 1.day) do
       Sheet.includes(:user).community_favorites
     end
   end
 
   def verbose_license
-    return "All rights reserved" if all_rights_reserved?
-    return "Creative Commons" if creative_commons?
-    return "Creative Commons Zero" if cc0?
-    return "Public Domain" if public_domain?
+    return 'All rights reserved' if all_rights_reserved?
+    return 'Creative Commons' if creative_commons?
+    return 'Creative Commons Zero' if cc0?
+    return 'Public Domain' if public_domain?
   end
 
   def purchased_by?(user)
@@ -170,7 +174,7 @@ class Sheet < ActiveRecord::Base
     unliked_by user
   end
 
-  def has_pdf_preview?
+  def pdf_preview?
     preview_url = pdf_preview_url
     preview_url.present? && preview_url != PDF_DEFAULT_URL
   end
@@ -192,44 +196,45 @@ class Sheet < ActiveRecord::Base
   end
 
   protected
-    def tags
-      [genre_list, composer_list, source_list].flatten
-    end
 
-    def tag_objects
-      [genres, composers, sources].flatten
-    end
+  def tags
+    [genre_list, composer_list, source_list].flatten
+  end
 
-    # Formatting method for selectize.js usage
-    def format_tags(input)
-      output = ""
-      input.each do |tag|
-        output << "'#{tag}',"
-      end
-      return output[0..-2] # Strip trailing comma
-    end
+  def tag_objects
+    [genres, composers, sources].flatten
+  end
 
-    def validate_private_sheet_must_be_free
-      invalid = self.vprivate? && !self.free?
-      errors.add(:price, PRIVATE_FREE_VALIDATION_MESSAGE) if invalid
+  # Formatting method for selectize.js usage
+  def format_tags(input)
+    output = ''
+    input.each do |tag|
+      output << "'#{tag}',"
     end
+    output[0..-2] # Strip trailing comma
+  end
 
-    def validate_free_sheet_quota
-      invalid_quota = self.free? && user.hit_sheet_quota?
-      errors.add(:sheet_quota, HIT_QUOTA_MESSAGE) if invalid_quota
-    end
+  def validate_private_sheet_must_be_free
+    invalid = self.vprivate? && !self.free?
+    errors.add(:price, PRIVATE_FREE_VALIDATION_MESSAGE) if invalid
+  end
 
-    def validate_price
-      valid_price = price_cents.zero? || price_cents.in?(MIN_PRICE..MAX_PRICE)
-      errors.add(:price, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
-    end
+  def validate_free_sheet_quota
+    invalid_quota = self.free? && user.hit_sheet_quota?
+    errors.add(:sheet_quota, HIT_QUOTA_MESSAGE) if invalid_quota
+  end
 
-    def validate_number_of_tags
-      valid_number = genre_list.size <= MAX_NUMBER_OF_TAGS && source_list.size <= MAX_NUMBER_OF_TAGS && composer_list.size <= MAX_NUMBER_OF_TAGS
-      errors.add(:tags, TOO_MANY_TAGS_MESSAGE) unless valid_number
-    end
+  def validate_price
+    valid_price = price_cents.zero? || price_cents.in?(MIN_PRICE..MAX_PRICE)
+    errors.add(:price, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
+  end
 
-    def record_publisher_status
-      user.update_attribute(:has_published, true) unless user.has_published
-    end
+  def validate_number_of_tags
+    valid_number = genre_list.size <= MAX_NUMBER_OF_TAGS && source_list.size <= MAX_NUMBER_OF_TAGS && composer_list.size <= MAX_NUMBER_OF_TAGS
+    errors.add(:tags, TOO_MANY_TAGS_MESSAGE) unless valid_number
+  end
+
+  def record_publisher_status
+    user.update_attribute(:has_published, true) unless user.has_published
+  end
 end

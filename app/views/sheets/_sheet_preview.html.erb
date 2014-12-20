@@ -1,4 +1,4 @@
-<% if sheet.has_pdf_preview? %>
+<% if sheet.pdf_preview? %>
     <%= image_tag(sheet.pdf_preview_url, title:"This is a preview page. Download high quality PDF and other files from the panel to the right.", class: "sample_sheet") %>
 <% else %>
     <%= image_tag("/assets/missing.png", class: "sample_sheet") %>
