@@ -1,7 +1,5 @@
 # Controller for Orders
 class OrdersController < ApplicationController
-  MARKETPLACE_PAYPAL_EMAIL = 'yosriady-facilitator@gmail.com'
-  DEFAULT_CURRENCY = 'USD'
   SUCCESS_ORDER_PURCHASE_MESSAGE = 'Great success! Thank you for your purchase.'
   CANCEL_ORDER_PURCHASE_MESSAGE = 'Purchase canceled.'
   PURCHASE_INVALID_PAYPAL_EMAIL_MESSAGE = "We could not process your purchase. The uploader's Paypal email is invalid! We've sent the uploader an email. In the meantime, why not take a look at other works on SheetHub?"
@@ -92,7 +90,7 @@ class OrdersController < ApplicationController
       r.feesPayer = 'PRIMARYRECEIVER'
       r.cancelUrl = orders_cancel_url
       r.returnUrl = orders_success_url(tracking_id)
-      r.currencyCode = DEFAULT_CURRENCY
+      r.currencyCode = 'USD'
 
       # Primary receiver (Sheet Owner)
       r.receiverList.receiver[0].amount = amount
@@ -101,7 +99,7 @@ class OrdersController < ApplicationController
 
       # Secondary Receiver (Marketplace)
       r.receiverList.receiver[1].amount = Order.calculate_commission(author, amount)
-      r.receiverList.receiver[1].email = MARKETPLACE_PAYPAL_EMAIL
+      r.receiverList.receiver[1].email = Rails.application.secrets.paypal_username
       r.receiverList.receiver[1].primary = false
       r
     end
