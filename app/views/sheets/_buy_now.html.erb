@@ -30,7 +30,7 @@
         <% if sheet.pay_what_you_want %>
           <div class="input-group input-group-bordered">
           <span class="input-group-addon">$</span>
-            <%= text_field_tag(:amount, number_to_currency(sheet.price, unit: "", precision: 2)) %>
+            <%= text_field_tag(:amount, number_to_currency(sheet.price, unit: "", precision: 2), data: {min: sheet.price}) %>
           </div>
           <div id="add_buttons">
             <button type="button" data-amount="1.00" class="add_button btn btn-success"><em class="fa fa-plus"></em> <span>$1.00</span></button>
@@ -64,11 +64,23 @@
   </div>
 </div>
 <script>
+// BuyNow.js
 $(document).on("page:change", function() {
     $('#amount').maskMoney();
     $('.add_button').click(function(){
-      var newValue = parseFloat($('#amount').val()) + parseFloat($(this).data('amount'));
-      $('#amount').val(newValue.toFixed(2));
+      var newAmount = parseFloat($('#amount').val()) + parseFloat($(this).data('amount'));
+      $('#amount').val(newAmount.toFixed(2));
     })
+
+    // Client side min amount validation
+    $( "#amount" ).change(function() {
+      var currentAmount = parseFloat($('#amount').val());
+      var min = parseFloat($('#amount').data("min"));
+      if (currentAmount < min){
+        $("#paypal-checkout-btn").addClass("disabled");
+      } else {
+        $("#paypal-checkout-btn").removeClass("disabled");
+      }
+    });
 });
 </script>
