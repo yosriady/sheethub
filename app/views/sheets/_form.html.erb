@@ -48,10 +48,16 @@
   <hr>
 
   <%= f.label "Price" %>
-  <div class="input-group">
-  <span class="input-group-addon">$</span>
+  <div class="input-group input-group-bordered">
+    <span class="input-group-addon">$</span>
     <%= f.input_field :price, placeholder: "e.g. 2.99", :value => number_to_currency(f.object.price, unit: "", precision: 2) %>
   </div>
 
   <%= f.button :submit, class: "btn btn-success btn-lg btn-block"%>
 <% end %>
+
+<script>
+$(document).on("page:change", function() {
+  $('#sheet_price').maskMoney();
+});
+</script>

@@ -46,6 +46,9 @@ input[type="submit"] {
 .input-group {
     #amount {
         font-size: 24px;
+    }
+
+    #amount, #sheet_price {
         border-bottom-left-radius: 0px;
         border-top-left-radius: 0px;
     }
