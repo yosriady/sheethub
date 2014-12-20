@@ -185,7 +185,7 @@ class User < ActiveRecord::Base
   def build_display_name
     if first_name.present?
       if last_name.present?
-        '#{first_name} #{last_name}'
+        "#{first_name} #{last_name}"
       else
         first_name
       end
