@@ -1,25 +1,25 @@
 class SubscriptionsController < ApplicationController
-  SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE = ""
+  SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE = 'Upgrade complete! You are now a proud premium SheetHub member. Nice!'
   DOWNGRADE_TO_BASIC_SUBSCRIPTION_MESSAGE = "You've Downgraded to a Basic membership. We're sorry to see you go."
-  CANCEL_UPGRADE_PURCHASE_MESSAGE = "Upgrade purchase canceled."
-  ERROR_UPGRADE_PURCHASE_MESSAGE = "Upgrade purchase error. Please contact support."
+  CANCEL_UPGRADE_PURCHASE_MESSAGE = 'Upgrade purchase canceled.'
+  ERROR_UPGRADE_PURCHASE_MESSAGE = 'Oops! Upgrade purchase error. Please contact support.'
 
   before_action :authenticate_user!
   before_action :validate_membership, only: [:purchase, :checkout, :suspend, :reactivate]
   before_action :validate_existing_membership, only: [:purchase, :checkout, :downgrade]
 
   def purchase
-    track('Visit subscription purchase page', {membership_type: subscriptions_params[:membership]})
+    track('Visit subscription purchase page', { membership_type: subscriptions_params[:membership] })
   end
 
   def checkout
     payment_response = build_payment_response(subscriptions_params[:membership])
 
-    if payment_response.ack == "Success"
+    if payment_response.ack == 'Success'
       # Finds previous in-progress subscription if exists
-      @subscription = Subscription.find_or_initialize_by(membership_type: Subscription.membership_types[subscriptions_params[:membership]], user_id:current_user.id, status: Subscription.statuses[:processing])
+      @subscription = Subscription.find_or_initialize_by(membership_type: Subscription.membership_types[subscriptions_params[:membership]], user_id: current_user.id, status: Subscription.statuses[:processing])
       @subscription.update(tracking_id: payment_response.token)
-      track('Redirected to Paypal for subscription purchase', {membership_type: subscriptions_params[:membership], tracking_id: @subscription.tracking_id})
+      track('Redirected to Paypal for subscription purchase', { membership_type: subscriptions_params[:membership], tracking_id: @subscription.tracking_id })
       redirect_to payment_response.redirect_uri
     else
       Rails.logger.info "Paypal Subscription Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
@@ -35,7 +35,7 @@ class SubscriptionsController < ApplicationController
     if has_previous_subscription
       user_subscriptions.first.destroy
     end
-    track('Completed subscription purchase', {membership_type: subscriptions_params[:membership], tracking_id: @subscription.tracking_id})
+    track('Completed subscription purchase', { membership_type: subscriptions_params[:membership], tracking_id: @subscription.tracking_id })
     render action: 'thank_you', notice: SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE
   end
 
@@ -46,7 +46,7 @@ class SubscriptionsController < ApplicationController
   def downgrade
     track('Attempted downgrade')
     if current_user.hit_sheet_quota_for_basic?
-      flash[:error] = "You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets."
+      flash[:error] = 'You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets.'
       redirect_to user_membership_settings_path
     else
       membership = subscriptions_params[:membership]
@@ -60,76 +60,74 @@ class SubscriptionsController < ApplicationController
   end
 
   private
-    def finalize_new_subscription(request)
-      token = parseTokenFromQueryString(request)
-      subscription = Subscription.find_by(tracking_id: token)
-      payment_request = build_payment_request(subscription.membership_type)
-      profile = Paypal::Payment::Recurring.new(
-        :start_date => Time.now,
-        :description => Subscription.billing_agreement_description(subscription.membership_type),
-        :auto_bill => 'AddToNextBilling',
-        :billing => {
-          :period        => :Month,
-          :frequency     => 1,
-          :amount        => Subscription.subscription_amount(subscription.membership_type)
-        }
-      )
-      response = Subscription.paypal_request.subscribe!(token, profile)
-      subscription.complete(response.recurring.identifier)
-      return subscription
-    end
 
-    def parseTokenFromQueryString(request)
-      request.query_parameters["token"]
-    end
-
-    def paypal_options
-      return {
-        no_shipping: true,
-        allow_note: false,
-        pay_on_paypal: true
+  def finalize_new_subscription(request)
+    token = parse_token(request)
+    subscription = Subscription.find_by(tracking_id: token)
+    profile = Paypal::Payment::Recurring.new(
+      start_date: Time.now,
+      description: Subscription.billing_agreement_description(subscription.membership_type),
+      auto_bill: 'AddToNextBilling',
+      billing: {
+        period: :Month,
+        frequency: 1,
+        amount: Subscription.subscription_amount(subscription.membership_type)
       }
-    end
+    )
+    response = Subscription.paypal_request.subscribe!(token, profile)
+    subscription.complete(response.recurring.identifier)
+    subscription
+  end
 
-    def build_payment_request(membership_type)
-      Paypal::Payment::Request.new(
-        :billing_type  => :RecurringPayments,
-        :billing_agreement_description => Subscription.billing_agreement_description(membership_type)
-      )
-    end
+  def parse_token(request)
+    request.query_parameters['token']
+  end
 
-    def build_payment_response(membership_type)
-      payment_request = build_payment_request(subscriptions_params[:membership])
-      payment_response = paypal_request.setup(
-                          payment_request,
-                          subscriptions_success_url,
-                          subscriptions_cancel_url
-                        )
-    end
+  def paypal_options
+    {
+      no_shipping: true,
+      allow_note: false,
+      pay_on_paypal: true
+    }
+  end
 
-    def validate_membership
-      unless subscriptions_params[:membership].in? ['plus', 'pro']
-        flash[:error] = "Membership type does not exist"
-        redirect_to upgrade_path
-      end
-    end
+  def build_payment_request(membership_type)
+    Paypal::Payment::Request.new(
+      billing_type: :RecurringPayments,
+      billing_agreement_description: Subscription.billing_agreement_description(membership_type)
+    )
+  end
 
-    def validate_existing_membership
-      if current_user.membership_type == subscriptions_params[:membership]
-        flash[:error] = "You are already a #{current_user.membership_type.titleize} member."
-        redirect_to upgrade_path
-      end
-    end
+  def build_payment_response(membership_type)
+    payment_request = build_payment_request(membership_type)
+    paypal_request.setup(
+      payment_request,
+      subscriptions_success_url,
+      subscriptions_cancel_url
+    )
+  end
 
-    def paypal_request
-      Paypal::Express::Request.new(
-        :username   => Rails.application.secrets.paypal_username,
-        :password   => Rails.application.secrets.paypal_password,
-        :signature  => Rails.application.secrets.paypal_signature
-      )
-    end
+  def validate_membership
+    return if subscriptions_params[:membership].in? %w('plus', 'pro')
+    flash[:error] = 'Membership type does not exist'
+    redirect_to upgrade_path
+  end
 
-    def subscriptions_params
-      params.permit(:membership, :_method, :authenticity_token)
-    end
+  def validate_existing_membership
+    return unless current_user.membership_type == subscriptions_params[:membership]
+    flash[:error] = 'You are already a #{current_user.membership_type.titleize} member.'
+    redirect_to upgrade_path
+  end
+
+  def paypal_request
+    Paypal::Express::Request.new(
+      username: Rails.application.secrets.paypal_username,
+      password: Rails.application.secrets.paypal_password,
+      signature: Rails.application.secrets.paypal_signature
+    )
+  end
+
+  def subscriptions_params
+    params.permit(:membership, :_method, :authenticity_token)
+  end
 end
