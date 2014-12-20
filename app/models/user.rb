@@ -1,6 +1,7 @@
+# User model
 class User < ActiveRecord::Base
-  AVATAR_HASH_SECRET = "sheethubhashsecret"
-  MISSING_AVATAR_URL = "default_avatar.png"
+  AVATAR_HASH_SECRET = 'sheethubhashsecret'
+  MISSING_AVATAR_URL = 'default_avatar.png'
   EXPIRATION_TIME = 600
   BASIC_FREE_SHEET_QUOTA = 25
   PLUS_FREE_SHEET_QUOTA = 75
@@ -10,11 +11,11 @@ class User < ActiveRecord::Base
   PRO_ROYALTY_PERCENTAGE = 0.85
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
-  INVALID_MEMBERSHIP_TYPE_MESSAGE = "Membership type does not exist"
-  MISSING_SUBSCRIPTION_OBJECT_MESSAGE = "Error: Subscription object missing. Contact support."
+  INVALID_MEMBERSHIP_TYPE_MESSAGE = 'Membership type does not exist'
+  MISSING_SUBSCRIPTION_OBJECT_MESSAGE = 'Error: Subscription object missing. Contact support.'
 
-  enum membership_type: %w{ basic plus pro staff }
-  validates :username, presence: true, uniqueness: {case_sensitive: false}, if: :finished_registration?
+  enum membership_type: %w( basic plus pro staff )
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, if: :finished_registration?
   validates_acceptance_of :terms, acceptance: true
   validates_email_format_of :email, message: 'You have an invalid email address'
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
@@ -25,18 +26,20 @@ class User < ActiveRecord::Base
   after_save :update_mixpanel_profile
 
   has_attached_file :avatar,
-                    :convert_options => {
-                        :original => "-strip"},
-                    :hash_secret => AVATAR_HASH_SECRET,
-                    :default_url => MISSING_AVATAR_URL
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-  validates :avatar, :dimensions => { width: AVATAR_MAX_WIDTH, height: AVATAR_MAX_HEIGHT }
+                    convert_options: {
+                      original: '-strip'
+                    },
+                    hash_secret: AVATAR_HASH_SECRET,
+                    default_url: MISSING_AVATAR_URL
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates :avatar, dimensions: { width: AVATAR_MAX_WIDTH,
+                                   height: AVATAR_MAX_HEIGHT }
   attr_accessor :remove_avatar
 
   # Devise modules
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
-  devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+         :trackable, :validatable, :confirmable, :lockable
+  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   def royalty_percentage
     return BASIC_ROYALTY_PERCENTAGE if basic?
@@ -47,28 +50,30 @@ class User < ActiveRecord::Base
   def self.free_sheet_quota_of(membership_type)
     m = membership_type.downcase
     raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
-    return BASIC_FREE_SHEET_QUOTA if m == "basic"
-    return PLUS_FREE_SHEET_QUOTA if m == "plus"
-    return PRO_FREE_SHEET_QUOTA if m == "pro"
+    return BASIC_FREE_SHEET_QUOTA if m == 'basic'
+    return PLUS_FREE_SHEET_QUOTA if m == 'plus'
+    return PRO_FREE_SHEET_QUOTA if m == 'pro'
   end
 
   def update_membership_to(membership_type)
     m = membership_type.downcase
     raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
-    raise MISSING_SUBSCRIPTION_OBJECT_MESSAGE unless has_subscription_for_membership(membership_type) || membership_type == "basic"
+    raise MISSING_SUBSCRIPTION_OBJECT_MESSAGE unless has_subscription_for_membership(membership_type) || basic?
     update(membership_type: m, sheet_quota: User.free_sheet_quota_of(m))
   end
 
   def has_subscription_for_membership(membership_type)
-    Subscription.find_by(user:self, membership_type:Subscription.membership_types[membership_type], status: Subscription.statuses[:completed]).present?
+    Subscription.find_by(user: self,
+                         membership_type:Subscription.membership_types[membership_type],
+                         status: Subscription.statuses[:completed]).present?
   end
 
   def premium_subscription
-    Subscription.find_by(user:self, status: Subscription.statuses[:completed])
+    Subscription.find_by(user: self, status: Subscription.statuses[:completed])
   end
 
   def completed_subscriptions
-    Subscription.where(user:self, status: Subscription.statuses[:completed]).order(:updated_at)
+    Subscription.where(user: self, status: Subscription.statuses[:completed]).order(:updated_at)
   end
 
   def premium?
@@ -76,7 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def joined_at
-    created_at.strftime "%B %Y"
+    created_at.strftime '%B %Y'
   end
 
   def display_name
@@ -121,7 +126,7 @@ class User < ActiveRecord::Base
       total_sales = sheet.total_sales
       result[sheet.title] = total_sales if total_sales > 0
     end
-    return result
+    result
   end
 
   def aggregated_earnings
@@ -129,7 +134,7 @@ class User < ActiveRecord::Base
   end
 
   def sales_past_month
-    sales.where("purchased_at >= ?", 1.month.ago.utc)
+    sales.where('purchased_at >= ?', 1.month.ago.utc)
   end
 
   def earnings_past_month
@@ -161,15 +166,15 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.skip_confirmation!
 
       # Get normal quality picture if using omniauth-facebook
-      if auth.provider == "facebook"
-        user.image = auth.info.image + "?type=large"
+      if auth.provider == 'facebook'
+        user.image = auth.info.image + '?type=large'
       else
         user.image = auth.info.image
       end
@@ -180,7 +185,7 @@ class User < ActiveRecord::Base
   def build_display_name
     if first_name.present?
       if last_name.present?
-        "#{first_name} #{last_name}"
+        '#{first_name} #{last_name}'
       else
         first_name
       end
@@ -196,5 +201,4 @@ class User < ActiveRecord::Base
   def update_mixpanel_profile
     Analytics.update_profile(self)
   end
-
 end
