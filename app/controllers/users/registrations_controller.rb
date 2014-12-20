@@ -151,7 +151,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def validate_registration_finished
-    finished = !user_signed_in || current_user.finished_registration?
+    finished = !user_signed_in? || current_user.finished_registration?
     if (params[:action] == 'finish_registration') && finished
       redirect_to root_url
     end
