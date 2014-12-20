@@ -15,13 +15,12 @@ class Order < ActiveRecord::Base
   validates_attachment_content_type :pdf, content_type: ['application/pdf']
 
   def complete
-    unless completed?
-      update(status: Order.statuses[:completed], purchased_at: Time.zone.now)
-      sheet.increment!(:total_sold)
-      OrderMailer.purchase_receipt_email(self).deliver
-      OrderMailer.sheet_purchased_email(self).deliver
-      Analytics.track_charge(self)
-    end
+    return if completed?
+    update(status: Order.statuses[:completed], purchased_at: Time.zone.now)
+    sheet.increment!(:total_sold)
+    OrderMailer.purchase_receipt_email(self).deliver
+    OrderMailer.sheet_purchased_email(self).deliver
+    Analytics.track_charge(self)
   end
 
   def generate_watermarked_pdf
@@ -39,7 +38,7 @@ class Order < ActiveRecord::Base
         c.alpha 'remove'
         c.compose 'Over'
         c.geometry '+0+20'
-        c.gravity "NorthEast"
+        c.gravity 'NorthEast'
       end
       processed_page = processed_page.combine_options do |c|
         c.font 'Helvetica'

@@ -55,7 +55,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit_membership
     track('View membership settings')
     subscription = current_user.premium_subscription
-    @payment_details = subscription.get_payment_details if subscription.present?
+    @payment_details = subscription.payment_details if subscription.present?
   end
 
   def edit_password
