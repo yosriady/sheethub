@@ -31,7 +31,7 @@ class Asset < ActiveRecord::Base
   end
 
   def expiring_url(time = EXPIRATION_TIME)
-    return unless if s3_object
+    return unless s3_object
     s3_object.url_for(:read, expires: time).to_s
   end
 

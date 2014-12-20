@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_registration_finishes
     return if action_name == 'finish_registration'
-    return if !user_signed_in? || current_user.finished_registration
+    return if !user_signed_in? || current_user.finished_registration?
     redirect_to finish_registration_url
   end
 
