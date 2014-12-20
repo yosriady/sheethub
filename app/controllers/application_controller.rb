@@ -8,26 +8,26 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   before_filter :set_timezone
 
-  def track(event_name, data={})
+  def track(event_name, data = {})
     identifier = (user_signed_in? ? current_user.id : session.id)
     Analytics.track(identifier, event_name, data)
   end
 
   def set_timezone
     tz = current_user ? current_user.timezone : nil
-    Time.zone = tz || ActiveSupport::TimeZone["UTC"]
+    Time.zone = tz || ActiveSupport::TimeZone['UTC']
   end
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
     return unless request.get?
-    if (request.path != "/users/sign_in" &&
-        request.path != "/users/sign_up" &&
-        request.path != "/users/password/new" &&
-        request.path != "/users/password/edit" &&
-        request.path != "/users/confirmation" &&
-        request.path != "/users/finish_registration" &&
-        request.path != "/users/sign_out" &&
+    if (request.path != '/users/sign_in' &&
+        request.path != '/users/sign_up' &&
+        request.path != '/users/password/new' &&
+        request.path != '/users/password/edit' &&
+        request.path != '/users/confirmation' &&
+        request.path != '/users/finish_registration' &&
+        request.path != '/users/sign_out' &&
         !request.xhr?) # don't store ajax calls
       session[:previous_url] = request.fullpath
     end
@@ -39,10 +39,8 @@ class ApplicationController < ActionController::Base
 
   def ensure_registration_finishes
     return if action_name == 'finish_registration'
-
-    if current_user && !current_user.finished_registration?
-      redirect_to finish_registration_url
-    end
+    return if !user_signed_in? || current_user.finished_registration
+    redirect_to finish_registration_url
   end
 
   def not_found
@@ -50,7 +48,8 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) << :username
-    end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :username
+  end
 end
