@@ -168,6 +168,7 @@ class Sheet < ActiveRecord::Base
 
   def favorited_by(user)
     liked_by user
+    SheetMailer.sheet_favorited_email(self, user).deliver
   end
 
   def unfavorited_by(user)
