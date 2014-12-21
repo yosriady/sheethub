@@ -13,7 +13,6 @@ gem 'passenger'
 # gem 'dalli'
 
 # HTML Emails
-gem 'roadie'
 gem 'roadie-rails'
 
 # Event Analytics
