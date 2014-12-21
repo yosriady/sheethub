@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
 
       # Secondary Receiver (Marketplace)
       r.receiverList.receiver[1].amount = Order.calculate_commission(author, amount)
-      r.receiverList.receiver[1].email = Rails.application.secrets.paypal_username
+      r.receiverList.receiver[1].email = Rails.application.secrets.paypal_email
       r.receiverList.receiver[1].primary = false
       r
     end
@@ -114,7 +114,7 @@ class OrdersController < ApplicationController
     end
 
     def invalid_account_details?(pay_response)
-      pay_response.error.first.errorId == 580001
+      pay_response.error.first.errorId.in? [580001, 520009]
     end
 
     def validate_flagged

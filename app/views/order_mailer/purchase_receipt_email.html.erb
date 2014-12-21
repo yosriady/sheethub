@@ -2,26 +2,38 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= stylesheet_link_tag "email" %>
   </head>
-  <body>
-    <p>Dear <%= @buyer.display_name %>, </p>
-    <p>Thank you for purchasing <strong><%= @sheet.title %></strong>. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. You can directly download the files from the sheet page <%= link_to 'here', sheet_url(@sheet) %>. Enjoy!
-    </p>
-    <p>This email message will serve as your receipt.</p>
+  <body id="email">
+    <h2><a href="<%= root_url %>">SheetHub</a></h2>
+    <div class="container">
+      <h1>Thank you for your purchase!</h1>
+      <p>Hi <%= @buyer.display_name %>, </p>
+      <p><strong>Thank you for purchasing <%= @sheet.title %></strong>. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. You can directly download the files from the sheet page <%= link_to 'here', sheet_url(@sheet) %>. Enjoy!
+      </p>
+      <p>This email message will serve as your receipt.</p>
 
-    <hr>
-    <strong>Payment Info</strong>
-    <p>Sheet Purchased: <%= link_to @sheet.title, sheet_url(@sheet) %></p>
-    <p>Amount paid: <%= number_to_currency(@order.amount) %></p>
-    <p>Tracking Id: <%= @order.tracking_id %></p>
-    <p>Purchase Date: <%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
-    <hr>
-    <p>
-      To access all your purchases, log in to SheetHub and go to your <%= link_to "Library", user_library_url %>.
-    </p>
-    <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
+      <div class="payment-summary">
+          <h3>Payment Summary</h3>
+          <em>Sheet Purchased</em>
+          <p><%= link_to @sheet.title, sheet_url(@sheet) %></p>
+          <em>Purchase Date</em>
+          <p><%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
+          <em>Amount Paid</em>
+          <p><%= number_to_currency(@order.amount) %></p>
+          <em>Tracking Id</em>
+          <p><%= @order.tracking_id %></p>
+      </div>
 
-    <p>Cheers,</p>
-    <p>SheetHub</p>
+      <p>
+        To access all your purchases, log in to SheetHub and go to <%= link_to "My Library", user_library_url %>.
+      </p>
+      <a href="<%= user_library_url %>" class="btn"> View My Library</a>
+      <p>For help and product support, please visit our <%= link_to "Help Center", faq_url %>.</p>
+
+      <p>Cheers,</p>
+      <p>SheetHub</p>
+    </div>
+    <p class="footer">Sent with &hearts; from SheetHub</p>
   </body>
 </html>

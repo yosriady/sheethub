@@ -83,6 +83,8 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colored (1.2)
+    css_parser (1.3.5)
+      addressable
     daemon_controller (1.2.0)
     debug_inspector (0.0.2)
     devise (3.4.1)
@@ -268,6 +270,12 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rinku (1.5.1)
+    roadie (3.0.2)
+      css_parser (~> 1.3.4)
+      nokogiri (~> 1.6.0)
+    roadie-rails (1.0.3)
+      rails (>= 3.0, < 4.2)
+      roadie (~> 3.0)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -399,6 +407,8 @@ DEPENDENCIES
   rails (= 4.1.1)
   rails_12factor
   rails_best_practices
+  roadie
+  roadie-rails
   rspec
   rspec-rails
   s3_direct_upload

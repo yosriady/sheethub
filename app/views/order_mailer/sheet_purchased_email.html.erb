@@ -2,24 +2,38 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= stylesheet_link_tag "email" %>
   </head>
   <body>
-    <p>Dear <%= @publisher.display_name %>, </p>
-    <p>Woohoo! You've made a sale! <%= link_to @sheet.title, sheet_url(@sheet) %> was bought by <%= link_to @buyer.display_name, user_profile_url(@buyer.username) %>.
-    </p>
-    <p>This email message will serve as your receipt.</p>
-    <hr>
-    <strong>Payment Info</strong>
-    <p>Sheet Purchased: <%= link_to @sheet.title, sheet_url(@sheet) %></p>
-    <p>Amount Paid: <%= number_to_currency(@order.amount) %></p>
-    <p>Estimated Earnings (before PayPal fees): <%= number_to_currency(@order.royalty) %></p>
-    <p>Tracking Id: <%= @order.tracking_id %></p>
-    <p>Purchase Date: <%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
-    <hr>
-    <p>You can view more sales details from the <a href="<%= user_sales_url %>"> Sales</a> dashboard.</p>
-    <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
+    <h2><a href="<%= root_url %>">SheetHub</a></h2>
+    <div class="container">
+        <h1>Congratulations!</h1>
+        <p>Hi <%= @publisher.display_name %>, </p>
+        <p>Good news! <strong>You've made a sale!</strong> <%= link_to @sheet.title, sheet_url(@sheet) %> was bought by <%= link_to @buyer.display_name, user_profile_url(@buyer.username) %>.
+        </p>
+        <p>This email message will serve as your receipt.</p>
 
-    <p>Cheers,</p>
-    <p>SheetHub</p>
+        <div class="payment-summary">
+            <h3>Payment Summary</h3>
+            <em>Sheet Purchased</em>
+            <p><%= link_to @sheet.title, sheet_url(@sheet) %></p>
+            <em>Purchase Date</em>
+            <p><%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
+            <em>Amount Paid</em>
+            <p><%= number_to_currency(@order.amount) %></p>
+            <em>Estimated Earnings</em>
+            <p><%= number_to_currency(@order.royalty) %></p>
+            <em>Tracking Id</em>
+            <p><%= @order.tracking_id %></p>
+        </div>
+
+        <p>You can view more sales details from the <a href="<%= user_sales_url %>"> Sales</a> dashboard.</p>
+        <a href="<%= user_sales_url %>" class="btn"> View Sales</a>
+        <p>For help and product support, please visit our <%= link_to "Help Center", faq_url %>.</p>
+
+        <p>Cheers,</p>
+        <p>SheetHub</p>
+    </div>
+    <p class="footer">Sent with &hearts; from SheetHub</p>
   </body>
 </html>

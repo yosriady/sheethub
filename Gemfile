@@ -12,6 +12,10 @@ gem 'passenger'
 # Memcached
 # gem 'dalli'
 
+# HTML Emails
+gem 'roadie'
+gem 'roadie-rails'
+
 # Event Analytics
 gem 'mixpanel-ruby'
 

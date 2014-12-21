@@ -2,15 +2,21 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= stylesheet_link_tag "email" %>
   </head>
   <body>
-    <p>Dear <%= @publisher.display_name %>, </p>
-    <p>Woohoo! <%= link_to @user.display_name, user_profile_url(@user.username) %> favorited <%= link_to @sheet.title, sheet_url(@sheet) %>!
-    </p>
+    <h2><a href="<%= root_url %>">SheetHub</a></h2>
+    <div class="container">
+      <h1>You have a new fan!</h1>
+      <p>Hi <%= @publisher.display_name %>, </p>
+      <p>Nice! <%= link_to @user.display_name, user_profile_url(@user.username) %> favorited your work, <%= link_to @sheet.title, sheet_url(@sheet) %>! Share your work to get more fans.
+      </p>
+      <a href="<%= favorites_sheet_path(@sheet) %>" class="btn">View More Fans of <%= @sheet.title %></a>
+      <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
 
-    <p>For help or product support, please visit <%= link_to "SheetHub Help", faq_url %>.</p>
-
-    <p>Cheers,</p>
-    <p>SheetHub</p>
+      <p>Cheers,</p>
+      <p>SheetHub</p>
+    </div>
+    <p class="footer">Sent with &hearts; from SheetHub</p>
   </body>
 </html>
