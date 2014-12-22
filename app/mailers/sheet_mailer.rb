@@ -9,7 +9,7 @@ class SheetMailer < ActionMailer::Base
     @sheet = sheet
     @publisher = sheet.user
     email_with_name = "#{@publisher.display_name} <#{@publisher.email}>"
-    mail(to: email_with_name, subject: 'Sheet Favorited')
+    mail(to: email_with_name, subject: 'You have a new fan!')
   end
 
 end
