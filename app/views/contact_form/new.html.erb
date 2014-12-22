@@ -13,7 +13,7 @@ keywords %w(contact support)
   <div class="row">
 
     <div class="col-xs-8 white-container">
-        <%= simple_form_for(@contact, html: { class:'sleek-form' }, defaults: { class:'big-form', input_html: { class: 'form-control' }}) do |f| %>
+        <%= simple_form_for(@contact, html: { class:'sleek-form' }, defaults: { input_html: { class: 'form-control' }}) do |f| %>
           <%= f.input :name, label: 'Your Name', required: true %>
           <%= f.input :email, required: true %>
           <%= f.input :subject, required: true %>

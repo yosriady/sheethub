@@ -105,7 +105,7 @@ The Public Domain Mark is recommended for works that are free of known copyright
   <h4><em class="fa fa-info-circle"></em> Miscellaneous</h4>
     <%= render "faq_item", id:"howto-help", question: "How can I help build this community?", answer: "We want SheetHub to become a vibrant community and for you to feel like a part of it all. Any contributions you make would be awesome. You can help by giving feedback & suggestions, following the #{link_to 'Community Guidelines', community_guidelines_url }, helping us spread the word, and sharing your performances! You shape the future of SheetHub!" %>
     <%= render "faq_item", id:"feature-request", question: "I have a feature I'd like to see. How do I let you know?", answer: "Be sure to leave your ideas, comments, and suggestions on our #{link_to "Community Hub", "https://admin.userreport.com/Websites/CrowdIntelligenceExample.aspx?WebsiteId=78c6cc74-05f2-4833-804c-c7acf9e3c9a7#ci/ideas"}. Help decide what we build next. You shape the future of SheetHub!" %>
-    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to "This person.", "https://github.com/Leventhan"} I’m primarily a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for written music and have been disappointed so far, so I decided to try my hand at building one. <a href='mailto:support@sheethub.co'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's continuous development. " %>
+    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to "This person.", "https://github.com/Leventhan"} I’m primarily a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for written music and have been disappointed so far, so I decided to try my hand at building one. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's continuous development. " %>
     <%= render "faq_item", id:"missing-question", question: "My question wasn't on here!", answer: "<a href='mailto:support@sheethub.co'>Let us know.</a> " %>
 </div>
 
@@ -114,9 +114,8 @@ The Public Domain Mark is recommended for works that are free of known copyright
 <div class="col-xs-4">
     <div class="bg-info blurb"><strong><em class="fa fa-info-circle"></em> Alpha</strong> <p>We are currently in public alpha, which means things may not work perfectly – yet. If you encounter something that looks broken, please let us know!</p></div>
     <hr>
-    <div class="well">
-        <a href="mailto:support@sheethub.co" class="btn btn-block btn-default" target="_blank"><em class="fa fa-paper-plane-o"></em> Contact Us</a>
-    </div>
+    <a href="<%= contact_url %>" class="btn btn-block btn-default">Contact Us</a>
+    <hr>
     <div class="panel panel-default">
         <%= render 'layouts/twitter_widget' %>
         <%= render 'layouts/facebook_widget' %>
