@@ -24,5 +24,9 @@ module Sheethub
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true
     ActsAsTaggableOn.force_parameterize = true
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
