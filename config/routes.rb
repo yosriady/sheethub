@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   defaults subdomain: 'www' do
-    mount_griddler
-
     get 'upgrade/purchase/:membership', to: 'subscriptions#purchase', as: 'subscriptions_purchase'
     post 'upgrade/checkout/:membership', to: 'subscriptions#checkout', as: 'subscriptions_checkout'
     get 'upgrade/cancel', to: 'subscriptions#cancel', as: 'subscriptions_cancel'

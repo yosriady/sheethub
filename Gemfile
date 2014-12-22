@@ -15,10 +15,6 @@ gem 'sidekiq'
 # Memcached
 # gem 'dalli'
 
-# Inbound email processing
-gem 'griddler'
-gem 'griddler-mandrill'
-
 # HTML Emails
 gem 'roadie-rails'
 
