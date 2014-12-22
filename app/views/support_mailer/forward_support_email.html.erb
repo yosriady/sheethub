@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= render 'layouts/email_styles' %>
+  </head>
+  <body>
+    <h2><a href="<%= root_url %>">SheetHub</a></h2>
+    <div class="container">
+        <h1>Somebody needs support.</h1>
+        <div class="payment-summary">
+            <h3>Email Summary</h3>
+            <em>To</em>
+            <p><%= @email.to %></p>
+            <em>From</em>
+            <p><%= @email.from %></p>
+            <em>CC</em>
+            <p><%= @email.cc %></p>
+            <em>Subject</em>
+            <p><%= @email.subject %></p>
+            <em>Body</em>
+            <p><%= @email.body %></p>
+            <em>Attachments</em>
+            <p><%= @email.attachments %></p>
+            <em>Headers</em>
+            <p><%= @email.headers %></p>
+        </div>
+    </body>
+</html>

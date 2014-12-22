@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
     else
       Rails.logger.info "Paypal Order Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
       if invalid_account_details?(payment_response)
-        OrderMailer.purchase_failure_email(@order).deliver_later
+        OrderMailer.purchase_failure_email(@order).deliver
         flash[:error] = PURCHASE_INVALID_PAYPAL_EMAIL_MESSAGE
       else
         flash[:error] = "We could not process your purchase. #{payment_response.error.first.message}"
