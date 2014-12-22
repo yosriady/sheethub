@@ -15,6 +15,9 @@ gem 'sidekiq'
 # Memcached
 # gem 'dalli'
 
+# Contact Form
+gem 'mail_form'
+
 # HTML Emails
 gem 'roadie-rails'
 

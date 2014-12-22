@@ -166,6 +166,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mail_form (1.5.0)
+      actionmailer (>= 3.2, < 5)
+      activemodel (>= 3.2, < 5)
     maskmoney-rails (3.0.2.0)
     metamagic (3.1.6)
       rails (>= 3.0.0)
@@ -410,6 +413,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   letter_opener
+  mail_form
   maskmoney-rails
   metamagic
   mini_magick (= 4.0.0.rc)

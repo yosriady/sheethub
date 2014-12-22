@@ -74,5 +74,8 @@ Rails.application.routes.draw do
     get '/privacy-policy', to: 'pages#privacy', as: 'privacy'
     get '/community-guidelines', to: 'pages#community_guidelines'
     get '/upgrade', to: 'pages#upgrade'
+
+    get '/contact', to: 'contact_form#new', as: 'contact'
+    post '/contact', to: 'contact_form#create', as: 'contact_forms'
   end
 end

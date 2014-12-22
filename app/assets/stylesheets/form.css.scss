@@ -53,3 +53,24 @@ input[type="submit"] {
         border-top-left-radius: 0px;
     }
 }
+
+form.sleek-form {
+    padding: 20px;
+
+    .control-group {
+        margin-bottom: 10px;
+
+        label {
+            font-weight: normal;
+        }
+
+        .controls input {
+            padding: 20px;
+            font-size: 18px;
+        }
+    }
+
+    input[type="submit"] {
+        text-transform: uppercase;
+    }
+}
