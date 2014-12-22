@@ -64,9 +64,11 @@ form.sleek-form {
             font-weight: normal;
         }
 
-        .controls input {
-            padding: 20px;
-            font-size: 18px;
+        .controls {
+            input, textarea {
+                padding: 20px 15px;
+                font-size: 18px;
+            }
         }
     }
 
