@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= render 'layouts/email_styles' %>
   </head>
-  <body id="email">
+  <body>
     <p>Dear <%= @buyer.display_name %>, </p>
     <p>Congratulations on your new SheetHub <strong><%= @membership_type %></strong> Membership! You can now enjoy up to <%= @buyer.sheet_quota %> free sheet uploads, unlimited commercial uploads, and many additional features. Enjoy! Thank you for your support!</p>
     <p>This email message will serve as your receipt.</p>

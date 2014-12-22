@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <%= stylesheet_link_tag "email" %>
+    <%= render 'layouts/email_styles' %>
   </head>
-  <body id="email">
+  <body>
     <h2><a href="<%= root_url %>">SheetHub</a></h2>
     <div class="container">
       <h1 class="error">We've encountered a problem.</h1>
