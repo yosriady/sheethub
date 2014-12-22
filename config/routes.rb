@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   defaults subdomain: 'www' do
+    get "/email_processor", to: proc { [200, {}, ["OK"]] }, as: "mandrill_head_test_request"
+
     get 'upgrade/purchase/:membership', to: 'subscriptions#purchase', as: 'subscriptions_purchase'
     post 'upgrade/checkout/:membership', to: 'subscriptions#checkout', as: 'subscriptions_checkout'
     get 'upgrade/cancel', to: 'subscriptions#cancel', as: 'subscriptions_cancel'
