@@ -27,7 +27,6 @@ gem 'mixpanel-ruby'
 
 # Application Monitoring
 gem 'newrelic_rpm'
-gem 'opbeat'
 
 # HTML Embed Links
 gem 'auto_html'
