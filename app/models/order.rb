@@ -18,8 +18,8 @@ class Order < ActiveRecord::Base
     return if completed?
     update(status: Order.statuses[:completed], purchased_at: Time.zone.now)
     sheet.increment!(:total_sold)
-    OrderMailer.purchase_receipt_email(self).deliver
-    OrderMailer.sheet_purchased_email(self).deliver
+    OrderMailer.purchase_receipt_email(self).deliver_later
+    OrderMailer.sheet_purchased_email(self).deliver_later
     Analytics.track_charge(self)
   end
 

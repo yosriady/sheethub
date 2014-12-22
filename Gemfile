@@ -9,6 +9,9 @@ gem 'pg'
 # Application Server
 gem 'passenger'
 
+# Background processing
+gem 'sidekiq'
+
 # Memcached
 # gem 'dalli'
 
@@ -41,9 +44,6 @@ gem 'validates_email_format_of'
 
 # Soft Deletion
 gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
-
-# Static code analysis
-# gem 'rubocop'
 
 # Search
 gem 'searchkick'
