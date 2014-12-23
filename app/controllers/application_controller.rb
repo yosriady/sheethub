@@ -7,6 +7,18 @@ class ApplicationController < ActionController::Base
   before_action :ensure_registration_finishes
   after_filter :store_location
   before_filter :set_timezone
+  before_filter :redirect_subdomain
+
+  def redirect_subdomain
+    if request.subdomain == 'www'
+      if Rails.env.development?
+        port = ":#{request.port}"
+        redirect_to [request.protocol, request.domain, port, request.fullpath].join
+      else
+        redirect_to [request.protocol, request.domain, request.fullpath].join
+      end
+    end
+  end
 
   def track(event_name, data = {})
     identifier = (user_signed_in? ? current_user.id : session.id)
