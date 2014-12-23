@@ -11,7 +11,7 @@ keywords %w(upgrade pro plus premium)
     </div>
 
     <% if current_user %>
-    <p class="bg-info"><em class="fa fa-info-circle"></em> As a <%= current_user.membership_type.titleize %> member, you already have access to many features. <% if current_user.basic? %> You can <a href="<%= subscriptions_purchase_path(:pro) %>">Upgrade</a> to enjoy unlimited free uploads and even more features!<% end %></p>
+    <p class="bg-info"><em class="fa fa-info-circle"></em> You are a <%= current_user.membership_type.titleize %> member. <% if current_user.basic? %> <a href="<%= subscriptions_purchase_path(:pro) %>">Upgrade</a> now to enjoy additional free uploads and even more features!<% end %></p>
     <% end %>
 
     <div class="col-xs-4">

@@ -2,7 +2,7 @@
 <div id="related">
     <% if user_signed_in? %>
         <div id="related-tags">
-            <h1><em class="fa fa-heart-o"></em> Recommended for you</h1>
+            <h2><em class="fa fa-heart-o"></em> Recommended for you</h2>
             <%= render 'sheets/tags', tags: sheet.related_tags %>
         </div>
         <div id="related-sheets">
@@ -21,7 +21,7 @@
         </div>
     <% else %>
         <br /><br />
-        <h1 class="text-center">Sign In to view recommended works</h1>
+        <h2 class="text-center">Sign In to view recommended works</h2>
         <a href="<%= new_user_session_url %>" class="btn btn-success btn-lg center-block"> Sign In</a>
     <% end %>
 </div>

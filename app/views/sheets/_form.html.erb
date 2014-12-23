@@ -53,7 +53,7 @@
     <%= f.input_field :price, placeholder: "e.g. 2.99", :value => number_to_currency(f.object.price, unit: "", precision: 2) %>
   </div>
 
-  <%= f.button :submit, class: "btn btn-success btn-lg btn-block"%>
+  <%= f.button :submit, f.object.new_record? ? 'Upload' : 'Update', class: "btn btn-success btn-lg btn-block"%>
 <% end %>
 
 <script>
