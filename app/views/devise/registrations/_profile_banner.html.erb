@@ -5,9 +5,9 @@
       <ul class="list-inline">
         <% if !user.basic? %><li><%= render 'layouts/user_badge', user: user%></li><% end %>
         <li><p><a href="<%= user_profile_url(subdomain:user.username) %>"><em class="fa fa-user"></em> <%= user.username %></a></p></li>
-        <% if user.website? %><li><p><a href="<%= url_with_protocol(user.website) %>" target="_blank"><em class="fa fa-globe"></em> <%= user.website %></a></p></li><% end %>
         <li><p><em class="fa fa-clock-o"></em> Joined <%= user.joined_at %></p></li>
+        <% if user.website? %><li><p><a href="<%= url_with_protocol(user.website) %>" target="_blank"><em class="fa fa-link"></em> <%= user.website %></a></p></li><% end %>
       </ul>
-        <% if user.tagline? %><p><q><%= user.tagline %></q></p><% end %>
+        <% if user.tagline? %><p class="tagline"><%= user.tagline %></p><% end %>
     </div>
 </div>

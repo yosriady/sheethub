@@ -86,7 +86,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.update_attributes(account_update_params)
       set_flash_message :notice, :updated
       sign_in @user, bypass: true
-      redirect_to user_settings_url
+      redirect_to user_profile_url(subdomain:@user.username)
     else
       flash[:error] = @user.errors.full_messages.to_sentence
       render 'edit'

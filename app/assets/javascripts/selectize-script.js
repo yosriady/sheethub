@@ -38,7 +38,7 @@ $(document).on("page:change", function() {
             "label":'All rights reserved. This title is my original work.',
             "value":'all_rights_reserved'
         }, {
-            "label":'Creative Commons.',
+            "label":'Creative Commons (Attribution-NonCommercial-ShareAlike)',
             "value":'creative_commons'
         }, {
             "label":'Creative Commons Zero. ',

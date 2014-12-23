@@ -52,7 +52,7 @@ keywords %w(help faq support frequently/ asked/ questions)
   <hr>
 
   <h4><em class="fa fa-legal"></em> Publishing Rights and Copyright</h4>
-    <%= render "faq_item", id:"licenses", question: "What licenses do I choose?", answer:"<ul>
+    <%= render "faq_item", id:"licenses", question: "Which licenses can I choose?", answer:"<ul>
 <li><strong>All rights reserved.</strong> As the copyright holder, you reserve, or hold for your own use, all the rights provided by copyright law on your work, such as distribution, performance, and creation of derivative works.</li>
 <li><strong>Creative Commons. </strong>
 Offering your work under a <a href='https://creativecommons.org/choose/'>Creative Commons</a> license does not mean giving up your copyright. It means offering some of your rights to any member of the public but only under certain conditions.
@@ -80,7 +80,7 @@ The Public Domain Mark is recommended for works that are free of known copyright
 <li>Unique version of a public domain sheet music - you have arranged a public domain work in a unique way that differentiates it from products currently available for sale on SheetHub.</li>
 </ul>"%>
   <%= render "faq_item", id:"arrangements", question: "Can I submit an arrangement of public domain sheet music?", answer: "Yes, you may submit an arrangement of public domain sheet music as long as you have added additional value that is not currently represented on SheetHub. This includes an unusual instrumentation, a level-specific arrangement or an arrangement in a style that is different than the original."%>
-  <%= render "faq_item", id:"content-rights", question: "Does SheetHub take any ownership of the content I upload?", answer: "No. You will always fully own your content. You are free to remove it at any time. SheetHub just asks for the minimum amount of rights necessary to run the site, such as permission to show your sheet page and host your files." %>
+  <%= render "faq_item", id:"content-rights", question: "Does SheetHub take any ownership of the content I upload?", answer: "No. You will always fully own your content. You are free to remove it at any time. SheetHub just asks for the minimum amount of rights necessary to run the site, such as permission to show your sheet page, host your files, and distribute your work on your behalf." %>
   <%= render "faq_item", id:"copyright-report", question: "How do I report a copyright infringement?", answer:"<p>If you are a copyright owner or an agent of a copyright owner and believe that any User Material or other content that has been made available on or through the Website infringes upon your copyrights, provide the following information on the <strong>Report</strong> page:</p>
 
         <ul>
@@ -104,9 +104,9 @@ The Public Domain Mark is recommended for works that are free of known copyright
   <hr>
   <h4><em class="fa fa-info-circle"></em> Miscellaneous</h4>
     <%= render "faq_item", id:"howto-help", question: "How can I help build this community?", answer: "We want SheetHub to become a vibrant community and for you to feel like a part of it all. Any contributions you make would be awesome. You can help by giving feedback & suggestions, following the #{link_to 'Community Guidelines', community_guidelines_url }, helping us spread the word, and sharing your performances! You shape the future of SheetHub!" %>
-    <%= render "faq_item", id:"feature-request", question: "I have a feature I'd like to see. How do I let you know?", answer: "Be sure to leave your ideas, comments, and suggestions on our #{link_to "Community Hub", "https://admin.userreport.com/Websites/CrowdIntelligenceExample.aspx?WebsiteId=78c6cc74-05f2-4833-804c-c7acf9e3c9a7#ci/ideas"}. Help decide what we build next. You shape the future of SheetHub!" %>
+    <%= render "faq_item", id:"feature-request", question: "I have a feature I'd like to see. How do I let you know?", answer: "Be sure to leave your ideas, comments, and suggestions on our Feedback page. You shape the future of SheetHub!" %>
+    <%= render "faq_item", id:"missing-question", question: "My question isn't on here!", answer: "<a href='mailto:support@sheethub.co'>Let us know.</a> " %>
     <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to "This person.", "https://github.com/Leventhan"} I’m primarily a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for written music and have been disappointed so far, so I decided to try my hand at building one. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's continuous development. " %>
-    <%= render "faq_item", id:"missing-question", question: "My question wasn't on here!", answer: "<a href='mailto:support@sheethub.co'>Let us know.</a> " %>
 </div>
 
 
