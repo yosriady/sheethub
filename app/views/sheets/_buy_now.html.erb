@@ -7,7 +7,7 @@
         <% elsif sheet.free? %>
             <span class="sheet-buy-now-text text-center"><p><em class="fa fa-smile-o"></em> FREE</p></span>
         <% elsif user_signed_in? %>
-            <a data-toggle="modal" data-target="#buyNowModal"><button type="button" class="btn btn-success col-xs-8"><em class="fa fa-shopping-cart"></em> Buy Now</button></a>
+            <a id="buy-now"><button type="button" class="btn btn-success col-xs-8"><em class="fa fa-shopping-cart"></em> Buy Now</button></a>
             <span class="sheet-price col-xs-4"><p><%= number_to_currency(sheet.price) %></p></span>
         <% else %>
             <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success col-xs-8"><em class="fa fa-shopping-cart"></em> Buy Now</button></a>
@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="buyNowModal" role="dialog" aria-labelledby="flagModal" aria-hidden="true">
+<div class="modal" id="buyNowModal" role="dialog" aria-labelledby="flagModal" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
@@ -54,7 +54,7 @@
               <em class='fa fa-paypal'></em> Checkout with PayPal
             <% end %>
           <% else %>
-            <a id="paypal-checkout-btn" href="<%= checkout_url(:sheet => sheet) %>" data-method="post" class="btn btn-lg btn-success"><em class="fa fa-paypal"></em> Checkout with Paypal</a>
+            <a id="paypal-checkout-btn" href="<%= checkout_url(:sheet => sheet) %>" data-method="post" class="btn btn-lg btn-success"><em class="fa fa-paypal"></em> Checkout with PayPal</a>
           <% end %>
       </div>
 
@@ -68,9 +68,18 @@
 $(document).on("page:change", function() {
     $('#amount').maskMoney();
     $('.add_button').click(function(){
+      $(this).addClass("animated rubberBand");
       var newAmount = parseFloat($('#amount').val()) + parseFloat($(this).data('amount'));
       $('#amount').val(newAmount.toFixed(2));
+      $(this).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $(this).removeClass("animated rubberBand");
+      });
     })
+
+    $("#buy-now").click(function(){
+      $('#buyNowModal').addClass('animated bounceIn');
+      $('#buyNowModal').modal();
+    });
 
     // Client side min amount validation
     $( "#amount" ).change(function() {
