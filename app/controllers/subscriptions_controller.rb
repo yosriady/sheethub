@@ -108,7 +108,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def validate_membership
-    return if subscriptions_params[:membership].in? %w('plus', 'pro')
+    return if subscriptions_params[:membership].in? %w(plus pro)
     flash[:error] = 'Membership type does not exist'
     redirect_to upgrade_path
   end
@@ -128,6 +128,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscriptions_params
-    params.permit(:membership, :_method, :authenticity_token)
+    params.permit(:membership, :_method, :authenticity_token, :subdomain)
   end
 end

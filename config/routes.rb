@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   defaults subdomain: '' do
     get 'upgrade/purchase/:membership', to: 'subscriptions#purchase', as: 'subscriptions_purchase'
-    post 'upgrade/checkout/:membership', to: 'subscriptions#checkout', as: 'subscriptions_checkout'
+    get 'upgrade/checkout/:membership', to: 'subscriptions#checkout', as: 'subscriptions_checkout'
     get 'upgrade/cancel', to: 'subscriptions#cancel', as: 'subscriptions_cancel'
     get 'upgrade/success', to: 'subscriptions#success', as: 'subscriptions_success'
     get 'downgrade/:membership', to: 'subscriptions#downgrade', as: 'subscriptions_downgrade'
