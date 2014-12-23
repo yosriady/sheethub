@@ -61,6 +61,8 @@
     animation: bgscroll 30s infinite linear;
 
     h1 {
+        font-family: 'Roboto Slab', serif;
+        font-weight: 300;
         color: #2583EB;
         margin: 0px;
         padding-top: 100px;
@@ -80,7 +82,7 @@
 }
 
 .animated-banner.footer-banner {
-    height: 300px;
+    height: 225px;
     border-top: 1px solid #ddd;
 
     .btn {

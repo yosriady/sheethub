@@ -30,6 +30,9 @@ gem 'newrelic_rpm'
 # HTML Embed Links
 gem 'auto_html'
 
+# CSS Animations
+gem 'animate-rails'
+
 # SEO Meta Tags
 gem 'metamagic'
 

@@ -50,11 +50,11 @@
           <%= image_tag("https://www.paypalobjects.com/webstatic/en_SG/mktg/Logos/AM_SbyPP_mc_vs_dc_ae.jpg", class:"paypal-logo") %>
 
           <% if sheet.pay_what_you_want %>
-            <%= button_tag(type:'submit', id:"paypal-checkout-btn", class: 'btn btn-success') do %>
+            <%= button_tag(type:'submit', id:"paypal-checkout-btn", class: 'btn btn-lg btn-success') do %>
               <em class='fa fa-paypal'></em> Checkout with PayPal
             <% end %>
           <% else %>
-            <a id="paypal-checkout-btn" href="<%= checkout_url(:sheet => sheet) %>" data-method="post" class="btn btn-success"><em class="fa fa-paypal"></em> Checkout with Paypal</a>
+            <a id="paypal-checkout-btn" href="<%= checkout_url(:sheet => sheet) %>" data-method="post" class="btn btn-lg btn-success"><em class="fa fa-paypal"></em> Checkout with Paypal</a>
           <% end %>
       </div>
 
