@@ -7,20 +7,8 @@
         <%= render 'recent_sales', sales: @sales_past_month %>
 
         <h1>Sales Statistics</h1>
-        <%= render "sales_stats", aggregated_sales: @aggregated_sales, recent_sales:@sales_past_month %>
-
-        <div class="panel panel-info">
-          <div class="panel-heading"><em class="fa fa-line-chart"></em> Sales Revenue By Title (in USD)</div>
-          <div class="panel-body">
-            <%= pie_chart(@aggregated_sales) if @aggregated_sales.present? %>
-          </div>
-        </div>
-
-        <div class="panel panel-info">
-          <div class="panel-heading"><em class="fa fa-calendar"></em> Sales Quantity By Date</div>
-          <div class="panel-body">
-            <%= line_chart @sales_past_month.group_by_day(:purchased_at).count if @sales_past_month.present? %>
-          </div>
-        </div>
+        <%= render 'sales_stats', aggregated_sales: @aggregated_sales, recent_sales:@sales_past_month %>
+        <%= render 'sales_revenue_by_title_chart', aggregated_sales: @aggregated_sales %>
+        <%= render 'sales_quantity_by_date_chart', sales_past_month:@sales_past_month %>
       </div>
   </div>

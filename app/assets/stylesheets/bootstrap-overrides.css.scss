@@ -193,3 +193,8 @@ a.disabled {
     padding: 1px;
     border-radius: 6px;
 }
+
+// Dropdown opens on hover instead of only click
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}

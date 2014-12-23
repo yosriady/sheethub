@@ -1,5 +1,5 @@
 <div class="nav-strip alpha">
   <div class="container-fluid">
-    <p><em class="fa fa-rocket"></em> Welcome to the all-new platform built for musicians! <%= "Sign up today and become a founding member!" unless user_signed_in? %></p>
+    <p><em class="fa fa-rocket"></em> Welcome to the all-new platform built for musicians! <%= user_signed_in? ? "Tell your friends about us!" :"Sign up today and become a founding member!" %></p>
   </div>
 </div>
