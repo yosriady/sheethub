@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  defaults subdomain: 'www' do
+  defaults subdomain: '' do
     get 'upgrade/purchase/:membership', to: 'subscriptions#purchase', as: 'subscriptions_purchase'
     post 'upgrade/checkout/:membership', to: 'subscriptions#checkout', as: 'subscriptions_checkout'
     get 'upgrade/cancel', to: 'subscriptions#cancel', as: 'subscriptions_cancel'
@@ -16,9 +16,9 @@ Rails.application.routes.draw do
                                       omniauth_callbacks: 'users/omniauth_callbacks' }
     devise_scope :user do
 
-      get '/', to: 'sheets#index', constraints: { subdomain: 'www' }
+      get '/', to: 'sheets#index', constraints: { subdomain: '' }
       get '/', to: 'users/registrations#profile', constraints: { subdomain: /.+/ }, as: :user_profile
-      get '/favorites', to: 'sheets#index', constraints: { subdomain: 'www' }
+      get '/favorites', to: 'sheets#index', constraints: { subdomain: '' }
       get '/favorites', to: 'users/registrations#favorites', constraints: { subdomain: /.+/ }, as: :user_favorites
       match 'users/finish_registration', to: 'users/registrations#finish_registration', via: [:get, :patch], as: :finish_registration
       get 'dashboard', to: 'users/registrations#dashboard', as: :user_dashboard
