@@ -12,7 +12,7 @@
   <%= f.label :license %> <a href="<%= faq_path %>#licenses" target="blank"><em class="fa fa-question-circle"></em></a>
   <%= f.input_field :license, :as => :select, :collection => Sheet.licenses.keys %>
 
-  <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, and other information. Add Youtube, Vimeo, and Soundcloud links to generate lots of interest!" %>
+  <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, and other information. You can also link to a YouTube, SoundCloud or Vimeo URL, and we'll embed the corresponding player." %>
 
   <%= f.label :instruments %>
   <br>

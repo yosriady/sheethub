@@ -1,27 +1,30 @@
 
 <div class="container">
-    <h1>Editing <a href="<%= sheet_path(@sheet) %>"><%= @sheet.title %></a></h1>
-
-    <div id="sheet-content" class="col-xs-8">
-        <%= image_tag(@sheet.pdf_preview_url, :class => "sample_sheet") %>
+    <div class="row">
+      <h1 class="text-center">Editing <a href="<%= sheet_path(@sheet) %>"><%= @sheet.title %></a></h1>
+      <hr>
     </div>
 
-    <div id="sheet-sidebar" class="col-xs-4">
-        <div class="panel panel-info">
-          <div class="panel-body">
-                <%= render 'form', sheet: @sheet, genres: @genres, composers: @composers, sources: @sources %>
+    <div class="row">
+      <div id="sheet-content" class="col-xs-8">
+          <%= image_tag(@sheet.pdf_preview_url, :class => "sample_sheet") %>
+      </div>
+
+      <div id="sheet-sidebar" class="col-xs-4">
+          <div class="panel panel-info">
+            <div class="panel-body">
+                  <%= render 'form', sheet: @sheet, genres: @genres, composers: @composers, sources: @sources %>
+            </div>
           </div>
-        </div>
 
-        <%= render 's3_uploader', sheet: @sheet %>
+          <%= render 's3_uploader', sheet: @sheet %>
 
-        <div class="panel panel-danger">
-          <div class="panel-heading"><em class="fa fa-warning"></em> Danger Zone</div>
-          <div class="panel-body">
-                <%= link_to raw("<em class='fa fa-trash'></em> Delete this Sheet"), @sheet, method: :delete, data: { confirm: 'Are you sure you want to delete this sheet? You can restore deleted sheets at any time from the Trash page.' }, class:"btn btn-danger" %>
+          <div class="panel panel-danger">
+            <div class="panel-heading"><em class="fa fa-warning"></em> Danger Zone</div>
+            <div class="panel-body">
+                  <%= link_to raw("<em class='fa fa-trash'></em> Delete this Sheet"), @sheet, method: :delete, data: { confirm: 'Are you sure you want to delete this sheet? You can restore deleted sheets at any time from the Trash page.' }, class:"btn btn-danger" %>
+            </div>
           </div>
-        </div>
-
+      </div>
     </div>
-
 </div>

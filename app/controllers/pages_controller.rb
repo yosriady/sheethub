@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
-  before_filter :disable_navbar, only: [:index]
-
-  def index
-    track('View homepage')
+  def faq
+    track('View features')
   end
 
   def faq
@@ -24,10 +22,4 @@ class PagesController < ApplicationController
   def upgrade
     track('View upgrade page')
   end
-
-  private
-    def disable_navbar
-      @disable_navbar = true
-    end
-
 end

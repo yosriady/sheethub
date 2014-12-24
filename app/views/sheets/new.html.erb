@@ -1,10 +1,16 @@
 <% title "Upload"  %>
 
 <div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <h1 class="text-center">Let's add your work!</h1>
+            <hr>
+        </div>
+    </div>
 
     <div class="row">
     <div class="col-xs-3 ">
-        <div class="well" style="margin-top:150px;">
+        <div class="well" style="margin-top:80px;">
             Learn more about picking the right license for your music <a href="<%= faq_path %>#licenses" target="blank">here</a>.
         </div>
 
@@ -17,7 +23,6 @@
         </div>
     </div>
 
-    <h1>New sheet</h1>
     <div class="col-xs-6 white-container">
     <%= render 'form', sheet: @sheet, genres: @genres, composers: @composers, sources: @sources %>
     </div>

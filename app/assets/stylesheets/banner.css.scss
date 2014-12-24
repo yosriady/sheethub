@@ -88,6 +88,10 @@
     .btn {
         width: 200px;
         margin-top: 20px;
+
+        &:first-child {
+            margin-left: 100px;
+        }
     }
 
     h1 {

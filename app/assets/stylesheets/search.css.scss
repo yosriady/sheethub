@@ -33,26 +33,27 @@
 }
 
 #search_form {
-  background: rgba(255,255,255,0.2);
-  border: 0;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
   color: #fff;
   box-shadow:none;
 
   &:focus {
     outline: none;
+    border: 1px solid rgba(255,255,255,0.6);
     }
 
     &::-webkit-input-placeholder {
-        color: rgba(255,255,255, 0.9);
+        color: rgba(255,255,255,0.9);
     }
     &:-moz-placeholder {
-        color: rgba(255,255,255, 0.9);
+        color: rgba(255,255,255,0.9);
     }
     &::-moz-placeholder {
-        color: rgba(255,255,255, 0.9);
+        color: rgba(255,255,255,0.9);
     }
     &:-ms-input-placeholder {
-        color: rgba(255,255,255, 0.9);
+        color: rgba(255,255,255,0.9);
     }
 }
 
