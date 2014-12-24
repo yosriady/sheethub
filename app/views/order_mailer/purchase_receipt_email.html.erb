@@ -9,7 +9,7 @@
     <div class="container">
       <h1>Thank you for your purchase!</h1>
       <p>Hi <%= @buyer.display_name %>, </p>
-      <p><strong>Thank you for purchasing <%= @sheet.title %></strong>. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. You can directly download the files from the sheet page <%= link_to 'here', sheet_url(@sheet) %>. Enjoy!
+      <p>Thank you for purchasing <%= link_to @sheet.title, sheet_url(@sheet) %>! You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. You can directly download the files from the sheet page <%= link_to 'here', sheet_url(@sheet) %>. Enjoy!
       </p>
       <p>This email message will serve as your receipt.</p>
 

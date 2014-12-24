@@ -56,8 +56,8 @@ class OrdersController < ApplicationController
     @order = Order.find_by(tracking_id: tracking_id)
     if @order
       @order.complete
-      sheet = @order.sheet
-      track('Complete sheet purchase', { order_id: @order.id, sheet_id: sheet.id, sheet_title: sheet.title })
+      @sheet = @order.sheet
+      track('Complete sheet purchase', { order_id: @order.id, sheet_id: @sheet.id, sheet_title: @sheet.title })
       render action: 'thank_you', notice: SUCCESS_ORDER_PURCHASE_MESSAGE
     else
       fail 'Invalid Tracking Id'

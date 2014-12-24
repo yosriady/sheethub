@@ -9,7 +9,7 @@
     <div class="container">
         <h1>Congratulations!</h1>
         <p>Hi <%= @publisher.display_name %>, </p>
-        <p>Good news! <strong>You've made a sale!</strong> <%= link_to @sheet.title, sheet_url(@sheet) %> was bought by <%= link_to @buyer.display_name, user_profile_url(@buyer.username) %>.
+        <p>Good news! <strong>You've made a sale!</strong> <%= link_to @buyer.display_name, user_profile_url(@buyer.username) %> purchased <%= link_to @sheet.title, sheet_url(@sheet) %>.
         </p>
         <p>This email message will serve as your receipt.</p>
 
