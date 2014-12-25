@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   end
 
   def faq
-    track('View help')
+    track('View support')
   end
 
   def terms
