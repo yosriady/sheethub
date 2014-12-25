@@ -19,22 +19,22 @@ module Relatable
     GROUP BY sheets.id ORDER BY count DESC
     LIMIT #{num_results}
     "
-    Rails.cache.fetch('related_sheets_to_#{self}', expires_in: 1.day) do
+    # Rails.cache.fetch('related_sheets_to_#{self}', expires_in: 1.day) do
       Sheet.find_by_sql(sql)
-    end
+    # end
   end
 
   def related_tags
-    Rails.cache.fetch('related_tags_to_#{self}', expires_in: 1.day) do
+    # Rails.cache.fetch('related_tags_to_#{self}', expires_in: 1.day) do
       related_tags = Set.new
       related_sheets_via_tags.find_each { |sheet| related_tags.merge sheet.tag_objects }
       related_tags.to_a
-    end
+    # end
   end
 
   def related_sheets_via_tags
-    Rails.cache.fetch('related_sheets_via_tags_to_#{self}', expires_in: 1.day) do
+    # Rails.cache.fetch('related_sheets_via_tags_to_#{self}', expires_in: 1.day) do
       Sheet.tagged_with(joined_tags, any: true).includes(:sources, :composers, :genres).limit(5)
-    end
+    # end
   end
 end
