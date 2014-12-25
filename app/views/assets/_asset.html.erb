@@ -1,5 +1,5 @@
 <li>
-    <a href="<%= download_asset_path(asset) %>" data-no-turbolink='true' title="Last updated on <%= asset.updated_at.strftime('%e %b %Y') %>" data-toggle='tooltip' data-placement='top'>
+    <a href="<%= download_asset_url(asset) %>" data-no-turbolink='true' title="Last updated on <%= asset.updated_at.strftime('%e %b %Y') %>" data-toggle='tooltip' data-placement='top'>
     <div class="sheet-file">
         <p><em class="fa fa-download"></em> <%= asset.filename %> <strong><%= number_to_human_size(asset.filesize) %></strong></p>
     </div>

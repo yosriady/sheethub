@@ -77,7 +77,7 @@ class SheetsController < ApplicationController
       redirect_to order.pdf_download_url
     else
       flash[:error] = ERROR_PDF_UNPURCHASED_MESSAGE
-      redirect_to sheet_path(@sheet)
+      redirect_to sheet_url(@sheet)
     end
   end
 
@@ -90,23 +90,23 @@ class SheetsController < ApplicationController
     track('Flag sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     message = params[:flag][:message].present? ? params[:flag][:message] : DEFAULT_FLAG_MESSAGE
     Flag.create(user:current_user, sheet:@sheet, message:message, email:params[:flag][:email])
-    redirect_to sheet_path(@sheet), notice: SUCCESS_FLAG_MESSAGE
+    redirect_to sheet_url(@sheet), notice: SUCCESS_FLAG_MESSAGE
   end
 
   # Favorites/Unfavorites a Sheet
   def favorite
     track('Favorite sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     unless current_user
-      redirect_to new_user_session_path, error: ERROR_UNSIGNED_FAVORITE_MESSAGE
+      redirect_to new_user_session_url, error: ERROR_UNSIGNED_FAVORITE_MESSAGE
     end
     if @sheet && (!current_user.voted_for? @sheet)
       @sheet.favorited_by current_user
-      redirect_to sheet_path(@sheet), notice: SUCCESS_FAVORITE_MESSAGE
+      redirect_to sheet_url(@sheet), notice: SUCCESS_FAVORITE_MESSAGE
     elsif @sheet && (current_user.voted_for? @sheet)
       @sheet.unfavorited_by current_user
-      redirect_to sheet_path(@sheet), notice: SUCCESS_UNFAVORITE_MESSAGE
+      redirect_to sheet_url(@sheet), notice: SUCCESS_UNFAVORITE_MESSAGE
     else
-      redirect_to root_path, error: ERROR_SHEET_NOT_FOUND_MESSAGE
+      redirect_to root_url, error: ERROR_SHEET_NOT_FOUND_MESSAGE
     end
   end
 
@@ -165,7 +165,7 @@ class SheetsController < ApplicationController
     @sheet.destroy
     track('Delete sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     respond_to do |format|
-      format.html { redirect_to sheets_path, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
+      format.html { redirect_to sheets_url, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
       format.json { head :no_content }
     end
   end
@@ -175,7 +175,7 @@ class SheetsController < ApplicationController
     Sheet.restore(@sheet, :recursive => true)
     track('Restore sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
     respond_to do |format|
-      format.html { redirect_to sheet_path(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE }
+      format.html { redirect_to sheet_url(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE }
       format.json { head :no_content }
     end
   end
@@ -230,7 +230,7 @@ class SheetsController < ApplicationController
 
   def autocomplete
     track('Searched for', {query: params[:query]})
-    render json: Sheet.is_public.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_path(s)}}
+    render json: Sheet.is_public.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_url(s)}}
   end
 
   private
@@ -253,21 +253,21 @@ class SheetsController < ApplicationController
         # Allow Staff to view
       elsif current_user != @sheet.user
         flash[:error] = ERROR_PRIVATE_SHEET_MESSAGE
-        redirect_to sheets_path
+        redirect_to sheets_url
       end
     end
 
     def authenticate_owner
       unless @sheet.user == current_user
         flash[:error] = ERROR_UPDATE_SHEET_MESSAGE
-        redirect_to sheets_path
+        redirect_to sheets_url
       end
     end
 
     def validate_flagged
       if @sheet.is_flagged
         flash[:error] = FLAGGED_MESSAGE
-        redirect_to sheets_path
+        redirect_to sheets_url
       end
     end
 

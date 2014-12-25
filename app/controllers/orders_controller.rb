@@ -47,7 +47,7 @@ class OrdersController < ApplicationController
       else
         flash[:error] = "We could not process your purchase. #{payment_response.error.first.message}"
       end
-      redirect_to sheet_path(@sheet)
+      redirect_to sheet_url(@sheet)
     end
   end
 
@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
 
   def cancel
     track('Cancel sheet purchase')
-    redirect_to sheets_path, notice: CANCEL_ORDER_PURCHASE_MESSAGE
+    redirect_to sheets_url, notice: CANCEL_ORDER_PURCHASE_MESSAGE
   end
 
   private
@@ -120,7 +120,7 @@ class OrdersController < ApplicationController
     def validate_flagged
       return unless @sheet.is_flagged
       flash[:error] = FLAGGED_MESSAGE
-      redirect_to sheets_path
+      redirect_to sheets_url
     end
 
     def validate_min_amount

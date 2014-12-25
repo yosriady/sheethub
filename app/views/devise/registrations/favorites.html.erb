@@ -19,7 +19,7 @@
           <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
           <% if @user == current_user %>
             <h2 class="text-center">You have no favorites.</h2>
-            <a href="<%= root_path %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-picture"></span> Browse</a>
+            <a href="<%= root_url %>" class="btn btn btn btn-success btn-sleek center-block"><span class="fa fa-picture"></span> Browse</a>
           <% else %>
             <h2 class="text-center">This user has no favorites.</h2>
           <% end %>

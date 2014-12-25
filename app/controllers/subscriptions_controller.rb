@@ -23,7 +23,7 @@ class SubscriptionsController < ApplicationController
       redirect_to payment_response.redirect_uri
     else
       Rails.logger.info "Paypal Subscription Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
-      redirect_to upgrade_path, notice: ERROR_UPGRADE_PURCHASE_MESSAGE
+      redirect_to upgrade_url, notice: ERROR_UPGRADE_PURCHASE_MESSAGE
     end
   end
 
@@ -40,19 +40,19 @@ class SubscriptionsController < ApplicationController
   end
 
   def cancel
-    redirect_to upgrade_path, notice: CANCEL_UPGRADE_PURCHASE_MESSAGE
+    redirect_to upgrade_url, notice: CANCEL_UPGRADE_PURCHASE_MESSAGE
   end
 
   def downgrade
     track('Attempted downgrade')
     if current_user.hit_sheet_quota_for_basic?
       flash[:error] = 'You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets.'
-      redirect_to user_membership_settings_path
+      redirect_to user_membership_settings_url
     else
       membership = subscriptions_params[:membership]
       current_user.subscription.destroy
       current_user.update_membership_to(membership)
-      redirect_to user_membership_settings_path, notice: DOWNGRADE_TO_BASIC_SUBSCRIPTION_MESSAGE
+      redirect_to user_membership_settings_url, notice: DOWNGRADE_TO_BASIC_SUBSCRIPTION_MESSAGE
     end
   end
 
@@ -110,13 +110,13 @@ class SubscriptionsController < ApplicationController
   def validate_membership
     return if subscriptions_params[:membership].in? %w(plus pro)
     flash[:error] = 'Membership type does not exist'
-    redirect_to upgrade_path
+    redirect_to upgrade_url
   end
 
   def validate_existing_membership
     return unless current_user.membership_type == subscriptions_params[:membership]
     flash[:error] = 'You are already a #{current_user.membership_type.titleize} member.'
-    redirect_to upgrade_path
+    redirect_to upgrade_url
   end
 
   def paypal_request

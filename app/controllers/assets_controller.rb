@@ -18,7 +18,7 @@ class AssetsController < ApplicationController
       delete_s3_object(s3_key)
       # TOOD: This error message is not displayed
       flash[:error] = @asset.errors.full_messages.to_sentence
-      redirect_to edit_sheet_path(sheet)
+      redirect_to edit_sheet_url(sheet)
     end
   end
 
@@ -33,7 +33,7 @@ class AssetsController < ApplicationController
     else
       flash[:error] = INVALID_PERMISSION_MESSAGE
     end
-    redirect_to edit_sheet_path(sheet)
+    redirect_to edit_sheet_url(sheet)
   end
 
   def download
@@ -44,7 +44,7 @@ class AssetsController < ApplicationController
     else
       # FIX: Message not displayed
       flash[:error] = ERROR_SHEET_UNPURCHASED_MESSAGE
-      redirect_to sheet_path(sheet)
+      redirect_to sheet_url(sheet)
     end
   end
 

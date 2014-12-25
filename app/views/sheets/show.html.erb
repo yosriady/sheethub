@@ -15,7 +15,7 @@ keywords @sheet.cached_joined_tags
             <h1><%= link_to @sheet.title, sheet_path(@sheet) %></h1>
             <h4>by <a href="<%= user_profile_url(subdomain: @sheet.user.username) %>" class="sheet-author"><%= @sheet.user.display_name %></a> <%= render 'layouts/user_badge', user: @sheet.user%></h4>
         </div>
-        <div class="col-xs-4 zeropaddingleft">
+        <div class="col-xs-4 zeropadding">
             <%= render 'buy_now', sheet:@sheet %>
         </div>
     </div>
@@ -29,7 +29,7 @@ keywords @sheet.cached_joined_tags
             <%= render 'disqus' %>
         </div>
 
-        <div id="sheet-sidebar" class="col-xs-4 zeropaddingleft">
+        <div id="sheet-sidebar" class="col-xs-4 zeropadding">
             <%= render 'sheet_info', sheet:@sheet %>
 
             <%= render 'sheet_favorite', sheet: @sheet, favorites:@favorites %>
