@@ -2,6 +2,7 @@
 class Sheet < ActiveRecord::Base
   include Deduplicatable
   include Relatable
+  include Taggable
 
   PDF_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
   EXPIRATION_TIME = 30
