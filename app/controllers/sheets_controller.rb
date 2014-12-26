@@ -12,7 +12,7 @@ class SheetsController < ApplicationController
   before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
-  DEFAULT_FLAG_MESSAGE = "No Message."
+  DEFAULT_FLAG_MESSAGE = 'No Message.'
   SUCCESS_FLAG_MESSAGE = "Succesfully reported! We'll come back to you in 72 hours."
   ERROR_UNSIGNED_FAVORITE_MESSAGE = 'You need to be signed in to favorite'
   SUCCESS_FAVORITE_MESSAGE = 'Sweet! Added to favorites.'
@@ -42,7 +42,7 @@ class SheetsController < ApplicationController
 
   # GET /search
   def search
-    track('View search results', {query: params[:q]})
+    track('View search results', query: params[:q])
     @sheets = Sheet.is_public.search params[:q], page: params[:page], per_page: SEARCH_PAGE_SIZE
   end
 
@@ -59,7 +59,7 @@ class SheetsController < ApplicationController
   # GET /sheets/1
   # GET /sheets/1.json
   def show
-    track('View sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
+    track('View sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     @favorites = @sheet.votes_for.includes(:voter).limit(5)
   end
 
@@ -69,7 +69,7 @@ class SheetsController < ApplicationController
 
   # Downloads Sheet PDF
   def download
-    track('Download sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
+    track('Download sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     if @sheet.free? || @sheet.uploaded_by?(current_user)
       redirect_to @sheet.pdf_download_url
     elsif @sheet.purchased_by?(current_user)
@@ -87,7 +87,7 @@ class SheetsController < ApplicationController
 
   # POST /sheets/1/flag
   def flag
-    track('Flag sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
+    track('Flag sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     message = params[:flag][:message].present? ? params[:flag][:message] : DEFAULT_FLAG_MESSAGE
     Flag.create(user:current_user, sheet:@sheet, message:message, email:params[:flag][:email])
     redirect_to sheet_url(@sheet), notice: SUCCESS_FLAG_MESSAGE
@@ -95,7 +95,7 @@ class SheetsController < ApplicationController
 
   # Favorites/Unfavorites a Sheet
   def favorite
-    track('Favorite sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
+    track('Favorite sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     unless current_user
       redirect_to new_user_session_url, error: ERROR_UNSIGNED_FAVORITE_MESSAGE
     end
@@ -129,7 +129,7 @@ class SheetsController < ApplicationController
 
     respond_to do |format|
       if @sheet.save
-        track('Upload sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
+        track('Upload sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
         format.html { redirect_to @sheet, notice: SUCCESS_CREATE_SHEET_MESSAGE }
         format.json { render :show, status: :created, location: @sheet }
       else
@@ -148,7 +148,7 @@ class SheetsController < ApplicationController
 
     respond_to do |format|
       if @sheet.update(update_params)
-        track('Update sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
+        track('Update sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
         format.html { redirect_to @sheet, notice: SUCCESS_UPDATE_SHEET_MESSAGE }
         format.json { render :show, status: :ok, location: @sheet }
       else
@@ -163,7 +163,7 @@ class SheetsController < ApplicationController
   # DELETE /sheets/1.json
   def destroy
     @sheet.destroy
-    track('Delete sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
+    track('Delete sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     respond_to do |format|
       format.html { redirect_to sheets_url, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
       format.json { head :no_content }
@@ -173,7 +173,7 @@ class SheetsController < ApplicationController
   # Reverses soft-deletion
   def restore
     Sheet.restore(@sheet, :recursive => true)
-    track('Restore sheet', {sheet_id: @sheet.id, sheet_title: @sheet.title})
+    track('Restore sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     respond_to do |format|
       format.html { redirect_to sheet_url(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE }
       format.json { head :no_content }
@@ -188,7 +188,7 @@ class SheetsController < ApplicationController
 
   # GET /instrument/:slug
   def by_instrument
-    track('View instrument', {query: params[:slug]})
+    track('View instrument', query: params[:slug])
     @sheets = Sheet.with_any_instruments(params[:slug]).page(params[:page])
   end
 
@@ -200,8 +200,8 @@ class SheetsController < ApplicationController
 
   # GET /genre/:slug
   def by_genre
-    track('View genre', {query: params[:slug]})
-    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :genres).includes(:user).page(params[:page])
+    track('View genre', query: params[:slug])
+    @sheets = Sheet.is_public.tagged_with(params[:slug], on: :genres).includes(:user).page(params[:page])
   end
 
   # GET /composers
@@ -212,8 +212,8 @@ class SheetsController < ApplicationController
 
   # GET /composer/:slug
   def by_composer
-    track('View composer', {query: params[:slug]})
-    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :composers).includes(:user).page(params[:page])
+    track('View composer', query: params[:slug])
+    @sheets = Sheet.is_public.tagged_with(params[:slug], on: :composers).includes(:user).page(params[:page])
   end
 
   # GET /sources
@@ -224,89 +224,95 @@ class SheetsController < ApplicationController
 
   # GET /source/:slug
   def by_source
-    track('View source', {query: params[:slug]})
-    @sheets = Sheet.is_public.tagged_with(params[:slug], :on => :sources).includes(:user).page(params[:page])
+    track('View source', query: params[:slug])
+    @sheets = Sheet.is_public.tagged_with(params[:slug], on: :sources).includes(:user).page(params[:page])
   end
 
   def autocomplete
-    track('Searched for', {query: params[:query]})
+    track('Searched for', query: params[:query])
     render json: Sheet.is_public.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_url(s)}}
   end
 
   private
-    def build_tags(sheet_params)
-      updated_params = sheet_params
-      updated_params[:instruments] = params[:sheet][:instruments_list]
-      updated_params[:composer_list] = params[:sheet][:composer_list]
-      updated_params[:genre_list] = params[:sheet][:genre_list]
-      updated_params[:source_list] = params[:sheet][:source_list]
-      updated_params[:cached_joined_tags] = [params[:sheet][:instruments_list], params[:sheet][:composer_list], params[:sheet][:genre_list], params[:sheet][:source_list]].flatten.join ", "
-      return updated_params
-    end
 
-    def is_private_sheet
-      @sheet && @sheet.privately_visible?
-    end
+  def build_tags(sheet_params)
+    updated_params = sheet_params
+    updated_params[:instruments] = params[:sheet][:instruments_list]
+    updated_params[:composer_list] = params[:sheet][:composer_list]
+    updated_params[:genre_list] = params[:sheet][:genre_list]
+    updated_params[:source_list] = params[:sheet][:source_list]
+    updated_params[:cached_joined_tags] = [params[:sheet][:instruments_list], params[:sheet][:composer_list], params[:sheet][:genre_list], params[:sheet][:source_list]].flatten.join ", "
+    return updated_params
+  end
 
-    def hide_private_sheets
-      if current_user && current_user.staff?
-        # Allow Staff to view
-      elsif current_user != @sheet.user
-        flash[:error] = ERROR_PRIVATE_SHEET_MESSAGE
-        redirect_to sheets_url
-      end
-    end
+  def is_private_sheet
+    @sheet && @sheet.privately_visible?
+  end
 
-    def authenticate_owner
-      unless @sheet.user == current_user
-        flash[:error] = ERROR_UPDATE_SHEET_MESSAGE
-        redirect_to sheets_url
-      end
-    end
+  def hide_private_sheets
+    return unless current_user != @sheet.user
+    flash[:error] = ERROR_PRIVATE_SHEET_MESSAGE
+    redirect_to sheets_url
+  end
 
-    def validate_flagged
-      if @sheet.is_flagged
-        flash[:error] = FLAGGED_MESSAGE
-        redirect_to sheets_url
-      end
-    end
+  def authenticate_owner
+    return if @sheet.user == current_user
+    flash[:error] = ERROR_UPDATE_SHEET_MESSAGE
+    redirect_to sheets_url
+  end
 
-    def format_tag_fields
-      TAG_FIELDS.each { |tag_field| format_tags(tag_field)} # Clean up selectize tag values: genres, sources, composers, instruments
-    end
+  def validate_flagged
+    return unless @sheet.is_flagged
+    flash[:error] = FLAGGED_MESSAGE
+    redirect_to sheets_url
+  end
 
-    def validate_instruments
-      params[:sheet][:instruments_list].select! {|instrument| Sheet.values_for_instruments.include?(instrument)} # Delete invalid instruments
-    end
+  def format_tag_fields
+    # Clean up selectize tag values: genres, sources, composers, instruments
+    TAG_FIELDS.each { |tag_field| format_tags(tag_field) }
+  end
 
-    def set_sheet
-      @sheet = Sheet.includes(:sources, :composers, :genres).friendly.find(params[:id])
+  def validate_instruments
+    # Delete invalid instruments
+    params[:sheet][:instruments_list].select! do |instrument|
+      Sheet.values_for_instruments.include?(instrument)
     end
+  end
 
-    def set_sheet_lazy
-      @sheet = Sheet.friendly.find(params[:id])
-    end
+  def set_sheet
+    @sheet = Sheet.includes(:sources,
+                            :composers,
+                            :genres).friendly.find(params[:id])
+  end
 
-    def set_deleted_sheet
-      @sheet = Sheet.only_deleted.friendly.find(params[:id])
-    end
+  def set_sheet_lazy
+    @sheet = Sheet.friendly.find(params[:id])
+  end
 
-    def set_all_tags
-      @composers = Sheet.is_public.tags_on(:composers)
-      @genres = Sheet.is_public.tags_on(:genres)
-      @sources = Sheet.is_public.tags_on(:sources)
-    end
+  def set_deleted_sheet
+    @sheet = Sheet.only_deleted.friendly.find(params[:id])
+  end
 
-    def set_instruments
-      gon.instruments ||= Sheet.values_for_instruments
-    end
+  def set_all_tags
+    @composers = Sheet.is_public.tags_on(:composers)
+    @genres = Sheet.is_public.tags_on(:genres)
+    @sources = Sheet.is_public.tags_on(:sources)
+  end
 
-    def format_tags(tag_list)
-      params[:sheet][tag_list].delete("")
-      params[:sheet][tag_list] = params[:sheet][tag_list].map &:to_sym
-    end
+  def set_instruments
+    gon.instruments ||= Sheet.values_for_instruments
+  end
 
-    def sheet_params
-      params[:sheet].permit(:user_id, :title, :description, :instruments_list, :composer_list, :genre_list, :source_list, :cached_joined_tags, :pages, :difficulty, :pdf, :assets_attributes, :visibility, :price, :license, :enable_pdf_stamping, :pay_what_you_want)
-    end
+  def format_tags(tag_list)
+    params[:sheet][tag_list].delete('')
+    params[:sheet][tag_list] = params[:sheet][tag_list].map &:to_sym
+  end
+
+  def sheet_params
+    params[:sheet].permit(:user_id, :title, :description, :instruments_list,
+                          :composer_list, :genre_list, :source_list,
+                          :cached_joined_tags, :pages, :difficulty, :pdf,
+                          :assets_attributes, :visibility, :price, :license,
+                          :enable_pdf_stamping, :pay_what_you_want)
+  end
 end

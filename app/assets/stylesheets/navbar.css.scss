@@ -23,7 +23,7 @@
     background: #2583EB;
     margin-bottom:0px;
     border: none;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     -moz-box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
     -ms-box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
     -o-box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
@@ -116,7 +116,7 @@
     background: #5cb85c;
     color: #fff;
     text-align: center;
-    border-bottom:0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 
     a {
         background: rgba(0,0,0,0.2);

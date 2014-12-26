@@ -2,6 +2,7 @@
 
 <div class="animated-banner">
     <h1 class="animated bounceIn">Thank you for your purchase!</h1>
+    <h2 class="animated bounceIn">We've added <%= @order.sheet.title %> to your Library!</h2>
 </div>
 
 <div class="container">
@@ -14,8 +15,7 @@
 
             <div class="pull-left">
                 <strong>What happens next?</strong>
-                <p><%= link_to @sheet.title, sheet_path(@sheet) %> is now registered to your SheetHub account. Visit <% link_to 'My Library', user_library_path %> to download your files whenever you're ready.</p>
-                <p>You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy!</p>
+                <p><%= link_to @sheet.title, sheet_path(@sheet) %> is now registered to your SheetHub account. Visit the sheet page or your <strong>Library</strong> to download whenever you're ready. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy!</p>
             </div>
         </div>
         <div class="col-xs-4">
