@@ -1,4 +1,6 @@
-<%= render 'sheet_instruments', instruments: sheet.instruments if sheet.instruments.present? %>
-<%= render 'lean_tags', tags: sheet.genres, tag_type:'genre' if sheet.genres.any? %>
-<%= render 'lean_tags', tags: sheet.composers, tag_type:'composer' if sheet.composers.any? %>
-<%= render 'lean_tags', tags: sheet.sources, tag_type:'source' if sheet.sources.any? %>
+<% cache(cache_key_for_sheet_tags(sheet)) do %>
+    <%= render 'sheet_instruments', instruments: sheet.instruments if sheet.instruments.present? %>
+    <%= render 'lean_tags', tags: sheet.genres, tag_type:'genre' if sheet.genres.any? %>
+    <%= render 'lean_tags', tags: sheet.composers, tag_type:'composer' if sheet.composers.any? %>
+    <%= render 'lean_tags', tags: sheet.sources, tag_type:'source' if sheet.sources.any? %>
+<% end %>

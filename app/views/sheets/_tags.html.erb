@@ -1,7 +1,7 @@
 <% tags.each do |tag| %>
-    <a href="<%= tag.taggings.present? ? tag_url(tag.taggings[0].context.chop, tag.name) : nil %>">
+    <a href="<%= tag_url(tag.taggings[0].context.chop, tag.name) %>">
     <span class="tag">
-        <span class="fa fa-<%= tag.taggings.present? ? tag_icon(tag.taggings[0].context.chop) : nil %>"></span>
+        <span class="fa fa-<%= tag_icon(tag.taggings[0].context.chop) %>"></span>
         <%= tag.name.titleize %>
     </span>
     </a>

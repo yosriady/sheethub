@@ -1,6 +1,8 @@
+<% cache(cache_key_for_tag_breadcrumb(tag)) do %>
 <ol class="breadcrumb">
 <li><em class="fa fa-<%= tag_icon(tag_type) %>"></em><a href="<%= browse_url %>">Browse</a></li>
 <li><a href="/<%= tag_type %>s"><%= tag_type.titleize.pluralize %></a></li>
 <li><a href="<%= "/#{tag_type}/#{tag}" %>"><%= tag.titleize %></a></li>
 </ol>
 <hr>
+<% end %>
