@@ -107,7 +107,7 @@ group :production do
   gem 'rails_12factor'
 
   # Memory profiling
-  gem 'oink'
+  # gem 'oink'
 end
 
 group :development do
