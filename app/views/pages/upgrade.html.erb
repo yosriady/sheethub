@@ -3,16 +3,10 @@ title "Upgrade"
 keywords %w(upgrade pro plus premium)
 %>
 
-
-<div class="container white-container" id="upgrade-page">
-    <div class="animated-banner">
-        <h1 style="color: #5cb85c; font-weight:bold;">Go Pro on SheetHub</h1>
-        <h2>Unlimited free uploads and more.</h2>
-    </div>
-
-    <% if current_user %>
-    <p class="bg-info"><em class="fa fa-info-circle"></em> You are a <%= current_user.membership_type.titleize %> member. <% if current_user.basic? %> <a href="<%= subscriptions_purchase_path(:pro) %>">Upgrade</a> now to enjoy additional free uploads and even more features!<% end %></p>
-    <% end %>
+<div class="white-container">
+<div class="container" id="upgrade-page">
+    <h1 class="text-center">Go Pro on SheetHub</h1>
+    <h2 class="text-center">Unlimited free uploads, new awesome features, and help the community!</h2>
 
     <div class="col-xs-4">
     <%= render 'subscriptions/basic_table' %>
@@ -25,4 +19,5 @@ keywords %w(upgrade pro plus premium)
     </div>
 
 
+</div>
 </div>

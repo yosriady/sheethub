@@ -1,4 +1,15 @@
 #upgrade-page {
+    h1 {
+        color: #5cb85c;
+    }
+
+    h2 {
+        color: #888;
+        font-family: 'Source Sans Pro', sans-serif;
+        margin-top:0px;
+    }
+
+
     .col-xs-4 {
         padding: 0px;
         padding-top:10px;
@@ -10,6 +21,10 @@
     }
 
     .list-group.basic-plan {
+        h1 {
+            color: #333;
+        }
+
         .list-group-item {
             &:hover, &:focus {
                 cursor: help;
@@ -22,9 +37,14 @@
         }
     }
 
-    .pricing-box h2 {
-        font-family: 'Roboto Slab', serif;
+    .pricing-box {
+        h1 {
+            color: #fff;
+            font-weight: 300;
+        }
     }
+
+}
 
     .tooltip {
         min-width: 150px;
@@ -44,11 +64,18 @@
         }
     }
 
+
+.pricing-box {
+    h1 {
+        color: #fff;
+        font-weight: 300;
+    }
 }
 
 .list-group {
     h1.membership-price{
         text-align:center;
+        font-weight: 300;
         margin-top: 10px;
 
         .fade-text {
@@ -60,7 +87,7 @@
     }
 }
 
-.list-group.plus-plan {
+#upgrade-page .list-group.plus-plan {
     .list-group-item {
         &:hover, &:focus {
             cursor: help;
