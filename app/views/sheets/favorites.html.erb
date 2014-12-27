@@ -13,17 +13,7 @@ keywords @sheet.cached_joined_tags
   </div>
   <div class="col-xs-12">
       <div id="sheets">
-        <% if @favorites.each do |vote| %>
-          <a href="<%= user_profile_url(subdomain: vote.voter.username) %>">
-              <%= image_tag(vote.voter.avatar_url, class: "small-avatar", data: { toggle: 'tooltip', placement: 'top' }, title:vote.voter.display_name) %>
-          </a>
-        <% end.empty? %>
-          <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
-          <h2 class="text-center">No fans yet!</h2>
-        <% end %>
-      </div>
-      <div id="paginator" class="text-center">
-        <%= paginate @favorites %>
+        <%= render 'fans', favorites: @favorites%>
       </div>
     </div>
   </div>

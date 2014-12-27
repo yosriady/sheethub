@@ -1,0 +1,5 @@
+<% cache(fan) do %>
+<a href="<%= user_profile_url(subdomain: fan.username) %>">
+    <%= image_tag(fan.avatar_url, class: "small-avatar", data: { toggle: 'tooltip', placement: 'top' }, title:fan.display_name) %>
+</a>
+<% end %>
