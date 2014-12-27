@@ -70,7 +70,7 @@ Rails.application.routes.draw do
     get 'source/:slug', to: 'sheets#by_source', as: 'source'
 
     get '/features', to: 'pages#features', as: 'features'
-    get '/support', to: 'pages#faq', as: 'faq'
+    get '/support', to: 'pages#support', as: 'support'
     get '/terms-of-service', to: 'pages#terms', as: 'terms'
     get '/privacy-policy', to: 'pages#privacy', as: 'privacy'
     get '/community-guidelines', to: 'pages#community_guidelines'
