@@ -106,6 +106,9 @@ group :production do
   gem 'heroku-deflater'
   gem 'rails_12factor'
 
+  # Error monitoring
+  gem 'bugsnag'
+
   # Memory profiling
   # gem 'oink'
 end
