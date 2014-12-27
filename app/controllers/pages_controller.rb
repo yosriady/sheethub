@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
-  def support
+  def features
     track('View features')
   end
 
-  def faq
+  def support
     track('View support')
   end
 

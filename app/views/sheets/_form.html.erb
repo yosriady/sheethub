@@ -9,7 +9,7 @@
   <% end %>
 
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
-  <%= f.label :license %> <a href="<%= faq_path %>#licenses" target="blank"><em class="fa fa-question-circle"></em></a>
+  <%= f.label :license %> <a href="<%= support_url %>#licenses" target="blank"><em class="fa fa-question-circle"></em></a>
   <%= f.input_field :license, :as => :select, :collection => Sheet.licenses.keys %>
 
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, and other information. You can also link to a YouTube, SoundCloud or Vimeo URL, and we'll embed the corresponding player." %>
@@ -31,7 +31,7 @@
   <%= f.input_field :source_list, collection: sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
   <hr>
-  <%= f.label :pdf %> <a href="<%= faq_path %>#sheet-requirements" target="blank"><em class="fa fa-question-circle"></em></a>
+  <%= f.label :pdf %> <a href="<%= support_url %>#sheet-requirements" target="blank"><em class="fa fa-question-circle"></em></a>
   <% if params[:action] == "edit" && sheet.pdf.present? %>
   <ul id="sheet-files">
     <li>
@@ -57,14 +57,14 @@
      <label>
        <%= f.input_field :enable_pdf_stamping, inline_label: "Stamp PDF with the buyer's info" %>
      </label>
-     <a href="<%= faq_path %>#help-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
+     <a href="<%= support_url %>#help-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
   </div>
 
   <div class="checkbox">
      <label>
        <%= f.input_field :pay_what_you_want, inline_label: "Enable Pay-What-You-Want pricing" %>
      </label>
-     <a href="<%= faq_path %>#help-pay-what-you-want" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
+     <a href="<%= support_url %>#help-pay-what-you-want" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
   </div>
 
   <%= f.button :submit, f.object.new_record? ? 'Upload' : 'Update', class: "btn btn-success btn-lg btn-block"%>

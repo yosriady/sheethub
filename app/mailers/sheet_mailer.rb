@@ -12,4 +12,10 @@ class SheetMailer < ActionMailer::Base
     mail(to: email_with_name, subject: 'You have a new fan!')
   end
 
+  def sheet_flagged_email(flag)
+    @flag = flag
+    @sheet = flag.sheet
+    mail(to: "yosriady@gmail.com", subject: 'A Sheet has been flagged')
+  end
+
 end
