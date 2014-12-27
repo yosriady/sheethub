@@ -13,7 +13,7 @@ gem 'passenger'
 gem 'sidekiq'
 
 # Memcached
-# gem 'dalli'
+gem 'dalli'
 
 # Contact Form
 gem 'mail_form'
