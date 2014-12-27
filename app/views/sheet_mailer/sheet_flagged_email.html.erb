@@ -1,29 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <%= render 'layouts/email_styles' %>
-  </head>
-  <body>
-    <h2><a href="<%= root_url %>">SheetHub</a></h2>
-    <div class="container">
-      <h1 class="error">A sheet has been flagged</h1>
-
-      <div class="summary">
-          <h3>Summary</h3>
-          <em>Sheet Flagged</em>
-          <p><%= link_to @sheet.title, sheet_url(@sheet) %></p>
-          <em>Flag Date</em>
-          <p><%= @flag.created_at.strftime('%A, %d %b %Y') %></p>
-          <em>Email</em>
-          <p><%= @flag.email || "None" %></p>
-          <em>User ID</em>
-          <p><%= @flag.user_id || "None" %></p>
-          <em>Message</em>
-          <p><%= @flag.message %></p>
-      </div>
-
-    </div>
-    <p class="footer">Sent with &hearts; from SheetHub</p>
-  </body>
-</html>
+<h1 class="error">A sheet has been flagged</h1>
+<div class="summary">
+    <h3>Summary</h3>
+    <em>Sheet Flagged</em>
+    <p><%= link_to @sheet.title, sheet_url(@sheet) %></p>
+    <em>Flag Date</em>
+    <p><%= @flag.created_at.strftime('%A, %d %b %Y') %></p>
+    <em>Email</em>
+    <p><%= @flag.email || "None" %></p>
+    <em>User ID</em>
+    <p><%= @flag.user_id || "None" %></p>
+    <em>Message</em>
+    <p><%= @flag.message %></p>
+</div>

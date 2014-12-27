@@ -1,23 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <%= render 'layouts/email_styles' %>
-  </head>
-  <body>
-    <p>Dear <%= @buyer.display_name %>, </p>
-    <p>Congratulations on your new SheetHub <strong><%= @membership_type %></strong> Membership! You can now enjoy up to <%= @buyer.sheet_quota %> free sheet uploads, unlimited commercial uploads, and many additional features. Enjoy! Thank you for your support!</p>
-    <p>This email message will serve as your receipt.</p>
+<h1>Congratulations on your upgrade!</h1>
+<p>Dear <%= @buyer.display_name %>, </p>
+<p>Congratulations on your new SheetHub <strong><%= @membership_type %></strong> Membership! You can now enjoy up to <%= @buyer.sheet_quota %> free sheet uploads, unlimited commercial uploads, and many additional features. Enjoy! Thank you for your support!</p>
+<p>This email message will serve as your receipt.</p>
 
-    <hr>
-    <strong>Payment Info</strong>
-    <p>Membership: <%= @membership_type %></p>
-    <p>Amount: <%= number_to_currency(Subscription.subscription_amount(@membership_type.downcase)) %> / month</p>
-    <p>Tracking Id: <%= @subscription.tracking_id %></p>
-    <hr>
-    <p>For help or product support, please visit <%= link_to "SheetHub Help", support_url %>.</p>
-
-    <p>Cheers,</p>
-    <p>SheetHub</p>
-  </body>
-</html>
+<hr>
+<strong>Payment Info</strong>
+<p>Membership: <%= @membership_type %></p>
+<p>Amount: <%= number_to_currency(Subscription.subscription_amount(@membership_type.downcase)) %> / month</p>
+<p>Tracking Id: <%= @subscription.tracking_id %></p>
+<hr>

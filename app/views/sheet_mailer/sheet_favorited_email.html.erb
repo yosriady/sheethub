@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <%= render 'layouts/email_styles' %>
-  </head>
-  <body>
-    <h2><a href="<%= root_url %>">SheetHub</a></h2>
-    <div class="container">
-      <h1>You have a new fan!</h1>
-      <p>Hi <%= @publisher.display_name %>, </p>
-      <p>Nice! <%= link_to @user.display_name, user_profile_url(@user.username) %> recently favorited your work, <%= link_to @sheet.title, sheet_url(@sheet) %>. Share your work to get even more fans!
-      </p>
-      <a href="<%= favorites_sheet_url(@sheet) %>" class="btn">Go to your fans</a>
-      <p>For help or product support, please visit our <%= link_to "Support Center", support_url %>.</p>
-
-      <p>Cheers,</p>
-      <p>SheetHub</p>
-    </div>
-    <p class="footer">Sent with &hearts; from SheetHub</p>
-  </body>
-</html>
+<h1>You have a new fan!</h1>
+<p>Hi <%= @publisher.display_name %>, </p>
+<p>Nice! <%= link_to @user.display_name, user_profile_url(@user.username) %> recently favorited your work, <%= link_to @sheet.title, sheet_url(@sheet) %>. Share your work to get even more fans!
+</p>
+<a href="<%= favorites_sheet_url(@sheet) %>" class="btn">Go to your fans</a>

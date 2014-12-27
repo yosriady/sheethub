@@ -1,5 +1,6 @@
 class SheetMailer < ActionMailer::Base
   include Roadie::Rails::Automatic
+  layout 'mailer'
 
   DEFAULT_FROM_EMAIL = "SheetHub <notifications@sheethub.co>"
   default from: DEFAULT_FROM_EMAIL

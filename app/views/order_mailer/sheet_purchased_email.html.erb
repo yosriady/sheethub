@@ -1,39 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <%= render 'layouts/email_styles' %>
-  </head>
-  <body>
-    <h2><a href="<%= root_url %>">SheetHub</a></h2>
-    <div class="container">
-        <h1>Congratulations!</h1>
-        <p>Hi <%= @publisher.display_name %>, </p>
-        <p>Good news! <strong>You've made a sale!</strong> <%= link_to @buyer.display_name, user_profile_url(@buyer.username) %> purchased <%= link_to @sheet.title, sheet_url(@sheet) %>.
-        </p>
-        <p>This email message will serve as your receipt.</p>
+<h1>Congratulations!</h1>
+<p>Hi <%= @publisher.display_name %>, </p>
+<p>Good news! <strong>You've made a sale!</strong> <%= link_to @buyer.display_name, user_profile_url(@buyer.username) %> purchased <%= link_to @sheet.title, sheet_url(@sheet) %>.
+</p>
+<p>This email message will serve as your receipt.</p>
 
-        <div class="summary">
-            <h3>Payment Summary</h3>
-            <em>Sheet Purchased</em>
-            <p><%= link_to @sheet.title, sheet_url(@sheet) %></p>
-            <em>Purchase Date</em>
-            <p><%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
-            <em>Amount Paid</em>
-            <p><%= number_to_currency(@order.amount) %></p>
-            <em>Estimated Earnings</em>
-            <p><%= number_to_currency(@order.royalty) %></p>
-            <em>Tracking Id</em>
-            <p><%= @order.tracking_id %></p>
-        </div>
+<div class="summary">
+    <h3>Payment Summary</h3>
+    <em>Sheet Purchased</em>
+    <p><%= link_to @sheet.title, sheet_url(@sheet) %></p>
+    <em>Purchase Date</em>
+    <p><%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
+    <em>Amount Paid</em>
+    <p><%= number_to_currency(@order.amount) %></p>
+    <em>Estimated Earnings</em>
+    <p><%= number_to_currency(@order.royalty) %></p>
+    <em>Tracking Id</em>
+    <p><%= @order.tracking_id %></p>
+</div>
 
-        <p>You can view more sales details from the <a href="<%= user_sales_url %>"> Sales</a> dashboard.</p>
-        <a href="<%= user_sales_url %>" class="btn"> View Sales</a>
-        <p>For help and product support, please visit our <%= link_to "Support Center", support_url %>.</p>
-
-        <p>Cheers,</p>
-        <p>SheetHub</p>
-    </div>
-    <p class="footer">Sent with &hearts; from SheetHub</p>
-  </body>
-</html>
+<p>You can view more sales details from the <a href="<%= user_sales_url %>"> Sales</a> dashboard.</p>
+<a href="<%= user_sales_url %>" class="btn"> View Sales</a>

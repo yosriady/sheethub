@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= render 'layouts/email_styles' %>
+  </head>
+  <body>
+    <h2><a href="<%= root_url %>">SheetHub</a></h2>
+    <div class="container">
+
+        <%= yield %>
+
+      <p>For help or product support, please visit our <%= link_to "Support Center", support_url %>.</p>
+
+      <p>Cheers,</p>
+      <p>SheetHub</p>
+    </div>
+    <p class="footer">Sent with &hearts; from SheetHub</p>
+  </body>
+</html>
