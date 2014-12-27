@@ -1,4 +1,4 @@
-<% cache(cache_key_for_sheets) do %>
+
 <div id="sheets">
     <% sheets.each do |sheet| %>
         <%= render 'sheets/sheet', sheet: sheet %>
@@ -12,4 +12,3 @@
 <div id="paginator" class="text-center">
   <%= paginate sheets %>
 </div>
-<% end %>
