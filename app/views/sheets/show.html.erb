@@ -31,8 +31,13 @@ keywords @sheet.cached_joined_tags
 
         <div id="sheet-sidebar" class="col-xs-4 zeropadding">
             <%= render 'sheet_info', sheet:@sheet %>
-
             <%= render 'sheet_favorite', sheet: @sheet, favorites:@favorites %>
+            <div class="panel panel-info">
+              <div class="panel-heading"><em class="fa fa-download"></em> Files</div>
+              <div class="panel-body" style="padding: 10px;">
+                <%= render 'sheet_files', sheet: @sheet %>
+            </div>
+            </div>
             <%= render 'sheet_share', sheet: @sheet %>
             <%= render 'sign_up_blurb' %>
 

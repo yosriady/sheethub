@@ -3,11 +3,11 @@
     cursor: pointer;
     margin: 2px 0px;
     opacity: 0.85;
-    padding: 4px 8px;
+    padding: 4px 12px;
     color: #ffffff;
     border: 1px solid #0073bb;
     text-shadow: 0 1px 0 rgba(0, 51, 83, 0.9);
-    border-radius: 4px;
+    border-radius: 100px;
     background-color: #1b9dec;
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1da7ee), to(#178ee9));
     background-image: -webkit-linear-gradient(top, #1da7ee, #178ee9);
@@ -28,7 +28,7 @@
     border: 1px solid #ddd;
     text-shadow: none;
     box-shadow: none;
-    background:none;
+    background:#fff;
     background-image:none;
     opacity: 1;
 

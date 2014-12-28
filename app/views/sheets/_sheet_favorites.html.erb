@@ -3,6 +3,6 @@
       <% favorites.each do |vote| %>
         <%= render 'fan', fan: vote.voter %>
       <% end %>
-      <a href="<%= favorites_sheet_url(sheet) %>" class="bg-info" style="padding: 5px 15px;" data-toggle="tooltip" data-placement="top" title="View All <%= sheet.cached_votes_up %> Fans"><em class="fa fa-ellipsis-h"></em></a>
+      <a href="<%= favorites_sheet_url(sheet) %>" class="bg-info" data-toggle="tooltip" data-placement="top" title="View All <%= sheet.cached_votes_up %> Fans"><em class="fa fa-plus"></em></a>
 </li>
 <% end %>

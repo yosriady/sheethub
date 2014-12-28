@@ -1,5 +1,5 @@
 <div class="panel panel-info">
-  <div class="panel-body">
+  <div class="panel-body" style="padding-bottom: 5px">
     <p><%= sheet.description? ? sheet.description_html : 'No description.'%></p>
 
     <strong class="publishing-rights"><em class="fa fa-certificate"></em> <%= sheet.verbose_license %> <a href="<%= support_url %>#licenses"><em class="fa fa-question-circle"></em></a></strong>
@@ -7,11 +7,8 @@
   </div>
 
     <ul class="list-group">
-        <li class="list-group-item flat-tags">
+        <li class="list-group-item flat-tags well">
             <%= render 'sheet_tags', sheet:sheet %>
-        </li>
-        <li class="list-group-item">
-            <%= render 'sheet_files', sheet: sheet %>
         </li>
     </ul>
 </div>
