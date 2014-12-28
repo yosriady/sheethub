@@ -152,7 +152,7 @@ RSpec.describe SheetsController, :type => :controller do
     it "redirects to the sheets list" do
       sheet = Sheet.create! valid_attributes
       delete :destroy, {:id => sheet.to_param}, valid_session
-      expect(response).to redirect_to(sheets_url)
+      expect(response).to redirect_to(browse_url)
     end
   end
 
