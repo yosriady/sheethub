@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   def update_membership_to(membership_type)
     m = membership_type.downcase
     raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
-    raise MISSING_SUBSCRIPTION_OBJECT_MESSAGE unless has_subscription_for_membership(membership_type) || basic?
+    # raise MISSING_SUBSCRIPTION_OBJECT_MESSAGE unless has_subscription_for_membership(membership_type) || basic?
     update(membership_type: m, sheet_quota: User.free_sheet_quota_of(m))
   end
 
