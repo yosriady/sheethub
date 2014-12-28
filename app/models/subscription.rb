@@ -42,6 +42,7 @@ class Subscription < ActiveRecord::Base
     end
     is_only_subscription = (user.completed_subscriptions.size == 1)
     user.update_membership_to('basic') if is_only_subscription
+    SubscriptionMailer.cancellation_success_email(self).deliver
   end
 
   def payment_details

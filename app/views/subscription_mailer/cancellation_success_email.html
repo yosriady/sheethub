@@ -1,0 +1,15 @@
+<h1 class="error">We're sorry to see you go. :(</h1>
+<p>Hi <%= @buyer.display_name %>, </p>
+<p>You've cancelled your SheetHub <strong><%= @membership_type %></strong> Membership.</p>
+
+<div class="summary">
+    <h3 class="error">Cancelled Membership Summary</h3>
+    <em>Membership</em>
+    <p><%= @membership_type %></p>
+    <em>Join Date</em>
+    <p><%= @subscription.updated_at.strftime('%A, %d %b %Y') %></p>
+    <em>Amount</em>
+    <p><%= number_to_currency(Subscription.subscription_amount(@membership_type.downcase)) %> / month</p>
+    <em>Tracking Id</em>
+    <p><%= @subscription.tracking_id %></p>
+</div>
