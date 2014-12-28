@@ -18,7 +18,7 @@
           <% if @user && @user.basic? %>
             <p class="bg-info"><em class="fa fa-info-circle"></em><a href="<%= upgrade_path %>"> Upgrade</a> now to enjoy unlimited free uploads and extra features.</p>
           <% elsif @user && (@user.plus? || @user.pro?) %>
-            <p class="bg-primary"><em class="fa fa-smile-o"></em> Thank you for supporting SheetHub! Together we can make SheetHub a great community for musicians! </p>
+            <p class="bg-primary"><em class="fa fa-smile-o"></em> Thank you for supporting SheetHub! Together we can make SheetHub a great community platform for musicians! </p>
           <% end %>
 
 

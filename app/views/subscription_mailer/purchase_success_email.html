@@ -1,11 +1,16 @@
-<h1>Congratulations on your upgrade!</h1>
-<p>Dear <%= @buyer.display_name %>, </p>
-<p>Congratulations on your new SheetHub <strong><%= @membership_type %></strong> Membership! You can now enjoy up to <%= @buyer.sheet_quota %> free sheet uploads, unlimited commercial uploads, and many additional features. Enjoy! Thank you for your support!</p>
+<h1>Congratulations!</h1>
+<p>Hi <%= @buyer.display_name %>, </p>
+<p>Congratulations on your new SheetHub <strong><%= @membership_type %></strong> Membership! You now enjoy up to <%= @buyer.sheet_quota %> free sheet uploads, higher earnings (for Pro), additional features, and more. Enjoy! Thank you for supporting SheetHub, the open platform for musicians!</p>
 <p>This email message will serve as your receipt.</p>
 
-<hr>
-<strong>Payment Info</strong>
-<p>Membership: <%= @membership_type %></p>
-<p>Amount: <%= number_to_currency(Subscription.subscription_amount(@membership_type.downcase)) %> / month</p>
-<p>Tracking Id: <%= @subscription.tracking_id %></p>
-<hr>
+<div class="summary">
+    <h3>Payment Summary</h3>
+    <em>Membership</em>
+    <p><%= @membership_type %></p>
+    <em>Purchase Date</em>
+    <p><%= @subscription.updated_at.strftime('%A, %d %b %Y') %></p>
+    <em>Amount</em>
+    <p><%= number_to_currency(Subscription.subscription_amount(@membership_type.downcase)) %> / month</p>
+    <em>Tracking Id</em>
+    <p><%= @subscription.tracking_id %></p>
+</div>
