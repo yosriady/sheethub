@@ -1,0 +1,24 @@
+<h1>Welcome to SheetHub!</h1>
+<p>Hi <%= @user.display_name %>, </p>
+<p>Congratulations! Your account is now approved! Whether you're a beginner or a pro, SheetHub has everything you need to find, publish and share digital sheet music, score, and tablature.</p>
+
+<p>You can click here to sign in and get started:</p>
+<a href="<%= new_user_session_url %>" class="btn">Sign In</a>
+
+<p>Here are a few tips to help you dive in and get started:</p>
+<ul>
+    <li>
+        <strong>Discover new music.</strong> SheetHub makes it easy to find music through tags and search. We curate recommended works to help you find interesting works. Start <a href="<%= discover_url %>">discovering</a>!
+    </li>
+    <li>
+        <p><strong>Publish your work.</strong> If you're publishing, make sure that you've set your <a href="<%= user_settings_url %>">PayPal Email</a> correctly so you can start accepting payments. We'll let you know of any failed transactions via a friendly email, but you don't want to miss a sale! You need to have a confirmed PayPal email.</p>
+    </li>
+    <li>
+        <p><strong>Be the first to learn about our latest updates.</strong> We work day and night to provide you with the best experience available and are adding new things all the time! Keep up to date and share your thoughts on the <a href="http://blog.sheethub.co">SheetHub Blog</a>.</p>
+    </li>
+    <li>
+        <p><strong>Suggest new features</strong>. SheetHub is a continuously evolving platform built to cater the needs of our growing community of musicians. The community decides and votes on what we build next on our <a href="https://feedback.userreport.com/78c6cc74-05f2-4833-804c-c7acf9e3c9a7/">Feedback Forum</a>. Shape the future of SheetHub by submitting new ideas, reporting bugs, and upvoting ideas you like!</p>
+    </li>
+</ul>
+
+<p>We're musicians too, and we're here to help. Whether you have questions, need help setting up, or just need some advice – we're available anytime.</p>

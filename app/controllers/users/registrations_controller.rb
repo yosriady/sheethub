@@ -100,6 +100,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       update_params[:finished_registration?] = true
       update_params[:sheet_quota] = User::BASIC_FREE_SHEET_QUOTA
       if current_user.update(update_params)
+        UserMailer.welcome_email(current_user).deliver
         track('Finished registration')
         redirect_to user_profile_path(subdomain: current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
