@@ -1,6 +1,6 @@
 class SheetsController < ApplicationController
-  before_action :set_sheet, only: [:show, :update]
-  before_action :set_sheet_lazy, only: [:edit, :report, :flag, :favorite, :favorites, :destroy, :download]
+  before_action :set_sheet, only: [:update]
+  before_action :set_sheet_lazy, only: [:show, :edit, :report, :flag, :favorite, :favorites, :destroy, :download]
   before_action :set_deleted_sheet, only: [:restore]
   before_action :format_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]

@@ -4,6 +4,6 @@ module SheetsHelper
   end
 
   def cache_key_for_sheet_related_results(sheet)
-    "sheet_related_results_for_sheet_#{@sheet.id}_#{@sheet.updated_at}"
+    "sheet_related_results_for_sheet_#{sheet.id}_#{sheet.updated_at}"
   end
 end
