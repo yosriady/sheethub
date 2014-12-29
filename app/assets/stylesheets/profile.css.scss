@@ -10,7 +10,7 @@
         float: left;
         min-width: 100px;
         max-width: 100px;
-        border-radius: 6px;
+        border-radius: 1000px;
         margin-top: 10px;
         margin-right: 20px;
     }
@@ -37,6 +37,8 @@
         }
 
         h1 {
+            font-family: 'Source Sans Pro';
+            font-weight: 600;
             color: rgba(255, 255, 255, 1);
             display: inline;
         }
@@ -49,9 +51,16 @@
 
 .nav-strip-profile {
     background: #fff;
+    padding: 0px 20px;
+    padding-top: 5px;
+    height: 50px;
 
     .container-fluid {
         padding:0px 40px;
+    }
+
+    .fade-text {
+        padding: 0px 5px;
     }
 }
 
@@ -64,9 +73,18 @@
 .nav-strip-profile .list-inline > li {
     margin: 0px 10px;
     padding-bottom: 8px;
+
+    h4 a {
+        font-size: 16px;
+        color: #aaa;
+    }
 }
 
 .nav-strip-profile .list-inline > li.active {
-    border-bottom: 2px solid;
-    padding-bottom: 8px;
+    border-bottom: 3px solid;
+    padding-bottom: 2px;
+
+    h4 a {
+        color: #333;
+    }
 }

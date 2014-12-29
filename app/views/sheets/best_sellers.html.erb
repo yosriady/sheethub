@@ -3,13 +3,15 @@ title "Best Sellers"
 description "Discover best selling sheets on SheetHub"
 %>
 
-<%= render 'layouts/nav_strip' %>
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h2 class="sheets-heading"><em class="fa fa-certificate"></em> Best Sellers</h2>
-      <br />
-      <%= render 'sheets', sheets: @sheets %>
+        <ol class="breadcrumb">
+            <li><em class="fa fa-certificate %>"></em><a href="<%= browse_url %>">Browse</a></li>
+            <li><a href="<%= best_sellers_url %>">Best Sellers</a></li>
+        </ol>
+        <hr>
+        <%= render 'sheets', sheets: @sheets %>
     </div>
   </div>
 </div>

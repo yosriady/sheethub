@@ -3,12 +3,14 @@ title "Community Favorites"
 description "Discover all-time favorite works on SheetHub"
 %>
 
-<%= render 'layouts/nav_strip' %>
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h2 class="sheets-heading"><em class="fa fa-bookmark-o"></em> Community Favorites</h2>
-      <br />
+      <ol class="breadcrumb">
+          <li><em class="fa fa-bookmark %>"></em><a href="<%= browse_url %>">Browse</a></li>
+          <li><a href="<%= community_favorites_url %>">Community Favorites</a></li>
+      </ol>
+      <hr>
       <%= render 'sheets', sheets: @sheets %>
     </div>
   </div>

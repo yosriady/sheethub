@@ -4,8 +4,8 @@
 <div class="nav-strip nav-strip-profile">
 <div class="container-fluid">
 <ul class="list-inline">
-  <li><a href="<%= user_profile_url(subdomain: @user.username) %>">Works</a></li>
-  <li class="active"><a href="<%= user_favorites_url(subdomain: @user.username) %>">Favorites <span class="badge"><%= @favorites.count %></span></a></li>
+  <li><h4><a href="<%= user_profile_url(subdomain: @user.username) %>">Works</a></h4></li>
+  <li class="active"><h4><a href="<%= user_favorites_url(subdomain: @user.username) %>">Favorites</a> <span class="fade-text"><%= @favorites.count %></h4></li>
 </ul>
 </div>
 </div>

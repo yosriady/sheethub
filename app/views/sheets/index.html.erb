@@ -3,16 +3,22 @@ title "Browse"
 description "SheetHub is an open platform built for musicians."
 %>
 
-<%= render 'layouts/nav_strip' %>
-
 
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
-            <h2 class="sheets-heading">Recent works</h2>
-            <br />
+            <h2 class="sheets-heading">Find New and Interesting Musical Works</h2>
+            <h4 class="sheets-subheading">or <%= link_to "publish your own" %> to a growing community of musicians</h4>
+            <br/>
+            <br/>
+            <div class="flat-tags text-center">
+              <a href="<%= browse_url %>"><span class="tag active">New To SheetHub</span></a>
+              <a href="<%= best_sellers_url %>"><span class="tag">Best Sellers</span></a>
+              <a href="<%= community_favorites_url %>"><span class="tag">Community Favorites</span></a>
+            </div>
+            <br/>
             <%= render 'sheets', sheets: @sheets %>
-      </div>
+    </div>
     </div>
 </div>
 
@@ -24,7 +30,7 @@ description "SheetHub is an open platform built for musicians."
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
-            <a href="<%= community_favorites_path %>"><h2 class="sheets-heading">Community Favorites</h2></a>
+            <a href="<%= community_favorites_path %>"><h2 class="sheets-heading">Community Spotlight</h2></a>
             <h4 class="sheets-subheading"><em class="fa fa-star-o"></em> Get inspiration from these SheetHub members' top picks</h4>
             <br />
             <%= render 'featured_sheets', sheets: @featured %>
