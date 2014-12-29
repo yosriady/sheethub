@@ -21,6 +21,8 @@ module Sheethub
       }
     }
 
+    config.to_prepare { Devise::Mailer.layout "mailer" }
+
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true
     ActsAsTaggableOn.force_parameterize = true
