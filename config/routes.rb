@@ -51,7 +51,7 @@ Rails.application.routes.draw do
     get 'assets/:id/download', to: 'assets#download', as: 'download_asset'
 
     root 'sheets#index'
-    get 'browse', to: 'sheets#index', as: 'browse'
+    get 'discover', to: 'sheets#index', as: 'discover'
     get 'upload', to: 'sheets#new', as: 'sheet_upload'
     get 'search', to: 'sheets#search'
     get 'best-sellers', to: 'sheets#best_sellers'

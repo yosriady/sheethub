@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
 
   def cancel
     track('Cancel sheet purchase')
-    redirect_to browse_url, notice: CANCEL_ORDER_PURCHASE_MESSAGE
+    redirect_to discover_url, notice: CANCEL_ORDER_PURCHASE_MESSAGE
   end
 
   private
@@ -120,7 +120,7 @@ class OrdersController < ApplicationController
     def validate_flagged
       return unless @sheet.is_flagged
       flash[:error] = FLAGGED_MESSAGE
-      redirect_to browse_url
+      redirect_to discover_url
     end
 
     def validate_min_amount

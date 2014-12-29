@@ -8,8 +8,8 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to features_url do %><em class="fa fa-star"></em> Features<% end %></li>
-        <li><a href="<%= browse_url %>"><em class="fa fa-picture-o"></em> Browse</a></li>
         <li><a href="<%= sheet_upload_url %>"><em class="fa fa-cloud-upload"></em> Upload</a></li>
+        <li><a href="<%= discover_url %>">Discover</a></li>
 
       <% if user_signed_in? %>
         <%= render 'layouts/user_dropdown' %>

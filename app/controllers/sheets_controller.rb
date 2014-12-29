@@ -253,19 +253,19 @@ class SheetsController < ApplicationController
   def hide_private_sheets
     return unless current_user != @sheet.user
     flash[:error] = ERROR_PRIVATE_SHEET_MESSAGE
-    redirect_to browse_url
+    redirect_to discover_url
   end
 
   def authenticate_owner
     return if @sheet.user == current_user
     flash[:error] = ERROR_UPDATE_SHEET_MESSAGE
-    redirect_to browse_url
+    redirect_to discover_url
   end
 
   def validate_flagged
     return unless @sheet.is_flagged
     flash[:error] = FLAGGED_MESSAGE
-    redirect_to browse_url
+    redirect_to discover_url
   end
 
   def format_tag_fields
