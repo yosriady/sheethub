@@ -1,6 +1,6 @@
 <div class="sheet">
     <%= render 'sheet_text', sheet: sheet %>
-    <a href="<%= sheet_url(sheet, subdomain: sheet.user.username) %>">
+    <a href="<%= sheet_url(sheet) %>">
         <%= image_tag(sheet.pdf_preview_url, title:"This is a preview page.", class: "sheet_preview") %>
     </a>
     <div class="sheet-user">
