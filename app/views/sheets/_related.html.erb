@@ -1,4 +1,4 @@
-<% unless sheet.joined_tags.empty? || sheet.related_tags.blank? %>
+<% unless sheet.cached_joined_tags.empty? || sheet.related_tags.blank? %>
 <div id="related">
     <% if user_signed_in? %>
         <% cache(cache_key_for_sheet_related_results(sheet)) do %>

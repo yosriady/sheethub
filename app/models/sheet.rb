@@ -211,8 +211,8 @@ class Sheet < ActiveRecord::Base
     (instruments & Sheet.values_for_instruments).map { |r| 2**Sheet.values_for_instruments.index(r) }.inject(0, :+)
   end
 
-  def joined_tags
-    format_tags(tags)
+  def cached_joined_tags_list
+    cached_joined_tags.split(",")
   end
 
   def cached_genres_list
