@@ -7,11 +7,6 @@ h1, h2, h3 {
     -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-    color: #2583EB;
-    font-family: 'Roboto Slab';
-}
-
 h2 {
     font-weight: 300;
 }
@@ -133,6 +128,11 @@ blockquote {
 
 .zeropaddingleft {
     padding-left:0;
+}
+
+.zerohorizontalpadding {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .fade-text {
