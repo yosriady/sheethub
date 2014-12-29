@@ -1,0 +1,5 @@
+<h1 class="error"><%= @sheet.title %> deleted</h1>
+<p>Hi <%= @publisher.display_name %>, </p>
+<p><%= link_to @sheet.title, sheet_url(@sheet) %> has been deleted. Restore it at any time from the Trash Bin.</p>
+
+<a href="<%= user_trash_url %>" class="btn">View Deleted Sheets</a>

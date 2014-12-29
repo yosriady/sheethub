@@ -176,6 +176,24 @@ class Sheet < ActiveRecord::Base
     unliked_by user
   end
 
+  def restore
+    restore_tags
+    Sheet.restore(self, :recursive => true)
+  end
+
+  def clear_tags
+    genres.clear
+    sources.clear
+    composers.clear
+  end
+
+  def restore_tags
+    self.genre_list = self.cached_genres
+    self.source_list = self.cached_sources
+    self.composer_list = self.cached_composers
+    self.save!
+  end
+
   def pdf_preview?
     preview_url = pdf_preview_url
     preview_url.present? && preview_url != PDF_DEFAULT_URL
@@ -195,6 +213,31 @@ class Sheet < ActiveRecord::Base
 
   def joined_tags
     format_tags(tags)
+  end
+
+  def cached_genres_list
+    cached_genres.split(",")
+  end
+
+  def cached_composers_list
+    cached_composers.split(",")
+  end
+
+  def cached_sources_list
+    cached_sources.split(",")
+  end
+
+  # Override Soft Destroy
+  def destroy
+    clear_tags
+    super
+    SheetMailer.sheet_deleted_email(self).deliver
+  end
+
+  # Override Hard Destroy
+  def really_destroy!
+    super
+    SheetMailer.sheet_really_deleted_email(self).deliver
   end
 
   protected

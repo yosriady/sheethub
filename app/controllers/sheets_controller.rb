@@ -166,14 +166,14 @@ class SheetsController < ApplicationController
     @sheet.destroy
     track('Delete sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     respond_to do |format|
-      format.html { redirect_to trash_url, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
+      format.html { redirect_to user_trash_url, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
       format.json { head :no_content }
     end
   end
 
   # Reverses soft-deletion
   def restore
-    Sheet.restore(@sheet, :recursive => true)
+    @sheet.restore
     track('Restore sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     respond_to do |format|
       format.html { redirect_to sheet_url(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE }
@@ -243,6 +243,9 @@ class SheetsController < ApplicationController
     updated_params[:genre_list] = params[:sheet][:genre_list]
     updated_params[:source_list] = params[:sheet][:source_list]
     updated_params[:cached_joined_tags] = [params[:sheet][:instruments_list], params[:sheet][:composer_list], params[:sheet][:genre_list], params[:sheet][:source_list]].flatten.join ", "
+    updated_params[:cached_genres] = params[:sheet][:genre_list].join ", "
+    updated_params[:cached_composers] = params[:sheet][:composer_list].join ", "
+    updated_params[:cached_sources] = params[:sheet][:source_list].join ", "
     return updated_params
   end
 
