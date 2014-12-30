@@ -3,7 +3,7 @@
 }
 
 #banner.profile-banner {
-    height: 140px;
+    height: 120px;
     padding-left: 5%;
 
     .profile-avatar {
@@ -72,6 +72,7 @@
 .nav-strip-profile .list-inline > li {
     margin: 0px 10px;
     padding-bottom: 8px;
+    font-style: normal;
 
     h4 a {
         font-size: 16px;
