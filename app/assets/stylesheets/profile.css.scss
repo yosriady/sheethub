@@ -3,13 +3,13 @@
 }
 
 #banner.profile-banner {
-    height: 150px;
+    height: 140px;
     padding-left: 5%;
 
     .profile-avatar {
         float: left;
-        min-width: 100px;
-        max-width: 100px;
+        min-width: 80px;
+        max-width: 80px;
         border-radius: 1000px;
         margin-top: 10px;
         margin-right: 20px;
@@ -29,7 +29,6 @@
 
         a {
             color: rgba(255, 255, 255, 0.7);
-            display:block;
 
             &:hover, &:focus, &:active {
                 color: rgba(255, 255, 255, 1);

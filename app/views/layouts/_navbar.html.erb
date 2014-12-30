@@ -9,12 +9,12 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<%= discover_url %>"><em class="fa fa-home"></em> Discover</a></li>
         <li><%= link_to features_url do %><em class="fa fa-star"></em> Features<% end %></li>
-        <li><a href="<%= sheet_upload_url %>"><em class="fa fa-cloud-upload"></em> Upload</a></li>
+        <li><a href="<%= sheet_upload_url %>"><em class="fa fa-plus"></em> Upload</a></li>
 
       <% if user_signed_in? %>
         <%= render 'layouts/user_dropdown' %>
       <% else %>
-        <li><a href="<%= new_user_session_url %>">Sign In</a></li>
+        <li><a href="<%= new_user_registration_url %>">Sign Up Free</a></li>
       <% end %>
 
         <li class="dropdown">
