@@ -242,10 +242,6 @@ class SheetsController < ApplicationController
     updated_params[:composer_list] = params[:sheet][:composer_list]
     updated_params[:genre_list] = params[:sheet][:genre_list]
     updated_params[:source_list] = params[:sheet][:source_list]
-    updated_params[:cached_joined_tags] = [params[:sheet][:instruments_list], params[:sheet][:composer_list], params[:sheet][:genre_list], params[:sheet][:source_list]].flatten
-    updated_params[:cached_genres] = params[:sheet][:genre_list]
-    updated_params[:cached_composers] = params[:sheet][:composer_list]
-    updated_params[:cached_sources] = params[:sheet][:source_list]
     return updated_params
   end
 
@@ -315,7 +311,7 @@ class SheetsController < ApplicationController
   def sheet_params
     params[:sheet].permit(:user_id, :title, :description, :instruments_list,
                           :composer_list, :genre_list, :source_list,
-                          :cached_joined_tags, :pages, :difficulty, :pdf,
+                          :pages, :difficulty, :pdf,
                           :assets_attributes, :visibility, :price, :license,
                           :enable_pdf_stamping, :pay_what_you_want)
   end

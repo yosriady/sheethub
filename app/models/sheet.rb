@@ -224,6 +224,30 @@ class Sheet < ActiveRecord::Base
     SheetMailer.sheet_really_deleted_email(self).deliver
   end
 
+  def composer_list=(tag_list)
+    super
+    tag_list.map!(&:downcase)
+    self.cached_composers = tag_list
+    self.cached_joined_tags = [instruments, genre_list, source_list, tag_list].flatten
+    self.save!
+  end
+
+  def genre_list=(tag_list)
+    super
+    tag_list.map(&:downcase)
+    self.cached_genres = tag_list
+    self.cached_joined_tags = [instruments, composer_list, source_list, tag_list].flatten
+    self.save!
+  end
+
+  def source_list=(tag_list)
+    super
+    tag_list.map(&:downcase)
+    self.cached_sources = tag_list
+    self.cached_joined_tags = [instruments, genre_list, composer_list, tag_list].flatten
+    self.save!
+  end
+
   protected
 
   def tags
