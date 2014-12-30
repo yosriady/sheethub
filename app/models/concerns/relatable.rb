@@ -13,7 +13,7 @@ module Relatable
   def related_sheets(num_results = DEFAULT_NUM_RELATED_RESULTS)
     return [] if cached_joined_tags.empty?
     Rails.cache.fetch(cache_key_for_related_sheets, expires_in: 1.week) do
-      Sheet.tagged_with(cached_joined_tags_list, any: true).limit(num_results)
+      Sheet.tagged_with(cached_joined_tags, any: true).limit(num_results)
     end
   end
 

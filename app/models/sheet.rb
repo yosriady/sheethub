@@ -211,22 +211,6 @@ class Sheet < ActiveRecord::Base
     (instruments & Sheet.values_for_instruments).map { |r| 2**Sheet.values_for_instruments.index(r) }.inject(0, :+)
   end
 
-  def cached_joined_tags_list
-    cached_joined_tags.split(",")
-  end
-
-  def cached_genres_list
-    cached_genres.split(",")
-  end
-
-  def cached_composers_list
-    cached_composers.split(",")
-  end
-
-  def cached_sources_list
-    cached_sources.split(",")
-  end
-
   # Override Soft Destroy
   def destroy
     clear_tags

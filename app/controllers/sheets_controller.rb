@@ -242,10 +242,10 @@ class SheetsController < ApplicationController
     updated_params[:composer_list] = params[:sheet][:composer_list]
     updated_params[:genre_list] = params[:sheet][:genre_list]
     updated_params[:source_list] = params[:sheet][:source_list]
-    updated_params[:cached_joined_tags] = [params[:sheet][:instruments_list], params[:sheet][:composer_list], params[:sheet][:genre_list], params[:sheet][:source_list]].flatten.join ", "
-    updated_params[:cached_genres] = params[:sheet][:genre_list].join ", "
-    updated_params[:cached_composers] = params[:sheet][:composer_list].join ", "
-    updated_params[:cached_sources] = params[:sheet][:source_list].join ", "
+    updated_params[:cached_joined_tags] = [params[:sheet][:instruments_list], params[:sheet][:composer_list], params[:sheet][:genre_list], params[:sheet][:source_list]].flatten
+    updated_params[:cached_genres] = params[:sheet][:genre_list]
+    updated_params[:cached_composers] = params[:sheet][:composer_list]
+    updated_params[:cached_sources] = params[:sheet][:source_list]
     return updated_params
   end
 
