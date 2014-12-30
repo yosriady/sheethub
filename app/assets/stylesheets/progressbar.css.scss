@@ -1,23 +1,23 @@
 body #nprogress .bar {
     background: #2583eb;
     padding-bottom:2px;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid white;
 }
 
 .upload {
-  border-top: solid 1px #CCC;
+  border-top: solid 1px #ccc;
   width: 100%;
   padding-top: 10px;
   margin-top: 10px;
 
   .progress {
     margin-top: 8px;
-    border: solid 1px #555;
+    border: solid 1px #4cae4c;
     border-radius: 4px;
     -moz-border-radius: 4px;
     .bar {
       height: 10px;
-      background: #3EC144;
+      background: #5cb85c;
     }
   }
 }

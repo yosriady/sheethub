@@ -1,12 +1,12 @@
 .navbar .nav > .active > a {
-    color: #fff;
+    color: white;
     background: rgba(0,0,0,0.15);
     padding: 10px 15px;
     margin: 5px;
     border-radius: 100px;
 
     &:hover, &:focus, {
-        color: #fff;
+        color: white;
         background: rgba(0,0,0,0.3);
         padding: 10px 15px;
         margin: 5px;
@@ -14,7 +14,7 @@
 }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-        color: #fff;
+        color: white;
         background: rgba(0,0,0,0.2);
     }
 
@@ -38,23 +38,23 @@
     }
 
     ul.nav li a{
-        color: #fff;
+        color: white;
         padding: 15px;
 
         &:hover, &:focus, &:active{
-            color: #fff;
+            color: white;
             background: rgba(0,0,0,0.2);
         }
 
     }
 
     .navbar-brand {
-        color: #fff;
+        color: white;
         font-family: 'Roboto Slab', serif;
         font-size: 24px;
 
         &:hover, &:focus, &:active{
-            color: #fff;
+            color: white;
         }
 
         span.badge {
@@ -71,14 +71,14 @@
         border-radius: 0px;
 
         &:hover, &:focus, &:active{
-            color: #fff;
+            color: white;
             background: #2583EB;
         }
 
         &.bg-success {
             color: #5cb85c;
             &:hover, &:focus, &:active{
-                color: #fff;
+                color: white;
                 background: #5cb85c;
 
             }
@@ -89,7 +89,6 @@
 }
 
 .nav-strip {
-    color: #428bca;
     height: 40px;
     padding: 10px 0px;
     border-bottom: 1px solid #bce8f1;
@@ -103,13 +102,9 @@
     }
 }
 
-.divider {
-    border-left: 1px solid #428bca;
-}
-
 .alpha {
     background: #5cb85c;
-    color: #fff;
+    color: white;
     text-align: center;
     border-bottom: 1px solid rgba(0,0,0,0.05);
 
