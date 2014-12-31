@@ -4,8 +4,8 @@
     <div class="row">
       <%= render 'user_dashboard_sidebar' %>
       <div class="col-xs-10">
-        <h1>Sales</h1>
-        <%= render 'recent_sales', sales: @sales_past_month %>
+        <h1>All Sales</h1>
+        <%= render 'recent_sales', sales: @all_sales %>
 
         <h1>Sales Statistics</h1>
         <%= render 'sales_stats', aggregated_sales: @aggregated_sales, recent_sales:@sales_past_month %>

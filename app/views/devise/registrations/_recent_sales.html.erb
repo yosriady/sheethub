@@ -2,11 +2,13 @@
   <table class="table table-bordered table-striped white-container">
     <thead class="bg-info">
       <tr>
-        <th><em class="fa fa-calendar"></em> Sale date</th>
-        <th><em class="fa fa-music"></em> Sheet Music</th>
-        <th><em class="fa fa-user"></em> Buyer</th>
-        <th><em class="fa fa-usd"></em> Amount</th>
-        <th><em class="fa fa-usd"></em> Estimated Earning <a href="<%= support_url %>#earnings-calculation"><em class="fa fa-question-circle"></em></a></th>
+        <th>Date</th>
+        <th>Title</th>
+        <th>User</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>Amount</th>
+        <th>Earnings <a href="<%= support_url %>#earnings-calculation"><em class="fa fa-question-circle"></em></a></th>
       </tr>
     </thead>
     <tbody>
@@ -15,12 +17,17 @@
             <td><%= order.purchased_at.strftime("%A, %e %B %Y %l:%M %p") %></td>
             <td><%= link_to order.sheet.title, sheet_url(order.sheet) %></td>
             <td><%= link_to order.user.display_name, user_profile_url(subdomain: order.user.username) %></td>
+            <td><%= order.user.email %></td>
+            <td><%= order.user.billing_country %></td>
             <td><%= number_to_currency(order.amount) %></td>
             <td><%= number_to_currency(order.royalty) %></td>
           </tr>
         <% end %>
     </tbody>
   </table>
+  <div id="paginator" class="text-center">
+    <%= paginate sales %>
+  </div>
 <% else %>
   <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
   <h2 class="text-center">You have no sales yet.</h2>
