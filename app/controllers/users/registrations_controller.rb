@@ -140,7 +140,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def registration_params
     params[:user].permit(:username, :finished_registration?, :tagline, :website,
                          :avatar, :terms, :paypal_email, :first_name,
-                         :last_name, :sheet_quota, :timezone)
+                         :last_name, :sheet_quota, :timezone,
+                         :billing_full_name, :billing_address_line_1,
+                         :billing_address_line_2, :billing_city,
+                         :billing_state_province, :billing_country,
+                         :billing_zipcode)
   end
 
   def password_params

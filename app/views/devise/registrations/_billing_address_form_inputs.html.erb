@@ -1,0 +1,11 @@
+<hr>
+<p class="fade-text"><em class="fa fa-info-circle"></em> To comply with the new <%= link_to "2015 VAT MOSS regulations for EU", "http://ec.europa.eu/taxation_customs/taxation/vat/how_vat_works/telecom/index_en.htm" %>, please provide your billing address below.</p>
+<%= f.input :billing_full_name, label: 'Full Name', placeholder: 'Your Full Name' %>
+<%= f.input :billing_address_line_1, label: 'Address Line 1', placeholder: 'Street Address' %>
+<%= f.input :billing_address_line_2, label: 'Address Line 2', placeholder: 'Apartment, suite, unit building, etc. (optional)' %>
+<%= f.input :billing_city, label: 'City', placeholder: 'Your City' %>
+<%= f.input :billing_state_province, label: 'State / Province', placeholder: 'Your State / Province' %>
+<%= f.input :billing_country, label: 'Country', placeholder: 'Your Country' %>
+<%= f.label :timezone %><br />
+<%= f.time_zone_select :timezone, nil, include_blank: true %>
+<%= f.input :billing_zipcode, label: 'ZIP/Postal code', placeholder: 'Your Postal Code' %>

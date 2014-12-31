@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   validates :billing_state_province, presence: true, if: :finished_registration?
   validates :billing_country, presence: true, if: :finished_registration?
   validates :billing_zipcode, presence: true, if: :finished_registration?
-  validates :timezone, presence: true, if: :finished_registration?
+  validate :timezone_is_populated, if: :finished_registration?
   validates_email_format_of :email, message: 'You have an invalid email address'
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   has_many :sheets, dependent: :destroy
@@ -206,5 +206,9 @@ class User < ActiveRecord::Base
 
   def update_mixpanel_profile
     Analytics.update_profile(self)
+  end
+
+  def timezone_is_populated
+    errors.add(:timezone, 'cannot be blank') if timezone.blank?
   end
 end
