@@ -4,14 +4,9 @@
     <div class="col-lg-4 col-lg-offset-4 white-container">
         <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, defaults: { input_html: { class: 'form-control' }}) do |f| %>
           <%= f.error_notification %>
-
-          <div class="form-inputs">
-            <%= f.input :email, required: true, autofocus: true, placeholder: 'Your SheetHub account email address' %>
-          </div>
-
-          <%= f.button :submit, "Send me instructions", class:"btn btn-wide btn-success" %>
+          <%= f.input :email, required: true, autofocus: true, placeholder: 'Your SheetHub account email address' %>
+          <%= f.button :submit, "Send password reset instructions", class:"btn btn-success" %>
         <% end %>
-        <br />
     </div>
 </div>
 </div>
