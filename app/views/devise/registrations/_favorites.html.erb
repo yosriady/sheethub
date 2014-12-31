@@ -1,5 +1,5 @@
 <div id="favorites">
-    <% favorites.find_each do |favorite| %>
+    <% favorites.each do |favorite| %>
         <%= render 'sheets/sheet', sheet: favorite.votable %>
     <% end %>
 

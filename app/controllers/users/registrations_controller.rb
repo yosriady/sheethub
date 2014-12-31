@@ -39,9 +39,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def sales
     track('View sales')
+    @all_sales = current_user.sales.page(params[:page])
     @aggregated_sales = current_user.aggregated_sales
     @sales_past_month = current_user.sales_past_month
-    @all_sales = current_user.sales.page(params[:page])
   end
 
   def trash

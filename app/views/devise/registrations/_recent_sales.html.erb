@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-        <% sales.find_each do |order| %>
+        <% sales.each do |order| %>
           <tr>
             <td><%= order.purchased_at.strftime("%A, %e %B %Y %l:%M %p") %></td>
             <td><%= link_to order.sheet.title, sheet_url(order.sheet) %></td>
@@ -28,7 +28,4 @@
   <div id="paginator" class="text-center">
     <%= paginate sales %>
   </div>
-<% else %>
-  <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
-  <h2 class="text-center">You have no sales yet.</h2>
 <% end %>

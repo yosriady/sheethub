@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <% sheets.find_each do |sheet| %>
+      <% sheets.each do |sheet| %>
         <%= render 'sheets/sheet_dashboard', sheet: sheet %>
       <% end %>
     </tbody>
@@ -20,6 +20,7 @@
   <div id="paginator" class="text-center">
     <%= paginate sheets %>
   </div>
+  <a href="<%= sheet_upload_path %>" class="btn btn-success btn-inline"><em class="fa fa-plus"></em> Upload</a>
 <% else %>
   <h2 class="text-center"><em class="fa fa-eye-slash"></em> You have no published works</h2>
 <% end %>
