@@ -22,12 +22,15 @@
         <div class="form-inputs">
           <%= f.label :paypal_email %> <a href="<%= support_url %>#paypal-transfer"><em class="fa fa-question-circle"></em></a>
           <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
+          <hr>
 
           <%= f.input :first_name %>
           <%= f.input :last_name %>
 
           <%= f.input :tagline, placeholder: "Something interesting about you", autofocus: true %>
           <%= f.input :website, placeholder: "Your personal website", autofocus: true %>
+
+          <hr>
 
           <%= f.label :timezone %><br />
           <%= f.time_zone_select :timezone %>

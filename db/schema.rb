@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230031545) do
+ActiveRecord::Schema.define(version: 20141231093532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,13 @@ ActiveRecord::Schema.define(version: 20141230031545) do
     t.datetime "locked_at"
     t.string   "cached_display_name",    limit: 255
     t.string   "timezone",               limit: 255
+    t.string   "billing_full_name"
+    t.string   "billing_street_line_1"
+    t.string   "billing_street_line_2"
+    t.string   "billing_city"
+    t.string   "billing_state_province"
+    t.string   "billing_country"
+    t.string   "billing_zipcode"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

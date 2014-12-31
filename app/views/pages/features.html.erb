@@ -25,6 +25,15 @@ keywords %w(features benefits)
             </div>
             <div class="feature">
                 <div class="col-xs-1">
+                    <em class="fa fa-users"></em>
+                </div>
+                <div class="col-xs-11">
+                    <h3>Direct-to-fan storefront</h3>
+                    <p>Sell your work directly to your fans with a product page. You can start publishing on SheetHub, your website, Facebook page, or Twitter channel in minutes.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="col-xs-1">
                     <em class="fa fa-smile-o"></em>
                 </div>
                 <div class="col-xs-11">
@@ -66,15 +75,6 @@ keywords %w(features benefits)
                 <div class="col-xs-11">
                     <h3>Analytics</h3>
                     <p>Gain valuable insight into your overall earnings, your most popular works, who your fans are, and more from an intuitive and simple to use dashboard that’s, well, kind of fun to use.</p>
-                </div>
-            </div>
-            <div class="feature">
-                <div class="col-xs-1">
-                    <em class="fa fa-lightbulb-o"></em>
-                </div>
-                <div class="col-xs-11">
-                    <h3>We're here to help</h3>
-                    <p>We're musicians too, and we're here to help. Whether you have questions, need help setting up, or just need some advice. <%= link_to "We're available anytime.", support_url %></p>
                 </div>
             </div>
         </div>
@@ -131,6 +131,15 @@ keywords %w(features benefits)
                 <div class="col-xs-11">
                     <h3>Getting Better Every Day</h3>
                     <p>SheetHub is a continuously evolving platform built to cater the needs of our growing community of musicians. The community decides and votes on what we build next. You shape the future of SheetHub!</p>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="col-xs-1">
+                    <em class="fa fa-lightbulb-o"></em>
+                </div>
+                <div class="col-xs-11">
+                    <h3>We're here to help</h3>
+                    <p>We're musicians too, and we're here to help. Whether you have questions, need help setting up, or just need some advice. <%= link_to "We're available anytime.", support_url %></p>
                 </div>
             </div>
         </div>
@@ -274,5 +283,11 @@ keywords %w(features benefits)
 <% if !user_signed_in? %>
 <div class="animated-banner footer-banner">
     <h1>Join a growing community of musicians. <a href="<%= new_user_registration_url %>" class="btn btn-inline btn-success btn-banner btn-lg center-block"> Sign Up For Free</a></h1>
+</div>
+<% end %>
+
+<% if user_signed_in? %>
+<div class="animated-banner footer-banner">
+    <h1>Publish your work on SheetHub <a href="<%= sheet_upload_path %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"> Upload</a></h1>
 </div>
 <% end %>
