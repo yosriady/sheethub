@@ -18,6 +18,16 @@
     <p><%= number_to_currency(@order.royalty) %></p>
     <em>Tracking Id</em>
     <p><%= @order.tracking_id %></p>
+    <em>Billing Information</em>
+    <p><%= @buyer.billing_full_name %></p>
+    <p><%= @buyer.billing_address_line_1 %></p>
+    <p><%= @buyer.billing_address_line_2 %></p>
+    <p><%= @buyer.billing_city %></p>
+    <p><%= @buyer.billing_state_province %></p>
+    <p><%= @buyer.billing_country %></p>
+    <p><%= @buyer.billing_zipcode %></p>
+    <em>IP Address</em>
+    <p><%= @buyer.last_sign_in_ip.to_s %></p>
 </div>
 
 <p>You can view more sales details from the <a href="<%= user_sales_url %>"> Sales</a> dashboard.</p>

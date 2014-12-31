@@ -10,7 +10,7 @@
     <p><%= link_to @sheet.title, sheet_url(@sheet) %></p>
     <em>Purchase Date</em>
     <p><%= @order.purchased_at.strftime('%A, %d %b %Y') %></p>
-    <em>Sheet Price</em>
+    <em>Price</em>
     <p><%= number_to_currency(@order.price) %></p>
     <em>Amount Paid</em>
     <p><%= number_to_currency(@order.amount) %></p>
