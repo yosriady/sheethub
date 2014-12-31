@@ -239,6 +239,7 @@ class SheetsController < ApplicationController
   def build_tags(sheet_params)
     updated_params = sheet_params
     updated_params[:instruments] = params[:sheet][:instruments_list]
+    binding.pry
     updated_params[:composer_list] = params[:sheet][:composer_list]
     updated_params[:genre_list] = params[:sheet][:genre_list]
     updated_params[:source_list] = params[:sheet][:source_list]

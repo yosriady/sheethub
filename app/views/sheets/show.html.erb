@@ -1,9 +1,10 @@
 <%
 title @sheet.title
-description @sheet.description
+description "#{@sheet.title} sheet music on SheetHub, the open platform for musicians. #{@sheet.description}"
 keywords @sheet.cached_joined_tags
 %>
 
+<%= render 'open_graph_metatags', sheet: @sheet %>
 
 <div class="container">
     <div class="row">
