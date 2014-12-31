@@ -77,6 +77,7 @@ gem 'nprogress-rails'
 gem 'simple_form'
 gem 'selectize-rails'
 gem 'maskmoney-rails'
+gem 'country_select', github: 'stefanpenner/country_select'
 
 # Frontend
 gem 'bootstrap-sass', '~> 3.1.1'

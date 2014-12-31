@@ -31,7 +31,10 @@ $(document).on("page:change", function() {
     });
 
     $('#sheet_difficulty').selectize({});
+
+    // User Form Fields
     $('#user_timezone').selectize({});
+    $('#user_billing_country').selectize({});
 
     $('#sheet_license').selectize({
         options: [{

@@ -6,6 +6,13 @@ GIT
     paranoia (2.0.4)
       activerecord (~> 4.0)
 
+GIT
+  remote: git://github.com/stefanpenner/country_select.git
+  revision: d3ba0b99beacf66f189816db88ed46342698b539
+  specs:
+    country_select (2.1.0)
+      countries (~> 0.9, >= 0.9.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,8 +107,11 @@ GEM
     coffee-script-source (1.8.0)
     colored (1.2)
     connection_pool (2.1.0)
+    countries (0.9.3)
+      currencies (~> 0.4.2)
     css_parser (1.3.5)
       addressable
+    currencies (0.4.2)
     daemon_controller (1.2.0)
     dalli (2.7.2)
     debug_inspector (0.0.2)
@@ -409,6 +419,7 @@ DEPENDENCIES
   bugsnag
   bullet
   chartkick
+  country_select!
   dalli
   devise
   dotenv-rails

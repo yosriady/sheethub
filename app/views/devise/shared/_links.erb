@@ -1,3 +1,13 @@
+<hr>
+
+<%- if controller_name != 'registrations' %>
+    <%= link_to "Not registered yet?", new_registration_path(resource_name) %><br />
+<% end %>
+
+<%- if controller_name != 'sessions' %>
+    <%= link_to "Already registered?", new_session_path(resource_name) %><br />
+<% end %>
+
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Resend confirmation instructions?", new_confirmation_path(resource_name) %><br />
 <% end -%>

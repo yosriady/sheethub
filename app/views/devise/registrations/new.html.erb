@@ -21,9 +21,10 @@
         <div class="form-actions">
             <%= f.button :submit, "Sign Up", class:"btn btn btn-success btn-lg btn-block" %>
         </div>
+        <p class="fade-text">By signing up, you agree to SheetHub's <%= link_to "Terms of Service", terms_path %>
+          and <%=link_to "Privacy Policy", privacy_path %>.</p>
         <% end %>
 
-        <%= link_to "Already registered?", new_session_path(resource_name) %><br />
         <%= render "devise/shared/links" %>
     </div>
   </div>

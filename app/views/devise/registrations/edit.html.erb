@@ -20,7 +20,7 @@
         <hr>
 
         <div class="form-inputs">
-          <%= f.label :paypal_email %> <a href="<%= support_url %>#paypal-transfer"><em class="fa fa-question-circle"></em></a>
+          <%= f.label :paypal_email, label: 'PayPal Email' %> <a href="<%= support_url %>#paypal-transfer"><em class="fa fa-question-circle"></em></a>
           <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
           <hr>
 
@@ -31,7 +31,6 @@
           <%= f.input :website, placeholder: "Your personal website", autofocus: true %>
 
           <hr>
-
           <%= f.label :timezone %><br />
           <%= f.time_zone_select :timezone %>
 

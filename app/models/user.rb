@@ -16,7 +16,13 @@ class User < ActiveRecord::Base
 
   enum membership_type: %w( basic plus pro staff )
   validates :username, presence: true, uniqueness: { case_sensitive: false }, if: :finished_registration?
-  validates_acceptance_of :terms, acceptance: true
+  validates :billing_full_name, presence: true, if: :finished_registration?
+  validates :billing_address_line_1, presence: true, if: :finished_registration?
+  validates :billing_city, presence: true, if: :finished_registration?
+  validates :billing_state_province, presence: true, if: :finished_registration?
+  validates :billing_country, presence: true, if: :finished_registration?
+  validates :billing_zipcode, presence: true, if: :finished_registration?
+  validates :timezone, presence: true, if: :finished_registration?
   validates_email_format_of :email, message: 'You have an invalid email address'
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   has_many :sheets, dependent: :destroy

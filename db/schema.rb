@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231093532) do
+ActiveRecord::Schema.define(version: 20141231110012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,8 +194,8 @@ ActiveRecord::Schema.define(version: 20141231093532) do
     t.string   "cached_display_name",    limit: 255
     t.string   "timezone",               limit: 255
     t.string   "billing_full_name"
-    t.string   "billing_street_line_1"
-    t.string   "billing_street_line_2"
+    t.string   "billing_address_line_1"
+    t.string   "billing_address_line_2"
     t.string   "billing_city"
     t.string   "billing_state_province"
     t.string   "billing_country"
