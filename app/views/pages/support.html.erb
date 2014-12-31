@@ -19,7 +19,7 @@ keywords %w(support faq help frequently/ asked/ questions)
   <%= render "faq_item", id:"howto-upload", question: "How do I upload my music on SheetHub?", answer: "<a href='#{new_user_registration_path }'>Sign Up</a> and <a href='#{sheet_upload_path}'>Upload</a> to start publishing! You will need at least a printable PDF version of your sheet music to start." %>
   <hr>
 
-  <h4><em class="fa fa-music"></em> Sheet Music</h4>
+  <h4><em class="fa fa-music"></em> User Submissions</h4>
     <%= render "faq_item", id:"sheet-requirements", question: "What technical requirements do you have for submitted PDFs?", answer: "PDFs submitted must be: <ul><li>portrait oriented</li> <li>free of password protection</li> <li>less than 20 MB in size</li></ul><p>We require PDFs because it is a file format that is easily printable and require no specific music notation software installed to view. Users will be able to view and print your works without hassle.</p>"%>
      <%= render "faq_item", id:"sheet-recommendations", question: "Any other recommendations on how to format my PDF?", answer: "Users will be able to view a cover page which will be automatically created from the first page of your PDF. Customers are better able to make a purchasing decision if they can see a sample of your music that reflects the difficulty, range and uniqueness of your piece."%>
      <%= render "faq_item", id:"sheet-metadata", question: "What other information can I submit with my sheet music?", answer: "Submitting additional information about your sheet music - instruments, composers, genres, and sources - will help other users find and ultimately purchase your sheet music. SheetHub also uses this information in our internal recommendations system. The more detailed information you provide, the more likely that your sheet music appears in recommended results. "%>
@@ -114,7 +114,7 @@ The Public Domain Mark is recommended for works that are free of known copyright
 <div class="col-xs-4">
     <div class="bg-info blurb"><strong><em class="fa fa-info-circle"></em> Alpha</strong> <p>We are currently in public alpha, which means things may not work perfectly – yet. If you encounter something that looks broken, please let us know!</p></div>
     <br />
-    <a href="<%= contact_url %>" class="btn btn-block btn-success">Contact Us</a>
+    <a href="<%= contact_url %>" class="btn btn-block btn-success"><em class="fa fa-paper-plane"></em> Contact Us</a>
     <hr>
     <div class="panel panel-default">
         <%= render 'layouts/twitter_widget' %>
