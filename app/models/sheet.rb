@@ -125,11 +125,19 @@ class Sheet < ActiveRecord::Base
   end
 
   def total_sales
-    completed_orders.size * price
+    completed_orders.inject(0) { |total, order| total + order.amount }
   end
 
   def total_earnings
     completed_orders.inject(0) { |total, order| total + order.royalty }
+  end
+
+  def average_sales
+    completed_orders.average(:amount_cents).to_f / 100
+  end
+
+  def maximum_sale
+    completed_orders.maximum(:amount_cents).to_f / 100
   end
 
   def price

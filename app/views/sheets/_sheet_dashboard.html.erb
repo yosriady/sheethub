@@ -1,14 +1,23 @@
 <tr>
   <td class="sheet table-sheet">
-    <%= render 'sheets/sheet_text', sheet: sheet %>
-    <em class="fade-text" style="padding:10px;" data-toggle="tooltip" data-placement="right" title="Published <%= sheet.created_at.strftime('%d %B %Y') %>"><span class="publish-date">Published <%= distance_of_time_in_words(Time.zone.now, sheet.created_at) %> ago</span></em>
+    <a href="<%= sheet_url(sheet) %>"><%= sheet.title %></a>
   </td>
   <td>
-    <%= render 'sheets/sheet_files', sheet: sheet %>
+    <%= sheet.completed_orders.size %>
   </td>
   <td>
-    <a href="<%= edit_sheet_path(sheet) %>">
-      <button type="button" class="btn btn-success btn-block"><em class="fa fa-edit"></em> Edit</button>
-    </a>
+    <%= number_to_currency(sheet.total_sales) %>
+  </td>
+  <td>
+    <%= number_to_currency(sheet.total_earnings) %>
+  </td>
+  <td>
+    <%= number_to_currency(sheet.average_sales) %>
+  </td>
+  <td>
+    <%= number_to_currency(sheet.maximum_sale) %>
+  </td>
+  <td>
+    <p><a href="<%= edit_sheet_path(sheet) %>"> Edit </a></p>
   </td>
 </tr>
