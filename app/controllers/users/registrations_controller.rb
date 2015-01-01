@@ -104,15 +104,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # Finish registration fields edit/update
   def finish_registration
     if request.patch? && params[:user] && params[:user][:username]
+      @user = current_user
       update_params = registration_params
       update_params[:finished_registration?] = true
       update_params[:sheet_quota] = User::BASIC_FREE_SHEET_QUOTA
-      if current_user.update(update_params)
-        UserMailer.welcome_email(current_user).deliver
+      if @user.update(update_params)
+        UserMailer.welcome_email(@user).deliver
         track('Finished registration')
-        redirect_to user_profile_url(subdomain: current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
+        redirect_to user_profile_url(subdomain: @user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
-        flash[:error] = current_user.errors.full_messages.to_sentence
+        flash[:error] = @user.errors.full_messages.to_sentence
         redirect_to finish_registration_url, error: FAILURE_UPDATE_PROFILE_MESSAGE
       end
     else

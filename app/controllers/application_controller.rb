@@ -10,13 +10,12 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_subdomain
 
   def redirect_subdomain
-    if request.subdomain == 'www'
-      if Rails.env.development?
-        port = ":#{request.port}"
-        redirect_to [request.protocol, request.domain, port, request.fullpath].join
-      else
-        redirect_to [request.protocol, request.domain, request.fullpath].join
-      end
+    return unless request.subdomain == 'www'
+    if Rails.env.development?
+      port = ":#{request.port}"
+      redirect_to [request.protocol, request.domain, port, request.fullpath].join
+    else
+      redirect_to [request.protocol, request.domain, request.fullpath].join
     end
   end
 

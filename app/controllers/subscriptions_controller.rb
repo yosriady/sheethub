@@ -9,22 +9,28 @@ class SubscriptionsController < ApplicationController
   before_action :validate_existing_membership, only: [:purchase, :checkout, :downgrade]
 
   def purchase
-    track('Visit subscription purchase page', { membership_type: subscriptions_params[:membership] })
+    track('Visit subscription purchase page',
+          membership_type: subscriptions_params[:membership])
   end
 
   def checkout
     payment_response = build_payment_response(subscriptions_params[:membership])
-
-    if payment_response.ack == 'Success'
-      # Finds previous in-progress subscription if exists
-      @subscription = Subscription.find_or_initialize_by(membership_type: Subscription.membership_types[subscriptions_params[:membership]], user_id: current_user.id, status: Subscription.statuses[:processing])
-      @subscription.update(tracking_id: payment_response.token)
-      track('Redirected to Paypal for subscription purchase', { membership_type: subscriptions_params[:membership], tracking_id: @subscription.tracking_id })
-      redirect_to payment_response.redirect_uri
-    else
+    unless payment_response.ack == 'Success'
       Rails.logger.info "Paypal Subscription Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
       redirect_to upgrade_url, notice: ERROR_UPGRADE_PURCHASE_MESSAGE
     end
+
+    # Finds previous in-progress subscription if exists
+    @subscription = Subscription.find_or_initialize_by(
+                      membership_type: Subscription.membership_types[subscriptions_params[:membership]],
+                      user_id: current_user.id,
+                      status: Subscription.statuses[:processing]
+                    )
+    @subscription.update(tracking_id: payment_response.token)
+    track('Redirected to Paypal for subscription purchase',
+          membership_type: subscriptions_params[:membership],
+          tracking_id: @subscription.tracking_id)
+    redirect_to payment_response.redirect_uri
   end
 
   def success
@@ -32,10 +38,10 @@ class SubscriptionsController < ApplicationController
     # Cancels previous subscription if exists
     user_subscriptions = @subscription.user.completed_subscriptions
     has_previous_subscription = (user_subscriptions.size > 1)
-    if has_previous_subscription
-      user_subscriptions.first.destroy
-    end
-    track('Completed subscription purchase', { membership_type: subscriptions_params[:membership], tracking_id: @subscription.tracking_id })
+    user_subscriptions.first.destroy if has_previous_subscription
+    track('Completed subscription purchase',
+          membership_type: subscriptions_params[:membership],
+          tracking_id: @subscription.tracking_id)
     render action: 'thank_you', notice: SUCCESS_SUBSCRIPTION_PURCHASE_MESSAGE
   end
 
@@ -46,7 +52,7 @@ class SubscriptionsController < ApplicationController
   def downgrade
     track('Attempted downgrade')
     if current_user.hit_sheet_quota_for_basic?
-      flash[:error] = 'You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets.'
+      flash[:error] = "You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets."
       redirect_to user_membership_settings_url
     else
       membership = subscriptions_params[:membership]
@@ -115,7 +121,7 @@ class SubscriptionsController < ApplicationController
 
   def validate_existing_membership
     return unless current_user.membership_type == subscriptions_params[:membership]
-    flash[:error] = 'You are already a #{current_user.membership_type.titleize} member.'
+    flash[:error] = "You are already a #{current_user.membership_type.titleize} member."
     redirect_to upgrade_url
   end
 
