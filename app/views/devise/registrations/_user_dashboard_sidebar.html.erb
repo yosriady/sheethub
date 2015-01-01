@@ -14,11 +14,11 @@
         <hr>
 
         <h5>Account</h5>
-        <li role="presentation"><a href="<%= user_settings_path %>"><em class="fa fa-cog"></em> Edit Profile</a></li>
+        <li role="presentation"><a href="<%= user_settings_url %>"><em class="fa fa-cog"></em> Edit Profile</a></li>
         <% unless current_user.provider? %>
-        <li role="presentation"><a href="<%= user_password_settings_path %>"><em class="fa fa-key"></em> Change Password</a></li>
+        <li role="presentation"><a href="<%= user_password_settings_url %>"><em class="fa fa-key"></em> Change Password</a></li>
         <% end %>
-        <li role="presentation"><a href="<%= user_membership_settings_path %>"><em class="fa fa-star"></em> Membership</a></li>
+        <li role="presentation"><a href="<%= user_membership_settings_url %>"><em class="fa fa-star"></em> Membership</a></li>
         <hr>
     </ul>
 </div>

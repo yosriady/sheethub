@@ -1,5 +1,5 @@
 <div class="navbar-form input-group search-bar">
-  <form action="<%= search_path %>" method="get">
+  <form action="<%= search_url %>" method="get">
     <div id="scrollable-dropdown-menu" class="has-feedback">
       <%= text_field_tag :q, params[:q], id:"search_form", class:"typeahead form-control", placeholder:"Search for title" %>
       <em class="fa fa-search form-control-feedback"></em>

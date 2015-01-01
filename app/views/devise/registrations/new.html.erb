@@ -11,7 +11,7 @@
         <%= render "devise/shared/omniauth_links" %>
         <%= render "layouts/line_divider" %>
 
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), defaults: { input_html: { class: 'form-control' }}) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_url(resource_name), defaults: { input_html: { class: 'form-control' }}) do |f| %>
         <%= f.error_notification %>
 
         <div class="form-inputs">
@@ -23,8 +23,8 @@
         <div class="form-actions">
             <%= f.button :submit, "Sign Up", class:"btn btn btn-success btn-lg btn-block" %>
         </div>
-        <p class="fade-text">By signing up, you agree to SheetHub's <%= link_to "Terms of Service", terms_path %>
-          and <%=link_to "Privacy Policy", privacy_path %>.</p>
+        <p class="fade-text">By signing up, you agree to SheetHub's <%= link_to "Terms of Service", terms_url %>
+          and <%=link_to "Privacy Policy", privacy_url %>.</p>
         <% end %>
 
         <%= render "devise/shared/links" %>

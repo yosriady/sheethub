@@ -35,7 +35,7 @@
   <% if params[:action] == "edit" && sheet.pdf.present? %>
   <ul id="sheet-files">
     <li>
-        <a href="<%= download_sheet_path(sheet) %>">
+        <a href="<%= download_sheet_url(sheet) %>">
             <div class="sheet-file">
             <p><em class="fa fa-download"></em> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
             </div>

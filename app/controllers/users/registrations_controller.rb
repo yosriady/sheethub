@@ -44,6 +44,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @sales_past_month = current_user.sales_past_month
   end
 
+  def download_sales_data
+
+  end
+
   def trash
     track('View trash')
     @deleted_sheets = current_user.deleted_sheets
@@ -103,10 +107,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if current_user.update(update_params)
         UserMailer.welcome_email(current_user).deliver
         track('Finished registration')
-        redirect_to user_profile_path(subdomain: current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
+        redirect_to user_profile_url(subdomain: current_user.username), notice: SUCCESS_UPDATE_PROFILE_MESSAGE
       else
         flash[:error] = current_user.errors.full_messages.to_sentence
-        redirect_to finish_registration_path, error: FAILURE_UPDATE_PROFILE_MESSAGE
+        redirect_to finish_registration_url, error: FAILURE_UPDATE_PROFILE_MESSAGE
       end
     else
       # Render Form

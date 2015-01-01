@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
       <%= render 'user_dashboard_sidebar' %>
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_url(resource_name), html: { method: :put, multipart: true }) do |f| %>
         <%= f.error_notification %>
 
         <h1>Edit Profile</h1>

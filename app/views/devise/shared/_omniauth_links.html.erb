@@ -1,9 +1,9 @@
 <%- if devise_mapping.omniauthable? %>
-       <a href="<%= omniauth_authorize_path(resource_name, "facebook") %>" class="btn-omniauth btn btn-block btn-social btn-facebook">
+       <a href="<%= omniauth_authorize_url(resource_name, "facebook") %>" class="btn-omniauth btn btn-block btn-social btn-facebook">
             <em class="fa fa-facebook"></em> Sign in with Facebook
         </a>
 
-        <a href="<%= omniauth_authorize_path(resource_name, "google_oauth2") %>" class="btn-omniauth btn btn-block btn-social btn-google-plus">
+        <a href="<%= omniauth_authorize_url(resource_name, "google_oauth2") %>" class="btn-omniauth btn btn-block btn-social btn-google-plus">
             <em class="fa fa-google-plus"></em> Sign in with Google+
         </a>
 <% end -%>

@@ -4,7 +4,7 @@
     <div class="row">
       <%= render 'user_dashboard_sidebar' %>
       <div class="col-xs-10">
-        <h1>All Sales</h1>
+        <h1>All Sales <a href="<%= user_download_sales_data_url %>" class="btn btn-default pull-right"><em class="fa fa-download"></em> Download Sales Data CSV</a></h1>
         <%= render 'recent_sales', sales: @all_sales %>
 
         <h1>Sales Statistics</h1>

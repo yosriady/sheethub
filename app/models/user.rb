@@ -126,6 +126,11 @@ class User < ActiveRecord::Base
     Order.includes(:user).includes(:sheet).where(sheet_id: sheets.ids, status: Order.statuses[:completed])
   end
 
+  def all_sales_data
+
+
+  end
+
   def aggregated_sales
     result = {}
     sheets.find_each do |sheet|

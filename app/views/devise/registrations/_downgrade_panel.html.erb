@@ -13,7 +13,7 @@
         <p class="bg-danger"><em class="fa fa-info-circle"></em> You may need to delete some free sheets before you can downgrade to a lower plan. </p>
         <p class="bg-danger"><em class="fa fa-info-circle"></em> You will lose access to your current <%= user.membership_type.titleize %> membership features. </p>
 
-        <a href="<%= subscriptions_downgrade_path(:basic) %>"><button type="button" class="btn btn-default"><em class="fa fa-frown-o"></em> Downgrade to Basic</button></a>
+        <a href="<%= subscriptions_downgrade_url(:basic) %>"><button type="button" class="btn btn-default"><em class="fa fa-frown-o"></em> Downgrade to Basic</button></a>
     </div>
   </div>
 </div>

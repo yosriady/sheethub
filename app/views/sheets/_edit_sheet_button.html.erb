@@ -1,5 +1,5 @@
 <% if current_user.present? && current_user == sheet.user %>
-<a href="<%= edit_sheet_path(sheet) %>">
+<a href="<%= edit_sheet_url(sheet) %>">
     <button type="button" class="btn btn-success btn-lg btn-block"><em class="fa fa-edit"></em> Edit</button>
 </a>
 <% end %>

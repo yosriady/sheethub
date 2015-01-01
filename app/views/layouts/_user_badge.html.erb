@@ -1,7 +1,7 @@
 <% if user.staff? %>
   <span class="badge"> STAFF </span>
 <% elsif user.plus? %>
-  <a href="<%= upgrade_path %>"><span class="badge"> PLUS </span></a>
+  <a href="<%= upgrade_url %>"><span class="badge"> PLUS </span></a>
 <% elsif user.pro?%>
-  <a href="<%= upgrade_path %>"><span class="pro badge"> PRO </span></a>
+  <a href="<%= upgrade_url %>"><span class="pro badge"> PRO </span></a>
 <% end %>
