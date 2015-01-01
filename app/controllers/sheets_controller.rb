@@ -64,6 +64,7 @@ class SheetsController < ApplicationController
   end
 
   def favorites
+    track('View sheet fans', sheet_id: @sheet.id, sheet_title: @sheet.title)
     @favorites = @sheet.votes_for.includes(:voter).page(params[:page]).per(50)
   end
 
