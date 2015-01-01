@@ -25,7 +25,7 @@
         <td>
           Monthly Amount
         </td>
-        <td><strong>US$<%= payment_details.billing.amount.total %></strong></td>
+        <td><strong><%= number_to_currency(payment_details.billing.amount.total) %></strong></td>
       </tr>
         <td>
           Next billing date
@@ -42,7 +42,7 @@
         <td>
           Outstanding balance
         </td>
-        <td><strong><%= payment_details.summary.outstanding_balance.zero? ? "No outstanding payments" : "US$#{payment_details.summary.outstanding_balance}" %></strong></td>
+        <td><strong><%= payment_details.summary.outstanding_balance.zero? ? "No outstanding payments" : "#{number_to_currency(payment_details.summary.outstanding_balance)}" %></strong></td>
       </tr>
     </tbody>
   </table>

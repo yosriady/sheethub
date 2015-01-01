@@ -34,7 +34,7 @@ class SheetsController < ApplicationController
   def index
     @instruments = Sheet.values_for_instruments
     @sheets = Sheet.is_public.includes(:user).page(params[:page])
-    @featured = Sheet.includes(:user).community_favorites.limit(3)
+    @featured = Sheet.cached_community_favorites.limit(3)
     @composers = Sheet.popular_composers
     @genres = Sheet.popular_genres
     @sources = Sheet.popular_sources
@@ -48,12 +48,12 @@ class SheetsController < ApplicationController
 
   def best_sellers
     track('View best sellers')
-    @sheets = Sheet.get_best_sellers.page(params[:page])
+    @sheets = Sheet.cached_best_sellers.page(params[:page])
   end
 
   def community_favorites
     track('View community favorites')
-    @sheets = Sheet.get_community_favorites.page(params[:page])
+    @sheets = Sheet.cached_community_favorites.page(params[:page])
   end
 
   # GET /sheets/1

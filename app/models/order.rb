@@ -74,7 +74,7 @@ class Order < ActiveRecord::Base
     pdf.expiring_url(EXPIRATION_TIME)
   end
 
-  # Can refactor out to a common interface?
+  # TODO: Refactor out to a common CSV interface
   def csv_data
     [updated_at.to_s, sheet.title,
       ActionController::Base.helpers.number_to_currency(price),
@@ -130,5 +130,4 @@ class Order < ActiveRecord::Base
     file = s3.buckets['sheethub'].objects[key]
     file.delete
   end
-
 end

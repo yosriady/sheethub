@@ -1,9 +1,9 @@
 <% if favorites.each do |vote| %>
   <%= render 'fan', fan: vote.voter %>
+  <div id="paginator" class="text-center">
+    <%= paginate favorites %>
+  </div>
 <% end.empty? %>
   <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
   <h2 class="text-center">No fans yet!</h2>
 <% end %>
-<div id="paginator" class="text-center">
-  <%= paginate favorites %>
-</div>

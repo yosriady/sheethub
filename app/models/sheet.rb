@@ -83,13 +83,13 @@ class Sheet < ActiveRecord::Base
     simple_format
   end
 
-  def self.get_best_sellers
+  def self.cached_best_sellers
     Rails.cache.fetch('best_sellers', expires_in: 1.day) do
       Sheet.includes(:user).best_sellers
     end
   end
 
-  def self.get_community_favorites
+  def self.cached_community_favorites
     Rails.cache.fetch('community_favorites', expires_in: 1.day) do
       Sheet.includes(:user).community_favorites
     end
@@ -186,7 +186,7 @@ class Sheet < ActiveRecord::Base
 
   def restore
     restore_tags
-    Sheet.restore(self, :recursive => true)
+    Sheet.restore(self, recursive: true)
   end
 
   def clear_tags
