@@ -44,8 +44,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @sales_past_month = current_user.sales_past_month
   end
 
-  def download_sales_data
-
+  def csv_sales_data
+    @sales_data = current_user.csv_sales_data
+    respond_to do |format|
+      format.csv { send_data @sales_data, filename: "sales-#{Time.zone.now.strftime('%b %d %Y').parameterize}.csv" }
+    end
   end
 
   def trash

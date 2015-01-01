@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       match 'users/finish_registration', to: 'users/registrations#finish_registration', via: [:get, :patch], as: :finish_registration
       get 'dashboard', to: 'users/registrations#dashboard', as: :user_dashboard
       get 'sales', to: 'users/registrations#sales', as: :user_sales
-      get 'download_sales_data', to: 'users/registrations#download_sales_data', as: :user_download_sales_data
+      get 'sales/download', to: 'users/registrations#csv_sales_data', as: :user_csv_sales_data
       get 'library', to: 'users/registrations#library', as: :user_library
       get 'trash', to: 'users/registrations#trash', as: :user_trash
 

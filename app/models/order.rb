@@ -74,6 +74,17 @@ class Order < ActiveRecord::Base
     pdf.expiring_url(EXPIRATION_TIME)
   end
 
+  # Can refactor out to a common interface?
+  def csv_data
+    [updated_at.to_s, sheet.title,
+      ActionController::Base.helpers.number_to_currency(price),
+      ActionController::Base.helpers.number_to_currency(amount),
+      ActionController::Base.helpers.number_to_currency(royalty), user.email,
+     user.last_sign_in_ip, user.billing_full_name, user.billing_address_line_1,
+     user.billing_address_line_2, user.billing_city,
+     user.billing_state_province, user.billing_country, user.billing_zipcode]
+  end
+
   def amount
     amount_cents.to_f / 100
   end
