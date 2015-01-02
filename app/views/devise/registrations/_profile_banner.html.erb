@@ -4,7 +4,7 @@
       <h1><%= user.display_name %><%= render 'layouts/user_badge', user: user unless user.basic?%></h1>
       <ul class="list-inline">
         <li><p><a href="<%= user_profile_url(subdomain:user.username) %>"><em class="fa fa-user"></em> <%= user.username %></a></p></li>
-        <li><p><em class="fa fa-map-marker"></em> <%= user.timezone %></p></li>
+        <li><p><em class="fa fa-map-marker"></em> <%= user.country %></p></li>
         <% if user.website? %><li><p><a href="<%= url_with_protocol(user.website) %>" target="_blank"><em class="fa fa-home"></em> <%= user.website %></a></p></li><% end %>
         <% if user.tagline? %><li><p class="tagline"><em class="fa fa-info-circle"></em> <%= user.tagline %></p></li><% end %>
       </ul>

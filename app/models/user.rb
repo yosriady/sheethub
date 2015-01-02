@@ -74,6 +74,11 @@ class User < ActiveRecord::Base
                          status: Subscription.statuses[:completed]).present?
   end
 
+  def country
+    country = ISO3166::Country[billing_country]
+    country.translations[I18n.locale.to_s] || country.name
+  end
+
   def premium_subscription
     Subscription.find_by(user: self, status: Subscription.statuses[:completed])
   end
