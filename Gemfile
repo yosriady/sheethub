@@ -21,8 +21,9 @@ gem 'mail_form'
 # HTML Emails
 gem 'roadie-rails'
 
-# Event Analytics
+# Analytics
 gem 'mixpanel-ruby'
+gem 'google-analytics-turbolinks'
 
 # Application Monitoring
 gem 'newrelic_rpm'

@@ -9,6 +9,7 @@
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/google_analytics_sdk' %>
 </head>
 <body>
 <%= render 'layouts/fb_sdk' %>
@@ -20,6 +21,5 @@
 </div>
 
 <%= render 'layouts/footer' %>
-<%= render 'layouts/google_analytics_sdk' if Rails.env.production? %>
 </body>
 </html>

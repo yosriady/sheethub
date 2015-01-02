@@ -29,4 +29,5 @@
 //= require fb-sdk
 //= require paypal-checkout
 //= require profile-settings
+//= require google-analytics-turbolinks
 //= require_tree .

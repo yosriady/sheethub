@@ -154,6 +154,7 @@ GEM
       json
       multi_json
       request_store (>= 1.0.5)
+    google-analytics-turbolinks (0.0.4)
     groupdate (2.3.0)
       activesupport (>= 3)
     hashie (2.1.2)
@@ -427,6 +428,7 @@ DEPENDENCIES
   font-awesome-rails
   friendly_id
   gon
+  google-analytics-turbolinks
   groupdate
   heroku-deflater
   jquery-rails
