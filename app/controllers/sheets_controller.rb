@@ -32,6 +32,7 @@ class SheetsController < ApplicationController
   # GET /sheets
   # GET /sheets.json
   def index
+    track('View homepage')
     @instruments = Sheet.values_for_instruments
     @sheets = Sheet.is_public.includes(:user).page(params[:page])
     @featured = Sheet.cached_community_favorites.limit(3)
