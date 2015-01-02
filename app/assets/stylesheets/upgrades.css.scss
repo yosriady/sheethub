@@ -106,6 +106,8 @@
 }
 
 .list-group.pro-plan {
+    outline: 10px solid #ecface;
+
     .list-group-item {
         &:hover, &:focus {
             cursor: help;

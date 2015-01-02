@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
   EXPIRATION_TIME = 600
   BASIC_FREE_SHEET_QUOTA = 10
   PLUS_FREE_SHEET_QUOTA = 75
-  PRO_FREE_SHEET_QUOTA = 250
-  BASIC_ROYALTY_PERCENTAGE = 0.80
-  PLUS_ROYALTY_PERCENTAGE = 0.80
-  PRO_ROYALTY_PERCENTAGE = 0.85
+  PRO_FREE_SHEET_QUOTA = 125
+  BASIC_ROYALTY_PERCENTAGE = 0.75
+  PLUS_ROYALTY_PERCENTAGE = 0.75
+  PRO_ROYALTY_PERCENTAGE = 0.80
   AVATAR_MAX_WIDTH = 300
   AVATAR_MAX_HEIGHT = 300
   INVALID_MEMBERSHIP_TYPE_MESSAGE = 'Membership type does not exist'
@@ -201,14 +201,11 @@ class User < ActiveRecord::Base
   end
 
   def build_display_name
-    if first_name.present?
-      if last_name.present?
-        "#{first_name} #{last_name}"
-      else
-        first_name
-      end
+    return username unless first_name.present?
+    if last_name.present?
+      "#{first_name} #{last_name}"
     else
-      username
+      first_name
     end
   end
 

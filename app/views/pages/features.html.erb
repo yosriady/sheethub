@@ -12,6 +12,7 @@ keywords %w(features benefits)
         <h2>You upload your amazing work - we take care of everything else.</h2>
 
         <img src="http://s13.postimg.org/j6kfkowrr/sheetshow.png" />
+        <a href="<%= new_user_registration_url %>" class="btn btn-success center-block"> Sign Up For Free</a>
 
         <div class="col-xs-6">
             <div class="feature">
@@ -20,7 +21,7 @@ keywords %w(features benefits)
                 </div>
                 <div class="col-xs-11">
                     <h3>Easy Publishing</h3>
-                    <p>Easily publish, manage, and update your music to a growing audience of musicians. Add files, video links, set a price, and more. No complex installation or technical skills required.</p>
+                    <p>Compose, publish, sell. Easily publish, manage, and update your music to a growing audience of musicians. Add files, video links, set a price, and more. No complex installation or technical skills required.</p>
                 </div>
             </div>
             <div class="feature">
@@ -209,11 +210,11 @@ keywords %w(features benefits)
         <div class="col-xs-6">
             <div class="feature">
                 <div class="col-xs-1">
-                    <em class="fa fa-hand-o-up"></em>
+                    <em class="fa fa-gift"></em>
                 </div>
                 <div class="col-xs-11">
-                    <h3>Instant Buy</h3>
-                    <p>Sometimes you don’t need a shopping cart. Instant buy makes purchasing as simple and easy as possible. Just click, pay and download your product.</p>
+                    <h3>Access to Free works</h3>
+                    <p>Get unlimited downloads of free published works on SheetHub. Download and print anytime, on any platform.</p>
                 </div>
             </div>
             <div class="feature">
@@ -227,6 +228,15 @@ keywords %w(features benefits)
             </div>
         </div>
         <div class="col-xs-6">
+            <div class="feature">
+                <div class="col-xs-1">
+                    <em class="fa fa-hand-o-up"></em>
+                </div>
+                <div class="col-xs-11">
+                    <h3>Instant Buy</h3>
+                    <p>Instant buy makes purchasing as simple and easy as possible. Just click, pay and download your product.</p>
+                </div>
+            </div>
             <div class="feature">
                 <div class="col-xs-1">
                     <em class="fa fa-birthday-cake"></em>
@@ -297,6 +307,6 @@ keywords %w(features benefits)
 
 <% if user_signed_in? %>
 <div class="animated-banner footer-banner">
-    <h1>Now available: Plus and Pro memberships. <a href="<%= upgrade_url %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"><em class="fa fa-star"></em> Upgrade</a></h1>
+    <h1>Now available: Plus and Pro memberships. <a href="<%= upgrade_url %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"><em class="fa fa-star"></em> Go Pro</a></h1>
 </div>
 <% end %>

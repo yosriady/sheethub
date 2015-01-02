@@ -5,7 +5,7 @@ keywords %w(contact support)
 %>
 
 <div class="animated-banner">
-    <h1><em class="fa fa-paper-plane"></em> Contact Us</h1>
+    <h1><em class="fa fa-paper-plane"></em> Contact</h1>
     <h2>Have questions? We're happy to help!</h2>
 </div>
 
@@ -13,13 +13,14 @@ keywords %w(contact support)
   <div class="row">
 
     <div class="col-xs-8 white-container">
-        <%= simple_form_for(@contact, html: { class:'sleek-form' }, defaults: { input_html: { class: 'form-control' }}) do |f| %>
+        <%= simple_form_for(@contact, defaults: { input_html: { class: 'form-control' }}) do |f| %>
           <%= f.input :name, label: 'Your Name', required: true %>
           <%= f.input :email, required: true %>
           <%= f.input :subject, required: true %>
           <%= f.input :message, as: :text, required: true %>
 
-          <%= f.button :submit, 'Send Message', class: "btn btn-success btn-block btn-lg" %>
+          <%= f.button :submit, 'Send Message', class: "btn btn-success btn-lg" %>
+          <p class="fade-text">* The founder / lead engineer personally respond to each message</p>
         <% end %>
     </div>
     <div class="col-xs-4">

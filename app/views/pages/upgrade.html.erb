@@ -1,22 +1,34 @@
 <%
-title "Upgrade"
+title "Go Pro"
 keywords %w(upgrade pro plus premium)
 %>
 
 <div class="container" id="upgrade-page">
     <br />
     <h1 class="text-center">Go Pro on SheetHub</h1>
-    <h2 class="text-center">Access awesome new features and support the community!</h2>
+    <h2 class="text-center">Access awesome new <%= link_to "features", features_url %> and support the community!</h2>
 
-    <div class="col-xs-4">
-    <%= render 'subscriptions/basic_table' %>
-    </div>
-    <div class="col-xs-4">
-        <%= render 'subscriptions/plus_table', nobutton:false %>
-    </div>
-    <div class="col-xs-4">
-      <%= render 'subscriptions/pro_table', nobutton:false %>
+    <div class="row">
+        <div class="col-xs-4">
+          <%= render 'subscriptions/pro_table', nobutton:false %>
+        </div>
+        <div class="col-xs-4">
+            <%= render 'subscriptions/plus_table', nobutton:false %>
+        </div>
+        <div class="col-xs-4">
+            <%= render 'subscriptions/basic_table' %>
+        </div>
     </div>
 
+    <div class="row">
+        <hr>
+        <div class="col-xs-6">
+        <p class="bg-info"><em class="fa fa-info-circle"></em> Questions about features and pricing? Visit our <%= link_to "Support Center.", support_url %> </p>
+        </div>
+        <div class="col-xs-6">
+        <p class="bg-success"><em class="fa fa-graduation-cap"></em> Large Organization or Educational Institution? <%= link_to "Contact Us", contact_url %> for an estimate.</p>
+        </div>
+
+    </div>
 
 </div>
