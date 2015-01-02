@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :sheets do
       collection do
         get 'autocomplete'
+        get 'titles'
       end
 
       member do

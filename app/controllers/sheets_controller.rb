@@ -235,6 +235,10 @@ class SheetsController < ApplicationController
     render json: Sheet.is_public.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_url(s)}}
   end
 
+  def titles
+    render json: Sheet.is_public.map{|s| {title: s.title, url: sheet_url(s)}}
+  end
+
   private
 
   def build_tags(sheet_params)

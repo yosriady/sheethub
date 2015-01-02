@@ -1,8 +1,11 @@
 $(document).on("page:change", function() {
   if(!$('.twitter-typeahead').length){
     var sheets = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: {
+          url: '/sheets/titles'
+        },
       remote: '/sheets/autocomplete?query=%QUERY'
     });
 
