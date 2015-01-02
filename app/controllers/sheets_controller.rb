@@ -231,7 +231,6 @@ class SheetsController < ApplicationController
   end
 
   def autocomplete
-    track('Searched for', query: params[:query])
     render json: Sheet.is_public.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_url(s)}}
   end
 
