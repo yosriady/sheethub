@@ -1,13 +1,10 @@
-<%= render 'layouts/nav_strip' %>
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h1><span>Here's what we found for <q><%= params[:q] %></q></span>:</h1>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12">
+      <ol class="breadcrumb">
+          <li><em class="fa fa-search %>"></em><a href="<%= discover_url %>">Discover</a></li>
+          <li><a href="<%= search_url(params[:q]) %>">"<%= params[:q] %>" results</a></li>
+      </ol>
       <%= render 'sheets', sheets: @sheets %>
     </div>
     <div id="paginator" class="text-center">
