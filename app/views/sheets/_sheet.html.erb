@@ -1,4 +1,3 @@
-<% cache(sheet) do %>
 <div class="sheet">
     <%= render 'sheets/sheet_text', sheet: sheet %>
     <a href="<%= sheet_url(sheet) %>">
@@ -8,4 +7,3 @@
       <a href="<%= user_profile_url(subdomain: sheet.user.username) %>"><em class="fa fa-user"></em> <%= sheet.user.display_name %></a>
     </div>
 </div>
-<% end %>

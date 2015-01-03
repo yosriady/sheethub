@@ -1,6 +1,6 @@
 <div id="sheets">
   <% if sheets.each do |sheet| %>
-  <%= render 'sheets/featured_sheet', sheet: sheet %>
+  <%= render 'sheets/sheet', sheet: sheet %>
   <% end.empty? %>
   <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
   <h2 class="text-center">No Sheets yet!</h2>
