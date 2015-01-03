@@ -1,3 +1,4 @@
+<% cache("sheet_text_#{sheet.updated_at}") do %>
 <a href="<%= sheet_url(sheet) %>">
 <div class="sheet-text">
   <% if sheet.privately_visible?%>
@@ -11,3 +12,4 @@
   <p><%= sheet.cached_composers.any? ? sheet.cached_composers.join(", ").titleize : "Unknown Composer" %></p>
 </div>
 </a>
+<% end %>
