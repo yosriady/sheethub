@@ -1,4 +1,4 @@
-<% cache("sheet_user_#{user.updated_at}") do %>
+<% cache("sheet_user_#{user.username}_#{user.updated_at}") do %>
 <div class="sheet-user">
   <a href="<%= user_profile_url(subdomain: user.username) %>"><em class="fa fa-user"></em> <%= user.display_name %></a>
 </div>

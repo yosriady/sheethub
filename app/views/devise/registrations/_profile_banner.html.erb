@@ -1,3 +1,4 @@
+<%= cache("profile_banner_#{user.username}_#{user.updated_at}") do %>
 <div id="banner" class="profile-banner">
     <%= image_tag(user.avatar_url, class: "profile-avatar") %>
     <div class="profile-bio">
@@ -8,6 +9,6 @@
         <% if user.website? %><li><p><a href="<%= url_with_protocol(user.website) %>" target="_blank"><em class="fa fa-home"></em> <%= user.website %></a></p></li><% end %>
         <% if user.tagline? %><li><p class="tagline"><em class="fa fa-info-circle"></em> <%= user.tagline %></p></li><% end %>
       </ul>
-
     </div>
 </div>
+<% end %>

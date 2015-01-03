@@ -1,4 +1,4 @@
-<% cache("sheet_text_#{sheet.updated_at}") do %>
+<% cache("sheet_text_#{sheet.slug}_#{sheet.updated_at}") do %>
 <a href="<%= sheet_url(sheet) %>">
 <div class="sheet-text">
   <% if sheet.privately_visible?%>
