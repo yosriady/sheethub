@@ -23,7 +23,6 @@ gem 'roadie-rails'
 
 # Analytics
 gem 'mixpanel-ruby'
-gem 'google-analytics-turbolinks'
 
 # Application Monitoring
 gem 'newrelic_rpm'
