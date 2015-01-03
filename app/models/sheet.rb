@@ -14,7 +14,6 @@ class Sheet < ActiveRecord::Base
   INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
   TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
   HIT_QUOTA_MESSAGE = 'You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub.'
-  PRIVATE_FREE_VALIDATION_MESSAGE = 'Private Sheets must be free.'
 
   belongs_to :user
   has_many :flags, dependent: :destroy
@@ -31,7 +30,6 @@ class Sheet < ActiveRecord::Base
 
   validate :validate_price
   validate :validate_number_of_tags
-  validate :validate_private_sheet_must_be_free
   validates :title, presence: true
   validates :license, presence: true
   validates :visibility, presence: true
@@ -273,11 +271,6 @@ class Sheet < ActiveRecord::Base
       output << "'#{tag}',"
     end
     output[0..-2] # Strip trailing comma
-  end
-
-  def validate_private_sheet_must_be_free
-    invalid = self.vprivate? && !self.free?
-    errors.add(:price, PRIVATE_FREE_VALIDATION_MESSAGE) if invalid
   end
 
   def validate_free_sheet_quota
