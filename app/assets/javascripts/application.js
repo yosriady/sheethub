@@ -16,7 +16,6 @@
 //= require s3_direct_upload
 //= require s3-uploader
 //= require bootstrap
-//= require tooltips
 //= require jquery_ujs
 //= require selectize
 //= require selectize-script
@@ -24,9 +23,4 @@
 //= require twitter/typeahead
 //= require twitter/typeahead.min
 //= require turbolinks
-//= require userreport
-//= require twitter
-//= require fb-sdk
-//= require paypal-checkout
-//= require profile-settings
 //= require_tree .

@@ -12,9 +12,9 @@ class OrdersController < ApplicationController
   before_action :validate_min_amount, only: [:checkout]
 
   def checkout
-    track('Checking out sheet', { sheet_id: @sheet.id, sheet_title: @sheet.title })
+    track('Checking out sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
 
-    if @sheet.pay_what_you_want
+    if @sheet.pay_what_you_want && params[:amount].present?
       amount = params[:amount].to_f
       amount_cents = amount * 100
     else
@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
     if @order
       @order.complete
       @sheet = @order.sheet
-      track('Complete sheet purchase', { order_id: @order.id, sheet_id: @sheet.id, sheet_title: @sheet.title })
+      track('Complete sheet purchase', order_id: @order.id, sheet_id: @sheet.id, sheet_title: @sheet.title)
       render action: 'thank_you', notice: SUCCESS_ORDER_PURCHASE_MESSAGE
     else
       fail 'Invalid Tracking Id'
@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
 
   def cancel
     track('Cancel sheet purchase')
-    redirect_to discover_url, notice: CANCEL_ORDER_PURCHASE_MESSAGE
+    redirect_to sheet_url(params[:sheet]), notice: CANCEL_ORDER_PURCHASE_MESSAGE
   end
 
   private
@@ -88,7 +88,7 @@ class OrdersController < ApplicationController
       r.trackingId = tracking_id
       r.actionType = 'PAY'
       r.feesPayer = 'PRIMARYRECEIVER'
-      r.cancelUrl = orders_cancel_url
+      r.cancelUrl = orders_cancel_url(sheet: sheet)
       r.returnUrl = orders_success_url(tracking_id)
       r.currencyCode = 'USD'
 
@@ -124,7 +124,7 @@ class OrdersController < ApplicationController
     end
 
     def validate_min_amount
-      return unless @sheet.pay_what_you_want
+      return unless @sheet.pay_what_you_want && params[:amount]
       above_minimum = params[:amount].to_f >= @sheet.price
       return if above_minimum
       flash[:error] = INVALID_PRICE_MESSAGE
