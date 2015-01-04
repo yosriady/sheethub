@@ -1,7 +1,9 @@
 class ContactFormController < ApplicationController
   def new
     track('Visited contact form')
-    @contact = ContactForm.new
+    @contact = ContactForm.new(subject: params[:subject],
+                               email: (current_user.email if user_signed_in?),
+                               name: (current_user.display_name if user_signed_in?))
   end
 
   def create
