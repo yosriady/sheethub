@@ -1,7 +1,9 @@
 <div class="sheet">
     <%= render 'sheets/sheet_text', sheet: sheet %>
+    <div class="sheet-preview">
     <a href="<%= sheet_url(sheet) %>">
-        <%= image_tag(sheet.pdf_preview_url, title:"Preview of #{sheet.title}", class: "sheet_preview") %>
+        <%= image_tag(sheet.pdf_preview_url, title:"Preview of #{sheet.title}") %>
     </a>
+    </div>
     <%= render 'sheets/sheet_user', user: sheet.user %>
 </div>

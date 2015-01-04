@@ -46,11 +46,16 @@
     margin-bottom:10px;
 }
 
-.sheet_preview {
-    width: 100%;
+.sheet-preview {
+    height: 360px;
+    overflow: hidden;
     background: #fff;
     border-radius:0px;
     border-top: 1px solid #eee;
+
+    img {
+        width: 100%;
+    }
 }
 
 #sheet-sidebar {
