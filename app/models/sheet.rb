@@ -118,6 +118,10 @@ class Sheet < ActiveRecord::Base
     vprivate?
   end
 
+  def visibility_string
+    visibility[1..-1].titleize
+  end
+
   def completed_orders
     Order.where(sheet_id: id, status: Order.statuses[:completed])
   end

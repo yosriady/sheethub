@@ -3,6 +3,9 @@
     <a href="<%= sheet_url(sheet) %>"><%= sheet.title %></a>
   </td>
   <td>
+    <%= sheet.visibility_string %>
+  </td>
+  <td>
     <%= sheet.completed_orders.size %>
   </td>
   <td>
