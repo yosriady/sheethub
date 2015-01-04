@@ -299,9 +299,9 @@ class SheetsController < ApplicationController
   end
 
   def set_all_tags
-    @composers = Sheet.is_public.tags_on(:composers)
-    @genres = Sheet.is_public.tags_on(:genres)
-    @sources = Sheet.is_public.tags_on(:sources)
+    @composers = Sheet.tags_on(:composers)
+    @genres = Sheet.tags_on(:genres)
+    @sources = Sheet.tags_on(:sources)
   end
 
   def set_instruments
