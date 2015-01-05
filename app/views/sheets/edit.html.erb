@@ -1,16 +1,15 @@
 
 <div class="container">
     <div class="row">
-      <h1 class="text-center">Editing <a href="<%= sheet_url(@sheet) %>"><%= @sheet.title %></a></h1>
-      <hr>
-    </div>
-
-    <div class="row">
       <div id="sheet-content" class="col-xs-8">
-          <%= image_tag(@sheet.pdf_preview_url, :class => "sample_sheet") %>
+        <h1 class="text-center">Editing <%= @sheet.title %></h1>
+        <hr>
+        <%= image_tag(@sheet.pdf_preview_url, :class => "sample_sheet") %>
       </div>
 
       <div id="sheet-sidebar" class="col-xs-4">
+          <a href="<%= sheet_url(@sheet) %>", class="btn btn-default btn-block"><em class="fa fa-angle-left"></em> Back to <%= @sheet.title %></a>
+          <br />
           <div class="panel panel-info">
             <div class="panel-body">
                   <%= render 'form', sheet: @sheet, genres: @genres, composers: @composers, sources: @sources %>
