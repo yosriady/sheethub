@@ -4,7 +4,8 @@ class Sheet < ActiveRecord::Base
   include Relatable
   include Taggable
 
-  PDF_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
+  PDF_PREVIEW_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
+  PDF_DEFAULT_URL = 'nil'
   EXPIRATION_TIME = 30
   MIN_PRICE = 99
   MAX_PRICE = 999_99
@@ -59,7 +60,11 @@ class Sheet < ActiveRecord::Base
                     processors: [:preview],
                     hash_secret: Rails.application.secrets.sheet_hash_secret,
                     default_url: PDF_DEFAULT_URL,
-                    preserve_files: 'true'
+                    preserve_files: 'true',
+                    s3_permissions: {
+                      preview: :public_read,
+                      original: :private
+                    }
   validates_attachment_content_type :pdf,
                                     content_type: ['application/pdf']
   validates_attachment_size :pdf, in: 0.megabytes..MAX_FILESIZE.megabytes
@@ -206,11 +211,11 @@ class Sheet < ActiveRecord::Base
 
   def pdf_preview?
     preview_url = pdf_preview_url
-    preview_url.present? && preview_url != PDF_DEFAULT_URL
+    preview_url.present? && preview_url != PDF_PREVIEW_DEFAULT_URL
   end
 
   def pdf_preview_url
-    pdf.expiring_url(EXPIRATION_TIME, :preview)
+    pdf.url(:preview) || PDF_PREVIEW_DEFAULT_URL
   end
 
   def pdf_download_url

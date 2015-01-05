@@ -36,7 +36,8 @@ class User < ActiveRecord::Base
                       original: '-strip'
                     },
                     hash_secret: AVATAR_HASH_SECRET,
-                    default_url: MISSING_AVATAR_URL
+                    default_url: MISSING_AVATAR_URL,
+                    s3_permissions: :public_read
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   validates :avatar, dimensions: { width: AVATAR_MAX_WIDTH,
                                    height: AVATAR_MAX_HEIGHT }

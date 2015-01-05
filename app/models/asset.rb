@@ -12,7 +12,8 @@ class Asset < ActiveRecord::Base
 
   has_attached_file :file,
                     hash_secret: Rails.application.secrets.asset_hash_secret,
-                    preserve_files: "true"
+                    preserve_files: "true",
+                    s3_permissions: :private
   validate :validate_file_size
   # TODO: validate attachment content type: MIDI, .ptb, .gp5, .tg, etc...
 
