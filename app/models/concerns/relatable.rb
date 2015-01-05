@@ -4,6 +4,7 @@ module Relatable
 
   included do
     DEFAULT_NUM_RELATED_RESULTS = 3
+    DEFAULT_NUM_RELATED_TAGS = 12
   end
 
   def cache_key_for_related_sheets
@@ -21,11 +22,11 @@ module Relatable
     "related_tags_for_sheet_#{id}-#{updated_at}"
   end
 
-  def related_tags
+  def related_tags(num_results = DEFAULT_NUM_RELATED_TAGS)
     Rails.cache.fetch(cache_key_for_related_tags, expires_in: 1.week) do
       related_tags = Set.new
       related_sheets.find_each { |sheet| related_tags.merge sheet.tag_objects }
-      related_tags.to_a
+      related_tags.to_a.first(num_results)
     end
   end
 end
