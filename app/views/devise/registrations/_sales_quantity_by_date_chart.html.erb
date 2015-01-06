@@ -2,7 +2,7 @@
   <div class="panel-heading"><em class="fa fa-calendar"></em> Overall Sales Quantity By Date</div>
   <div class="panel-body">
     <% if sales_past_month.present? %>
-      <%= line_chart sales_past_month.group_by_day(:purchased_at).count if sales_past_month.present? %>
+      <%= column_chart sales_past_month.group_by_day(:purchased_at, format: "%d %b %Y").count if sales_past_month.present? %>
     <% else %>
       <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
       <h2 class="text-center">You have no sales yet.</h2>
