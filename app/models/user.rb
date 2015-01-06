@@ -135,7 +135,7 @@ class User < ActiveRecord::Base
   def csv_sales_data
     require 'csv'
     headers = [:date, :title, :price, :amount, :earnings, :email,
-     :ip, :billing_full_name, :billing_address_line_1,
+     :ip_address, :billing_full_name, :billing_address_line_1,
      :billing_address_line_2, :billing_city,
      :billing_state_province, :billing_country, :billing_zipcode]
     CSV.generate do |csv|
@@ -144,7 +144,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def aggregated_sales
+  def all_time_sales
     result = {}
     sheets.find_each do |sheet|
       total_sales = sheet.total_sales
@@ -153,12 +153,16 @@ class User < ActiveRecord::Base
     result
   end
 
-  def aggregated_earnings
+  def all_time_earnings
     sheets.inject(0) { |total, sheet| total + sheet.total_earnings }
   end
 
   def sales_past_month
     sales.where('purchased_at >= ?', 1.month.ago.utc)
+  end
+
+  def sales_past_month_by_country
+    sales_past_month.group(:billing_country).count.map {|k, v| [ISO3166::Country[k].name, v] if ISO3166::Country[k] }
   end
 
   def earnings_past_month

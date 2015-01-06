@@ -1,8 +1,8 @@
 <div class="panel panel-info">
   <div class="panel-heading"><em class="fa fa-line-chart"></em> Overall Sales Revenue By Title (in USD)</div>
   <div class="panel-body">
-    <% if aggregated_sales.present? %>
-      <%= pie_chart(aggregated_sales) %>
+    <% if all_time_sales.present? %>
+      <%= pie_chart(all_time_sales) %>
     <% else %>
       <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
       <h2 class="text-center">You have no sales yet.</h2>

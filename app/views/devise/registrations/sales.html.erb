@@ -5,8 +5,9 @@
       <%= render 'user_dashboard_sidebar' %>
       <div class="col-xs-10">
         <%= render 'recent_sales', sales: @all_sales %>
-        <%= render 'sales_stats', aggregated_sales: @aggregated_sales, recent_sales:@sales_past_month %>
-        <%= render 'sales_revenue_by_title_chart', aggregated_sales: @aggregated_sales %>
+        <%= render 'sales_stats', all_time_sales: @all_time_sales, recent_sales:@sales_past_month %>
+        <%= render 'recent_sales_quantity_by_country_chart', sales_past_month_by_country: @sales_past_month_by_country %>
+        <%= render 'sales_revenue_by_title_chart', all_time_sales: @all_time_sales %>
         <%= render 'sales_quantity_by_date_chart', sales_past_month:@sales_past_month %>
       </div>
   </div>

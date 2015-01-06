@@ -16,7 +16,16 @@ class Order < ActiveRecord::Base
 
   def complete
     return if completed?
-    update(status: Order.statuses[:completed], purchased_at: Time.zone.now)
+    update(status: Order.statuses[:completed],
+           purchased_at: Time.zone.now,
+           billing_full_name: user.billing_full_name,
+           billing_address_line_1: user.billing_address_line_1,
+           billing_address_line_2: user.billing_address_line_2,
+           billing_city: user.billing_city,
+           billing_state_province: user.billing_state_province,
+           billing_country: user.billing_country,
+           billing_zipcode: user.billing_zipcode,
+           ip: user.current_sign_in_ip)
     sheet.increment!(:total_sold)
     OrderMailer.purchase_receipt_email(self).deliver
     OrderMailer.sheet_purchased_email(self).deliver
@@ -80,9 +89,9 @@ class Order < ActiveRecord::Base
       ActionController::Base.helpers.number_to_currency(price),
       ActionController::Base.helpers.number_to_currency(amount),
       ActionController::Base.helpers.number_to_currency(royalty), user.email,
-     user.last_sign_in_ip, user.billing_full_name, user.billing_address_line_1,
-     user.billing_address_line_2, user.billing_city,
-     user.billing_state_province, user.billing_country, user.billing_zipcode]
+     ip, billing_full_name, billing_address_line_1,
+     billing_address_line_2, billing_city,
+     billing_state_province, billing_country, billing_zipcode]
   end
 
   def amount

@@ -19,7 +19,7 @@
             <td><%= link_to order.sheet.title, sheet_url(order.sheet) %></td>
             <td><%= link_to order.user.display_name, user_profile_url(subdomain: order.user.username) %></td>
             <td><%= order.user.email %></td>
-            <td><%= order.user.billing_country %></td>
+            <td><%= order.billing_country %></td>
             <td><%= number_to_currency(order.amount) %></td>
             <td><%= number_to_currency(order.royalty) %></td>
           </tr>
