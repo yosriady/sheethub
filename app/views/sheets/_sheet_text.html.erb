@@ -1,13 +1,16 @@
 <a href="<%= sheet_url(sheet) %>">
 <div class="sheet-text">
-  <% if sheet.privately_visible?%>
-    <span class="fa fa-eye-slash pull-right"></span>
-  <% end %>
-  <% unless sheet.cached_votes_up.zero? %>
-  <span class="pull-right sheet-star"><%= sheet.cached_votes_up %> <em class="fa fa-star-o"></em></span>
-  <% end %>
-  <p class="sheet-instruments"><%= sheet.instruments.join(", ") %></p>
-  <h3><%= sheet.title %></h3>
-  <p><%= sheet.cached_composers.any? ? sheet.cached_composers.join(", ").titleize : "Unknown Composer" %></p>
+    <% if sheet.privately_visible?%>
+        <span class="pull-right sheet-badge"><span class="fa fa-eye-slash"></span></span>
+    <% end %>
+    <% if sheet.free?%>
+        <span class="pull-right free sheet-badge">Free</span>
+    <% end %>
+    <% unless sheet.cached_votes_up.zero? %>
+        <span class="pull-right star sheet-badge"><%= sheet.cached_votes_up %> <em class="fa fa-star-o"></em></span>
+    <% end %>
+    <p class="sheet-instruments"><%= sheet.instruments.join(", ") %></p>
+    <h3><%= sheet.title %></h3>
+    <p><%= sheet.cached_composers.any? ? sheet.cached_composers.join(", ").titleize : "Unknown Composer" %></p>
 </div>
 </a>

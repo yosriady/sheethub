@@ -180,8 +180,17 @@ div.wide-sheets div.sheet {
     margin: 20px;
 }
 
-.sheet-star {
-    color: #aaa;
+.sheet-badge {
+    background: #eee;
+    border-radius: 1000px;
+    padding: 0px 10px;
+    color: #777;
+    margin-left: 4px;
+
+    &.free {
+        background: #5cb85c;
+        color: #fff;
+    }
 }
 
 #sheets {
