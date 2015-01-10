@@ -11,7 +11,7 @@ keywords @sheet.cached_joined_tags
         <div id="sheet-content" class="col-xs-8">
             <div id="sheet-header">
                 <h1><%= link_to @sheet.title, sheet_url(@sheet) %></h1>
-                <h4>by <a href="<%= user_profile_url(subdomain: @sheet.user.username) %>" class="sheet-author"><%= @sheet.user.display_name %></a> <%= render 'layouts/user_badge', user: @sheet.user%></h4>
+                <h4>By <a href="<%= user_profile_url(subdomain: @sheet.user.username) %>" class="sheet-author"><%= @sheet.user.display_name %></a> <%= render 'layouts/user_badge', user: @sheet.user%></h4>
                 <hr>
             </div>
             <%= render 'sheet_preview', sheet:@sheet %>
