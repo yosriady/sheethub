@@ -44,7 +44,7 @@ class Sheet < ActiveRecord::Base
 
   enum visibility: %w( vpublic vprivate )
   enum difficulty: %w( beginner intermediate advanced )
-  enum license: %w( all_rights_reserved creative_commons cc0 public_domain )
+  enum license: %w( all_rights_reserved creative_commons cc0 public_domain licensed_arrangement)
 
   attr_accessor :instruments_list # For form parsing
   bitmask :instruments, as: [:others, :guitar, :piano, :bass, :mandolin, :banjo,
@@ -103,6 +103,7 @@ class Sheet < ActiveRecord::Base
     return 'Creative Commons' if creative_commons?
     return 'Creative Commons Zero' if cc0?
     return 'Public Domain' if public_domain?
+    return 'Licensed' if licensed_arrangement?
   end
 
   def purchased_by?(user)

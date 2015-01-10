@@ -53,6 +53,9 @@ $(document).on("page:change", function() {
             "label":'All rights reserved. This title is my original work.',
             "value":'all_rights_reserved'
         }, {
+            "label":'I have the permission to make, sell, and distribute this arrangement.',
+            "value":'licensed_arrangement'
+        }, {
             "label":'Creative Commons (Attribution-NonCommercial-ShareAlike)',
             "value":'creative_commons'
         }, {
