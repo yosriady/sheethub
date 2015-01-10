@@ -69,6 +69,16 @@ class Sheet < ActiveRecord::Base
                                     content_type: ['application/pdf']
   validates_attachment_size :pdf, in: 0.megabytes..MAX_FILESIZE.megabytes
   validates :pdf, presence: true
+  before_save :extract_number_of_pages
+
+  def extract_number_of_pages
+    return unless pdf?
+    tempfile = pdf.queued_for_write[:original]
+    unless tempfile.nil?
+      pdf = MiniMagick::Image.open(tempfile.path)
+      self.pages = pdf.pages.size
+    end
+  end
 
   has_many :assets, dependent: :destroy
   accepts_nested_attributes_for :assets

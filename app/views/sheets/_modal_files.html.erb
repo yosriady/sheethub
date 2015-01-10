@@ -4,7 +4,7 @@
     <!-- Main PDF file -->
     <% if sheet.pdf.present? %>
     <li class="text-center">
-        <p><em class="fa fa-download"></em><strong> <%= sheet.pdf_file_name %></strong> (<%= number_to_human_size(sheet.pdf_file_size).downcase %>)</p>
+        <p><em class="fa fa-download"></em><strong> <%= sheet.pdf_file_name %></strong> (<%= pluralize(sheet.pages, 'page') %> - <%= number_to_human_size(sheet.pdf_file_size).downcase %>)</p>
     </li>
     <% else %>
     <li class="text-center">

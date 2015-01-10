@@ -4,7 +4,7 @@
 <li>
     <a id="sheet-pdf-link" href="<%= download_sheet_url(sheet) %>" title="Last updated on <%= sheet.pdf_updated_at.strftime('%e %b %Y') %>" data-no-turbolink='true' data-toggle='tooltip' data-placement='top'>
         <div class="sheet-file">
-        <p><em class="fa fa-download"></em> <%= sheet.pdf_file_name %> <strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
+        <p><em class="fa fa-download"></em> <%= sheet.pdf_file_name %><strong><%= number_to_human_size(sheet.pdf_file_size) %></strong></p>
         </div>
     </a>
 </li>
