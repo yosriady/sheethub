@@ -210,8 +210,7 @@ class Sheet < ActiveRecord::Base
   end
 
   def pdf_preview?
-    preview_url = pdf_preview_url
-    preview_url.present? && preview_url != PDF_PREVIEW_DEFAULT_URL
+    pdf_preview_url.present? && pdf_preview_url != PDF_PREVIEW_DEFAULT_URL
   end
 
   def pdf_preview_url

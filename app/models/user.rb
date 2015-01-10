@@ -183,7 +183,7 @@ class User < ActiveRecord::Base
 
   def avatar_url
     if avatar.url.present? && avatar.url != MISSING_AVATAR_URL
-      avatar.expiring_url(EXPIRATION_TIME, :original)
+      avatar.url
     elsif image.present?
       image
     else
