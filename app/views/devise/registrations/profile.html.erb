@@ -10,17 +10,18 @@ description @user.tagline
 
   <li class="active"><h4><a href="<%= user_profile_url(subdomain: @user.username) %>">Works</a> <span class="fade-text"><%= @sheets.count %></span></h4></li>
   <li><h4><a href="<%= user_favorites_url(subdomain: @user.username) %>"> Favorites </a></h4></li>
-
+  <li data-toggle="tooltip" data-placement="left" title="Feature coming soon" class="pull-right" style="margin-top: 3px;"><a class="disabled btn btn-default"><span class="fa fa-user"></span><span class="fa fa-plus"></span> Follow</a></li>
 </ul>
 </div>
 </div>
 
 <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <div class="tab-content">
-          <%= render 'sheets_tab_content', sheets: @sheets, user: @user %>
-        </div>
-      </div>
+<!--     <div class="col-xs-4 profile-about">
+      <h3>About</h3>
+    </div> -->
+    <div class="col-xs-12">
+        <%= render 'profile_sheets', sheets: @sheets, user: @user %>
+    </div>
   </div>
 </div>
