@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     # End of Sheet Purchase Routes
 
     devise_for :users, controllers: { registrations: 'users/registrations',
-                                      omniauth_callbacks: 'users/omniauth_callbacks' }
+                                      omniauth_callbacks: 'users/omniauth_callbacks',
+                                      sessions: 'users/sessions' }
     devise_scope :user do
 
       get '/', to: 'sheets#index', constraints: { subdomain: '' }
