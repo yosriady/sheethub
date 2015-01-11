@@ -17,6 +17,8 @@ Rails.application.routes.draw do
                                       sessions: 'users/sessions' }
     devise_scope :user do
 
+      get '/discourse/sso', to: 'users/sessions#sso', as: :user_discourse_sso
+
       get '/', to: 'sheets#index', constraints: { subdomain: '' }
       get '/', to: 'users/registrations#profile', constraints: { subdomain: /.+/ }, as: :user_profile
       get '/favorites', to: 'sheets#index', constraints: { subdomain: '' }
