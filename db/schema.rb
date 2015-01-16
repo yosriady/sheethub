@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106144017) do
+ActiveRecord::Schema.define(version: 20150116085420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,13 @@ ActiveRecord::Schema.define(version: 20150106144017) do
   create_table "assets", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "filename",   limit: 255
-    t.string   "filetype",   limit: 255
+    t.string   "filename",    limit: 255
+    t.string   "filetype",    limit: 255
     t.integer  "filesize"
     t.integer  "sheet_id"
-    t.string   "url",        limit: 255
+    t.string   "url",         limit: 255
     t.datetime "deleted_at"
+    t.integer  "price_cents"
   end
 
   add_index "assets", ["deleted_at"], name: "index_assets_on_deleted_at", using: :btree
