@@ -210,3 +210,19 @@ h2 .fa-eye-slash {
 .hover-pointer:hover {
     cursor: pointer;
 }
+
+.carousel-indicators {
+    bottom: 0px;
+}
+
+.carousel-indicators .active {
+    background-color: #5cb85c;
+}
+
+.carousel-indicators li {
+    border-color: #5cb85c;
+}
+
+.carousel-inner > .item > img {
+    max-height: 480px;
+}
