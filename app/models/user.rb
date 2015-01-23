@@ -128,6 +128,14 @@ class User < ActiveRecord::Base
     free_sheets.size >= BASIC_FREE_SHEET_QUOTA
   end
 
+  def contributors
+    User.find(sales.pluck(:user_id))
+  end
+
+  def max_contribution_to(author)
+    Order.where(user_id: self.id, sheet_id: author.sheets.ids, status: Order.statuses[:completed]).maximum(:amount_cents)
+  end
+
   def sales
     Order.includes(:user).includes(:sheet).where(sheet_id: sheets.ids, status: Order.statuses[:completed])
   end
