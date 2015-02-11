@@ -3,6 +3,10 @@ class PagesController < ApplicationController
     track('View features')
   end
 
+  def notes
+    track('View notes')
+  end
+
   def support
     track('View support')
   end

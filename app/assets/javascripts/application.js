@@ -22,5 +22,7 @@
 //= require maskmoney
 //= require twitter/typeahead
 //= require twitter/typeahead.min
+//= require fb-sdk
+//= require userreport
 //= require turbolinks
 //= require_tree .
