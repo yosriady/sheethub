@@ -22,7 +22,7 @@
 //= require maskmoney
 //= require twitter/typeahead
 //= require twitter/typeahead.min
-//= require vextab-div
+//= require codemirror
 //= require fb-sdk
 //= require userreport
 //= require turbolinks
