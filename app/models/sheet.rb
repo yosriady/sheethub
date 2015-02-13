@@ -4,6 +4,8 @@ class Sheet < ActiveRecord::Base
   include Relatable
   include Taggable
   include Licensable
+  include Instrumentable
+  include Visible
 
   PDF_PREVIEW_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
   PDF_DEFAULT_URL = 'nil'
@@ -29,15 +31,11 @@ class Sheet < ActiveRecord::Base
 
   validate :validate_price
   validates :title, presence: true
-  validates :visibility, presence: true
 
-  scope :is_public, -> { where(visibility: Sheet.visibilities[:vpublic]) }
-  scope :is_private, -> { where(visibility: Sheet.visibilities[:vprivate]) }
   scope :flagged, -> { where(is_flagged: true) }
   scope :best_sellers, -> { is_public.order(price_cents: :desc) }
   scope :community_favorites, -> { is_public.order(cached_votes_up: :desc) }
 
-  enum visibility: %w( vpublic vprivate )
   enum difficulty: %w( beginner intermediate advanced )
 
   has_attached_file :pdf,
@@ -103,18 +101,6 @@ class Sheet < ActiveRecord::Base
   def uploaded_by?(usr)
     return false unless usr
     user.id == usr.id
-  end
-
-  def publicly_visible?
-    vpublic?
-  end
-
-  def privately_visible?
-    vprivate?
-  end
-
-  def visibility_string
-    visibility[1..-1].titleize
   end
 
   def completed_orders
