@@ -3,6 +3,7 @@ class Sheet < ActiveRecord::Base
   include Deduplicatable
   include Relatable
   include Taggable
+  include Licensable
 
   PDF_PREVIEW_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
   PDF_DEFAULT_URL = 'nil'
@@ -32,7 +33,6 @@ class Sheet < ActiveRecord::Base
   validate :validate_price
   validate :validate_number_of_tags
   validates :title, presence: true
-  validates :license, presence: true
   validates :visibility, presence: true
   validates :instruments, presence: true
 
@@ -44,7 +44,6 @@ class Sheet < ActiveRecord::Base
 
   enum visibility: %w( vpublic vprivate )
   enum difficulty: %w( beginner intermediate advanced )
-  enum license: %w( all_rights_reserved creative_commons cc0 public_domain licensed_arrangement)
 
   attr_accessor :instruments_list # For form parsing
   bitmask :instruments, as: [:others, :guitar, :piano, :bass, :mandolin, :banjo,
@@ -106,14 +105,6 @@ class Sheet < ActiveRecord::Base
     Rails.cache.fetch('community_favorites', expires_in: 1.day) do
       Sheet.includes(:user).community_favorites
     end
-  end
-
-  def verbose_license
-    return 'All rights reserved' if all_rights_reserved?
-    return 'Creative Commons' if creative_commons?
-    return 'Creative Commons Zero' if cc0?
-    return 'Public Domain' if public_domain?
-    return 'Licensed' if licensed_arrangement?
   end
 
   def purchased_by?(user)
