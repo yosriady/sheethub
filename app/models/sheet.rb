@@ -14,7 +14,6 @@ class Sheet < ActiveRecord::Base
   MAX_NUMBER_OF_TAGS = 5
   PRICE_VALUE_VALIDATION_MESSAGE = 'Price must be either $0 or between $0.99 - $999.99'
   INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
-  TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
   HIT_QUOTA_MESSAGE = 'You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub.'
 
   belongs_to :user
@@ -24,14 +23,11 @@ class Sheet < ActiveRecord::Base
 
   acts_as_votable
   acts_as_paranoid
-  acts_as_taggable
-  acts_as_taggable_on :composers, :genres, :sources
   searchkick word_start: [:name]
   extend FriendlyId
   friendly_id :sheet_slug, use: :slugged
 
   validate :validate_price
-  validate :validate_number_of_tags
   validates :title, presence: true
   validates :visibility, presence: true
   validates :instruments, presence: true
@@ -198,19 +194,6 @@ class Sheet < ActiveRecord::Base
     Sheet.restore(self, recursive: true)
   end
 
-  def clear_tags
-    genres.clear
-    sources.clear
-    composers.clear
-  end
-
-  def restore_tags
-    self.genre_list = self.cached_genres
-    self.source_list = self.cached_sources
-    self.composer_list = self.cached_composers
-    self.save!
-  end
-
   def pdf_preview?
     pdf_preview_url.present? && pdf_preview_url != PDF_PREVIEW_DEFAULT_URL
   end
@@ -240,45 +223,7 @@ class Sheet < ActiveRecord::Base
     SheetMailer.sheet_really_deleted_email(self).deliver
   end
 
-  def composer_list=(tag_list=[])
-    super
-    tag_list.map!(&:downcase)
-    self.cached_composers = tag_list
-    self.cached_joined_tags = [instruments, genre_list, source_list, tag_list].flatten
-  end
-
-  def genre_list=(tag_list=[])
-    super
-    tag_list.map(&:downcase)
-    self.cached_genres = tag_list
-    self.cached_joined_tags = [instruments, composer_list, source_list, tag_list].flatten
-  end
-
-  def source_list=(tag_list=[])
-    super
-    tag_list.map(&:downcase)
-    self.cached_sources = tag_list
-    self.cached_joined_tags = [instruments, genre_list, composer_list, tag_list].flatten
-  end
-
   protected
-
-  def tags
-    [genre_list, composer_list, source_list].flatten
-  end
-
-  def tag_objects
-    [genres, composers, sources].flatten
-  end
-
-  # Formatting method for selectize.js usage
-  def format_tags(input)
-    output = ''
-    input.each do |tag|
-      output << "'#{tag}',"
-    end
-    output[0..-2] # Strip trailing comma
-  end
 
   def validate_free_sheet_quota
     invalid_quota = self.free? && user.hit_sheet_quota?
@@ -288,11 +233,6 @@ class Sheet < ActiveRecord::Base
   def validate_price
     valid_price = price_cents.zero? || price_cents.in?(MIN_PRICE..MAX_PRICE)
     errors.add(:price, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
-  end
-
-  def validate_number_of_tags
-    valid_number = genre_list.size <= MAX_NUMBER_OF_TAGS && source_list.size <= MAX_NUMBER_OF_TAGS && composer_list.size <= MAX_NUMBER_OF_TAGS
-    errors.add(:tags, TOO_MANY_TAGS_MESSAGE) unless valid_number
   end
 
   def record_publisher_status
