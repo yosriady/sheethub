@@ -10,15 +10,11 @@ class Sheet < ActiveRecord::Base
   include Favoritable
   include SoftDestroyable
   include Sluggable
+  include PdfAttachable
+  include AssetAttachable
+  include Pricable
 
-  PDF_PREVIEW_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
-  PDF_DEFAULT_URL = 'nil'
   EXPIRATION_TIME = 30
-  MIN_PRICE = 99
-  MAX_PRICE = 999_99
-  MAX_FILESIZE = 20
-  PRICE_VALUE_VALIDATION_MESSAGE = 'Price must be either $0 or between $0.99 - $999.99'
-  INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
   HIT_QUOTA_MESSAGE = 'You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub.'
 
   belongs_to :user
@@ -26,47 +22,12 @@ class Sheet < ActiveRecord::Base
   before_save :validate_free_sheet_quota
 
   searchkick word_start: [:name]
-
-  validate :validate_price
   validates :title, presence: true
 
   scope :best_sellers, -> { is_public.order(price_cents: :desc) }
   scope :community_favorites, -> { is_public.order(cached_votes_up: :desc) }
 
   enum difficulty: %w( beginner intermediate advanced )
-
-  has_attached_file :pdf,
-                    styles: {
-                      preview: { geometry: '', format: :png }
-                    },
-                    processors: [:preview],
-                    hash_secret: Rails.application.secrets.sheet_hash_secret,
-                    default_url: PDF_DEFAULT_URL,
-                    preserve_files: 'true',
-                    s3_permissions: {
-                      preview: :public_read,
-                      original: :private
-                    }
-  validates_attachment_content_type :pdf,
-                                    content_type: ['application/pdf']
-  validates_attachment_size :pdf, in: 0.megabytes..MAX_FILESIZE.megabytes
-  validates :pdf, presence: true
-  before_save :extract_number_of_pages
-
-  def extract_number_of_pages
-    return unless pdf?
-    tempfile = pdf.queued_for_write[:original]
-    unless tempfile.nil?
-      pdf = MiniMagick::Image.open(tempfile.path)
-      self.pages = pdf.pages.size
-    end
-  end
-
-  has_many :assets, dependent: :destroy
-  accepts_nested_attributes_for :assets
-  validates_associated :assets,
-                       on: [:create, :update],
-                       message: INVALID_ASSETS_MESSAGE
 
   auto_html_for :description do
     html_escape
@@ -120,14 +81,6 @@ class Sheet < ActiveRecord::Base
     completed_orders.maximum(:amount_cents).to_f / 100
   end
 
-  def price
-    price_cents.to_f / 100
-  end
-
-  def price=(val)
-    write_attribute :price_cents, (val.to_f * 100).to_i
-  end
-
   def royalty
     (user.royalty_percentage * price).round(2)
   end
@@ -144,32 +97,11 @@ class Sheet < ActiveRecord::Base
     ((1 - user.royalty_percentage) * price_cents).round(0)
   end
 
-  def free?
-    price_cents.zero?
-  end
-
-  def pdf_preview?
-    pdf_preview_url.present? && pdf_preview_url != PDF_PREVIEW_DEFAULT_URL
-  end
-
-  def pdf_preview_url
-    pdf.url(:preview) || PDF_PREVIEW_DEFAULT_URL
-  end
-
-  def pdf_download_url
-    pdf.expiring_url(EXPIRATION_TIME)
-  end
-
   protected
 
   def validate_free_sheet_quota
     invalid_quota = self.free? && user.hit_sheet_quota?
     errors.add(:sheet_quota, HIT_QUOTA_MESSAGE) if invalid_quota
-  end
-
-  def validate_price
-    valid_price = price_cents.zero? || price_cents.in?(MIN_PRICE..MAX_PRICE)
-    errors.add(:price, PRICE_VALUE_VALIDATION_MESSAGE) unless valid_price
   end
 
   def record_publisher_status

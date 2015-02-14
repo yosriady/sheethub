@@ -1,7 +1,7 @@
 # User model
 class User < ActiveRecord::Base
-  AVATAR_HASH_SECRET = 'sheethubhashsecret'
-  MISSING_AVATAR_URL = 'default_avatar.png'
+  include Avatarable
+
   EXPIRATION_TIME = 600
   BASIC_FREE_SHEET_QUOTA = 15
   PLUS_FREE_SHEET_QUOTA = 75
@@ -9,20 +9,11 @@ class User < ActiveRecord::Base
   BASIC_ROYALTY_PERCENTAGE = 0.85
   PLUS_ROYALTY_PERCENTAGE = 0.85
   PRO_ROYALTY_PERCENTAGE = 0.90
-  AVATAR_MAX_WIDTH = 300
-  AVATAR_MAX_HEIGHT = 300
   INVALID_MEMBERSHIP_TYPE_MESSAGE = 'Membership type does not exist'
   MISSING_SUBSCRIPTION_OBJECT_MESSAGE = 'Error: Subscription object missing. Contact support.'
 
   enum membership_type: %w( basic plus pro staff )
   validates :username, presence: true, uniqueness: { case_sensitive: false }, if: :finished_registration?
-  validates :billing_full_name, presence: true, if: :finished_registration?
-  validates :billing_address_line_1, presence: true, if: :finished_registration?
-  validates :billing_city, presence: true, if: :finished_registration?
-  validates :billing_state_province, presence: true, if: :finished_registration?
-  validates :billing_country, presence: true, if: :finished_registration?
-  validates :billing_zipcode, presence: true, if: :finished_registration?
-  validate :timezone_is_populated, if: :finished_registration?
   validates_email_format_of :email, message: 'You have an invalid email address'
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   has_many :sheets, dependent: :destroy
@@ -30,18 +21,6 @@ class User < ActiveRecord::Base
   acts_as_voter
   before_save :cache_display_name
   after_save :update_mixpanel_profile
-
-  has_attached_file :avatar,
-                    convert_options: {
-                      original: '-strip'
-                    },
-                    hash_secret: AVATAR_HASH_SECRET,
-                    default_url: MISSING_AVATAR_URL,
-                    s3_permissions: :public_read
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
-  validates :avatar, dimensions: { width: AVATAR_MAX_WIDTH,
-                                   height: AVATAR_MAX_HEIGHT }
-  attr_accessor :remove_avatar
 
   # Devise modules
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
