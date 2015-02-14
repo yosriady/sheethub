@@ -8,6 +8,7 @@ class Sheet < ActiveRecord::Base
   include Visible
   include Flaggable
   include Favoritable
+  include SoftDestroyable
 
   PDF_PREVIEW_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
   PDF_DEFAULT_URL = 'nil'
@@ -23,7 +24,6 @@ class Sheet < ActiveRecord::Base
   before_create :record_publisher_status
   before_save :validate_free_sheet_quota
 
-  acts_as_paranoid
   searchkick word_start: [:name]
   extend FriendlyId
   friendly_id :sheet_slug, use: :slugged
@@ -156,11 +156,6 @@ class Sheet < ActiveRecord::Base
     ]
   end
 
-  def restore
-    restore_tags
-    Sheet.restore(self, recursive: true)
-  end
-
   def pdf_preview?
     pdf_preview_url.present? && pdf_preview_url != PDF_PREVIEW_DEFAULT_URL
   end
@@ -171,19 +166,6 @@ class Sheet < ActiveRecord::Base
 
   def pdf_download_url
     pdf.expiring_url(EXPIRATION_TIME)
-  end
-
-  # Override Soft Destroy
-  def destroy
-    clear_tags
-    super
-    SheetMailer.sheet_deleted_email(self).deliver
-  end
-
-  # Override Hard Destroy
-  def really_destroy!
-    super
-    SheetMailer.sheet_really_deleted_email(self).deliver
   end
 
   protected
