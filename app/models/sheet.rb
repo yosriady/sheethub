@@ -6,6 +6,8 @@ class Sheet < ActiveRecord::Base
   include Licensable
   include Instrumentable
   include Visible
+  include Flaggable
+  include Favoritable
 
   PDF_PREVIEW_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
   PDF_DEFAULT_URL = 'nil'
@@ -13,17 +15,14 @@ class Sheet < ActiveRecord::Base
   MIN_PRICE = 99
   MAX_PRICE = 999_99
   MAX_FILESIZE = 20
-  MAX_NUMBER_OF_TAGS = 5
   PRICE_VALUE_VALIDATION_MESSAGE = 'Price must be either $0 or between $0.99 - $999.99'
   INVALID_ASSETS_MESSAGE = 'Sheet supporting files invalid'
   HIT_QUOTA_MESSAGE = 'You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub.'
 
   belongs_to :user
-  has_many :flags, dependent: :destroy
   before_create :record_publisher_status
   before_save :validate_free_sheet_quota
 
-  acts_as_votable
   acts_as_paranoid
   searchkick word_start: [:name]
   extend FriendlyId
@@ -32,7 +31,6 @@ class Sheet < ActiveRecord::Base
   validate :validate_price
   validates :title, presence: true
 
-  scope :flagged, -> { where(is_flagged: true) }
   scope :best_sellers, -> { is_public.order(price_cents: :desc) }
   scope :community_favorites, -> { is_public.order(cached_votes_up: :desc) }
 
@@ -156,15 +154,6 @@ class Sheet < ActiveRecord::Base
       :title,
       [:title, user.username]
     ]
-  end
-
-  def favorited_by(user)
-    liked_by user
-    SheetMailer.sheet_favorited_email(self, user).deliver
-  end
-
-  def unfavorited_by(user)
-    unliked_by user
   end
 
   def restore

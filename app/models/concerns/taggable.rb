@@ -3,6 +3,7 @@ module Taggable
 
   included do
     DEFAULT_NUM_POPULAR_TAGS = 10
+    MAX_NUMBER_OF_TAGS = 5
     TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
 
     acts_as_taggable
