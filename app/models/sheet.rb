@@ -9,6 +9,7 @@ class Sheet < ActiveRecord::Base
   include Flaggable
   include Favoritable
   include SoftDestroyable
+  include Sluggable
 
   PDF_PREVIEW_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
   PDF_DEFAULT_URL = 'nil'
@@ -25,8 +26,6 @@ class Sheet < ActiveRecord::Base
   before_save :validate_free_sheet_quota
 
   searchkick word_start: [:name]
-  extend FriendlyId
-  friendly_id :sheet_slug, use: :slugged
 
   validate :validate_price
   validates :title, presence: true
@@ -147,13 +146,6 @@ class Sheet < ActiveRecord::Base
 
   def free?
     price_cents.zero?
-  end
-
-  def sheet_slug
-    [
-      :title,
-      [:title, user.username]
-    ]
   end
 
   def pdf_preview?
