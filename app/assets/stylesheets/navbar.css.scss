@@ -23,6 +23,7 @@
     background: #2583EB;
     margin-bottom:0px;
     border: none;
+    border-radius: 0px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
     -moz-box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
     -ms-box-shadow: 0 -2px 7px 2px rgba(0,0,0,.4);
@@ -80,10 +81,7 @@
             &:hover, &:focus, &:active{
                 color: white;
                 background: #5cb85c;
-
             }
-
-
         }
     }
 }
@@ -129,4 +127,17 @@
         height: 30px;
         border-radius: 1000px;
     }
+}
+
+.navbar-nav > li > .dropdown-menu {
+    border-top: none;
+}
+
+
+.navbar ul.nav li .dropdown-menu > li > a {
+    padding: 5px 10px;
+}
+
+.dropdown-menu hr {
+    margin: 5px 0px;
 }
