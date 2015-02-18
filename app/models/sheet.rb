@@ -14,7 +14,6 @@ class Sheet < ActiveRecord::Base
   include AssetAttachable
   include Pricable
 
-  EXPIRATION_TIME = 30
   HIT_QUOTA_MESSAGE = 'You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub.'
 
   belongs_to :user
