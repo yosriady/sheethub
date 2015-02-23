@@ -4,11 +4,11 @@
 
   <% if current_user.finished_registration? %>
     <li><a href="<%= user_profile_url(subdomain:current_user.username) %>"><em class="fa fa-user"></em> Profile</a></li>
-    <li><a href="<%= user_settings_url %>"><em class="fa fa-cog"></em> Edit Account</a></li>
     <% if current_user.has_published %>
       <li><a href="<%= user_dashboard_url %>"><em class="fa fa-home"></em> Dashboard</a></li>
     <% end %>
     <li><a href="<%= user_library_url %>"><em class="fa fa-download"></em> My Library</a></li>
+        <li><a href="<%= user_settings_url %>"><em class="fa fa-cog"></em> Edit Account</a></li>
   <% end %>
     <hr>
     <!-- <li><a href="<%= upgrade_url %>" class="bg-success"><em class="fa fa-star"></em> Upgrade</a></li> -->
