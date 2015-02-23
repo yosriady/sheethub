@@ -1,13 +1,19 @@
 <div class="container">
   <div class="row">
-    <h2 class="text-center">Please pick your username</h2>
+    <h2 class="text-center">Please pick your username!</h2>
 
     <div class="col-lg-4 col-lg-offset-4 white-container">
 
     <%= simple_form_for current_user, url: finish_registration_url(current_user), method: :patch do |f| %>
-      <%= f.input :username, label: 'Your Username', placeholder: '<username>.sheethub.co', autofocus: true %>
+      <div class="form-group">
+        <%= f.input :username, label: 'Your Username', placeholder: 'No spaces and no special characters allowed!', autofocus: true %>
+      </div>
+      <div class="form-group">
       <%= f.label :paypal_email, label: 'PayPal Email' %>
       <%= f.input_field :paypal_email, label: 'Paypal Email', placeholder:'Required for authors to accept payments' %>
+      </div>
+
+      <%= f.input_field :billing_country, label: 'Country', placeholder: 'Your Country' %>
 
       <%= f.button :submit, "Continue", class:"btn btn-success btn-block btn-lg" %>
     <% end %>

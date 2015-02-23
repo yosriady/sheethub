@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   MISSING_SUBSCRIPTION_OBJECT_MESSAGE = 'Error: Subscription object missing. Contact support.'
 
   enum membership_type: %w( basic plus pro staff )
-  validates :username, presence: true, uniqueness: { case_sensitive: false }, if: :finished_registration?
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "No spaces and no special characters allowed!"}, if: :finished_registration?
   validates_email_format_of :email, message: 'You have an invalid email address'
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   has_many :sheets, dependent: :destroy
@@ -55,8 +55,10 @@ class User < ActiveRecord::Base
   end
 
   def country
-    country = ISO3166::Country[billing_country]
-    country.translations[I18n.locale.to_s] || country.name
+    if billing_country
+      country = ISO3166::Country[billing_country]
+      country.translations[I18n.locale.to_s] || country.name
+    end
   end
 
   def premium_subscription
