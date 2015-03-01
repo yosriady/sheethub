@@ -9,6 +9,7 @@ module Taggable
     acts_as_taggable
     acts_as_taggable_on :composers, :genres, :sources
     validate :validate_number_of_tags
+    after_save :cache_tags
   end
 
   class_methods do
@@ -45,25 +46,14 @@ module Taggable
     self.save!
   end
 
-  def composer_list=(tag_list=[])
-    super
-    tag_list.map!(&:downcase)
-    self.cached_composers = tag_list
-    self.cached_joined_tags = [instruments, genre_list, source_list, tag_list].flatten
-  end
-
-  def genre_list=(tag_list=[])
-    super
-    tag_list.map(&:downcase)
-    self.cached_genres = tag_list
-    self.cached_joined_tags = [instruments, composer_list, source_list, tag_list].flatten
-  end
-
-  def source_list=(tag_list=[])
-    super
-    tag_list.map(&:downcase)
-    self.cached_sources = tag_list
-    self.cached_joined_tags = [instruments, genre_list, composer_list, tag_list].flatten
+  def cache_tags
+    composer_tag_list = composers.pluck(:name)
+    source_tag_list = sources.pluck(:name)
+    genre_tag_list = genres.pluck(:name)
+    self.update_columns(cached_composers: composer_tag_list,
+                cached_sources: source_tag_list,
+                cached_genres: genre_tag_list,
+                cached_joined_tags: [instruments, composer_tag_list, source_tag_list, genre_tag_list].flatten)
   end
 
   protected
