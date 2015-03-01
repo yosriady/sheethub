@@ -5,7 +5,8 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <%= render 'tag_breadcrumb', tag:params[:slug] ,tag_type:"composer" %>
+      <%= render 'tag_breadcrumb', tag:params[:slug] , tag_type:"composer" %>
+      <!-- <div class="alert alert-info alert-tag-info" role="alert"><p><strong><em class="fa fa-info-circle %>"></em> <%= params[:slug].titleize %></strong></p> Heitor Villa-Lobos was a Brazilian composer, described as "the single most significant creative figure in 20th-century Brazilian art music". Villa-Lobos has become the best-known and most significant Latin American composer to date.</div> -->
       <%= render 'sheets', sheets: @sheets %>
     </div>
   </div>
