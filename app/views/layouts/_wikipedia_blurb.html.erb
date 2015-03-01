@@ -1,0 +1,6 @@
+<% cache("wiki_#{key}") do %>
+<% text = wikipedia_extract(key) %>
+<% if text %>
+    <div class="alert alert-info alert-tag-info" role="alert"><p><strong><em class="fa fa-info-circle %>"></em> About <%= key.titleize %></strong></p> <%= text %></div>
+<% end %>
+<% end %>

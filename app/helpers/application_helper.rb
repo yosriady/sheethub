@@ -60,4 +60,13 @@ module ApplicationHelper
     end
   end
 
+  def wikipedia_extract(key)
+    require 'httparty'
+    response = HTTParty.get("https://en.wikipedia.org/w/api.php?format=json&action=query&continue=&prop=extracts&exsentences=5&exintro=&explaintext=&titles=" + URI.escape(key.titleize))
+    body = JSON.parse(response.body)["query"]["pages"]
+    extract = body[body.keys()[0]]["extract"]
+    has_valid_information = extract && !extract.index("This is a redirect") && extract.size > 100
+    (has_valid_information) ? extract : nil
+  end
+
 end

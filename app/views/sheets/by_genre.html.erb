@@ -6,6 +6,7 @@
   <div class="row">
     <div class="col-xs-12">
       <%= render 'tag_breadcrumb', tag:params[:slug] ,tag_type:"genre" %>
+      <%= render 'layouts/wikipedia_blurb', key: params[:slug] %>
       <%= render 'sheets', sheets: @sheets %>
     </div>
   </div>
