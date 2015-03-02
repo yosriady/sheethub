@@ -2,7 +2,6 @@
 class User < ActiveRecord::Base
   include Avatarable
 
-  EXPIRATION_TIME = 600
   BASIC_FREE_SHEET_QUOTA = 15
   PLUS_FREE_SHEET_QUOTA = 75
   PRO_FREE_SHEET_QUOTA = 155
@@ -17,6 +16,7 @@ class User < ActiveRecord::Base
   validates_email_format_of :email, message: 'You have an invalid email address'
   validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   has_many :sheets, dependent: :destroy
+  has_many :notes, dependent: :destroy
   has_one :subscription
   acts_as_voter
   before_save :cache_display_name
