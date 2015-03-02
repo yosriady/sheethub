@@ -74,7 +74,6 @@ Rails.application.routes.draw do
     get 'sources', to: 'sheets#sources'
     get 'source/:slug', to: 'sheets#by_source', as: 'source'
 
-    get '/notes', to: 'pages#notes', as: 'notes'
     get '/features', to: 'pages#features', as: 'features'
     get '/support', to: 'pages#support', as: 'support'
     get '/terms-of-service', to: 'pages#terms', as: 'terms'
