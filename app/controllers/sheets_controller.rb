@@ -147,7 +147,6 @@ class SheetsController < ApplicationController
   # PATCH/PUT /sheets/1.json
   def update
     update_params = build_tags(sheet_params)
-    @sheet.slug = nil if (sheet_params[:title] != @sheet.title) # Regenerate friendly-id
     respond_to do |format|
       if @sheet.update(update_params)
         track('Update sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
