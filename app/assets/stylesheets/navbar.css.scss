@@ -138,6 +138,10 @@
     padding: 5px 10px;
 }
 
-.dropdown-menu hr {
-    margin: 5px 0px;
+.dropdown-menu {
+    min-width: 125px;
+
+    hr {
+        margin: 5px 0px;
+    }
 }
