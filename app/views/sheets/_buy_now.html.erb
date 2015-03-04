@@ -7,11 +7,9 @@
         <% elsif sheet.free? %>
             <span class="sheet-buy-now-text text-center"><p><em class="fa fa-smile-o"></em> FREE</p></span>
         <% elsif user_signed_in? %>
-            <a id="buy-now"><button type="button" class="btn btn-success col-xs-8"><em class="fa fa-shopping-cart"></em> Buy Now</button></a>
-            <span class="sheet-price col-xs-4"><p><%= number_to_currency(sheet.price) %></p></span>
+            <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Get It Now for <%= number_to_currency(sheet.price) %></button></a>
         <% else %>
-            <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success col-xs-8"><em class="fa fa-shopping-cart"></em> Buy Now</button></a>
-            <span class="sheet-price col-xs-4"><p><%= number_to_currency(sheet.price) %></p></span>
+            <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Get It Now for <%= number_to_currency(sheet.price) %></button></a>
         <% end %>
     </div>
 </div>
