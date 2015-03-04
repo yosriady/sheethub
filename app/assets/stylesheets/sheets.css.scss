@@ -244,6 +244,7 @@ div.wide-sheets div.sheet {
         h3, p {
             white-space: nowrap;
             text-overflow: ellipsis;
+            overflow-x: hidden;
         }
     }
 

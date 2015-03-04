@@ -17,7 +17,7 @@ keywords @sheet.cached_joined_tags
             <a href="<%= user_profile_url(subdomain: @sheet.user.username) %>">
                 <button type="button" class="btn btn-block btn-default">See more from <%= @sheet.user.display_name %></button>
             </a>
-            <%= render 'disqus' %>
+            <%= render 'layouts/disqus' %>
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4 zeropadding">
