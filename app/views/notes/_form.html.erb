@@ -1,15 +1,22 @@
-<div id="vextab-editor" class="vex-tabdiv"
-      width=680 scale=1.0 editor="true"
-      editor_width=680 editor_height=330>options space=20
-  tabstave
-    notation=true
-    key=A time=4/4
+<%= simple_form_for @note do |f| %>
+  <%= f.error_notification %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
 
-    notes :q =|: (5/2.5/3.7/4) :8 7-5h6/3 ^3^ 5h6-7/5 ^3^ :q 7V/4 |
-    notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :h p5/4
-    text :w, |#segno, ,|, :hd, , #tr
+  <div class="col-xs-6">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :visibility, as: :select, collection: Note.visibilities.keys %>
+    <%= f.input :body, class:"vex-tabdiv", id:"vextab-editor" %>
+    <%= f.input :body_type, as: :select, collection: Note.body_types.keys %>
+    <%= f.button :submit, class: "btn btn-success btn-lg btn-block" %>
+  </div>
+<% end %>
 
+options space=20
+      tabstave
+        notation=true
+        key=A time=4/4
 
-  options space=25
-</div>
-
+        notes :q =|: (5/2.5/3.7/4) :8 7-5h6/3 ^3^ 5h6-7/5 ^3^ :q 7V/4 |
+        notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :h p5/4
+        text :w, |#segno, ,|, :hd, , #tr

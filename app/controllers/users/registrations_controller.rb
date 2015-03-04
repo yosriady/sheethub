@@ -24,7 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def dashboard
     track('View dashboard')
-    @sheets = current_user.sheets.includes(:assets).page(params[:page])
+    @sheets = current_user.sheets.page(params[:page])
   end
 
   def favorites

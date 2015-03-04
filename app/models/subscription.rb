@@ -3,10 +3,10 @@ class Subscription < ActiveRecord::Base
   # Note: Basic users should not have a Subscription object associated
 
   SUBSCRIPTION_UNIQUENESS_VALIDATION_MESSAGE = 'Users cannot have multiple same-type subscriptions.'
-  PLUS_BILLING_AGREEMENT_DESCRIPTION = 'Sheethub Plus Membership (US$12.00 per month)'
-  PRO_BILLING_AGREEMENT_DESCRIPTION = 'Sheethub Pro Membership (US$24.00 per month)'
-  PLUS_SUBSCRIPTION_AMOUNT = 12.00
-  PRO_SUBSCRIPTION_AMOUNT = 24.00
+  PLUS_BILLING_AGREEMENT_DESCRIPTION = 'Sheethub Plus Membership (US$6.00 per month)'
+  PRO_BILLING_AGREEMENT_DESCRIPTION = 'Sheethub Pro Membership (US$12.00 per month)'
+  PLUS_SUBSCRIPTION_AMOUNT = 6.00
+  PRO_SUBSCRIPTION_AMOUNT = 12.00
 
   belongs_to :user
   enum status: %w(processing completed suspended)

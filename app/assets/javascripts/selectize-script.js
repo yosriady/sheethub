@@ -36,6 +36,30 @@ $(document).on("page:change", function() {
     $('#user_timezone').selectize({});
     $('#user_billing_country').selectize({});
 
+    $('#note_body_type').selectize({
+         options: [{
+             "label":'VexTab',
+             "value":'vextab'
+         }, {
+             "label":'Plain Text',
+             "value":'plaintext'
+         }],
+         valueField: 'value',
+         labelField: 'label'
+     });
+
+    $('#note_visibility').selectize({
+         options: [{
+             "label":'Public',
+             "value":'vpublic'
+         }, {
+             "label":'Private (Only Me)',
+             "value":'vprivate'
+         }],
+         valueField: 'value',
+         labelField: 'label'
+     });
+
     $('#sheet_visibility').selectize({
          options: [{
              "label":'Public',

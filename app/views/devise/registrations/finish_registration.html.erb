@@ -6,7 +6,7 @@
 
     <%= simple_form_for current_user, url: finish_registration_url(current_user), method: :patch do |f| %>
       <div class="form-group">
-        <%= f.input :username, label: 'Your Username', placeholder: 'No spaces and no special characters allowed!', autofocus: true %>
+        <%= f.input :username, label: 'Choose a username', placeholder: 'No spaces and no special characters allowed!', autofocus: true %>
       </div>
       <div class="form-group">
       <%= f.label :paypal_email, label: 'PayPal Email' %>

@@ -1,11 +1,11 @@
 <hr>
 
 <%- if controller_name != 'registrations' %>
-    <%= link_to "Not registered yet? Sign Up.", new_registration_url(resource_name) %><br />
+    <%= link_to "No account? Sign up for free!.", new_registration_url(resource_name) %><br />
 <% end %>
 
 <%- if controller_name != 'sessions' %>
-    <%= link_to "Already registered? Sign In.", new_session_url(resource_name) %><br />
+    <%= link_to "Already have an account? Sign in here.", new_session_url(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

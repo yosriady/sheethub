@@ -17,13 +17,13 @@
   <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Grant access to your work through one-time download keys - perfect for fan rewards!">Download Keys <span class='badge fade-bg'>PLANNED</span></li>
   <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="An embeddable piece of HTML that you can put on other sites that enables visitors to download or buy your work">SheetHub Widget <span class='badge fade-bg'>PLANNED</span></li>
   <li class="list-group-item">
-    <h1 class="membership-price"><span class="fade-text"> $ </span>12 <span class="fade-text"> / mo</span></h1>
+    <h1 class="membership-price"><span class="fade-text"> $ </span>6 <span class="fade-text"> / mo</span></h1>
     <p class="fade-text text-center">You can cancel at any time. </p>
   </li>
   <% unless nobutton || (current_user && (current_user.membership_type == "plus" || current_user.membership_type == "pro"))%>
   <li class="list-group-item well">
     <a href="<%= subscriptions_purchase_url(:plus) %>">
-        <button type="button" class="btn btn-block btn-lg btn-primary" style="background: #2583EB;"><em class="fa fa-star"></em> Start My Plus Membership Now</button>
+        <button type="button" class="btn btn-block btn-lg btn-primary" style="background: #2583EB;"><em class="fa fa-plus-circle"></em> Start My Plus Membership Now</button>
     </a>
   </li>
   <% end %>

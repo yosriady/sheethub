@@ -22,10 +22,10 @@ class NotesController < ApplicationController
   # POST /notes
   def create
     @note = Note.new(note_params)
-
     if @note.save
       redirect_to @note, notice: 'Note was successfully created.'
     else
+      flash[:error] = @note.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -35,6 +35,7 @@ class NotesController < ApplicationController
     if @note.update(note_params)
       redirect_to @note, notice: 'Note was successfully updated.'
     else
+      flash[:error] = @note.errors.full_messages.to_sentence
       render :edit
     end
   end
@@ -48,11 +49,11 @@ class NotesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_note
-      @note = Note.find(params[:id])
+      @note = Note.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def note_params
-      params.require(:note).permit(:user_id, :title, :slug, :body, :visibility, :type)
+      params.require(:note).permit(:user_id, :title, :description, :body, :visibility, :body_type)
     end
 end

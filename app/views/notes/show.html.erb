@@ -1,34 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div id="sheet-content" class="col-xs-9">
+      <div class="white-container">
+      <div id="sheet-header">
+        <h1><%= link_to @note.title, note_url(@note) %></h1>
+        <h4>By <a href="<%= user_profile_url(subdomain: @note.user.username) %>" class="sheet-author"><%= @note.user.display_name %></a> <%= render 'layouts/user_badge', user: @note.user%></h4>
+        <hr>
+      </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @note.user_id %>
-</p>
+      <div class="vex-tabdiv" width=800 height=400>
+        <%= @note.body %>
+      </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @note.title %>
-</p>
+      </div>
+      <%= render 'layouts/disqus' %>
+    </div>
 
-<p>
-  <strong>Slug:</strong>
-  <%= @note.slug %>
-</p>
+    <div class="col-xs-3 zeropadding">
+      <div id="sheet-info" class="panel panel-info">
+        <div class="panel-body" style="padding-bottom: 5px">
+          <p><%= @note.description %></p>
+        </div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @note.body %>
-</p>
-
-<p>
-  <strong>Visibility:</strong>
-  <%= @note.visibility %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @note.type %>
-</p>
-
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+          <ul class="list-group">
+              <li class="list-group-item flat-tags well">
+                  <a href="<%= edit_note_url(@note) %>">
+                    <button type="button" class="btn btn-success btn-block"><em class="fa fa-edit"></em> Edit</button>
+                 </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+</div>
