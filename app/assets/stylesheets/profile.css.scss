@@ -4,7 +4,21 @@
 
 #banner.profile-banner {
     height: 130px;
-    padding-left: 5%;
+
+    .social-links {
+        a {
+            margin-left: 4px;
+        }
+    }
+
+    .social-link {
+        font-size: 32px;
+        color: #777;
+
+        &:hover, &:focus, &:active {
+            color: #fff;
+        }
+    }
 
     .profile-avatar {
         float: left;

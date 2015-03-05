@@ -153,7 +153,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
                          :billing_full_name, :billing_address_line_1,
                          :billing_address_line_2, :billing_city,
                          :billing_state_province, :billing_country,
-                         :billing_zipcode)
+                         :billing_zipcode, :facebook_username,
+                         :twitter_username, :googleplus_username)
   end
 
   def password_params

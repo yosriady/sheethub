@@ -1,10 +1,10 @@
 <%= cache("profile_banner_#{user.username}_#{user.updated_at}") do %>
 <div id="banner" class="profile-banner">
+    <%= render "social_links", user: user %>
     <%= image_tag(user.avatar_url, class: "profile-avatar") %>
     <div class="profile-bio">
       <h1><%= user.display_name %><%= render 'layouts/user_badge', user: user unless user.basic?%></h1>
       <ul class="list-inline">
-        <li><p><a href="<%= user_profile_url(subdomain:user.username) %>"><em class="fa fa-user"></em> <%= user.username %></a></p></li>
         <% if user.country.present? %>
           <li><p><em class="fa fa-map-marker"></em> <%= user.country %></p></li>
         <% end %>

@@ -7,7 +7,7 @@
         <%= f.error_notification %>
 
         <div class="col-xs-10 white-container">
-        <h2>Edit Your Personal Profile</h1>
+        <h2>Update My Personal Profile</h1>
         <hr>
 
         <div class="col-xs-5 zerohorizontalpadding">
@@ -31,6 +31,10 @@
 
           <%= f.input :tagline, placeholder: "Something interesting about you", autofocus: true %>
           <%= f.input :website, placeholder: "Your personal website", autofocus: true %>
+
+          <%= f.input :facebook_username, placeholder: "SheetHub" %>
+          <%= f.input :twitter_username, placeholder: "SheetHub" %>
+          <%= f.input :googleplus_username, placeholder: "SheetHub", label: "Google+ username" %>
 
           <%= render 'billing_address_form_inputs', f: f %>
 

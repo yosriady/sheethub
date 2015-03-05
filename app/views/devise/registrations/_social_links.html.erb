@@ -1,0 +1,11 @@
+<div class="social-links">
+  <% if user.googleplus_username %>
+  <a href="https://plus.google.com/+<%= user.googleplus_username %>" class="social-link pull-right" title="Google+ page" target="_blank"><em class="fa fa-google-plus-square"></em></a>
+  <% end %>
+  <% if user.twitter_username %>
+  <a href="https://twitter.com/<%= user.twitter_username %>" class="social-link pull-right" title="Twitter page" target="_blank"><em class="fa fa-twitter-square"></em></a>
+  <% end %>
+  <% if user.facebook_username %>
+  <a href="https://www.facebook.com/<%= user.facebook_username %>" class="social-link pull-right" title="Facebook page" target="_blank"><em class="fa fa-facebook-square"></em></a>
+  <% end %>
+</div>
