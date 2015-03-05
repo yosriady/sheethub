@@ -208,3 +208,11 @@ h2 .fa-eye-slash {
 .carousel-inner > .item > img {
     max-height: 480px;
 }
+
+.btn-primary {
+    background: #2583EB;
+
+    &:hover, &:active, &:focus {
+        background: #1D68BB;
+    }
+}
