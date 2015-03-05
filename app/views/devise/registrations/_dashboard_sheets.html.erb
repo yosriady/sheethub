@@ -9,7 +9,7 @@
         <th>Total Earnings</th>
         <th>Average Amount</th>
         <th>Max Amount</th>
-        <th>Edit</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +21,6 @@
   <div id="paginator" class="text-center">
     <%= paginate sheets %>
   </div>
-  <a href="<%= sheet_upload_url %>" class="btn btn-success btn-inline"><em class="fa fa-plus"></em> Upload</a>
 <% else %>
   <h2 class="text-center"><em class="fa fa-eye-slash"></em> You have no published works</h2>
 <% end %>

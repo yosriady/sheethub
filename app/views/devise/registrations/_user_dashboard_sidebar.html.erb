@@ -1,7 +1,7 @@
 <div class="col-xs-2 user-dashboard-sidebar">
     <ul class="nav nav-pills nav-stacked">
         <h5>Account</h5>
-        <li role="presentation"><a href="<%= user_settings_url %>"><em class="fa fa-cog"></em> Profile</a></li>
+        <li role="presentation"><a href="<%= user_settings_url %>"><em class="fa fa-cog"></em> My Profile</a></li>
         <% unless current_user.provider? %>
         <li role="presentation"><a href="<%= user_password_settings_url %>"><em class="fa fa-key"></em> Password</a></li>
         <% end %>
@@ -12,7 +12,7 @@
         <h5>Store</h5>
 
         <li><a href="<%= user_dashboard_url %>"><em class="fa fa-music"></em> My Works</a></li>
-        <li><a href="<%= user_sales_url %>"><em class="fa fa-bar-chart-o"></em> Sales</a></li>
+        <li><a href="<%= user_sales_url %>"><em class="fa fa-bar-chart-o"></em> My Sales</a></li>
         <li><a href="<%= user_trash_url %>"><em class="fa fa-trash"></em> Trash</a></li>
         <hr>
       <% end %>

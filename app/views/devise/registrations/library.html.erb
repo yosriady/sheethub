@@ -3,10 +3,10 @@
 <div class="container">
   <div class="row">
   <%= render 'user_dashboard_sidebar' %>
-  <div class="col-xs-10">
-      <h1>My Library</h1>
+  <div class="col-xs-10 white-container">
+      <h2>My Library <a href="<%= discover_url %>" class="btn btn-default pull-right"><span class="fa fa-eye"></span> Discover new music</a></h2>
+      <hr>
       <%= render 'library_sheets', orders: @purchases %>
-      <a href="<%= discover_url %>" class="btn btn-success"><span class="fa fa-eye"></span> Discover</a>
   </div>
 </div>
 </div>

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
       <%= render 'user_dashboard_sidebar' %>
-      <div class="col-xs-10">
+      <div class="col-xs-10 white-container">
         <%= render 'recent_sales', sales: @all_sales %>
         <%= render 'sales_stats', all_time_sales: @all_time_sales, recent_sales:@sales_past_month %>
         <%= render 'recent_sales_quantity_by_country_chart', sales_past_month_by_country: @sales_past_month_by_country %>

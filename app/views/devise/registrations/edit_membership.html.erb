@@ -3,8 +3,9 @@
 <div class="container">
     <div class="row">
       <%= render 'user_dashboard_sidebar' %>
-      <h1>Membership Settings</h1>
       <div class="col-xs-10 white-container">
+        <h2>Membership Settings</h2>
+        <hr>
         <%= render 'membership_details', user:@user %>
         <%= render 'membership_billing_details', payment_details: @payment_details %>
 
