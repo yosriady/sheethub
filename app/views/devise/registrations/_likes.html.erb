@@ -1,0 +1,13 @@
+<div id="likes">
+    <% likes.each do |like| %>
+        <%= render 'sheets/sheet', sheet: like.votable %>
+    <% end %>
+
+    <% if likes.empty? %>
+        <h2><em class="fa fa-eye-slash"></em></h2>
+        <h2>No likes yet!</h2>
+    <% end %>
+</div>
+<div id="paginator" class="text-center">
+    <%= paginate likes %>
+</div>

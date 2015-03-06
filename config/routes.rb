@@ -23,8 +23,8 @@ Rails.application.routes.draw do
 
       get '/', to: 'sheets#index', constraints: { subdomain: '' }
       get '/', to: 'users/registrations#profile', constraints: { subdomain: /.+/ }, as: :user_profile
-      get '/favorites', to: 'sheets#index', constraints: { subdomain: '' }
-      get '/favorites', to: 'users/registrations#favorites', constraints: { subdomain: /.+/ }, as: :user_favorites
+      get '/likes', to: 'sheets#index', constraints: { subdomain: '' }
+      get '/likes', to: 'users/registrations#likes', constraints: { subdomain: /.+/ }, as: :user_likes
       match 'users/finish_registration', to: 'users/registrations#finish_registration', via: [:get, :patch], as: :finish_registration
       get 'dashboard', to: 'users/registrations#dashboard', as: :user_dashboard
       get 'sales', to: 'users/registrations#sales', as: :user_sales
@@ -45,9 +45,9 @@ Rails.application.routes.draw do
       end
 
       member do
-        get 'favorites'
+        get 'fans'
         get 'download'
-        post 'favorite'
+        post 'like'
         get 'report'
         post 'flag'
         post 'restore'

@@ -1,6 +1,6 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: [:update]
-  before_action :set_sheet_lazy, only: [:show, :edit, :report, :flag, :favorite, :favorites, :destroy, :download]
+  before_action :set_sheet_lazy, only: [:show, :edit, :report, :flag, :like, :fans, :destroy, :download]
   before_action :set_deleted_sheet, only: [:restore]
   before_action :format_tag_fields, only: [:create, :update]
   before_action :validate_instruments, only: [:create, :update]
@@ -8,15 +8,15 @@ class SheetsController < ApplicationController
   before_action :set_instruments
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy, :restore]
   before_action :validate_flagged, only: [:show]
-  before_action :hide_private_sheets, only: [:show, :report, :flag, :favorite, :download], if: :is_private_sheet
+  before_action :hide_private_sheets, only: [:show, :report, :flag, :like, :download], if: :is_private_sheet
   before_action :authenticate_owner, :only => [:edit, :update, :destroy, :restore]
 
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
   DEFAULT_FLAG_MESSAGE = 'No Message.'
   SUCCESS_FLAG_MESSAGE = "Succesfully reported! We'll come back to you in 72 hours."
-  ERROR_UNSIGNED_FAVORITE_MESSAGE = 'You need to be signed in to favorite'
-  SUCCESS_FAVORITE_MESSAGE = 'Sweet! Added to favorites.'
-  SUCCESS_UNFAVORITE_MESSAGE = 'Removed from favorites.'
+  ERROR_UNSIGNED_LIKE_MESSAGE = 'You need to be signed in to like'
+  SUCCESS_LIKE_MESSAGE = 'Sweet! Added to likes.'
+  SUCCESS_UNLIKE_MESSAGE = 'Removed from likes.'
   SUCCESS_CREATE_SHEET_MESSAGE = "Woohoo! You've uploaded a new sheet."
   SUCCESS_UPDATE_SHEET_MESSAGE = "Fine piece of work! You've updated your sheet."
   ERROR_UPDATE_SHEET_MESSAGE = 'Oops! You cannot edit this Sheet because you are not the owner.'
@@ -61,12 +61,12 @@ class SheetsController < ApplicationController
   # GET /sheets/1.json
   def show
     track('View sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-    @favorites = @sheet.votes_for.includes(:voter).limit(5)
+    @likes = @sheet.votes_for.includes(:voter).limit(5)
   end
 
-  def favorites
+  def fans
     track('View sheet fans', sheet_id: @sheet.id, sheet_title: @sheet.title)
-    @favorites = @sheet.votes_for.includes(:voter).page(params[:page]).per(50)
+    @likes = @sheet.votes_for.includes(:voter).page(params[:page]).per(50)
   end
 
   # Downloads Sheet PDF
@@ -96,18 +96,17 @@ class SheetsController < ApplicationController
     redirect_to sheet_url(@sheet), notice: SUCCESS_FLAG_MESSAGE
   end
 
-  # Favorites/Unfavorites a Sheet
-  def favorite
-    track('Favorite sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
+  def like
+    track('Like sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     unless current_user
-      redirect_to new_user_session_url, error: ERROR_UNSIGNED_FAVORITE_MESSAGE
+      redirect_to new_user_session_url, error: ERROR_UNSIGNED_LIKE_MESSAGE
     end
     if @sheet && (!current_user.voted_for? @sheet)
-      @sheet.favorited_by current_user
-      redirect_to sheet_url(@sheet), notice: SUCCESS_FAVORITE_MESSAGE
+      @sheet.liked_by current_user
+      redirect_to sheet_url(@sheet), notice: SUCCESS_LIKE_MESSAGE
     elsif @sheet && (current_user.voted_for? @sheet)
-      @sheet.unfavorited_by current_user
-      redirect_to sheet_url(@sheet), notice: SUCCESS_UNFAVORITE_MESSAGE
+      @sheet.unliked_by current_user
+      redirect_to sheet_url(@sheet), notice: SUCCESS_UNLIKE_MESSAGE
     else
       redirect_to root_url, error: ERROR_SHEET_NOT_FOUND_MESSAGE
     end

@@ -7,7 +7,7 @@ class Sheet < ActiveRecord::Base
   include Instrumentable
   include Visible
   include Flaggable
-  include Favoritable
+  include Likable
   include SoftDestroyable
   include Sluggable
   include PdfAttachable

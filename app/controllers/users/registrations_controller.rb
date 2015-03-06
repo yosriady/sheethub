@@ -5,9 +5,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   ONLY_PRO_MESSAGE = 'That feature is only available to Pro Users. Upgrade to Pro today!'
   PUBLISHER_ONLY_FEATURE_MESSAGE = 'This feature is only available when you have a published sheet.'
 
-  before_action :validate_user_signed_in, except: [:new, :create, :profile, :favorites]
+  before_action :validate_user_signed_in, except: [:new, :create, :profile, :likes]
   before_action :disable_for_omniauth, only: [:edit_password]
-  before_action :set_profile_user, only: [:profile, :favorites]
+  before_action :set_profile_user, only: [:profile, :likes]
   before_action :validate_registration_finished
   before_action :validate_has_published, only: [:sales, :dashboard]
   before_action :set_current_user, only: [:edit_password, :edit_membership]
@@ -27,9 +27,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @sheets = current_user.sheets.page(params[:page])
   end
 
-  def favorites
-    track('View favorites')
-    @favorites = @user.votes.includes(:votable).page(params[:page])
+  def likes
+    track('View likes')
+    @likes = @user.votes.includes(:votable).page(params[:page])
   end
 
   def library

@@ -1,0 +1,15 @@
+<% if current_user.present? %>
+    <% if current_user.voted_for? sheet %>
+    <a href="<%= like_sheet_url(sheet) %>" data-method="post">
+        <button type="button" class="btn btn-block btn-default"><em class="fa fa-star-o"></em> Liked!</button>
+    </a>
+    <% else %>
+    <a href="<%= like_sheet_url(sheet) %>" data-method="post">
+        <button type="button" class="btn btn-block btn-success"><em class="fa fa-star-o"></em> Like!</button>
+    </a>
+    <% end %>
+<% else %>
+    <a href="<%= new_user_session_url %>">
+        <button type="button" class="btn btn-block btn-success"><em class="fa fa-star-o"></em> Like!</button>
+    </a>
+<% end %>

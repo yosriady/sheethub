@@ -1,0 +1,5 @@
+<h1>You have a new fan!</h1>
+<p>Hi <%= @publisher.display_name %>, </p>
+<p>Nice! <%= link_to @user.display_name, user_profile_url(@user.username) %> recently liked your work, <%= link_to @sheet.title, sheet_url(@sheet) %>. Share your work to get even more fans!
+</p>
+<a href="<%= fans_sheet_url(@sheet) %>" class="btn">Go to your fans</a>
