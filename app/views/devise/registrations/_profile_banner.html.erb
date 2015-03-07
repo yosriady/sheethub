@@ -8,9 +8,6 @@
         <% if user.country.present? %>
           <li><p><em class="fa fa-map-marker"></em> <%= user.country %></p></li>
         <% end %>
-        <% if user.website? %>
-          <li><p><a href="<%= url_with_protocol(user.website) %>" target="_blank"><em class="fa fa-home"></em> <%= user.website %></a></p></li>
-        <% end %>
         <% if user.tagline? %>
           <li><p class="tagline"><em class="fa fa-info-circle"></em> <%= user.tagline %></p></li>
         <% end %>
