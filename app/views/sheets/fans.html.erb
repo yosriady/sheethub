@@ -5,15 +5,16 @@ keywords @sheet.cached_joined_tags
 %>
 
 <div class="container">
-  <div class="row">
-  <div class="col-xs-12" id="sheet-header">
-    <h1 class="text-center"><%= link_to @sheet.title, sheet_url(@sheet) %>'s Fans</h1>
-    <br />
-  </div>
-  <div class="col-xs-12">
-      <div id="sheets">
-        <%= render 'fans', likes: @likes%>
-      </div>
+    <div class="row">
+    <div class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><em class="fa fa-music"></em><%= link_to @sheet.title, sheet_url(@sheet) %></li>
+            <li><%= link_to "Fans", fans_sheet_url(@sheet) %></li>
+        </ol>
+        <hr>
+        <div id="fans">
+          <%= render 'fans', likes: @likes%>
+        </div>
     </div>
-  </div>
+    </div>
 </div>
