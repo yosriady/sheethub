@@ -1,25 +1,15 @@
 # User model
 class User < ActiveRecord::Base
   include Avatarable
+  include Upgradable
+  include Payable
 
   scope :is_active, -> { where(finished_registration?: true) }
 
-  BASIC_FREE_SHEET_QUOTA = 15
-  PLUS_FREE_SHEET_QUOTA = 75
-  PRO_FREE_SHEET_QUOTA = 125
-  BASIC_ROYALTY_PERCENTAGE = 0.85
-  PLUS_ROYALTY_PERCENTAGE = 0.85
-  PRO_ROYALTY_PERCENTAGE = 0.90
-  INVALID_MEMBERSHIP_TYPE_MESSAGE = 'Membership type does not exist'
-  MISSING_SUBSCRIPTION_OBJECT_MESSAGE = 'Error: Subscription object missing. Contact support.'
-
-  enum membership_type: %w( basic plus pro staff )
   validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "No spaces and no special characters allowed!"}, if: :finished_registration?
   validates_email_format_of :email, message: 'You have an invalid email address'
-  validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :has_paypal_email?
   has_many :sheets, dependent: :destroy
   has_many :notes, dependent: :destroy
-  has_one :subscription
   acts_as_voter
   before_save :cache_display_name
   after_save :update_mixpanel_profile
@@ -29,50 +19,11 @@ class User < ActiveRecord::Base
          :trackable, :validatable, :confirmable, :lockable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
-  def royalty_percentage
-    return BASIC_ROYALTY_PERCENTAGE if basic?
-    return PLUS_ROYALTY_PERCENTAGE if plus?
-    return PRO_ROYALTY_PERCENTAGE if pro?
-  end
-
-  def self.free_sheet_quota_of(membership_type)
-    m = membership_type.downcase
-    raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
-    return BASIC_FREE_SHEET_QUOTA if m == 'basic'
-    return PLUS_FREE_SHEET_QUOTA if m == 'plus'
-    return PRO_FREE_SHEET_QUOTA if m == 'pro'
-  end
-
-  def update_membership_to(membership_type)
-    m = membership_type.downcase
-    raise INVALID_MEMBERSHIP_TYPE_MESSAGE unless m.in? User.membership_types.keys
-    # raise MISSING_SUBSCRIPTION_OBJECT_MESSAGE unless has_subscription_for_membership(membership_type) || basic?
-    update(membership_type: m, sheet_quota: User.free_sheet_quota_of(m))
-  end
-
-  def has_subscription_for_membership(membership_type)
-    Subscription.find_by(user: self,
-                         membership_type:Subscription.membership_types[membership_type],
-                         status: Subscription.statuses[:completed]).present?
-  end
-
   def country
     if billing_country
       country = ISO3166::Country[billing_country]
       country.translations[I18n.locale.to_s] || country.name
     end
-  end
-
-  def premium_subscription
-    Subscription.find_by(user: self, status: Subscription.statuses[:completed])
-  end
-
-  def completed_subscriptions
-    Subscription.where(user: self, status: Subscription.statuses[:completed]).order(:updated_at)
-  end
-
-  def premium?
-    plus? || pro?
   end
 
   def joined_at
@@ -91,73 +42,8 @@ class User < ActiveRecord::Base
     sheets.where(visibility: Sheet.visibilities[:vprivate])
   end
 
-  def has_paypal_email?
-    paypal_email.present?
-  end
-
   def free_sheets
     sheets.where(price_cents: 0)
-  end
-
-  def remaining_sheet_quota
-    sheet_quota - free_sheets.size
-  end
-
-  def hit_sheet_quota?
-    free_sheets.size >= sheet_quota
-  end
-
-  def hit_sheet_quota_for_basic?
-    free_sheets.size >= BASIC_FREE_SHEET_QUOTA
-  end
-
-  def contributors
-    User.find(sales.pluck(:user_id))
-  end
-
-  def max_contribution_to(author)
-    Order.where(user_id: self.id, sheet_id: author.sheets.ids, status: Order.statuses[:completed]).maximum(:amount_cents)
-  end
-
-  def sales
-    Order.includes(:user).includes(:sheet).where(sheet_id: sheets.ids, status: Order.statuses[:completed])
-  end
-
-  def csv_sales_data
-    require 'csv'
-    headers = [:date, :title, :price, :amount, :earnings, :email,
-     :ip_address, :billing_full_name, :billing_address_line_1,
-     :billing_address_line_2, :billing_city,
-     :billing_state_province, :billing_country, :billing_zipcode]
-    CSV.generate do |csv|
-      csv << headers
-      sales.each { |sale| csv << sale.csv_data }
-    end
-  end
-
-  def all_time_sales
-    result = {}
-    sheets.find_each do |sheet|
-      total_sales = sheet.total_sales
-      result[sheet.title] = total_sales if total_sales > 0
-    end
-    result
-  end
-
-  def all_time_earnings
-    sheets.inject(0) { |total, sheet| total + sheet.total_earnings }
-  end
-
-  def sales_past_month
-    sales.where('purchased_at >= ?', 1.month.ago.utc)
-  end
-
-  def sales_past_month_by_country
-    sales_past_month.group(:billing_country).count.map {|k, v| [ISO3166::Country[k].name, v] if ISO3166::Country[k] }
-  end
-
-  def earnings_past_month
-    sales_past_month.inject(0) { |total, order| total + order.royalty }
   end
 
   def purchased_orders
