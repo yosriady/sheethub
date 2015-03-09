@@ -20,4 +20,14 @@ module Avatarable
     attr_accessor :remove_avatar
   end
 
+  def avatar_url
+    if avatar.url.present? && avatar.url != MISSING_AVATAR_URL
+      avatar.url
+    elsif image.present?
+      image
+    else
+      MISSING_AVATAR_URL
+    end
+  end
+
 end

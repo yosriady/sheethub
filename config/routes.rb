@@ -18,11 +18,11 @@ Rails.application.routes.draw do
                                       omniauth_callbacks: 'users/omniauth_callbacks',
                                       sessions: 'users/sessions' }
     devise_scope :user do
-
       get '/discourse/sso', to: 'users/sessions#sso', as: :user_discourse_sso
 
       get '/', to: 'sheets#index', constraints: { subdomain: '' }
       get '/', to: 'users/registrations#profile', constraints: { subdomain: /.+/ }, as: :user_profile
+      get '/users', to: 'users/registrations#all', constraints: { subdomain: '' }, as: :all_users
       get '/likes', to: 'sheets#index', constraints: { subdomain: '' }
       get '/likes', to: 'users/registrations#likes', constraints: { subdomain: /.+/ }, as: :user_likes
       match 'users/finish_registration', to: 'users/registrations#finish_registration', via: [:get, :patch], as: :finish_registration

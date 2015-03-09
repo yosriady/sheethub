@@ -1,0 +1,5 @@
+<% cache(user) do %>
+<a href="<%= user_profile_url(subdomain: user.username) %>">
+    <%= image_tag(user.avatar_url, class: "small-avatar", data: { toggle: 'tooltip', placement: 'top' }, title:user.display_name) %>
+</a>
+<% end %>

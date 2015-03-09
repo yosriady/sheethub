@@ -1,0 +1,6 @@
+<% users.each do |user| %>
+  <%= render 'devise/registrations/user', user: user %>
+<% end %>
+<div id="paginator" class="text-center">
+  <%= paginate users %>
+</div>

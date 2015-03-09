@@ -22,6 +22,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @sheets = @user.public_sheets.page(params[:page]) if @user
   end
 
+  def all
+    @users = User.is_active.page(params[:page])
+  end
+
   def dashboard
     track('View dashboard')
     @sheets = current_user.sheets.page(params[:page])

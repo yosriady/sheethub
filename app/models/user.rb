@@ -2,6 +2,8 @@
 class User < ActiveRecord::Base
   include Avatarable
 
+  scope :is_active, -> { where(finished_registration?: true) }
+
   BASIC_FREE_SHEET_QUOTA = 15
   PLUS_FREE_SHEET_QUOTA = 75
   PRO_FREE_SHEET_QUOTA = 125
@@ -168,16 +170,6 @@ class User < ActiveRecord::Base
 
   def deleted_sheets
     Sheet.only_deleted.where(user_id: id)
-  end
-
-  def avatar_url
-    if avatar.url.present? && avatar.url != MISSING_AVATAR_URL
-      avatar.url
-    elsif image.present?
-      image
-    else
-      MISSING_AVATAR_URL
-    end
   end
 
   def self.from_omniauth(auth)

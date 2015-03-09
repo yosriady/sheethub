@@ -1,7 +1,7 @@
 <% if likes.present? %>
 <li class="list-group-item">
       <% likes.each do |like| %>
-        <%= render 'fan', fan: like.voter %>
+        <%= render 'devise/registrations/user', user: like.voter %>
       <% end %>
       <a href="<%= fans_sheet_url(sheet) %>" class="bg-info" data-toggle="tooltip" data-placement="top" title="View All <%= sheet.cached_votes_up %> Fans"><em class="fa fa-plus"></em></a>
 </li>
