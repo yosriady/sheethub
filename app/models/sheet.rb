@@ -1,6 +1,5 @@
 # Sheet Model
 class Sheet < ActiveRecord::Base
-  include Deduplicatable
   include Relatable
   include Taggable
   include Licensable

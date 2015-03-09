@@ -95,9 +95,6 @@ gem 'paperclip'
 gem 's3_direct_upload'
 gem 'mini_magick', '4.0.0.rc'
 
-# Perceptual Hash
-gem 'phashion'
-
 # Others
 gem 'friendly_id'
 gem 'bitmask_attributes'
