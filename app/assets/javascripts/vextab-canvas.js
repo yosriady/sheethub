@@ -1,18 +1,19 @@
-$(document).on("page:change", function() {
+var Note = (function(){
     var DEFAULT_SCALE = 1.0;
-    var NOTE_CANVAS = $('#note-canvas');
+    var DEFAULT_CANVAS_ELEMENT = $('#note-canvas');
+    var DEFAULT_BODY_ELEMENT = $("#note_body");
 
     function calculateNoteCanvasWidth(width){
         var window_width = width || $("#note-content").width();
         return 0.95 * window_width;
     }
 
-    function renderNote(scale, width){
-        NOTE_CANVAS.empty();
+    function render(scale, width){
+        $('#note-canvas').empty();
         var scale = scale ? scale : DEFAULT_SCALE;
         var width = width ? width : calculateNoteCanvasWidth();
 
-        var renderer = new Vex.Flow.Renderer(NOTE_CANVAS[0], Vex.Flow.Renderer.Backends.RAPHAEL);
+        var renderer = new Vex.Flow.Renderer($('#note-canvas')[0], Vex.Flow.Renderer.Backends.RAPHAEL);
         var artist = new Artist(10, 10, width, {scale: scale});
         var vextab = new VexTab(artist);
 
@@ -22,10 +23,16 @@ $(document).on("page:change", function() {
         artist.render(renderer);
     }
 
-    renderNote();
+    return {
+        render: render
+    }
+})();
+
+$(document).on("page:change", function() {
+    Note.render();
 
     $(window).bind('resizeEnd', function() {
-        renderNote();
+        Note.render();
     });
 
     // Broadcast Window Resize event
