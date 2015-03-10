@@ -126,8 +126,9 @@ group :development, :test do
   gem 'rspec'
   gem 'letter_opener'
   # gem 'factory_girl_rails'
-  gem "bullet"
-  gem "rails_best_practices"
+  gem 'bullet'
+  gem 'rails_best_practices'
+  gem 'rails-erd'
 end
 
 # Test data generation
