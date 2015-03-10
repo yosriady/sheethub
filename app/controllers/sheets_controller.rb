@@ -34,7 +34,7 @@ class SheetsController < ApplicationController
   def index
     track('View homepage')
     @instruments = Sheet.values_for_instruments
-    @sheets = Sheet.is_public.includes(:user).page(params[:page])
+    @sheets = Sheet.is_public.includes(:user).order('created_at DESC').page(params[:page])
     @featured = Sheet.cached_community_favorites.limit(3)
     @composers = Sheet.popular_composers
     @genres = Sheet.popular_genres
