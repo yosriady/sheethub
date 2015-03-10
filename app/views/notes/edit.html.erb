@@ -1,6 +1,11 @@
-<h1>Editing Note</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @note %> |
-<%= link_to 'Back', notes_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+        <h2>Editing Note</h2>
+        <%= link_to 'Show', @note %> |
+        <%= link_to 'Back', notes_path %>
+        <hr>
+        <%= render 'form' %>
+    </div>
+  </div>
+</div>

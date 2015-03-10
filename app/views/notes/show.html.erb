@@ -13,11 +13,11 @@ description "#{@note.title} sheet music on SheetHub, the easiest publishing plat
         <hr>
       </div>
 
-      <textarea hidden id="note-body">
+      <textarea hidden id="note_body">
         <%= @note.body %>
       </textarea>
-      <canvas id="note-canvas">
-      </canvas>
+      <div id="note-canvas">
+      </div>
 
       </div>
       <%= render 'layouts/disqus' %>
