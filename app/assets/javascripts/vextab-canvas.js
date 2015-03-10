@@ -29,11 +29,13 @@ var Note = (function(){
 })();
 
 $(document).on("page:change", function() {
-    Note.render();
-
-    $(window).bind('resizeEnd', function() {
+    if ($('#note-canvas').size() > 0){
         Note.render();
-    });
+
+        $(window).bind('resizeEnd', function() {
+            Note.render();
+        });
+    };
 
     // Broadcast Window Resize event
     $(window).resize(function() {
