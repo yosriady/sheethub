@@ -1,6 +1,11 @@
+<%
+title @note.title
+description "#{@note.title} sheet music on SheetHub, the easiest publishing platform built for musicians. #{@note.description}"
+%>
+
 <div class="container">
   <div class="row">
-    <div id="sheet-content" class="col-xs-9">
+    <div id="note-content" class="col-xs-9">
       <div class="white-container">
       <div id="sheet-header">
         <h1><%= link_to @note.title, note_url(@note) %></h1>
@@ -8,9 +13,11 @@
         <hr>
       </div>
 
-      <div class="vex-tabdiv" width=800 height=400>
+      <textarea hidden id="note-body">
         <%= @note.body %>
-      </div>
+      </textarea>
+      <canvas id="note-canvas">
+      </canvas>
 
       </div>
       <%= render 'layouts/disqus' %>
