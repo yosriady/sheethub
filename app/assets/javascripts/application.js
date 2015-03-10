@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require underscore
 //= require nprogress
 //= require nprogress-turbolinks
 //= require s3_direct_upload
