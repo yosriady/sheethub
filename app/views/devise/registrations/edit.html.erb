@@ -13,28 +13,31 @@
         <div class="col-xs-5 zerohorizontalpadding">
 
         <div class="form-inputs">
+          <label class="string control-label">Username</label>
+          <input class="string form-control" type="string" value="<%= resource.username %>" readonly>
+
           <label class="string control-label">Email</label>
           <input class="string form-control" type="string" value="<%= resource.email %>" readonly>
 
-          <label class="string control-label">Username</label>
-          <input class="string form-control" type="string" value="<%= resource.username %>" readonly>
+          <%= f.label :paypal_email, label: 'PayPal Email' %> <a href="<%= support_url %>#paypal-transfer"><em class="fa fa-question-circle"></em></a>
+          <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
         </div>
         <hr>
 
         <div class="form-inputs">
-          <%= f.label :paypal_email, label: 'PayPal Email' %> <a href="<%= support_url %>#paypal-transfer"><em class="fa fa-question-circle"></em></a>
-          <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
-          <hr>
-
           <%= f.input :first_name %>
           <%= f.input :last_name %>
 
           <%= f.input :tagline, placeholder: "Something interesting about you", autofocus: true %>
-          <%= f.input :website, label: "Personal Website", placeholder: "http://sheethub.co", autofocus: true %>
 
+
+          <hr >
+          <%= f.input :website, label: "Personal Website", placeholder: "http://sheethub.co", autofocus: true %>
           <%= f.input :facebook_username, placeholder: "SheetHub" %>
           <%= f.input :twitter_username, placeholder: "SheetHub" %>
           <%= f.input :googleplus_username, placeholder: "SheetHub", label: "Google+ username" %>
+          <%= f.input :soundcloud_username, placeholder: "SheetHub", label: "SoundCloud username" %>
+          <%= f.input :youtube_username, placeholder: "SheetHub", label: "YouTube username" %>
 
           <%= render 'billing_address_form_inputs', f: f %>
 
