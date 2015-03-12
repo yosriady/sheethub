@@ -54,6 +54,28 @@
     }
 }
 
+.user-bio {
+    margin-left: 1em;
+
+    h3 {
+        font-family: 'Source Sans Pro';
+        font-weight: 600;
+        display: inline;
+    }
+
+    p {
+        color: #999;
+    }
+
+    .list-inline {
+        margin-bottom: 0px;
+
+        p {
+            color: #555;
+        }
+    }
+}
+
 .nav-strip-profile {
     background: #fff;
     padding: 0px 20px;
