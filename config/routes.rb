@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     # Sheet Purchase Routes
     post 'checkout', to: 'orders#checkout'
-    get 'orders/success/:tracking_id', to:'orders#success', as: 'orders_success'
+    get 'orders/status/:tracking_id', to:'orders#status', as: 'orders_status'
     get 'orders/cancel'
     # End of Sheet Purchase Routes
 

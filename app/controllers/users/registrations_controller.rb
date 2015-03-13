@@ -38,7 +38,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def library
     track('View library')
-    @purchases = current_user.purchased_orders.includes(sheet: [:user, :assets]).page(params[:page])
+    @purchases = current_user.purchased_orders.includes(sheet: [:assets]).page(params[:page])
   end
 
   def sales

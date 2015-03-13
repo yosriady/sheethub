@@ -1,0 +1,28 @@
+<% title "Thank You" %>
+
+<div class="animated-banner">
+    <h1 class="animated bounceIn"><em class="fa fa-check-circle"></em> Thank you for your purchase!</h1>
+    <h2 class="animated bounceIn">We've added <%= @order.sheet.title %> to your Library!</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8 white-container">
+            <div class="pull-left">
+                <strong>What happens next?</strong>
+                <p><%= link_to @sheet.title, sheet_url(@sheet) %> is now registered to your SheetHub account. An email confirmation of this transaction has also been sent to you. Visit the sheet page or your <strong>Library</strong> to download whenever you're ready. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy!</p>
+            </div>
+            <div id="sheets" class="wide-sheets">
+                <%= render 'sheets/sheet', sheet: @sheet %>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="well">
+                <a href="<%= user_library_url %>" class="btn btn-block btn-success btn-lg animate-forever animated pulse"><em class="fa fa-download"></em> Go To My Library</a>
+            </div>
+            <%= render 'sheets/sheet_share', sheet: @sheet %>
+        </div>
+    </div>
+</div>
+
+<%= render 'sheets/related', sheet:@order.sheet %>

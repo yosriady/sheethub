@@ -7,12 +7,19 @@ class OrdersController < ApplicationController
   INVALID_PRICE_MESSAGE = 'Amount must be at least the minimum price.'
 
   before_action :set_sheet, only: [:checkout]
-  before_action :authenticate_user!, only: [:checkout, :success, :cancel]
+  before_action :set_order, only: [:status]
+  before_action :authenticate_user!, only: [:checkout, :status, :cancel]
+  before_action :authenticate_owner, only: [:status]
   before_action :validate_flagged, only: [:checkout]
   before_action :validate_min_amount, only: [:checkout]
 
   def checkout
     track('Checking out sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
+    @order = Order.find_or_initialize_by(user_id: current_user.id,
+                                         sheet_id: @sheet.id)
+    if @order.completed?
+      redirect_to :back, error: "You've already purchased #{@sheet.title}"
+    end
 
     if @sheet.pay_what_you_want && params[:amount].present?
       amount = params[:amount].to_f
@@ -20,12 +27,6 @@ class OrdersController < ApplicationController
     else
       amount = @sheet.price
       amount_cents = @sheet.price_cents
-    end
-
-    @order = Order.find_or_initialize_by(user_id: current_user.id,
-                                         sheet_id: @sheet.id)
-    if @order.completed?
-      redirect_to :back, error: "You've already purchased #{@sheet.title}"
     end
 
     author = @sheet.user
@@ -51,14 +52,11 @@ class OrdersController < ApplicationController
     end
   end
 
-  def success
-    tracking_id = params[:tracking_id]
-    @order = Order.find_by(tracking_id: tracking_id)
+  def status
     if @order
-      @order.complete
+      @order.complete if !@order.completed?
       @sheet = @order.sheet
       track('Complete sheet purchase', order_id: @order.id, sheet_id: @sheet.id, sheet_title: @sheet.title)
-      render action: 'thank_you', notice: SUCCESS_ORDER_PURCHASE_MESSAGE
     else
       fail 'Invalid Tracking Id'
     end
@@ -89,7 +87,7 @@ class OrdersController < ApplicationController
       r.actionType = 'PAY'
       r.feesPayer = 'PRIMARYRECEIVER'
       r.cancelUrl = orders_cancel_url(sheet: sheet)
-      r.returnUrl = orders_success_url(tracking_id)
+      r.returnUrl = orders_status_url(tracking_id)
       r.currencyCode = 'USD'
 
       # Primary receiver (Sheet Owner)
@@ -129,6 +127,15 @@ class OrdersController < ApplicationController
       return if above_minimum
       flash[:error] = INVALID_PRICE_MESSAGE
       redirect_to @sheet
+    end
+
+    def authenticate_owner
+      return if @order.user == current_user
+      redirect_to discover_url
+    end
+
+    def set_order
+      @order = Order.find_by(tracking_id: params[:tracking_id])
     end
 
     def set_sheet
