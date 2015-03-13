@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
 
   before_action :set_sheet, only: [:checkout]
   before_action :set_order, only: [:status]
+  before_action :validate_order_exists, only: [:status]
   before_action :authenticate_user!, only: [:checkout, :status, :cancel]
   before_action :authenticate_owner, only: [:status]
   before_action :validate_flagged, only: [:checkout]
@@ -129,8 +130,15 @@ class OrdersController < ApplicationController
       redirect_to @sheet
     end
 
+    def validate_order_exists
+      return if @order.present?
+      flash[:error] = "That order does not exist."
+      redirect_to root_url
+    end
+
     def authenticate_owner
       return if @order.user == current_user
+      flash[:error] = "You are not the owner of that order."
       redirect_to root_url
     end
 

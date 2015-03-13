@@ -58,7 +58,7 @@ class SheetsController < ApplicationController
       @sheets = @sheets.tagged_with(params[:tags].split)
     end
 
-    # Does text search not work with chained scopes?
+    # text search does not work with chained scopes.
     if params[:q].present?
       @sheets = @sheets.search params[:q], page: params[:page], per_page: SEARCH_PAGE_SIZE
     else
