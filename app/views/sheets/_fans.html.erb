@@ -1,7 +1,5 @@
 <% if likes.each do |vote| %>
-
   <%= render 'devise/registrations/user_detailed', user: vote.voter %>
-
 <% end.empty? %>
   <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
   <h2 class="text-center">No fans yet!</h2>
