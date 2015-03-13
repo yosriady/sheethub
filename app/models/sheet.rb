@@ -22,8 +22,10 @@ class Sheet < ActiveRecord::Base
   searchkick word_start: [:name]
   validates :title, presence: true
 
+  scope :this_month, -> {is_public.where(created_at: 1.month.ago..Time.zone.now)}
+  scope :this_week, -> {is_public.where(created_at: 1.week.ago..Time.zone.now)}
+  scope :this_day, -> {is_public.where(created_at: 1.day.ago..Time.zone.now)}
   scope :best_sellers, -> { is_public.order(price_cents: :desc) }
-  scope :community_favorites, -> { is_public.order(cached_votes_up: :desc) }
 
   enum difficulty: %w( beginner intermediate advanced )
 
@@ -40,12 +42,6 @@ class Sheet < ActiveRecord::Base
   def self.cached_best_sellers
     Rails.cache.fetch('best_sellers', expires_in: 1.day) do
       Sheet.includes(:user).best_sellers
-    end
-  end
-
-  def self.cached_community_favorites
-    Rails.cache.fetch('community_favorites', expires_in: 1.day) do
-      Sheet.includes(:user).community_favorites
     end
   end
 

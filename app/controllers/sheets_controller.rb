@@ -35,7 +35,7 @@ class SheetsController < ApplicationController
     track('View homepage')
     @instruments = Sheet.values_for_instruments
     @sheets = Sheet.is_public.includes(:user).order('created_at DESC').page(params[:page])
-    @featured = Sheet.cached_community_favorites.limit(3)
+    @featured = Sheet.cached_most_liked .limit(3)
     @composers = Sheet.popular_composers
     @genres = Sheet.popular_genres
     @sources = Sheet.popular_sources
@@ -43,11 +43,26 @@ class SheetsController < ApplicationController
 
   # GET /search
   def search
-    track('View search results', query: params[:q])
+    track('View search results', query: params.to_s)
+    @sheets = Sheet.is_public
+
+    if params[:date].present? && params[:date].in?(["week", "month", "day"])
+      @sheets = @sheets.send("this_#{params[:date]}")
+    end
+
+    if params[:sort_by].present? && params[:sort_by].in?(["likes"])
+      @sheets = @sheets.most_liked
+    end
+
+    if params[:tags].present?
+      @sheets = @sheets.tagged_with(params[:tags].split)
+    end
+
+    # Does text search not work with chained scopes?
     if params[:q].present?
-      @sheets = Sheet.is_public.search params[:q], page: params[:page], per_page: SEARCH_PAGE_SIZE
+      @sheets = @sheets.search params[:q], page: params[:page], per_page: SEARCH_PAGE_SIZE
     else
-      @sheets = Sheet.is_public.page(params[:page])
+      @sheets = @sheets.page(params[:page])
     end
   end
 
@@ -58,7 +73,7 @@ class SheetsController < ApplicationController
 
   def community_favorites
     track('View community favorites')
-    @sheets = Sheet.cached_community_favorites.page(params[:page])
+    @sheets = Sheet.cached_most_liked.page(params[:page])
   end
 
   # GET /sheets/1
