@@ -3,8 +3,12 @@
     <div class="col-xs-12">
       <ol class="breadcrumb">
           <li><em class="fa fa-search %>"></em><a href="<%= discover_url %>">Discover</a></li>
-          <li><a href="<%= search_url(params[:q]) %>">"<%= params[:q] %>" results</a></li>
+          <li><a href="<%= search_url(params[:q]) %>"><%= params[:q].present? ? params[:q] : 'All' %></a></li>
       </ol>
+      <hr>
+
+      <!-- TODO: filtering widget -->
+
       <%= render 'sheets', sheets: @sheets %>
     </div>
     <div id="paginator" class="text-center">

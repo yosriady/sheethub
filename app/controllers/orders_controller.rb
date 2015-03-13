@@ -118,7 +118,7 @@ class OrdersController < ApplicationController
     def validate_flagged
       return unless @sheet.is_flagged
       flash[:error] = FLAGGED_MESSAGE
-      redirect_to discover_url
+      redirect_to root_url
     end
 
     def validate_min_amount
@@ -131,7 +131,7 @@ class OrdersController < ApplicationController
 
     def authenticate_owner
       return if @order.user == current_user
-      redirect_to discover_url
+      redirect_to root_url
     end
 
     def set_order
