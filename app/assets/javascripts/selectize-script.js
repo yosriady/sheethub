@@ -30,6 +30,42 @@ $(document).on("page:change", function() {
         maxItems: 5
     });
 
+
+    $('#sheet_search_date').selectize({
+        options: [{
+            "label":'All Time',
+            "value":'all-time'
+        }, {
+            "label":'This Month',
+            "value":'month'
+        }, {
+            "label":'This Week',
+            "value":'week'
+        }, {
+            "label":'Today',
+            "value":'day'
+        }],
+        valueField: 'value',
+        labelField: 'label'
+    });
+    $('#sheet_search_sort').selectize({
+        options: [{
+            "label":'Most Recent',
+            "value":'recent'
+        }, {
+            "label":'Most Likes',
+            "value":'Likes'
+        }],
+        valueField: 'value',
+        labelField: 'label'
+    });
+    $('#sheet_search_tags').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false
+    });
+
+
     $('#sheet_difficulty').selectize({});
 
     // User Form Fields

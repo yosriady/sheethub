@@ -11,7 +11,12 @@
 
             <%= f.input :email, autofocus: true, placeholder: "Your email" if current_user.nil? %>
             <%= f.input :message, autofocus: true, placeholder: "What's the issue you want to report?" %>
-            <%= f.submit 'Report', class:"btn btn-primary" %>
+
+            <div class="form-actions">
+                <%= f.submit 'Report', class:"btn btn-success btn-block btn-lg" %>
+            </div>
+
+            <%= link_to "Go back", @sheet %>
         <% end %>
     </div>
   </div>

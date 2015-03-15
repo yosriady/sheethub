@@ -10,7 +10,7 @@
         <%= render 'membership_billing_details', payment_details: @payment_details %>
 
         <% unless @user.pro? %>
-          <a href="<%= upgrade_url %>"><button type="button" class="btn btn-success"><em class="fa fa-star"></em> Upgrade</button></a>
+          <a href="<%= upgrade_url %>"><button type="button" class="btn btn-success btn-lg"><em class="fa fa-star"></em> Upgrade</button></a>
         <% end %>
 
         <%= render 'downgrade_panel', user:@user %>

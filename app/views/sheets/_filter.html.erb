@@ -1,0 +1,16 @@
+<%= simple_form_for :sheet_search, :url => '/sheets' do |f| %>
+  <div class="col-xs-3">
+    <%= f.input_field :tags, collection: Sheet.tags, prompt: "Filter by tags", multiple: true %>
+  </div>
+  <div class="col-xs-2">
+    <%= f.input_field :date, :as => :select, :collection => Sheet.filter_date_enum, prompt: "Date published" %>
+  </div>
+  <div class="col-xs-2">
+    <%= f.input_field :sort, :as => :select, :collection => Sheet.sort_enum, prompt: "Order by" %>
+  </div>
+  <div class="col-xs-2">
+    <%= f.button :submit, class: 'zeromargin btn btn-success btn-inline' %>
+  </div>
+<% end %>
+</div>
+<hr>

@@ -39,6 +39,14 @@ class Sheet < ActiveRecord::Base
     simple_format
   end
 
+  def self.filter_date_enum
+    ["all-time", "week", "month", "day"]
+  end
+
+  def self.sort_enum
+    ["recent", "likes"]
+  end
+
   def self.cached_best_sellers
     Rails.cache.fetch('best_sellers', expires_in: 1.day) do
       Sheet.includes(:user).best_sellers

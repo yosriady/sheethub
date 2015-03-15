@@ -13,6 +13,12 @@ module Taggable
   end
 
   class_methods do
+    def tags
+      Rails.cache.fetch("all_tags", expires_in: 1.day) do
+        Sheet.all_tags
+      end
+    end
+
     def popular_genres
       Rails.cache.fetch("popular_genres", expires_in: 1.day) do
         Sheet.tag_counts_on(:genres).order(taggings_count: :desc).limit(DEFAULT_NUM_POPULAR_TAGS)

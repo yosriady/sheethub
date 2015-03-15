@@ -7,8 +7,9 @@ description "SheetHub is the easiest publishing platform built for musicians"
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
-            <!-- TODO: filter widget -->
-            <%= render 'sheets/sheets', sheets: @sheets %>
+      <%= render 'sheets/filter' %>
+      <div class="row">
+        <%= render 'sheets/sheets', sheets: @sheets %>
     </div>
     </div>
 </div>
