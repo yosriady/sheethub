@@ -20,10 +20,13 @@ Rails.application.routes.draw do
     devise_scope :user do
       get '/discourse/sso', to: 'users/sessions#sso', as: :user_discourse_sso
 
-      get '/', to: 'sheets#index', constraints: { subdomain: '' }
+      # Root Subdomain handling
+      get '/', to: 'pages#homepage', constraints: { subdomain: '' }
+      get '/likes', to: 'pages#homepage', constraints: { subdomain: '' }
+      # end Root Subdomain handling
+
       get '/', to: 'users/registrations#profile', constraints: { subdomain: /.+/ }, as: :user_profile
       get '/users', to: 'users/registrations#all', constraints: { subdomain: '' }, as: :all_users
-      get '/likes', to: 'sheets#index', constraints: { subdomain: '' }
       get '/likes', to: 'users/registrations#likes', constraints: { subdomain: /.+/ }, as: :user_likes
       match 'users/finish_registration', to: 'users/registrations#finish_registration', via: [:get, :patch], as: :finish_registration
       get 'dashboard', to: 'users/registrations#dashboard', as: :user_dashboard
@@ -57,8 +60,7 @@ Rails.application.routes.draw do
     resources :assets, only: [:create, :destroy]
     get 'assets/:id/download', to: 'assets#download', as: 'download_asset'
 
-    root 'sheets#index'
-    get 'discover', to: 'sheets#index', as: 'discover'
+    root 'pages#homepage'
     get 'upload', to: 'sheets#new', as: 'sheet_upload'
     get 'search', to: 'sheets#search'
     get 'best-sellers', to: 'sheets#best_sellers'

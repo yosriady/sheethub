@@ -32,18 +32,7 @@ class SheetsController < ApplicationController
   # GET /sheets
   # GET /sheets.json
   def index
-    track('View homepage')
-    @instruments = Sheet.values_for_instruments
-    @sheets = Sheet.is_public.includes(:user).order('created_at DESC').page(params[:page])
-    @featured = Sheet.cached_most_liked .limit(3)
-    @composers = Sheet.popular_composers
-    @genres = Sheet.popular_genres
-    @sources = Sheet.popular_sources
-  end
-
-  # GET /search
-  def search
-    track('View search results', query: params.to_s)
+    track('View sheets', query: params.to_s)
     @sheets = Sheet.is_public
 
     if params[:date].present? && params[:date].in?(["week", "month", "day"])
@@ -58,7 +47,14 @@ class SheetsController < ApplicationController
       @sheets = @sheets.tagged_with(params[:tags].split)
     end
 
-    # text search does not work with chained scopes.
+    @sheets = @sheets.page(params[:page])
+  end
+
+  # GET /search
+  def search
+    track('View search results', query: params[:q])
+    @sheets = Sheet.is_public
+
     if params[:q].present?
       @sheets = @sheets.search params[:q], page: params[:page], per_page: SEARCH_PAGE_SIZE
     else

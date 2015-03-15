@@ -59,7 +59,7 @@ class NotesController < ApplicationController
     def authenticate_owner
       return if @note.user == current_user
       flash[:error] = ERROR_UPDATE_NOTE_MESSAGE
-      redirect_to discover_url
+      redirect_to root_url
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -8,6 +8,8 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-8 white-container">
+            <div class="bg-info"><em class="fa fa-info-circle"></em> Purchased on <%= @order.purchased_at.strftime("%A, %e %B %Y %l:%M %p") %> for <%= number_to_currency(@order.amount) %></div>
+            <hr>
             <div class="pull-left">
                 <strong>What happens next?</strong>
                 <p><%= link_to @sheet.title, sheet_url(@sheet) %> is now registered to your SheetHub account. An email confirmation of this transaction has also been sent to you. Visit the sheet page or your <strong>Library</strong> to download whenever you're ready. You can view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. Enjoy!</p>

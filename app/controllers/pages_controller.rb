@@ -1,4 +1,14 @@
 class PagesController < ApplicationController
+  def homepage
+    track('View homepage')
+    @instruments = Sheet.values_for_instruments
+    @sheets = Sheet.is_public.includes(:user).order('created_at DESC').page(params[:page])
+    @featured = Sheet.cached_most_liked .limit(3)
+    @composers = Sheet.popular_composers
+    @genres = Sheet.popular_genres
+    @sources = Sheet.popular_sources
+  end
+
   def features
     track('View features')
   end

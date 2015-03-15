@@ -19,7 +19,7 @@
           <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
           <% if @user == current_user %>
             <h2 class="text-center">You have no likes.</h2>
-            <a href="<%= discover_url %>" class="btn btn-success btn-sleek center-block"><em class="fa fa-eye"></em> Discover</a>
+            <a href="<%= sheets_url %>" class="btn btn-success btn-sleek center-block"><em class="fa fa-eye"></em> Discover</a>
           <% else %>
             <h2 class="text-center">This user has no likes.</h2>
           <% end %>
