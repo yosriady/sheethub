@@ -12,6 +12,7 @@ class Sheet < ActiveRecord::Base
   include PdfAttachable
   include AssetAttachable
   include Pricable
+  include Purchasable
 
   HIT_QUOTA_MESSAGE = 'You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub.'
 
@@ -53,50 +54,9 @@ class Sheet < ActiveRecord::Base
     end
   end
 
-  def purchased_by?(user)
-    return false unless user
-    user.purchased?(id)
-  end
-
   def uploaded_by?(usr)
     return false unless usr
     user.id == usr.id
-  end
-
-  def completed_orders
-    Order.where(sheet_id: id, status: Order.statuses[:completed])
-  end
-
-  def total_sales
-    completed_orders.inject(0) { |total, order| total + order.amount }
-  end
-
-  def total_earnings
-    completed_orders.inject(0) { |total, order| total + order.royalty }
-  end
-
-  def average_sales
-    completed_orders.average(:amount_cents).to_f / 100
-  end
-
-  def maximum_sale
-    completed_orders.maximum(:amount_cents).to_f / 100
-  end
-
-  def royalty
-    (user.royalty_percentage * price).round(2)
-  end
-
-  def royalty_cents
-    (user.royalty_percentage * price_cents).round(0)
-  end
-
-  def commission
-    ((1 - user.royalty_percentage) * price).round(2)
-  end
-
-  def commission_cents
-    ((1 - user.royalty_percentage) * price_cents).round(0)
   end
 
   protected
