@@ -4,8 +4,8 @@ class Order < ActiveRecord::Base
   ORDER_UNIQUENESS_VALIDATION_MESSAGE = 'Users cannot have multiple orders of the same Sheet.'
   WATERMARK_PATH = "#{Rails.root}/public/images/watermark.png"
 
-  belongs_to :user
-  belongs_to :sheet
+  belongs_to :user, counter_cache: true
+  belongs_to :sheet, counter_cache: true
   enum status: %w(processing completed failed)
   validates :sheet_id, uniqueness: { scope: :user_id,
                                    message: ORDER_UNIQUENESS_VALIDATION_MESSAGE }

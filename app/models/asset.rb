@@ -5,7 +5,7 @@ class Asset < ActiveRecord::Base
   ASSET_NUMBER_VALIDATION_MESSAGE = 'You can only have 5 additional files per sheet'
   INVALID_FILESIZE_MESSAGE = 'Files must be less than 20 Megabytes in size'
 
-  belongs_to :sheet
+  belongs_to :sheet, counter_cache: true
   validate :validate_number_of_assets
   acts_as_paranoid
   validates_presence_of :sheet

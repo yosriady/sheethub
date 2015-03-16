@@ -16,7 +16,7 @@ class Sheet < ActiveRecord::Base
 
   HIT_QUOTA_MESSAGE = 'You have hit the number of free sheets you can upload. Upgrade your membership to Plus or Pro to upload more free sheets on SheetHub.'
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   before_create :record_publisher_status
   before_save :validate_free_sheet_quota
 
