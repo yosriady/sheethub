@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   scope :is_active, -> { where(finished_registration?: true) }
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "No spaces and no special characters allowed!"}, if: :finished_registration?
-  validates_email_format_of :email, message: 'You have an invalid email address'
+  validates_email_format_of :email, if: proc { |u| u.email_changed? }, message: 'You have an invalid email address'
   has_many :sheets, dependent: :destroy
   has_many :notes, dependent: :destroy
   acts_as_voter
