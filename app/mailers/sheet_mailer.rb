@@ -18,13 +18,13 @@ class SheetMailer < ActionMailer::Base
     @sheet = sheet
     @publisher = sheet.user
     email_with_name = "#{@publisher.display_name} <#{@publisher.email}>"
-    mail(to: email_with_name, subject: 'You have a new fan!')
+    mail(to: email_with_name, subject: 'You Have a New Fan!')
   end
 
   def sheet_flagged_email(flag)
     @flag = flag
     @sheet = flag.sheet
-    mail(to: 'yosriady@gmail.com', subject: 'A Sheet has been flagged')
+    mail(to: 'yosriady@gmail.com', subject: 'A Sheet is Flagged')
   end
 
   def sheet_deleted_email(sheet)
