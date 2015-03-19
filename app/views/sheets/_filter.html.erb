@@ -1,16 +1,18 @@
-<%= simple_form_for :sheet_search, :url => '/sheets' do |f| %>
+<%= simple_form_for :sheet_search, url: sheets_url, method: :get do |f| %>
+  <div class="col-xs-3 zeropaddingleft">
+    <%= f.input_field :tags, collection: Sheet.tags.map(&:name), prompt: "Filter by tags", multiple: true %>
+  </div>
   <div class="col-xs-3">
-    <%= f.input_field :tags, collection: Sheet.tags, prompt: "Filter by tags", multiple: true %>
+    <%= f.input_field :instruments, collection: Sheet.values_for_instruments, prompt: "Filter by instruments", multiple: true %>
   </div>
   <div class="col-xs-2">
-    <%= f.input_field :date, :as => :select, :collection => Sheet.filter_date_enum, prompt: "Date published" %>
+    <%= f.input_field :date, :as => :select, :collection => Sheet.filter_date_enum, prompt: "Date published", include_blank: false %>
   </div>
   <div class="col-xs-2">
-    <%= f.input_field :sort, :as => :select, :collection => Sheet.sort_enum, prompt: "Order by" %>
+    <%= f.input_field :sort, :as => :select, :collection => Sheet.sort_enum, prompt: "Order by", include_blank: false %>
   </div>
   <div class="col-xs-2">
-    <%= f.button :submit, class: 'zeromargin btn btn-success btn-inline' %>
+  <a id="btn-sheet-filter" href="javascript:void(0)"><button type="button" class="btn btn-success btn-inline btn-block"><em class="fa fa-search"></em> Search</button></a>
   </div>
 <% end %>
 </div>
-<hr>

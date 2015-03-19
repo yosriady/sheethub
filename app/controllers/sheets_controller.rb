@@ -32,22 +32,8 @@ class SheetsController < ApplicationController
   # GET /sheets
   # GET /sheets.json
   def index
-    track('View sheets', query: params.to_s)
-    @sheets = Sheet.is_public
-
-    if params[:date].present? && params[:date].in?(Sheet.filter_date_enum)
-      @sheets = @sheets.send("this_#{params[:date]}") if params[:date] != "all-time"
-    end
-
-    if params[:sort_by].present? && params[:sort_by].in?(Sheet.sort_enum)
-      @sheets = @sheets.most_liked if params[:sort_by] == "likes"
-    end
-
-    if params[:tags].present?
-      @sheets = @sheets.tagged_with(params[:tags].split)
-    end
-
-    @sheets = @sheets.page(params[:page])
+    track('Discover sheets', query: params.to_s)
+    @sheets = Sheet.filter(params)
   end
 
   # GET /search
