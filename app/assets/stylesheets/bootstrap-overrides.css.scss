@@ -217,3 +217,16 @@ h2 .fa-eye-slash {
         background: #1D68BB;
     }
 }
+
+.inline-block {
+    display:inline-block;
+}
+
+.panel-primary {
+    border-color: #2583EB;
+
+    .panel-heading {
+        background-color: #2583EB;
+        border-color: #2583EB;
+    }
+}
