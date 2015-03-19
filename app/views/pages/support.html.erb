@@ -30,6 +30,7 @@ keywords %w(support faq help frequently/ asked/ questions)
   <hr>
   <h4><em class="fa fa-shopping-cart"></em> Purchases</h4>
     <%= render "faq_item", id:"my-purchases", question: "Where can I find my purchases?", answer: "You can view all your purchases via the #{ link_to 'My Library',user_library_url } page. "%>
+    <%= render "faq_item", id:"out-of-stock", question: "What does out of stock mean?", answer: "Licenses for arranged sheet music are often purchased in limited sets. For one song, the arranger is only allowed to sell X number of copies; then she has to re-purchase additional licenses to continue selling."%>
   <hr>
 
   <h4><em class="fa fa-line-chart"></em> Payments, Sales, and Earnings</h4>
