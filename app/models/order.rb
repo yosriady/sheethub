@@ -26,7 +26,10 @@ class Order < ActiveRecord::Base
            billing_country: user.billing_country,
            billing_zipcode: user.billing_zipcode,
            ip: user.current_sign_in_ip)
-    sheet.increment!(:total_sold)
+    sheet.increment(:total_sold)
+    sheet.decrement(:limit_purchase_quantity)
+    sheet.save!
+    SheetMailer.sheet_out_of_stock_email(sheet).deliver if sheet.out_of_stock?
     OrderMailer.purchase_receipt_email(self).deliver
     OrderMailer.sheet_purchased_email(self).deliver
     Analytics.track_charge(self)

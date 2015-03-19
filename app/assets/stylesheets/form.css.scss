@@ -63,3 +63,23 @@ form.sleek-form {
         text-transform: uppercase;
     }
 }
+
+div.checkbox.limit-purchases {
+    padding-bottom: 0px;
+
+    label {
+        width: 100%;
+
+        label {
+            width: 70%;
+            float: left;
+        }
+
+        input.numeric {
+            width: 20%;
+            margin-top: 2px;
+            margin-bottom: -2px;
+            margin-right: 2px;
+        }
+    }
+}

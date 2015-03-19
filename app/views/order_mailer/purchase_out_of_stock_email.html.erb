@@ -1,0 +1,7 @@
+<h1 class="error">Sheet Out of Stock</h1>
+<p>Hi <%= @publisher.display_name %>, </p>
+<p>Someone tried to buy your sheet, <%= link_to @sheet.title, sheet_url(@sheet) %> but was unable to continue because <strong>it's out of stock!</strong>
+</p>
+<p>Acquire more licenses from the publisher and update your purchase limits to continue selling <%= @sheet.title %>! Visit your works dashboard once you've acquired more licenses.
+</p>
+<a href="<%= user_dashboard_url %>" class="btn">Go to My Works</a>

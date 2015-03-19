@@ -65,6 +65,13 @@
      <a href="<%= support_url %>#help-pay-what-you-want" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
   </div>
 
+  <div class="checkbox limit-purchases">
+    <label>
+     <%= f.input_field :limit_purchases, inline_label: 'Limit number of purchases', class: 'inline-block' %>
+     <%= f.input_field :limit_purchase_quantity, class:'pull-right inline-block', min:'0' %>
+   </label>
+  </div>
+
   <%= f.button :submit, f.object.new_record? ? 'Add Your Work' : 'Update', class: "btn btn-success btn-lg btn-block"%>
 <% end %>
 

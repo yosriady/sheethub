@@ -6,6 +6,13 @@ class SheetMailer < ActionMailer::Base
   DEFAULT_FROM_EMAIL = 'SheetHub <notifications@sheethub.co>'
   default from: DEFAULT_FROM_EMAIL
 
+  def sheet_out_of_stock_email(sheet)
+    @sheet = sheet
+    @publisher = sheet.user
+    email_with_name = "#{@publisher.display_name} <#{@publisher.email}>"
+    mail(to: email_with_name, subject: 'Sheet Out of Stock')
+  end
+
   def sheet_liked_email(sheet, user)
     @user = user
     @sheet = sheet

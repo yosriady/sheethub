@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_owner, only: [:status]
   before_action :validate_flagged, only: [:checkout]
   before_action :validate_min_amount, only: [:checkout]
+  before_action :validate_purchase_limits, only: [:checkout]
 
   def checkout
     track('Checking out sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
@@ -55,6 +56,8 @@ class OrdersController < ApplicationController
 
   def status
     if @order
+      # TODO: don't just anyhow complete if it's not completed, complete only if IPN returns true
+      # use Order.get_adaptive_payment_details to check status
       @order.complete if !@order.completed?
       @sheet = @order.sheet
       track('Complete sheet purchase', order_id: @order.id, sheet_id: @sheet.id, sheet_title: @sheet.title)
@@ -120,6 +123,13 @@ class OrdersController < ApplicationController
       return unless @sheet.is_flagged
       flash[:error] = FLAGGED_MESSAGE
       redirect_to root_url
+    end
+
+    def validate_purchase_limits
+      return if @sheet.in_stock?
+      flash[:error] = "#{@sheet.title} is currently out of stock"
+      OrderMailer.purchase_out_of_stock_email(@sheet).deliver
+      redirect_to @sheet
     end
 
     def validate_min_amount

@@ -73,6 +73,14 @@ class Sheet < ActiveRecord::Base
     user.id == usr.id
   end
 
+  def out_of_stock?
+    !in_stock?
+  end
+
+  def in_stock?
+    free? || !limit_purchases || (limit_purchases && !limit_purchase_quantity.zero?)
+  end
+
   protected
 
   def validate_free_sheet_quota

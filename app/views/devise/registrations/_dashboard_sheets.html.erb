@@ -5,6 +5,7 @@
         <th>Title</th>
         <th>Visibility</th>
         <th>Purchases</th>
+        <th>Purchases Left</th>
         <th>Total Revenue</th>
         <th>Total Earnings</th>
         <th>Average Amount</th>
@@ -14,7 +15,35 @@
     </thead>
     <tbody>
       <% sheets.each do |sheet| %>
-        <%= render 'sheets/sheet_dashboard', sheet: sheet %>
+        <tr>
+          <td>
+            <a href="<%= sheet_url(sheet) %>"><%= sheet.title %></a>
+          </td>
+          <td>
+            <%= sheet.visibility_string %>
+          </td>
+          <td>
+            <%= sheet.completed_orders.size %>
+          </td>
+          <td>
+            <%= sheet.in_stock? ? 'No limits' : sheet.limit_purchase_quantity %>
+          </td>
+          <td>
+            <%= number_to_currency(sheet.total_sales) %>
+          </td>
+          <td>
+            <%= number_to_currency(sheet.total_earnings) %>
+          </td>
+          <td>
+            <%= number_to_currency(sheet.average_sales) %>
+          </td>
+          <td>
+            <%= number_to_currency(sheet.maximum_sale) %>
+          </td>
+          <td>
+            <p><a href="<%= edit_sheet_url(sheet) %>"> Edit </a></p>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>

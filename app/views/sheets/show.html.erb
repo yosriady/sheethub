@@ -21,13 +21,16 @@ keywords @sheet.cached_joined_tags
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4 zeropadding">
-            <% if @sheet.privately_visible? %>
-                <p class="bg-info text-center"><em class="fa fa-eye-slash"></em> This sheet is <strong>Private</strong>.</p>
-            <% end %>
             <%= render 'buy_now', sheet:@sheet %>
+            <% if @sheet.privately_visible? %>
+                <p class="bg-info text-center"><em class="fa fa-eye-slash"></em> <%= @sheet.title %> is <strong>Private</strong></p>
+            <% end %>
+            <% if @sheet.out_of_stock? && current_user == @sheet.user %>
+                <p class="bg-warning text-center"><em class="fa fa-warning"></em> <%= @sheet.title %> is <strong>Out Of Stock</strong></p>
+            <% end %>
             <%= render 'sheet_info', sheet:@sheet %>
             <%= render 'sheet_like', sheet: @sheet, likes:@likes %>
-            <div class="panel panel-default">
+            <div class="panel panel-info">
               <div class="panel-heading"><em class="fa fa-download"></em> Download Files</div>
               <div class="panel-body" style="padding: 10px;">
                 <%= render 'sheet_files', sheet: @sheet %>

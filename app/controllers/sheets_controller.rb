@@ -316,6 +316,7 @@ class SheetsController < ApplicationController
                           :composer_list, :genre_list, :source_list,
                           :pages, :difficulty, :pdf,
                           :assets_attributes, :visibility, :price, :license,
-                          :enable_pdf_stamping, :pay_what_you_want)
+                          :enable_pdf_stamping, :pay_what_you_want,
+                          :limit_purchases, :limit_purchase_quantity)
   end
 end

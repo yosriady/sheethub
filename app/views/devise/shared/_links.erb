@@ -1,7 +1,7 @@
 <hr>
 
 <%- if controller_name != 'registrations' %>
-    <%= link_to "No account? Sign up for free!.", new_registration_url(resource_name) %><br />
+    <%= link_to "No account yet? Sign up for free!", new_registration_url(resource_name) %><br />
 <% end %>
 
 <%- if controller_name != 'sessions' %>
@@ -9,7 +9,7 @@
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Resend confirmation instructions?", new_confirmation_url(resource_name) %><br />
+  <%= link_to "Resend confirmation instructions", new_confirmation_url(resource_name) %><br />
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>

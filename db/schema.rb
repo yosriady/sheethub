@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318163400) do
+ActiveRecord::Schema.define(version: 20150319110853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,7 +135,10 @@ ActiveRecord::Schema.define(version: 20150318163400) do
     t.string   "cached_genres",                       default: [],                 array: true
     t.string   "cached_composers",                    default: [],                 array: true
     t.string   "cached_sources",                      default: [],                 array: true
-    t.integer  "assets_count",                        default: 0
+    t.integer  "assets_count",                        default: 0,     null: false
+    t.boolean  "limit_purchases",                     default: false, null: false
+    t.integer  "limit_purchase_quantity",             default: 0,     null: false
+    t.integer  "orders_count",                        default: 0,     null: false
   end
 
   add_index "sheets", ["cached_votes_down"], name: "index_sheets_on_cached_votes_down", using: :btree
@@ -230,8 +233,8 @@ ActiveRecord::Schema.define(version: 20150318163400) do
     t.string   "googleplus_username"
     t.string   "soundcloud_username"
     t.string   "youtube_username"
-    t.integer  "orders_count",                       default: 0
-    t.integer  "sheets_count",                       default: 0
+    t.integer  "orders_count",                       default: 0,     null: false
+    t.integer  "sheets_count",                       default: 0,     null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

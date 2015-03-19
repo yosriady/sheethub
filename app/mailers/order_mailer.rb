@@ -12,6 +12,13 @@ class OrderMailer < ActionMailer::Base
     mail(to: email_with_name, subject: 'Purchase Failure Notification')
   end
 
+  def purchase_out_of_stock_email(sheet)
+    @sheet = sheet
+    @publisher = @sheet.user
+    email_with_name = "#{@publisher.display_name} <#{@publisher.email}>"
+    mail(to: email_with_name, subject: 'Purchase Failure Notification')
+  end
+
   # For Buyer
   def purchase_receipt_email(order)
     @sheet = order.sheet
