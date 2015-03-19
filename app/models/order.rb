@@ -121,16 +121,20 @@ class Order < ActiveRecord::Base
     author.royalty_percentage * amount_cents
   end
 
-  def self.get_adaptive_payment_details(payKey)
+  def self.get_payment_details(order)
     api = PayPal::SDK::AdaptivePayments::API.new
     payment_details_request = api.build_payment_details
-    payment_details_request.payKey = payKey
+    payment_details_request.payKey = order.payer_id
     payment_details_response = api.payment_details(payment_details_request)
     if payment_details_response.success?
       return payment_details_response
     else
       fail "Payment Details for payKey #{payKey} Not Found"
     end
+  end
+
+  def payment_completed?
+    Order.get_payment_details(self).paymentInfoList.paymentInfo[0].transactionStatus == 'COMPLETED'
   end
 
   def s3_key

@@ -56,9 +56,7 @@ class OrdersController < ApplicationController
 
   def status
     if @order
-      # TODO: don't just anyhow complete if it's not completed, complete only if IPN returns true
-      # use Order.get_adaptive_payment_details to check status
-      @order.complete if !@order.completed?
+      @order.complete if (!@order.completed? && @order.payment_completed?)
       @sheet = @order.sheet
       track('Complete sheet purchase', order_id: @order.id, sheet_id: @sheet.id, sheet_title: @sheet.title)
     else
