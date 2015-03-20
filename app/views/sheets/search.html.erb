@@ -6,9 +6,6 @@
           <li><a href="<%= search_url(params[:q]) %>"><%= params[:q].present? ? params[:q] : 'All' %></a></li>
       </ol>
       <hr>
-
-      <!-- TODO: filtering widget -->
-
       <%= render 'sheets', sheets: @sheets %>
     </div>
     <div id="paginator" class="text-center">

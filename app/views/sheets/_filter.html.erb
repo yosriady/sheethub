@@ -1,5 +1,7 @@
+<div class="well" style="padding: 15px; padding-bottom: 10px;">
+<div class="row">
 <%= simple_form_for :sheet_search, url: sheets_url, method: :get do |f| %>
-  <div class="col-xs-3 zeropaddingleft">
+  <div class="col-xs-3">
     <%= f.input_field :tags, collection: Sheet.tags.map(&:name), prompt: "Filter by tags", multiple: true %>
   </div>
   <div class="col-xs-3">
@@ -15,4 +17,6 @@
   <a id="btn-sheet-filter" href="javascript:void(0)"><button type="button" class="btn btn-success btn-inline btn-block"><em class="fa fa-search"></em> Search</button></a>
   </div>
 <% end %>
+</div>
+</div>
 </div>
