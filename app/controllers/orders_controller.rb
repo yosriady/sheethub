@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     end
 
     author = @sheet.user
-    payment_request = build_adaptive_payment_request(@sheet, amount)
+    payment_request = build_payment_request(@sheet, amount)
     payment_response = get_adaptive_payment_response(payment_request)
     if payment_response.success?
       redirect_url = build_redirect_url(payment_response.payKey)
@@ -64,9 +64,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def thank_you
-  end
-
   def cancel
     track('Cancel sheet purchase')
     redirect_to sheet_url(params[:sheet]), notice: CANCEL_ORDER_PURCHASE_MESSAGE
@@ -80,7 +77,7 @@ class OrdersController < ApplicationController
       end
     end
 
-    def build_adaptive_payment_request(sheet, amount)
+    def build_payment_request(sheet, amount)
       author = sheet.user
       tracking_id = generate_token
       api = PayPal::SDK::AdaptivePayments::API.new
@@ -98,10 +95,30 @@ class OrdersController < ApplicationController
       r.receiverList.receiver[0].primary = true
 
       # Secondary Receiver (Marketplace)
-      r.receiverList.receiver[1].amount = Order.calculate_commission(author, amount)
+      r.receiverList.receiver[1].amount = Order.calculate_commission(author,
+                                                                     amount)
       r.receiverList.receiver[1].email = Rails.application.secrets.paypal_email
       r.receiverList.receiver[1].primary = false
       r
+    end
+
+    # {'email': 0.5 } #email - proportion of amount
+    def add_additional_receivers(payment_request, receivers)
+      fail 'Amount of split funds above 100%' if (t.values.sum > 1.0)
+
+      index = 2
+      receivers.each do |email, proportion|
+        payment_request.receiverList.receiver[index].amount = proportion * amount
+        payment_request.receiverList.receiver[index].email = email
+        payment_request.receiverList.receiver[index].primary = false
+        index += 1
+      end
+      payment_request
+    end
+
+    def build_split_payment_request(sheet, amount, receivers = {})
+      r = build_payment_request(sheet, amount)
+      add_additional_receivers(r, receivers)
     end
 
     def get_adaptive_payment_response(payment_request)
