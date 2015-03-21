@@ -1,4 +1,4 @@
-ruby '2.1.2'
+ruby '2.2.0'
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0.rc3'
@@ -91,7 +91,7 @@ gem 'autoprefixer-rails'
 gem 'gon'
 
 # File upload
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 gem 's3_direct_upload'
 gem 'mini_magick', '4.0.0.rc'

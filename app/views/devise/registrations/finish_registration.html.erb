@@ -13,8 +13,10 @@
       <%= f.input_field :paypal_email, label: 'Paypal Email', placeholder:'Required for authors to accept payments' %>
       </div>
 
+      <%= f.label :paypal_email, label: 'Your Country of Residence' %>
       <%= f.input_field :billing_country, label: 'Country', placeholder: 'Your Country' %>
 
+      <hr>
       <%= f.button :submit, "Continue", class:"btn btn-success btn-block btn-lg" %>
     <% end %>
     </div>
