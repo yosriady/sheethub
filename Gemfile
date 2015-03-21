@@ -18,9 +18,6 @@ gem 'dalli'
 # Contact Form
 gem 'mail_form'
 
-# HTML Emails
-gem 'roadie-rails'
-
 # Analytics
 gem 'mixpanel-ruby'
 

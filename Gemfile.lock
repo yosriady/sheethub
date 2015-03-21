@@ -111,8 +111,6 @@ GEM
     countries (0.11.2)
       currencies (~> 0.4.2)
       i18n_data (~> 0.6.0)
-    css_parser (1.3.6)
-      addressable
     currencies (0.4.2)
     dalli (2.7.4)
     debug_inspector (0.0.2)
@@ -312,12 +310,6 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rinku (1.5.1)
-    roadie (3.0.4)
-      css_parser (~> 1.3.4)
-      nokogiri (~> 1.6.0)
-    roadie-rails (1.0.5)
-      railties (>= 3.0, < 4.3)
-      roadie (~> 3.0)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -462,7 +454,6 @@ DEPENDENCIES
   rails-erd
   rails_12factor
   rails_best_practices
-  roadie-rails
   rspec
   rspec-rails
   s3_direct_upload

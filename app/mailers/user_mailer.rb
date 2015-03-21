@@ -1,6 +1,5 @@
 # Mailer class for emails related to user accounts and registration
 class UserMailer < ApplicationMailer
-  include Roadie::Rails::Automatic
   layout 'mailer'
 
   DEFAULT_FROM_EMAIL = 'SheetHub <notifications@sheethub.co>'
