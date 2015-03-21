@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   ONLY_PRO_MESSAGE = 'That feature is only available to Pro Users. Upgrade to Pro today!'
   PUBLISHER_ONLY_FEATURE_MESSAGE = 'This feature is only available when you have a published sheet.'
 
-  before_action :validate_user_signed_in, except: [:new, :create, :profile, :likes]
+  before_action :validate_user_signed_in, except: [:new, :create, :profile, :all, :likes]
   before_action :disable_for_omniauth, only: [:edit_password]
   before_action :set_profile_user, only: [:profile, :likes]
   before_action :validate_registration_finished
