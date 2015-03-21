@@ -7,7 +7,8 @@
     <h1 class="text-center">Sign Up For SheetHub</h1>
     <h4 class="text-center fade-text">It takes less than a minute.</h4>
 
-    <div class="col-lg-4 col-lg-offset-4 white-container">
+    <div class="col-lg-4 col-lg-offset-4">
+        <div class="white-container">
         <%= render "devise/shared/omniauth_links" %>
         <%= render "layouts/line_divider" %>
 
@@ -15,9 +16,18 @@
         <%= f.error_notification %>
 
         <div class="form-inputs">
-            <%= f.input :email, required: true, autofocus: true %>
-            <%= f.input :password, required: true %>
-            <%= f.input :password_confirmation, required: true %>
+            <div class="input-group">
+              <span class="input-group-addon"><em class="fa fa-envelope-o"></em></span>
+                <%= f.input_field :email, required: true, placeholder:'Email', autofocus: true %>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon"><em class="fa fa-lock"></em></span>
+                <%= f.input_field :password, placeholder:'Password', required: true %>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon"><em class="fa fa-lock"></em></span>
+                <%= f.input_field :password_confirmation, placeholder:'Password confirmation', required: true %>
+            </div>
         </div>
 
         <div class="form-actions">
@@ -26,7 +36,7 @@
         <p class="fade-text">By signing up, you agree to SheetHub's <%= link_to "Terms of Service", terms_url %>
           and <%=link_to "Privacy Policy", privacy_url %>.</p>
         <% end %>
-
+        </div>
         <%= render "devise/shared/links" %>
     </div>
   </div>
