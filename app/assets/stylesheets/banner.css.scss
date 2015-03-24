@@ -53,7 +53,7 @@
 .animated-banner {
     height: 300px;
     background: url(image_path('bg.svg'));
-    border-bottom: 1px rgba(0,0,0,0.1) solid;
+    border-bottom: 1px rgba(0,0,0,0.05) solid;
     -webkit-animation: bgscroll 30s infinite linear;
     -moz-animation: bgscroll 30s infinite linear;
     -ms-animation: bgscroll 30s infinite linear;
@@ -83,7 +83,7 @@
 
 .animated-banner.footer-banner {
     height: 225px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #ECEDEF;
 
     h1 {
         padding-top: 85px;
