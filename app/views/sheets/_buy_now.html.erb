@@ -5,9 +5,9 @@
         <% elsif current_user && sheet.owned_by?(current_user) %>
             <span class="sheet-buy-now-text text-center"><p><em class="fa fa-smile-o"></em> IN LIBRARY</p></span>
         <% elsif user_signed_in? %>
-            <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Get It Now for <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %></button></a>
+            <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Download Now for <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %></button></a>
         <% else %>
-            <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Get It Now for <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %></button></a>
+            <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Download Now for <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %></button></a>
         <% end %>
     </div>
 </div>
@@ -16,7 +16,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="flagModal">Get &lsquo;<%= sheet.title %>&rsquo;</h4>
+        <h4 class="modal-title" id="flagModal">Download &lsquo;<%= sheet.title %>&rsquo;</h4>
       </div>
       <div class="modal-body">
         <p class="bg-info">
