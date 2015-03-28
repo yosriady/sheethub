@@ -1,5 +1,5 @@
 <% if likes.present? %>
-<li class="list-group-item">
+<li class="list-group-item well">
       <% likes.each do |like| %>
         <%= render 'devise/registrations/user', user: like.voter %>
       <% end %>

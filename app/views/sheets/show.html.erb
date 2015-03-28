@@ -29,7 +29,6 @@ keywords @sheet.cached_joined_tags
                 <p class="bg-warning text-center"><em class="fa fa-warning"></em> <%= @sheet.title %> is <strong>Out Of Stock</strong></p>
             <% end %>
             <%= render 'sheet_info', sheet:@sheet %>
-            <%= render 'sheet_like', sheet: @sheet, likes:@likes %>
             <div class="panel panel-info">
               <div class="panel-heading"><em class="fa fa-download"></em> Download</div>
               <div class="panel-body" style="padding: 10px;">
@@ -37,6 +36,7 @@ keywords @sheet.cached_joined_tags
             </div>
             </div>
             <%= render 'sheet_share', sheet: @sheet %>
+            <%= render 'sheet_like', sheet: @sheet, likes:@likes %>
             <%= render 'sign_up_blurb' %>
 
             <div class="panel panel-default">

@@ -6,7 +6,40 @@ keywords %w(features benefits)
 
 <div class="animated-banner">
     <h1 class="sheets-heading">Sheet Music, Scores, Tablature, Chords</h1>
-    <h2 class="sheets-subheading"><strong><%= link_to "Share your music", sheet_upload_url %></strong> with a growing community of musicians. Easy and free. <%= link_to "Learn More", features_url %>.</h2>
+    <h2 class="sheets-subheading">SheetHub is a self-publishing platform and community for musicians.</h2>
+</div>
+
+<div class="container">
+    <p class="bg-info"><em class="fa fa-bullhorn"></em> SheetHub empowers musicians, composers, and arrangers with the ability to easily find, publish, and share sheet music, tablature, and score online.</p>
+    <div class="row">
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+                What does SheetHub give me?
+            </h4>
+          </div>
+            <div class="panel-body">
+              <p>With SheetHub, you can easily create a page where you can share and sell your works. You'll get an online profile and subdomain which lets you showcase all the works you've published on SheetHub. </p><p>Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle complex payments and distribution. SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on your creative pursuits! No setup fees, no monthly fees, no hosting fees to worry about!</p>
+            </div>
+          </div>
+        </div>
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+                Awesome! Is SheetHub free?
+            </h4>
+          </div>
+            <div class="panel-body">
+              <p>You are free to <%= link_to 'Sign Up', new_user_registration_url %> and upload <strong>unlimited free and commercial works</strong> without ever having to pay anything.</p><p> We only make money when you do. When someone buys your work you receive 85% of the total amount. The remaining 15% goes to SheetHub to pay for hosting fees, server fees, and to develop new platform features voted on by the SheetHub community. You are paid directly to your PayPal account the moment a user completes a purchase. SheetHub does not hold any of your earnings.
+                </p>
+            </div>
+          </div>
+        </div>
+    </div>
+    <p class="text-center"><em class="fa fa-arrow-down"></em> Read on for more on what you can do on SheetHub!</p>
+    </div>
 </div>
 
 <div class="white-container">
@@ -190,11 +223,6 @@ keywords %w(features benefits)
         </div>
     </div>
     </div>
-
-    <% if !user_signed_in? %>
-        <a href="<%= new_user_registration_url %>" class="btn btn-lg btn-success center-block"> Sign Up</a>
-    <% end %>
-
     <hr>
 
     <div class="row">
@@ -257,7 +285,7 @@ keywords %w(features benefits)
                     <em class="fa fa-heart-o"></em>
                 </div>
                 <div class="col-xs-11">
-                    <h3>Recommendations <span class="badge pro">NEW</span></h3>
+                    <h3>Recommendations</h3>
                     <p>Easily discover new and interesting music through recommended tags and pieces.</p>
                 </div>
             </div>
@@ -281,11 +309,11 @@ keywords %w(features benefits)
             </div>
             <div class="feature">
                 <div class="col-xs-1">
-                    <em class="fa fa-bookmark-o"></em>
+                    <em class="fa fa-star-o"></em>
                 </div>
                 <div class="col-xs-11">
-                    <h3>Favorites <span class="badge pro">NEW</span></h3>
-                    <p>Bookmark your favorite works for later perusal and purchase.</p>
+                    <h3>Likes </h3>
+                    <p>Bookmark your all-time favorite works for later perusal and purchase.</p>
                 </div>
             </div>
             <div class="feature">
@@ -300,15 +328,12 @@ keywords %w(features benefits)
         </div>
     </div>
     </div>
-    <% if !user_signed_in? %>
-        <a href="<%= new_user_registration_url %>" class="btn btn-lg btn-success center-block"> Sign Up</a>
-    <% end %>
 </div>
 </div>
 
 <% if !user_signed_in? %>
 <div class="animated-banner footer-banner">
-    <h1>Join a growing community of musicians. <a href="<%= new_user_registration_url %>" class="btn btn-inline btn-success btn-banner btn-lg center-block"><em class="fa fa-user"></em> Sign Up For Free</a></h1>
+    <h1><a href="<%= new_user_registration_url %>" class="btn btn-inline btn-success btn-banner btn-lg center-block"><em class="fa fa-user"></em> Sign Up For Free</a> <a href="<%= support_url %>" class="btn btn-inline btn-default btn-banner btn-lg center-block"> Learn More</a></h1>
 </div>
 <% end %>
 
