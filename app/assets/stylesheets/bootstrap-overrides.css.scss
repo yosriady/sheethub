@@ -231,8 +231,6 @@ h2 .fa-eye-slash {
     }
 }
 
-form {
-    .input-group {
-        padding: 5px 0px;
-    }
+.input-group .input-group-addon {
+  min-width: 40px;
 }
