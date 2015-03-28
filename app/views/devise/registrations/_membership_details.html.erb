@@ -17,7 +17,7 @@
   <tbody>
     <tr>
       <td>
-        Commercial Sheet Uploads
+        Sheet Uploads
       </td>
       <td><strong>Unlimited</strong></td>
     </tr>
@@ -26,12 +26,6 @@
         Percentage earnings
       </td>
       <td><strong><%= "#{number_to_percentage(user.royalty_percentage * 100, precision: 0)}" %></strong></td>
-    </tr>
-    <tr>
-      <td>
-        Free Sheet Uploads
-      </td>
-      <td><strong><%= user.remaining_sheet_quota%> of <%= user.sheet_quota %> remaining</strong></td>
     </tr>
   </tbody>
 </table>

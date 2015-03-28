@@ -18,7 +18,6 @@ class Sheet < ActiveRecord::Base
 
   belongs_to :user, counter_cache: true
   before_create :record_publisher_status
-  before_save :validate_free_sheet_quota
 
   searchkick word_start: [:name]
   validates :title, presence: true
@@ -82,11 +81,6 @@ class Sheet < ActiveRecord::Base
   end
 
   protected
-
-  def validate_free_sheet_quota
-    invalid_quota = self.free? && user.hit_sheet_quota?
-    errors.add(:sheet_quota, HIT_QUOTA_MESSAGE) if invalid_quota
-  end
 
   def record_publisher_status
     user.update_attribute(:has_published, true) unless user.has_published

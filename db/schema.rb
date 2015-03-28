@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319110853) do
+ActiveRecord::Schema.define(version: 20150328075913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -215,7 +215,6 @@ ActiveRecord::Schema.define(version: 20150319110853) do
     t.integer  "membership_type",                    default: 0,     null: false
     t.string   "paypal_email",           limit: 255
     t.boolean  "has_published",                      default: false
-    t.integer  "sheet_quota",                        default: 0,     null: false
     t.integer  "failed_attempts",                    default: 0
     t.string   "unlock_token",           limit: 255
     t.datetime "locked_at"

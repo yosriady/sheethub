@@ -50,16 +50,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def downgrade
-    track('Attempted downgrade')
-    if current_user.hit_sheet_quota_for_basic?
-      flash[:error] = "You need to delete some of your free sheets before you can downgrade. You have #{current_user.free_sheets.size} of an allowed #{User::BASIC_FREE_SHEET_QUOTA} free sheets."
-      redirect_to user_membership_settings_url
-    else
-      membership = subscriptions_params[:membership]
-      current_user.subscription.destroy
-      current_user.update_membership_to(membership)
-      redirect_to user_membership_settings_url, notice: DOWNGRADE_TO_BASIC_SUBSCRIPTION_MESSAGE
-    end
+    track('Downgrade')
+    membership = subscriptions_params[:membership]
+    current_user.subscription.destroy
+    current_user.update_membership_to(membership)
+    redirect_to user_membership_settings_url, notice: DOWNGRADE_TO_BASIC_SUBSCRIPTION_MESSAGE
   end
 
   def thank_you

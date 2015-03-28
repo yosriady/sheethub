@@ -32,15 +32,6 @@
     </div>
 
     <div class="col-xs-3">
-        <div class="panel panel-warning">
-        <div class="panel-body bg-warning">
-            <p>You have <strong>unlimited</strong> uploads for commercial sheets. You can upload <strong><%= current_user.remaining_sheet_quota %></strong> more free sheets on SheetHub. </p>
-            <% unless current_user.pro? %>
-                <p><%= link_to "Upgrade", upgrade_url %> to enjoy unlimited free sheet uploads and extra features!</p>
-            <% end %>
-        </div>
-        </div>
-
         <div class="panel panel-info">
             <div class="panel-body bg-info">
                 <strong><em class="fa fa-pencil"></em> Don't know how to transcribe?</strong>

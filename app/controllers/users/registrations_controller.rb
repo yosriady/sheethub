@@ -111,7 +111,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if request.patch? && params[:user] && params[:user][:username]
       update_params = registration_params
       update_params[:finished_registration?] = true
-      update_params[:sheet_quota] = User::BASIC_FREE_SHEET_QUOTA
       if current_user.update(update_params)
         UserMailer.welcome_email(current_user).deliver
         track('Finished registration')
@@ -153,7 +152,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def registration_params
     params[:user].permit(:username, :finished_registration?, :tagline, :website,
                          :avatar, :terms, :paypal_email, :first_name,
-                         :last_name, :sheet_quota, :timezone,
+                         :last_name, :timezone,
                          :billing_full_name, :billing_address_line_1,
                          :billing_address_line_2, :billing_city,
                          :billing_state_province, :billing_country,
