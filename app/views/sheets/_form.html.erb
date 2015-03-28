@@ -3,12 +3,7 @@
 
   <%=f.hidden_field :user_id, value: current_user.id %>
 
-  <%= f.label :visibility %>
-  <%= f.input_field :visibility, :as => :select, :collection => Sheet.visibilities.keys %>
-
   <%= f.input :title, placeholder: "What's the title of your piece?" %>
-  <%= f.label :license %> <a href="<%= support_url %>#licenses" target="blank"><em class="fa fa-question-circle"></em></a>
-  <%= f.input_field :license, :as => :select, :collection => Sheet.licenses.keys %>
 
   <%= f.input :description, :input_html => {:rows => 5}, placeholder: "Background, instructions, tuning information, and other information. You can also link to a YouTube, SoundCloud or Vimeo URL, and we'll embed the corresponding player." %>
 
@@ -28,6 +23,13 @@
   <br>
   <%= f.input_field :source_list, collection: sources.collect{|tag| tag.name}, prompt: "Where is this from?", multiple: true , id: "sources-field"%>
 
+  <%= f.label :visibility %>
+  <%= f.input_field :visibility, :as => :select, :collection => Sheet.visibilities.keys, prompt: 'Is your work public?' %>
+
+  <%= f.label :license %> <a href="<%= support_url %>#licenses" target="blank"><em class="fa fa-question-circle"></em></a>
+  <%= f.input_field :license, :as => :select, :collection => Sheet.licenses.keys, prompt: 'Pick a license' %>
+
+
   <hr>
   <%= f.label :pdf %> <a href="<%= support_url %>#sheet-requirements" target="blank"><em class="fa fa-question-circle"></em></a>
   <% if params[:action] == "edit" && sheet.pdf.present? %>
@@ -42,6 +44,12 @@
   </ul>
   <% end %>
   <%= f.file_field :pdf %>
+  <div class="checkbox">
+     <label>
+       <%= f.input_field :enable_pdf_stamping, inline_label: "Stamp PDF with the buyer's info" %>
+     </label>
+     <a href="<%= support_url %>#help-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
+  </div>
 
   <hr>
 
@@ -49,13 +57,6 @@
   <div class="input-group input-group-bordered">
     <span class="input-group-addon">$</span>
     <%= f.input_field :price, placeholder: "e.g. 2.99", :value => number_to_currency(f.object.price, unit: "", precision: 2) %>
-  </div>
-
-  <div class="checkbox">
-     <label>
-       <%= f.input_field :enable_pdf_stamping, inline_label: "Stamp PDF with the buyer's info" %>
-     </label>
-     <a href="<%= support_url %>#help-pdf-stamping" class="pull-right" target="_blank"><em class="fa fa-question-circle"></em></a>
   </div>
 
   <div class="checkbox">

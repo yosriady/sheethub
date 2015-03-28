@@ -3,9 +3,7 @@ module Licensable
   extend ActiveSupport::Concern
 
   included do
-    validates :license, presence: true
-    enum license: %w( all_rights_reserved creative_commons cc0 public_domain licensed_arrangement)
-
+    enum license: %w( all_rights_reserved creative_commons cc0 public_domain licensed_arrangement )
   end
 
   def verbose_license
