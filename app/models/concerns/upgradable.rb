@@ -2,7 +2,7 @@ module Upgradable
   extend ActiveSupport::Concern
 
   included do
-    BASIC_FREE_SHEET_QUOTA = 15
+    BASIC_FREE_SHEET_QUOTA = 30
     PLUS_FREE_SHEET_QUOTA = 75
     PRO_FREE_SHEET_QUOTA = 125
     INVALID_MEMBERSHIP_TYPE_MESSAGE = 'Membership type does not exist'
