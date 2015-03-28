@@ -25,7 +25,7 @@
   <% unless nobutton || (current_user && (current_user.membership_type == "pro")) %>
   <li class="list-group-item well">
     <a href="<%= subscriptions_purchase_url(:pro) %>">
-        <button type="button" class="btn btn-block btn-lg btn-success"><em class="fa fa-certificate"></em> Start My Pro Membership Now</button>
+        <button type="button" class="btn btn-block btn-lg btn-success"><em class="fa fa-certificate"></em> Get Pro</button>
     </a>
   </li>
   <% end %>
