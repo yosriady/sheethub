@@ -113,7 +113,11 @@ The Public Domain Mark is recommended for works that are free of known copyright
     <%= render "faq_item", id:"feature-request", question: "I have a feature I'd like to see. How do I let you know?", answer: "Be sure to leave your ideas, comments, and suggestions on our <strong>Feedback</strong> page. You shape the future of SheetHub!" %>
     <%= render "faq_item", id:"bug-report", question: "I want to report a bug!", answer: "Report it on our <strong>Feedback</strong> page. Help us squash all the bugs!" %>
     <%= render "faq_item", id:"missing-question", question: "My question isn't on here!", answer: "#{link_to 'Let us know!', contact_url(subject: 'I have a question')}" %>
-    <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to "This person.", "https://github.com/Leventhan"} I’m a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for written music and have been disappointed so far, so I decided to try my hand at building one. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's continuous development.</p> <p>Also, be sure to visit the <a href='http://blog.sheethub.co'>SheetHub Blog</a> for new features and updates!</p>" %>
+
+<hr>
+<h4><em class="fa fa-question-circle"></em> About</h4>
+  <%= render "faq_item", id:"who-makes-sheethub", question: "Who makes SheetHub?", answer: "#{link_to "This person.", "https://github.com/Leventhan"} I’m a software engineer. I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for sheet music and have been disappointed so far, so I decided to try my hand at building one. <a href='mailto:yosriady@gmail.com'>Let me know</a> what you think! Your feedback will be of tremendous help in guiding SheetHub's continuous development.</p> <p>Also, be sure to visit the <a href='http://blog.sheethub.co'>SheetHub Blog</a> for new features and updates!</p>" %>
+
 </div>
 
 

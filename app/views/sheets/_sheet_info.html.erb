@@ -2,7 +2,9 @@
   <div class="panel-body" style="padding-bottom: 5px">
     <p><%= sheet.description? ? sheet.description_html : 'No description.'%></p>
 
+    <% if sheet.license.present? %>
     <strong class="publishing-rights"><em class="fa fa-certificate"></em> <%= sheet.verbose_license %> <a href="<%= support_url %>#licenses"><em class="fa fa-question-circle"></em></a></strong>
+    <% end %>
 
     <p data-toggle="tooltip" data-placement="left" title="Published <%= sheet.created_at.strftime('%d %B %Y') %>"><span class="fade-text hover-pointer"><span class="fa fa-clock-o"></span> Published <%= distance_of_time_in_words(Time.zone.now, sheet.created_at) %> ago</span></p>
 

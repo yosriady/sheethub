@@ -2,24 +2,19 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-6 col-xs-offset-3">
-            <h2 class="text-center">Let's add your work!</h2>
-            <hr>
-        </div>
-    </div>
-
-    <div class="row">
     <div class="col-xs-3 ">
-        <div class="well">
-            Adding details about your work will help others find your it more easily.
+        <div class="well" style="margin-top:250px;">
+            Adding more details about your work, such as composers, genres, and sources will help others find your it more easily.
         </div>
 
-        <div class="well" style="margin-top:570px;">
+        <div class="well" style="margin-top:380px;">
         The first page of your PDF will be publicly visible as a preview page. You can add additional files later, from your sheet management page.
         </div>
     </div>
 
     <div class="col-xs-6 white-container">
+    <h2 class="text-center">Add Your Work</h2>
+    <hr>
     <%= render 'form', sheet: @sheet, genres: @genres, composers: @composers, sources: @sources %>
     </div>
 
