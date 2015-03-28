@@ -24,7 +24,7 @@ class SheetsController < ApplicationController
   SUCCESS_RESTORE_SHEET_MESSAGE = 'Sheet was successfully restored.'
   ERROR_SHEET_NOT_FOUND_MESSAGE = 'Oops! Sheet not found.'
   ERROR_CANNOT_RESTORE_UNDESTROYED_SHEET = 'You cannot restore an un-deleted Sheet.'
-  ERROR_PDF_UNPURCHASED_MESSAGE = 'Buy now to get unlimited access to this file.'
+  ERROR_PDF_UNPURCHASED_MESSAGE = 'Add this to your library to access files.'
   FLAGGED_MESSAGE = 'This Sheet has been flagged for a copyright violation.'
   ERROR_PRIVATE_SHEET_MESSAGE = 'This sheet is only visible to the owner.'
   SEARCH_PAGE_SIZE = 24
@@ -73,9 +73,8 @@ class SheetsController < ApplicationController
   # Downloads Sheet PDF
   def download
     track('Download sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-    if @sheet.free? || @sheet.uploaded_by?(current_user)
-      redirect_to @sheet.pdf_download_url
-    elsif @sheet.purchased_by?(current_user)
+    redirect_to @sheet.pdf_download_url if @sheet.uploaded_by?(current_user)
+    if @sheet.owned_by?(current_user)
       order = Order.find_by(user: current_user, sheet: @sheet)
       redirect_to order.pdf_download_url
     else

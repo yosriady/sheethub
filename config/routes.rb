@@ -8,11 +8,10 @@ Rails.application.routes.draw do
     get 'upgrade/success', to: 'subscriptions#success', as: 'subscriptions_success'
     get 'downgrade/:membership', to: 'subscriptions#downgrade', as: 'subscriptions_downgrade'
 
-    # Sheet Purchase Routes
-    post 'checkout', to: 'orders#checkout'
-    get 'orders/status/:tracking_id', to:'orders#status', as: 'orders_status'
+    post 'orders/checkout', to: 'orders#checkout'
+    post 'orders/get', to: 'orders#get'
+    get 'orders/status/:tracking_id', to: 'orders#status', as: 'orders_status'
     get 'orders/cancel'
-    # End of Sheet Purchase Routes
 
     devise_for :users, controllers: { registrations: 'users/registrations',
                                       omniauth_callbacks: 'users/omniauth_callbacks',

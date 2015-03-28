@@ -29,10 +29,31 @@ class Order < ActiveRecord::Base
     sheet.increment(:total_sold)
     sheet.decrement(:limit_purchase_quantity)
     sheet.save!
+    send_completion_emails
+    Analytics.track_charge(self)
+  end
+
+  def complete_free
+    return if completed? || !sheet.free?
+    tracking_id = Order.generate_token
+    update(tracking_id: tracking_id,
+          amount_cents: 0,
+          price_cents: 0)
+    complete
+  end
+
+  def send_completion_emails
+    return if freely_completed?
     SheetMailer.sheet_out_of_stock_email(sheet).deliver if sheet.out_of_stock?
     OrderMailer.purchase_receipt_email(self).deliver
     OrderMailer.sheet_purchased_email(self).deliver
-    Analytics.track_charge(self)
+  end
+
+  def self.generate_token
+    token = loop do
+      random_token = SecureRandom.urlsafe_base64(nil, false)
+      break random_token unless Order.exists?(tracking_id: random_token)
+    end
   end
 
   def generate_watermarked_pdf
@@ -135,6 +156,10 @@ class Order < ActiveRecord::Base
 
   def payment_completed?
     Order.get_payment_details(self).paymentInfoList.paymentInfo[0].transactionStatus == 'COMPLETED'
+  end
+
+  def freely_completed?
+    amount_cents.zero?
   end
 
   def s3_key

@@ -39,7 +39,7 @@ class AssetsController < ApplicationController
   def download
     sheet = @asset.sheet
     track('Download sheet asset', asset_name: @asset.filename, sheet_id: sheet.id, sheet_title: sheet.title)
-    if sheet.free? || sheet.purchased_by?(current_user) || sheet.uploaded_by?(current_user)
+    if sheet.free? || sheet.owned_by?(current_user) || sheet.uploaded_by?(current_user)
       redirect_to @asset.download_url
     else
       # FIX: Message not displayed

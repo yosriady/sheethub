@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328075913) do
+ActiveRecord::Schema.define(version: 20150328102124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150328075913) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status",                             default: 0
-    t.string   "payer_id",               limit: 255,             null: false
+    t.string   "payer_id"
     t.string   "tracking_id",            limit: 255,             null: false
     t.integer  "amount_cents",                                   null: false
     t.string   "pdf_file_name",          limit: 255

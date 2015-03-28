@@ -6,23 +6,30 @@ class OrdersController < ApplicationController
   FLAGGED_MESSAGE = 'You cannot purchase a flagged sheet.'
   INVALID_PRICE_MESSAGE = 'Amount must be at least the minimum price.'
 
-  before_action :set_sheet, only: [:checkout]
+  before_action :set_sheet, only: [:checkout, :get]
+  before_action :set_order_for_sheet, only: [:checkout, :get]
   before_action :set_order, only: [:status]
   before_action :validate_order_exists, only: [:status]
-  before_action :authenticate_user!, only: [:checkout, :status, :cancel]
+  before_action :authenticate_user!, only: [:get, :checkout, :status, :cancel]
   before_action :authenticate_owner, only: [:status]
   before_action :validate_flagged, only: [:checkout]
   before_action :validate_min_amount, only: [:checkout]
-  before_action :validate_purchase_limits, only: [:checkout]
+  before_action :validate_purchase_limits, only: [:checkout, :get]
+
+  def get
+    track('Getting sheet for free', sheet_id: @sheet.id, sheet_title: @sheet.title)
+    redirect_to :back, error: 'Sheet is not free' unless @sheet.free?
+
+    if @order.complete_free
+      redirect_to orders_status_url(@order.tracking_id)
+    else
+      flash[:error] = "Sorry, we couldn't give you that sheet for free."
+      redirect_to @sheet
+    end
+  end
 
   def checkout
     track('Checking out sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-    @order = Order.find_or_initialize_by(user_id: current_user.id,
-                                         sheet_id: @sheet.id)
-    if @order.completed?
-      redirect_to :back, error: "You've already purchased #{@sheet.title}"
-    end
-
     if @sheet.pay_what_you_want && params[:amount].present?
       amount = params[:amount].to_f
       amount_cents = amount * 100
@@ -70,16 +77,9 @@ class OrdersController < ApplicationController
   end
 
   private
-    def generate_token
-      token = loop do
-        random_token = SecureRandom.urlsafe_base64(nil, false)
-        break random_token unless Order.exists?(tracking_id: random_token)
-      end
-    end
-
     def build_payment_request(sheet, amount)
       author = sheet.user
-      tracking_id = generate_token
+      tracking_id = Order.generate_token
       api = PayPal::SDK::AdaptivePayments::API.new
       r = api.build_pay
       r.trackingId = tracking_id
@@ -147,6 +147,10 @@ class OrdersController < ApplicationController
       redirect_to @sheet
     end
 
+    def validate_ownership
+      redirect_to :back, error: "You've already owned #{@sheet.title}" if @order.completed?
+    end
+
     def validate_min_amount
       return unless @sheet.pay_what_you_want && params[:amount]
       above_minimum = params[:amount].to_f >= @sheet.price
@@ -169,6 +173,11 @@ class OrdersController < ApplicationController
 
     def set_order
       @order = Order.find_by(tracking_id: params[:tracking_id])
+    end
+
+    def set_order_for_sheet
+      @order = Order.find_or_initialize_by(user_id: current_user.id,
+                                         sheet_id: @sheet.id)
     end
 
     def set_sheet

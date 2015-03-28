@@ -13,15 +13,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
-        <li class="dropdown">
-          <a href="#" data-toggle="dropdown"><em class="fa fa-arrow-up"></em> Upload <b class="caret"></b></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><%= link_to sheet_upload_url do %><em class="fa fa-file-pdf-o"></em> PDF + files<% end %></li>
-            <li><%= link_to "#" do %><em class="fa fa-file-code-o"></em> XML <span class='badge fade-bg'>SOON</span><% end %></li>
-          </ul>
-        </li>
-
-
+        <li><%= link_to sheet_upload_url do %><em class="fa fa-plus"></em> Upload<% end %></li>
         <%= render 'layouts/user_dropdown' %>
       <% else %>
         <li><a href="<%= new_user_session_url %>">Sign In</a></li>

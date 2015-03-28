@@ -1,7 +1,7 @@
 module Purchasable
     extend ActiveSupport::Concern
 
-    def purchased_by?(user)
+    def owned_by?(user)
       return false unless user
       user.purchased?(id)
     end
