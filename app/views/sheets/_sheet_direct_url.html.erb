@@ -1,3 +1,8 @@
+<label class="control-label"><em class="fa fa-link"></em> Direct URL</label>
 <div class="form-group">
-  <input id="sheet-direct-url" onClick="this.select();" class="form-control" readonly value="<%= sheet_url(sheet, subdomain:sheet.user.username) %>">
+  <input onClick="this.select();" class="form-control text-selectable" readonly value="<%= sheet_url(sheet, subdomain:sheet.user.username) %>">
+</div>
+<label class="control-label"><em class="fa fa-code"></em> BBCode</label>
+<div class="form-group">
+  <input onClick="this.select();" class="form-control text-selectable" readonly value="[url=<%= sheet_url(sheet, subdomain:sheet.user.username) %>]<%= sheet.title %>[/url]">
 </div>
