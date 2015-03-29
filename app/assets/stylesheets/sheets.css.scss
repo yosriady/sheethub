@@ -1,11 +1,15 @@
 #sheet-header {
-    text-align: center;
-    margin-bottom: 22px;
+    display: inline-block;
+
+    .medium-avatar {
+        margin-right: 10px;
+    }
 
     h1 {
         font-family: 'Source Sans Pro', sans-serif;
         margin:0px;
         margin-top: 5px;
+        font-weight: 300;
 
         a {
             color: rgb(51, 51, 51);
