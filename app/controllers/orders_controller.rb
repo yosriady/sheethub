@@ -40,14 +40,15 @@ class OrdersController < ApplicationController
 
     author = @sheet.user
     payment_request = build_payment_request(@sheet, amount)
-    payment_response = get_adaptive_payment_response(payment_request)
+    payment_response = pay(payment_request)
     if payment_response.success?
-      redirect_url = build_redirect_url(payment_response.payKey)
       @order.update(tracking_id: payment_request.trackingId,
+                    category: Order.categories[:checkout],
                     payer_id: payment_response.payKey,
                     amount_cents: amount_cents,
                     royalty_cents: Order.calculate_royalty_cents(author, amount_cents),
                     price_cents: @sheet.price_cents)
+      redirect_url = build_redirect_url(payment_response.payKey)
       redirect_to redirect_url
     else
       Rails.logger.info "Paypal Order Error #{payment_response.error.first.errorId}: #{payment_response.error.first.message}"
@@ -63,7 +64,7 @@ class OrdersController < ApplicationController
 
   def status
     if @order
-      @order.complete if (!@order.completed? && @order.payment_completed?)
+      @order.complete if @order.completable?
       @sheet = @order.sheet
       track('Complete sheet purchase', order_id: @order.id, sheet_id: @sheet.id, sheet_title: @sheet.title)
     else
@@ -102,7 +103,20 @@ class OrdersController < ApplicationController
       r
     end
 
-    # {'email': 0.5 } #email - proportion of amount
+    def pay(payment_request)
+      api = PayPal::SDK::AdaptivePayments::API.new
+      api.pay(payment_request)
+    end
+
+    def build_redirect_url(payKey)
+      "https://#{Rails.application.secrets.paypal_domain}/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
+    end
+
+    def invalid_account_details?(pay_response)
+      pay_response.error.first.errorId.in? [580001, 520009]
+    end
+
+    # Method currently not used
     def add_additional_receivers(payment_request, receivers)
       fail 'Amount of split funds above 100%' if (t.values.sum > 1.0)
 
@@ -116,22 +130,10 @@ class OrdersController < ApplicationController
       payment_request
     end
 
+    # Method currently not used
     def build_split_payment_request(sheet, amount, receivers = {})
       r = build_payment_request(sheet, amount)
       add_additional_receivers(r, receivers)
-    end
-
-    def get_adaptive_payment_response(payment_request)
-      api = PayPal::SDK::AdaptivePayments::API.new
-      api.pay(payment_request)
-    end
-
-    def build_redirect_url(payKey)
-      "https://#{Rails.application.secrets.paypal_domain}/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
-    end
-
-    def invalid_account_details?(pay_response)
-      pay_response.error.first.errorId.in? [580001, 520009]
     end
 
     def validate_flagged

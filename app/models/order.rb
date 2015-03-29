@@ -6,6 +6,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :user, counter_cache: true
   belongs_to :sheet, counter_cache: true
+  enum category: %w(checkout free downloadkey gift)
   enum status: %w(processing completed failed)
   validates :sheet_id, uniqueness: { scope: :user_id,
                                    message: ORDER_UNIQUENESS_VALIDATION_MESSAGE }
@@ -13,6 +14,9 @@ class Order < ActiveRecord::Base
                     hash_secret: Rails.application.secrets.sheet_hash_secret,
                     default_url: Sheet::PDF_DEFAULT_URL
   validates_attachment_content_type :pdf, content_type: ['application/pdf']
+
+  # TODO: validate if category is free, amount cents and price cents is 0
+  # TODO: validate otherwise is true
 
   def complete
     return if completed?
@@ -30,15 +34,16 @@ class Order < ActiveRecord::Base
     sheet.decrement(:limit_purchase_quantity)
     sheet.save!
     send_completion_emails
-    Analytics.track_charge(self)
+    Analytics.track_charge(self) unless freely_completed?
   end
 
   def complete_free
     return if completed? || !sheet.free?
     tracking_id = Order.generate_token
     update(tracking_id: tracking_id,
-          amount_cents: 0,
-          price_cents: 0)
+           category: Order.categories[:free],
+           amount_cents: 0,
+           price_cents: 0)
     complete
   end
 
@@ -160,6 +165,10 @@ class Order < ActiveRecord::Base
 
   def freely_completed?
     amount_cents.zero?
+  end
+
+  def completable?
+    !completed? && payment_completed?
   end
 
   def s3_key
