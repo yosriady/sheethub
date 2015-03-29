@@ -5,12 +5,11 @@ keywords %w(features benefits)
 %>
 
 <div class="animated-banner">
-    <h1 class="sheets-heading">Share your music</h1>
-    <h2 class="sheets-subheading">SheetHub is a self-publishing platform and community marketplace for musicians.</h2>
+    <h1 class="sheets-heading">Share and sell your music</h1>
+    <h2 class="sheets-subheading">SheetHub is a self-publishing platform and community marketplace for musicians. Just 5% per transaction.</h2>
 </div>
 
 <div class="container">
-    <p class="bg-info"><em class="fa fa-bullhorn"></em> SheetHub empowers musicians, composers, and arrangers with the ability to easily find, publish, and share sheet music, tablature, and score online.</p>
     <div class="row">
     <div class="col-xs-6">
         <div class="panel panel-default">
@@ -20,7 +19,8 @@ keywords %w(features benefits)
             </h4>
           </div>
             <div class="panel-body">
-              <p>With SheetHub, you can easily publish, share, and sell your music. You'll get an online profile and subdomain which lets you showcase all the works you've published on SheetHub. </p><p>Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle everything from payments, sales, emails, and distribution. SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music!</p>
+              <p>SheetHub lets you easily publish, share, and sell your music.</p><p>Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle everything from payments, sales, emails, and distribution. You'll also get your very own personal portfolio and subdomain!</p><p> SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music.</p>
+              <p><%= link_to 'Sign Up', new_user_registration_url %> and get started. Add your work, name a price, and start selling instantly. Want us to help you? Email us at <a href="mailto:support@sheethub.co">support@sheethub.co</a></p>
             </div>
           </div>
         </div>
@@ -28,12 +28,15 @@ keywords %w(features benefits)
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-                Awesome! What does SheetHub cost?
+                Awesome! The price?
             </h4>
           </div>
             <div class="panel-body">
-              <p>With SheetHub, you have no setup fees, no monthly fees, no hosting fees to worry about. <%= link_to 'Sign Up', new_user_registration_url %> and get <strong>unlimited uploads</strong> today!</p><p> Our success is your success. When someone buys your work you receive 85% of the total amount. The remaining 15% goes to SheetHub to pay for hosting fees, server fees, and to develop new platform features voted on by the SheetHub community. You are paid directly to your PayPal account the moment you make a sale. SheetHub never holds any of your earnings. Who likes waiting for their money? No one.
+                <p>With SheetHub, you have no setup fees, no monthly fees, no hosting fees, no bandwidth fees to worry about. You have <em>unlimited uploads</em>. Just <strike>15%</strike> <strong>5%</strong> per transaction!</p>
+                <p class="bg-success"><em class="fa fa-star"></em> Be part of our public alpha and earn <strong>95%</strong>! For a <strong>$5.00</strong> sale, you'll earn <strong>$4.75</strong>!</p>
+                <p>You are paid directly to your PayPal account the moment you make a sale. SheetHub never holds any of your earnings. Get paid instantly on SheetHub.
                 </p>
+                <p><%= link_to 'Sign Up', new_user_registration_url %> and get started.</p>
             </div>
           </div>
         </div>
@@ -80,7 +83,7 @@ keywords %w(features benefits)
                 </div>
                 <div class="col-xs-11">
                     <h3>Easy Publishing</h3>
-                    <p>Compose, publish, sell. Easily publish, manage, and update your music to a growing audience of musicians. Add files, video links, set a price, and more. No complex installation or technical skills required.</p>
+                    <p>Compose, publish, sell. Easily publish and manage your music to a growing audience of musicians. Add files, video links, set a price, and more. No complex installation or technical skills required.</p>
                 </div>
             </div>
             <div class="feature">
@@ -332,9 +335,4 @@ keywords %w(features benefits)
 </div>
 
 <%= render 'layouts/sign_up_banner' %>
-
-<% if user_signed_in? %>
-<div class="animated-banner footer-banner">
-    <h1>Now available: Plus and Pro memberships. <a href="<%= upgrade_url %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"><em class="fa fa-star"></em> Go Pro</a></h1>
-</div>
-<% end %>
+<%= render 'layouts/upload_banner' %>

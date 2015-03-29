@@ -6,7 +6,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :user, counter_cache: true
   belongs_to :sheet, counter_cache: true
-  enum category: %w(checkout free downloadkey gift)
+  enum category: %w(checkout free_checkout download_key gift)
   enum status: %w(processing completed failed)
   validates :sheet_id, uniqueness: { scope: :user_id,
                                    message: ORDER_UNIQUENESS_VALIDATION_MESSAGE }
@@ -15,8 +15,10 @@ class Order < ActiveRecord::Base
                     default_url: Sheet::PDF_DEFAULT_URL
   validates_attachment_content_type :pdf, content_type: ['application/pdf']
 
-  # TODO: validate if category is free, amount cents and price cents is 0
-  # TODO: validate otherwise is true
+  validates :amount_cents, numericality: { equal_to: 0 }, if: :free_checkout?
+  validates :price_cents, numericality: { equal_to: 0  }, if: :free_checkout?
+  validates :amount_cents, numericality: { greater_than: 0 }, if: :checkout?
+  validates :price_cents, numericality: { greater_than: 0  }, if: :checkout?
 
   def complete
     return if completed?
@@ -34,21 +36,22 @@ class Order < ActiveRecord::Base
     sheet.decrement(:limit_purchase_quantity)
     sheet.save!
     send_completion_emails
-    Analytics.track_charge(self) unless freely_completed?
+    Analytics.track_charge(self) unless free_checkout?
+    true
   end
 
   def complete_free
     return if completed? || !sheet.free?
     tracking_id = Order.generate_token
     update(tracking_id: tracking_id,
-           category: Order.categories[:free],
+           category: Order.categories[:free_checkout],
            amount_cents: 0,
            price_cents: 0)
     complete
   end
 
   def send_completion_emails
-    return if freely_completed?
+    return if free_checkout?
     SheetMailer.sheet_out_of_stock_email(sheet).deliver if sheet.out_of_stock?
     OrderMailer.purchase_receipt_email(self).deliver
     OrderMailer.sheet_purchased_email(self).deliver
@@ -161,10 +164,6 @@ class Order < ActiveRecord::Base
 
   def payment_completed?
     Order.get_payment_details(self).paymentInfoList.paymentInfo[0].transactionStatus == 'COMPLETED'
-  end
-
-  def freely_completed?
-    amount_cents.zero?
   end
 
   def completable?

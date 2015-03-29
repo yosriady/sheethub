@@ -1,7 +1,7 @@
 <% title "Thank You" %>
 
 <div class="animated-banner">
-    <h1 class="animated bounceIn"><em class="fa fa-check-circle"></em> <%= @order.freely_completed? ? "Success!" : "Thank You For Your Purchase!"%></h1>
+    <h1 class="animated bounceIn"><em class="fa fa-check-circle"></em> <%= @order.free_checkout? ? "Success!" : "Thank You For Your Purchase!"%></h1>
 
     <h2 class="animated bounceIn">We've added <%= @order.sheet.title %> to your Library!</h2>
 </div>
@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-xs-8 white-container">
             <div class="bg-info"><em class="fa fa-info-circle"></em>
-                <% if @order.freely_completed? %>
+                <% if @order.free_checkout? %>
                     Added on <%= @order.purchased_at.strftime("%A, %e %B %Y %l:%M %p") %>
                 <% else %>
                     Purchased on <%= @order.purchased_at.strftime("%A, %e %B %Y %l:%M %p") %> for <%= number_to_currency(@order.amount) %>

@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
   before_action :set_sheet, only: [:checkout, :get]
   before_action :set_order_for_sheet, only: [:checkout, :get]
   before_action :set_order, only: [:status]
+  before_action :validate_ownership, only: [:checkout, :get]
   before_action :validate_order_exists, only: [:status]
   before_action :authenticate_user!, only: [:get, :checkout, :status, :cancel]
   before_action :authenticate_owner, only: [:status]

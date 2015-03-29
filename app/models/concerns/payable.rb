@@ -2,9 +2,9 @@ module Payable
   extend ActiveSupport::Concern
 
   included do
-    BASIC_ROYALTY_PERCENTAGE = 0.85
-    PLUS_ROYALTY_PERCENTAGE = 0.85
-    PRO_ROYALTY_PERCENTAGE = 0.90
+    BASIC_ROYALTY_PERCENTAGE = 0.95
+    PLUS_ROYALTY_PERCENTAGE = 0.95
+    PRO_ROYALTY_PERCENTAGE = 0.95
 
     validates_email_format_of :paypal_email, message: 'You have an invalid paypal account email address', if: :paypal_email?
   end
