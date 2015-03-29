@@ -13,16 +13,7 @@ keywords %w(contact support)
   <div class="row">
 
     <div class="col-xs-8 white-container">
-        <%= simple_form_for(@contact, defaults: { input_html: { class: 'form-control' }}) do |f| %>
-          <%= f.input :name, label: 'Your Name', required: true %>
-          <%= f.input :email, required: true %>
-          <%= f.input :subject, required: true %>
-          <%= f.input :message, as: :text, required: true %>
-
-          <br/>
-          <%= f.button :submit, 'Send Message', class: "btn btn-success btn-lg" %>
-          <p class="fade-text">* The founder personally respond to each message</p>
-        <% end %>
+      <%= render 'contact_form/form', contact: @contact %>
     </div>
     <div class="col-xs-4">
         <div class="bg-info blurb"><strong><em class="fa fa-info-circle"></em> Alpha</strong> <p>We are currently in public alpha, which means things may not work perfectly – yet. If you encounter something that looks broken, please let us know!</p></div>

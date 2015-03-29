@@ -1,0 +1,9 @@
+<%= simple_form_for(contact, defaults: { input_html: { class: 'form-control' }}) do |f| %>
+  <%= f.input :name, label: 'Your Name', required: true %>
+  <%= f.input :from, label: 'Your Email', required: true %>
+  <%= f.input :subject, required: true %>
+  <%= f.input :message, as: :text, required: true %>
+
+  <br/>
+  <%= f.button :submit, 'Send Message', class: "btn btn-success btn-lg" %>
+<% end %>

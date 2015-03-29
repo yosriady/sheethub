@@ -1,8 +1,7 @@
 class ContactForm < MailForm::Base
-  append :remote_ip, :user_agent
-
   attribute :name,      validate: true
-  attribute :email,     validate: /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i
+  attribute :from,     validate: /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i
+  attribute :to,     validate: /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i
 
   attribute :subject,   validate: true
   attribute :message,   validate: true
@@ -11,9 +10,9 @@ class ContactForm < MailForm::Base
   # in ActionMailer accepts.
   def headers
     {
-      subject: "New SheetHub Support Ticket: #{subject}",
-      to: "yosriady@gmail.com",
-      from: %("#{name}" <#{email}>)
+      subject: "New Message: #{subject}",
+      to: to,
+      from: %("#{name}" <#{from}>)
     }
   end
 end

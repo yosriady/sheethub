@@ -2,13 +2,13 @@ class ContactFormController < ApplicationController
   def new
     track('Visited contact form')
     @contact = ContactForm.new(subject: params[:subject],
-                               email: (current_user.email if user_signed_in?),
+                               from: (current_user.email if user_signed_in?),
                                name: (current_user.display_name if user_signed_in?))
   end
 
   def create
+    params[:contact_form][:to] = "yosriady@gmail.com"
     @contact = ContactForm.new(params[:contact_form])
-    @contact.request = request
     if @contact.deliver
       flash[:notice] = 'Thank you for your message. We will contact you soon!'
       track('Submitted contact form')

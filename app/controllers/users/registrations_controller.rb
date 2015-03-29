@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   before_action :validate_user_signed_in, except: [:new, :create, :profile, :all, :likes]
   before_action :disable_for_omniauth, only: [:edit_password]
-  before_action :set_profile_user, only: [:profile, :likes]
+  before_action :set_profile_user, only: [:profile, :likes, :new_contact, :create_contact]
   before_action :validate_registration_finished
   before_action :validate_has_published, only: [:sales, :dashboard]
   before_action :set_current_user, only: [:edit_password, :edit_membership]
@@ -123,6 +123,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
       # Render Form
     end
   end
+
+  # GET username.sheethub.co/contact
+  def new_contact
+    track('Viewed user contact form')
+    @contact = ContactForm.new(subject: params[:subject],
+                               from: (current_user.email if user_signed_in?),
+                               name: (current_user.display_name if user_signed_in?))
+  end
+
+  # POST username.sheethub.co/contact
+  def create_contact
+    params[:contact_form][:to] = @user.email
+    @contact = ContactForm.new(params[:contact_form])
+    if @contact.deliver
+      flash[:notice] = 'Message sent.'
+      track('Submitted user contact form')
+      redirect_to user_profile_url(subdomain: @user.username)
+    else
+      flash[:error] = @contact.errors.full_messages.to_sentence
+      redirect_to new_user_contact_url(subdomain: @user.username)
+    end
+  end
+
 
   def destroy
     # Disable destroy

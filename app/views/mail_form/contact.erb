@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= render 'layouts/email_styles' %>
+  </head>
+  <body>
+    <h2><a href="<%= root_url %>">SheetHub</a></h2>
+    <div class="container">
+      <h1>New Message</h1>
+      <div class="summary">
+        <em>From</em>
+        <p><%= @resource.name %> (<%= @resource.from %>)</p>
+
+        <em>Subject</em>
+        <p><%= @resource.subject %></p>
+
+        <em>Message</em>
+        <p><%= @resource.message %></p>
+    </div>
+    <p class="footer">Sent with &hearts; from SheetHub</p>
+  </body>
+</html>

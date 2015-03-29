@@ -1,0 +1,31 @@
+<% title "#{@user.display_name}'s Likes"  %>
+
+<%= render 'profile_banner', user:@user %>
+<div class="nav-strip nav-strip-profile">
+<div class="container-fluid">
+<ul class="list-inline">
+  <li><h4><a href="<%= user_profile_url(subdomain: @user.username) %>">Works</a></h4></li>
+  <li><h4><a href="<%= user_likes_url(subdomain: @user.username) %>">Likes</a></h4></li>
+  <li class="active"><h4><a href="<%= new_user_contact_url(subdomain: @user.username) %>"> Contact </a></h4></li>
+</ul>
+</div>
+</div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-xs-8 white-container">
+          <%= simple_form_for(@contact, url: create_user_contact_url(subdomain: @user.username), defaults: { input_html: { class: 'form-control' }}) do |f| %>
+            <%= f.input :name, label: 'Your Name', required: true %>
+            <%= f.input :from, label: 'Your Email', required: true %>
+            <%= f.input :subject, required: true %>
+            <%= f.input :message, as: :text, required: true %>
+
+            <br/>
+            <%= f.button :submit, 'Send Message', class: "btn btn-success btn-lg" %>
+          <% end %>
+      </div>
+      <div class="col-xs-4">
+
+      </div>
+  </div>
+</div>
