@@ -28,6 +28,9 @@
 
   <%= f.label :license %> <a href="<%= support_url %>#licenses" target="blank"><em class="fa fa-question-circle"></em></a>
   <%= f.input_field :license, :as => :select, :collection => Sheet.licenses.keys, prompt: 'Pick a license' %>
+  <%= f.label "Publisher / Copyright Information" %>
+  <br>
+  <%= f.input_field :publisher_list, collection: Sheet.tags_on(:publishers).collect{|tag| tag.name}, prompt: "e.g. Sony Music Entertainment", multiple: true , id: "publishers-field"%>
 
 
   <hr>

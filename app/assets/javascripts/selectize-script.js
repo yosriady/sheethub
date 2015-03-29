@@ -30,7 +30,12 @@ $(document).on("page:change", function() {
         maxItems: 5
     });
 
-    $('#sheet_difficulty').selectize({});
+    $('#publishers-field').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        create: true
+    });
 
     // User Form Fields
     $('#user_timezone').selectize({});

@@ -11,7 +11,7 @@ class SheetsController < ApplicationController
   before_action :hide_private_sheets, only: [:show, :report, :flag, :like, :download], if: :is_private_sheet
   before_action :authenticate_owner, only: [:edit, :update, :destroy, :restore]
 
-  TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list]
+  TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list, :publisher_list]
   DEFAULT_FLAG_MESSAGE = 'No Message.'
   SUCCESS_FLAG_MESSAGE = "Succesfully reported! We'll come back to you in 72 hours."
   ERROR_UNSIGNED_LIKE_MESSAGE = 'You need to be signed in to like'
@@ -244,6 +244,7 @@ class SheetsController < ApplicationController
     updated_params[:composer_list] = params[:sheet][:composer_list]
     updated_params[:genre_list] = params[:sheet][:genre_list]
     updated_params[:source_list] = params[:sheet][:source_list]
+    updated_params[:publisher_list] = params[:sheet][:publisher_list]
     return updated_params
   end
 
@@ -270,7 +271,7 @@ class SheetsController < ApplicationController
   end
 
   def format_tag_fields
-    # Clean up selectize tag values: genres, sources, composers, instruments
+    # Clean up selectize tag values: genres, sources, composers, instruments, publishers
     TAG_FIELDS.each { |tag_field| format_tags(tag_field) }
   end
 
@@ -284,7 +285,8 @@ class SheetsController < ApplicationController
   def set_sheet
     @sheet = Sheet.includes(:sources,
                             :composers,
-                            :genres).friendly.find(params[:id])
+                            :genres,
+                            :publishers).friendly.find(params[:id])
   end
 
   def set_sheet_lazy
@@ -313,7 +315,7 @@ class SheetsController < ApplicationController
   def sheet_params
     params[:sheet].permit(:user_id, :title, :description, :instruments_list,
                           :composer_list, :genre_list, :source_list,
-                          :pages, :difficulty, :pdf,
+                          :pages, :difficulty, :pdf, :publisher_list,
                           :assets_attributes, :visibility, :price, :license,
                           :enable_pdf_stamping, :pay_what_you_want,
                           :limit_purchases, :limit_purchase_quantity)

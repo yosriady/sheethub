@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329083100) do
+ActiveRecord::Schema.define(version: 20150329110827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20150329083100) do
     t.boolean  "limit_purchases",                     default: false, null: false
     t.integer  "limit_purchase_quantity",             default: 0,     null: false
     t.integer  "orders_count",                        default: 0,     null: false
+    t.string   "cached_publishers"
   end
 
   add_index "sheets", ["cached_votes_down"], name: "index_sheets_on_cached_votes_down", using: :btree

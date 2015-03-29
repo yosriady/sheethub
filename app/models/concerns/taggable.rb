@@ -7,7 +7,7 @@ module Taggable
     TOO_MANY_TAGS_MESSAGE = 'You have too many tags. Each sheet can have up to 5 of each: genres, composers, sources.'
 
     acts_as_taggable
-    acts_as_taggable_on :composers, :genres, :sources
+    acts_as_taggable_on :composers, :genres, :sources, :publishers
     validate :validate_number_of_tags
     after_save :cache_tags
   end
@@ -43,12 +43,14 @@ module Taggable
     genres.clear
     sources.clear
     composers.clear
+    publishers.clear
   end
 
   def restore_tags
     self.genre_list = self.cached_genres
     self.source_list = self.cached_sources
     self.composer_list = self.cached_composers
+    self.publisher_list = self.cached_publishers.split(", ").map(&:parameterize)
     self.save!
   end
 
@@ -56,9 +58,11 @@ module Taggable
     composer_tag_list = composers.pluck(:name)
     source_tag_list = sources.pluck(:name)
     genre_tag_list = genres.pluck(:name)
+    publisher_string = publishers.to_a.map(&:name).map(&:titleize).join(", ")
     self.update_columns(cached_composers: composer_tag_list,
                 cached_sources: source_tag_list,
                 cached_genres: genre_tag_list,
+                cached_publishers: publisher_string,
                 cached_joined_tags: [instruments, composer_tag_list, source_tag_list, genre_tag_list].flatten)
   end
 
