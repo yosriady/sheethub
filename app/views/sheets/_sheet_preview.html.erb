@@ -1,7 +1,11 @@
 <% if sheet.pdf_preview? %>
     <%= image_tag(sheet.pdf_preview_url, class: "sample_sheet") %>
     <span class="price-tag">
-        <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %>
+        <% if current_user && sheet.owned_by?(current_user) %>
+            In Library
+        <% else %>
+            <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %>
+        <% end %>
     </span>
 <% else %>
     <%= image_tag("/assets/missing.png", class: "sample_sheet") %>
