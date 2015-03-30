@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   defaults subdomain: '' do
-    resources :notes
-
     get 'upgrade/purchase/:membership', to: 'subscriptions#purchase', as: 'subscriptions_purchase'
     get 'upgrade/checkout/:membership', to: 'subscriptions#checkout', as: 'subscriptions_checkout'
     get 'upgrade/cancel', to: 'subscriptions#cancel', as: 'subscriptions_cancel'
