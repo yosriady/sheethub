@@ -1,13 +1,13 @@
 <% cache(cache_key_for_sheet_header(sheet)) do %>
 <div id="sheet-header">
-    <div class="pull-left">
+<div class="pull-left">
     <a href="<%= user_profile_url(subdomain: sheet.user.username) %>">
-        <%= image_tag(sheet.user.avatar_url, class: "medium-avatar", title:sheet.user.display_name) %>
+        <%= image_tag(sheet.user.avatar_url, class: "small-avatar", title:sheet.user.display_name) %>
     </a>
-    </div>
-    <div class="pull-left">
-        <h1><%= link_to sheet.title, sheet_url(@sheet) %></h1>
-        <h4>By <a href="<%= user_profile_url(subdomain: sheet.user.username) %>" class="sheet-author"><%= sheet.user.display_name %></a> <%= render 'layouts/user_badge', user: sheet.user%></h4>
-    </div>
+</div>
+<div class="pull-left">
+    <h1><%= @sheet.title %></h1>
+    <h4>By <a href="<%= user_profile_url(subdomain: sheet.user.username) %>" class="sheet-author"><%= sheet.user.display_name %></a> <%= render 'layouts/user_badge', user: sheet.user%></h4>
+</div>
 </div>
 <% end %>

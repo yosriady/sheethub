@@ -6,6 +6,9 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
+      <div class="nav navbar-nav navbar-left">
+      <%= render 'layouts/searchbar' %>
+      </div>
       <ul class="nav navbar-nav navbar-left">
         <%= render 'layouts/tags_dropdown' %>
         <%= render 'layouts/community_dropdown' %>
@@ -20,7 +23,6 @@
         <li><a href="<%= new_user_registration_url %>">Sign Up</a></li>
       <% end %>
       </ul>
-      <%= render 'layouts/searchbar' %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

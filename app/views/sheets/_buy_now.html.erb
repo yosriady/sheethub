@@ -5,9 +5,9 @@
         <% elsif current_user && sheet.owned_by?(current_user) %>
             <span class="sheet-buy-now-text text-center"><p><em class="fa fa-smile-o"></em> IN LIBRARY</p></span>
         <% elsif user_signed_in? %>
-            <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Download Now for <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %></button></a>
+            <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
         <% else %>
-            <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Download Now for <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %></button></a>
+            <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
         <% end %>
     </div>
 </div>

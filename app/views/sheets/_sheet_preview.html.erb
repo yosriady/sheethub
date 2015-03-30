@@ -1,5 +1,8 @@
 <% if sheet.pdf_preview? %>
     <%= image_tag(sheet.pdf_preview_url, class: "sample_sheet") %>
+    <span class="price-tag">
+        <%= sheet.free? ? 'Free' : number_to_currency(sheet.price) %>
+    </span>
 <% else %>
     <%= image_tag("/assets/missing.png", class: "sample_sheet") %>
 <% end %>

@@ -10,12 +10,11 @@ keywords @sheet.cached_joined_tags
     <div class="row">
         <div id="sheet-content" class="col-xs-8">
             <%= render 'sheet_preview', sheet:@sheet %>
-            <%= render 'sheet_header', sheet:@sheet %>
             <%= render 'layouts/disqus' %>
         </div>
 
         <div id="sheet-sidebar" class="col-xs-4 zeropadding">
-            <%= render 'buy_now', sheet:@sheet %>
+            <%= render 'sheet_header', sheet:@sheet %>
             <% if @sheet.privately_visible? %>
                 <p class="bg-info text-center"><em class="fa fa-eye-slash"></em> <%= @sheet.title %> is <strong>Private</strong></p>
             <% end %>
@@ -23,6 +22,7 @@ keywords @sheet.cached_joined_tags
                 <p class="bg-warning text-center"><em class="fa fa-warning"></em> <%= @sheet.title %> is <strong>Out Of Stock</strong></p>
             <% end %>
             <%= render 'sheet_info', sheet:@sheet %>
+            <%= render 'buy_now', sheet:@sheet %>
             <div class="panel panel-info">
               <div class="panel-heading"><em class="fa fa-download"></em> Download</div>
               <div class="panel-body" style="padding: 10px;">
