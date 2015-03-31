@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
          :trackable, :validatable, :confirmable, :lockable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
+  has_one :api_key
+
   def country
     if billing_country
       country = ISO3166::Country[billing_country]
