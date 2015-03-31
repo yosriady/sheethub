@@ -4,7 +4,11 @@
         <% if current_user && sheet.uploaded_by?(current_user) %>
             <%= render 'edit_sheet_button', sheet: sheet %>
         <% elsif user_signed_in? %>
-            <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
+            <% if sheet.free? && !sheet.pay_what_you_want %>
+              <a href="<%= orders_get_url(sheet: sheet) %>" data-method="post"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
+            <% else %>
+              <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
+            <% end %>
         <% else %>
             <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
         <% end %>
