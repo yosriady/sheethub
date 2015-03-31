@@ -1,6 +1,6 @@
 class API::V1::SheetsController < API::APIController
   respond_to :json
-  # before_action :authenticate
+  before_action :restrict_access, except: [:show]
 
   # GET /v1/sheets
   def index

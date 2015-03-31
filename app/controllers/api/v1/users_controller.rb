@@ -1,6 +1,6 @@
 class API::V1::UsersController < ApplicationController
   respond_to :json
-  # before_action :authenticate
+  before_action :restrict_access
 
   def index
     @users = User.all
