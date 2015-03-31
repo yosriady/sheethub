@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
   defaults subdomain: '' do
+
+    # API
+    namespace :api, path: '', constraints: { subdomain: 'api' }, defaults: {format: :json} do
+      namespace :v1 do
+        resources :sheets, only: [:index, :show]
+      end
+    end
+
+
+
+
     get 'upgrade/purchase/:membership', to: 'subscriptions#purchase', as: 'subscriptions_purchase'
     get 'upgrade/checkout/:membership', to: 'subscriptions#checkout', as: 'subscriptions_checkout'
     get 'upgrade/cancel', to: 'subscriptions#cancel', as: 'subscriptions_cancel'

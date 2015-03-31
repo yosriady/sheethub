@@ -15,6 +15,9 @@ gem 'sidekiq'
 # Memcached
 gem 'dalli'
 
+# API
+gem 'active_model_serializers'
+
 # Contact Form
 gem 'mail_form'
 
@@ -45,7 +48,7 @@ gem 'chartkick'
 gem 'validates_email_format_of'
 
 # Soft Deletion
-gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
+gem 'paranoia', github: 'radar/paranoia', branch: 'rails4'
 
 # Search
 gem 'searchkick'
@@ -55,7 +58,7 @@ gem 'twitter-typeahead-rails'
 # User authentication
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem "omniauth-google-oauth2"
+gem 'omniauth-google-oauth2'
 gem 'devise'
 
 # Tags
