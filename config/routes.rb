@@ -7,7 +7,11 @@ Rails.application.routes.draw do
       # TODO: a page on api.sheethub.co
 
       namespace :v1 do
-        resources :sheets, only: [:index, :show]
+        resources :sheets, only: [:index, :show] do
+          collection do
+            post 'search'
+          end
+        end
         resources :users, only: [:index, :show]
       end
     end
