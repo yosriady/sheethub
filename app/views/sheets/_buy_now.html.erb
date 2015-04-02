@@ -1,16 +1,16 @@
 <% unless current_user && sheet.owned_by?(current_user) %>
 <div class="panel panel-success">
-    <div class="panel-body bg-feathers">
+    <div class="panel-body bg-success">
         <% if current_user && sheet.uploaded_by?(current_user) %>
             <%= render 'sheets/edit_sheet_button', sheet: sheet %>
         <% elsif user_signed_in? %>
             <% if sheet.free? && !sheet.pay_what_you_want %>
               <a href="<%= orders_get_url(sheet: sheet) %>" data-method="post"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
             <% else %>
-              <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
+              <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Add to Library</button></a>
             <% end %>
         <% else %>
-            <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
+            <a href="<%= new_user_session_url %>"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Add to Library</button></a>
         <% end %>
     </div>
 </div>
