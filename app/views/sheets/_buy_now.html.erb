@@ -2,7 +2,7 @@
 <div class="panel panel-success">
     <div class="panel-body bg-feathers">
         <% if current_user && sheet.uploaded_by?(current_user) %>
-            <%= render 'edit_sheet_button', sheet: sheet %>
+            <%= render 'sheets/edit_sheet_button', sheet: sheet %>
         <% elsif user_signed_in? %>
             <% if sheet.free? && !sheet.pay_what_you_want %>
               <a href="<%= orders_get_url(sheet: sheet) %>" data-method="post"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
@@ -44,7 +44,7 @@
           </div>
         <% end %>
 
-        <%= render 'modal_files', sheet: sheet %>
+        <%= render 'sheets/modal_files', sheet: sheet %>
 
         <strong>What happens next?</strong>
         <p>You'll be able to view and print all of your purchased sheet music anytime, on any platform and device - without ever paying again. And we'll send you an email receipt containing your full purchase details. Enjoy! </p>
