@@ -24,6 +24,9 @@
 //= require twitter/typeahead
 //= require twitter/typeahead.min
 //= require fb-sdk
+//= require pdf
+//= require application.worker
+//= require pdf-canvas
 //= require userreport
 //= require turbolinks
 //= require_tree .

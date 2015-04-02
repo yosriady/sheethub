@@ -63,6 +63,8 @@ class SheetsController < ApplicationController
   def show
     track('View sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     @likes = @sheet.votes_for.includes(:voter).limit(5)
+
+    gon.pdf_url = @sheet.pdf_download_url if (user_signed_in? && @sheet.owned_by?(current_user))
   end
 
   def fans

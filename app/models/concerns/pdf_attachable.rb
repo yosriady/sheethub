@@ -2,7 +2,7 @@ module PdfAttachable
   extend ActiveSupport::Concern
 
   included do
-    EXPIRATION_TIME = 30
+    EXPIRATION_TIME = 600
     PDF_PREVIEW_DEFAULT_URL = 'nil' # TODO: point to special Missing file route
     PDF_DEFAULT_URL = 'nil'
     MAX_FILESIZE = 20
