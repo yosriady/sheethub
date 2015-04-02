@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <%= metamagic site: "SheetHub", title: [:title, :site], separator: " - ", description: "SheetHub is the easiest publishing platform for musicians. A super simple way to publish and share your sheet music, score, and tablature online. Publish, search, rate, and share your favourite works on SheetHub.", keywords: %w(sheet\ music score tablature self\ publishing platform) %>
-  <%= javascript_include_tag 'embeds' %>
-  <%= stylesheet_link_tag 'embeds' %>
+  <%= javascript_include_tag '/js/embeds.js' %>
+  <%= stylesheet_link_tag '/css/embeds.css' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div id="sh-embed">
+
+    <%= yield %>
+
+</div>
 
 </body>
 </html>

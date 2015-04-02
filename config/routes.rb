@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       end
     end
 
-    get 'embed/sheets/:id', to: 'embeds#sheet'
+    get 'embed/sheets/:id', to: 'embeds#sheet', as: 'sheet_embed'
 
     get 'upgrade/purchase/:membership', to: 'subscriptions#purchase', as: 'subscriptions_purchase'
     get 'upgrade/checkout/:membership', to: 'subscriptions#checkout', as: 'subscriptions_checkout'

@@ -6,3 +6,7 @@
 <div class="form-group">
   <input onClick="this.select();" class="form-control text-selectable" readonly value="[url=<%= sheet_url(sheet, subdomain:sheet.user.username) %>]<%= sheet.title %>[/url]">
 </div>
+<label class="control-label"><em class="fa fa-code"></em> Embed Code</label>
+<div class="form-group">
+  <input onClick="this.select();" class="form-control text-selectable" readonly value="<iframe src='<%= sheet_embed_url(sheet, subdomain:sheet.user.username) %>' width='400' height='300' frameborder='0'></iframe>">
+</div>

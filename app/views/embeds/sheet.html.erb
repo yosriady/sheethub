@@ -1,1 +1,11 @@
-<%= @sheet %>
+<%= link_to @sheet, target: '_blank', title: "Check out #{@sheet.title} on SheetHub!" do%>
+<div id="sh-preview-container">
+    <%= image_tag(@sheet.pdf_preview_url, id: 'sh-preview') %>
+    <%= image_tag(@sheet.user.avatar_url, id: "sh-avatar", title:@sheet.user.display_name) %>
+    <span class="sh-price-tag">
+        <%= @sheet.free? ? 'Free' : number_to_currency(@sheet.price) %>
+    </span>
+</div>
+
+<p>SheetHub</p>
+<% end %>

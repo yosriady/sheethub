@@ -12,7 +12,6 @@ keywords @sheet.cached_joined_tags
             <%= render 'sheet_preview', sheet:@sheet %>
             <%= render 'layouts/disqus' %>
         </div>
-
         <div id="sheet-sidebar" class="col-xs-4 zeropadding">
             <%= render 'sheet_header', sheet:@sheet %>
             <% if @sheet.privately_visible? %>
