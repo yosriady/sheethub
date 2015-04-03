@@ -74,9 +74,16 @@ var pdfDoc = null,
    * Displays previous page.
    */
   function onPrevPage() {
+    var goingToFirstPage = ((pageNum - 1) == 1);
+    if (goingToFirstPage) {
+        $('.pdf-canvas-prev').addClass("disabled");
+    }
+    $('.pdf-canvas-next').removeClass("disabled");
+
     if (pageNum <= 1) {
       return;
     }
+
     pageNum--;
     queueRenderPage(pageNum);
   }
@@ -86,13 +93,19 @@ var pdfDoc = null,
    * Displays next page.
    */
   function onNextPage() {
+    var goingToLastPage = ((pageNum + 1) == pdfDoc.numPages);
+    if (goingToLastPage){
+        $('.pdf-canvas-next').addClass("disabled");
+    }
+    $('.pdf-canvas-prev').removeClass("disabled");
+
     if (pageNum >= pdfDoc.numPages) {
       return;
     }
+
     pageNum++;
     queueRenderPage(pageNum);
   }
-
   _.each($('.pdf-canvas-next'), function(btn){ btn.addEventListener('click', onNextPage)});
 
   /**
@@ -101,7 +114,11 @@ var pdfDoc = null,
    function loadPDF(url){
     PDFJS.getDocument(url).then(function (pdfDoc_) {
         pdfDoc = pdfDoc_;
+
         _.each($('.pdf-canvas-page-count'), function(e){e.textContent = pdfDoc.numPages;});
+        if(pdfDoc.numPages > 1){
+          $('.pdf-canvas-next').removeClass("disabled");
+        }
 
         // Initial/first page rendering
         renderPage(pageNum);
