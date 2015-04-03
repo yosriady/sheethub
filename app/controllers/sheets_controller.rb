@@ -64,7 +64,8 @@ class SheetsController < ApplicationController
     track('View sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
     @likes = @sheet.votes_for.includes(:voter).limit(5)
 
-    gon.pdf_url = @sheet.pdf_download_url if (user_signed_in? && @sheet.owned_by?(current_user))
+    pdf_viewable = @sheet.free? || (user_signed_in? && @sheet.owned_by?(current_user))
+    gon.pdf_url = @sheet.pdf_download_url if pdf_viewable
   end
 
   def fans

@@ -1,11 +1,6 @@
 <% if sheet.pdf_preview? %>
-    <% if user_signed_in? && sheet.owned_by?(current_user) %>
-        <div>
-          <button id="prev" class="btn btn-default"><em class="fa fa-chevron-left"></em> Previous</button>
-          <button id="next" class="btn btn-default">Next <i class="fa fa-chevron-right"></i></button>
-          <span class="bg-info">Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-        </div>
-        <canvas id="pdf-canvas"></canvas>
+    <% if sheet.free? || (user_signed_in? && sheet.owned_by?(current_user)) %>
+        <%= render 'pdf_canvas' %>
     <% else %>
         <%= image_tag(sheet.pdf_preview_url, class: "sample_sheet") %>
     <% end %>
