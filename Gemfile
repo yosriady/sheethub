@@ -53,7 +53,6 @@ gem 'paranoia', github: 'radar/paranoia', branch: 'rails4'
 # Search
 gem 'searchkick'
 gem 'typhoeus'
-gem 'twitter-typeahead-rails'
 
 # User authentication
 gem 'omniauth'

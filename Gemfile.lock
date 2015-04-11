@@ -384,10 +384,6 @@ GEM
       hitimes
     turbolinks (2.5.3)
       coffee-rails
-    twitter-typeahead-rails (0.10.5)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
     typhoeus (0.7.1)
       ethon (>= 0.7.1)
     tzinfo (1.2.2)
@@ -468,7 +464,6 @@ DEPENDENCIES
   simple_form
   spring
   turbolinks
-  twitter-typeahead-rails
   typhoeus
   uglifier (>= 1.3.0)
   underscore-rails

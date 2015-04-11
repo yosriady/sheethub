@@ -21,8 +21,6 @@
 //= require selectize
 //= require selectize-script
 //= require maskmoney
-//= require twitter/typeahead
-//= require twitter/typeahead.min
 //= require fb-sdk
 //= require compatibility
 //= require pdf-canvas

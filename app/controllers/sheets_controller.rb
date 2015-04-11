@@ -231,10 +231,6 @@ class SheetsController < ApplicationController
     @sheets = Sheet.is_public.tagged_with(params[:slug], on: :sources).includes(:user).page(params[:page])
   end
 
-  def autocomplete
-    render json: Sheet.is_public.search(params[:query], limit: 10).map{|s| {title: s.title, url: sheet_url(s)}}
-  end
-
   def titles
     render json: Sheet.is_public.map{|s| {title: s.title, url: sheet_url(s)}}
   end
