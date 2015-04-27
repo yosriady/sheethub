@@ -9,7 +9,7 @@
           <li><p><em class="fa fa-map-marker"></em> <%= user.country %></p></li>
         <% end %>
       </ul>
-      <p><%= user.sheets.count %> Sheets</p>
+      <% unless user.sheets.count.zero? %><p><%= user.sheets.count %> Sheets</p> <% end %>
     </div>
 </div>
 </a>

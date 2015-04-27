@@ -22,10 +22,10 @@ class User < ActiveRecord::Base
   has_one :api_key
 
   def country
-    if billing_country
-      country = ISO3166::Country[billing_country]
-      country.translations[I18n.locale.to_s] || country.name
-    end
+    return unless billing_country
+    country = ISO3166::Country[billing_country]
+    return if country.nil?
+    country.translations.nil? ? country.name : country.translations[I18n.locale.to_s]
   end
 
   def joined_at
