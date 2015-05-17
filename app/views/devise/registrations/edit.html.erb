@@ -3,10 +3,10 @@
 <div class="container">
     <div class="row">
       <%= render 'user_dashboard_sidebar' %>
-      <%= simple_form_for(resource, as: resource_name, url: registration_url(resource_name), html: { method: :put, multipart: true }) do |f| %>
-        <%= f.error_notification %>
-
         <div class="col-xs-10 white-container">
+          <%= simple_form_for(resource, as: resource_name, url: registration_url(resource_name), html: { method: :put, multipart: true }) do |f| %>
+            <%= f.error_notification %>
+
           <h2>Update My Personal Profile</h1>
           <hr>
 

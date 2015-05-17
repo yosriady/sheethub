@@ -16,7 +16,11 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-8 white-container">
-          <%= @user.about.html_safe %>
+          <% if @user.about.present? %>
+            <%= @user.about.html_safe %>
+          <% else %>
+            <p>A proud SheetHub user.</p>
+          <% end %>
       </div>
       <div class="col-xs-4">
 
