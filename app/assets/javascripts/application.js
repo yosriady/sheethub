@@ -18,6 +18,7 @@
 //= require s3-uploader
 //= require bootstrap
 //= require jquery_ujs
+//= require bootsy
 //= require selectize
 //= require selectize-script
 //= require maskmoney

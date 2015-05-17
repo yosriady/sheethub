@@ -27,6 +27,9 @@ gem 'mixpanel-ruby'
 # Application Monitoring
 gem 'newrelic_rpm'
 
+# WYSWIG Editor
+gem 'bootsy', '>= 2.1.0'
+
 # HTML Embed Links
 gem 'auto_html'
 
@@ -93,7 +96,7 @@ gem 'gon'
 gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 gem 's3_direct_upload'
-gem 'mini_magick', '4.0.0.rc'
+gem 'mini_magick'
 
 # Others
 gem 'friendly_id'
