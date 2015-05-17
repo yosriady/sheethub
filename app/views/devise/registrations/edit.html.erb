@@ -7,44 +7,44 @@
         <%= f.error_notification %>
 
         <div class="col-xs-10 white-container">
-        <h2>Update My Personal Profile</h1>
-        <hr>
+          <h2>Update My Personal Profile</h1>
+          <hr>
 
-        <div class="col-xs-5 zerohorizontalpadding">
+          <div class="col-xs-5 zerohorizontalpadding">
 
-        <div class="form-inputs">
-          <label class="string control-label">Username</label>
-          <input class="string form-control" type="string" value="<%= resource.username %>" readonly>
+          <div class="form-inputs">
+            <label class="string control-label">Username</label>
+            <input class="string form-control" type="string" value="<%= resource.username %>" readonly>
 
-          <label class="string control-label">Email</label>
-          <input class="string form-control" type="string" value="<%= resource.email %>" readonly>
+            <label class="string control-label">Email</label>
+            <input class="string form-control" type="string" value="<%= resource.email %>" readonly>
 
-          <%= f.label :paypal_email, label: 'PayPal Email' %> <a href="<%= support_url %>#paypal-transfer"><em class="fa fa-question-circle"></em></a>
-          <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
-        </div>
-        <hr>
-
-        <div class="form-inputs">
-          <%= f.input :first_name %>
-          <%= f.input :last_name %>
-
-          <%= f.input :tagline, placeholder: "Something interesting about you", autofocus: true %>
-
-
-          <hr >
-          <%= f.input :website, label: "Personal Website", placeholder: "http://sheethub.co", autofocus: true %>
-          <%= f.input :facebook_username, placeholder: "SheetHub" %>
-          <%= f.input :twitter_username, placeholder: "SheetHub" %>
-          <%= f.input :googleplus_username, placeholder: "SheetHub", label: "Google+ username" %>
-          <%= f.input :soundcloud_username, placeholder: "SheetHub", label: "SoundCloud username" %>
-          <%= f.input :youtube_username, placeholder: "SheetHub", label: "YouTube username" %>
-
-          <%= render 'billing_address_form_inputs', f: f %>
-
-          <div class="form-actions">
-            <%= f.button :submit, "Update Profile", class: "btn btn-success btn-lg" %>
+            <%= f.label :paypal_email, label: 'PayPal Email' %> <a href="<%= support_url %>#paypal-transfer"><em class="fa fa-question-circle"></em></a>
+            <%= f.input_field :paypal_email, placeholder: "Your Paypal account email to send earnings to", autofocus: true %>
           </div>
-        </div>
+          <hr>
+
+          <div class="form-inputs">
+            <%= f.input :first_name %>
+            <%= f.input :last_name %>
+
+            <%= f.input :tagline, placeholder: "Something interesting about you", autofocus: true %>
+
+
+            <hr >
+            <%= f.input :website, label: "Personal Website", placeholder: "http://sheethub.co", autofocus: true %>
+            <%= f.input :facebook_username, placeholder: "SheetHub" %>
+            <%= f.input :twitter_username, placeholder: "SheetHub" %>
+            <%= f.input :googleplus_username, placeholder: "SheetHub", label: "Google+ username" %>
+            <%= f.input :soundcloud_username, placeholder: "SheetHub", label: "SoundCloud username" %>
+            <%= f.input :youtube_username, placeholder: "SheetHub", label: "YouTube username" %>
+
+            <%= render 'billing_address_form_inputs', f: f %>
+
+            <div class="form-actions">
+              <%= f.button :submit, "Update Profile", class: "btn btn-success btn-lg" %>
+            </div>
+          </div>
 
         </div>
 
@@ -55,8 +55,10 @@
               <%= image_tag resource.avatar_url, id: 'avatar-preview' %>
               <%= f.file_field :avatar, onchange: "readUploadImage(this)" %>
             </div>
+
+            <%= f.input :about, as: :bootsy %>
           </div>
-          </div>
+        </div>
       <% end %>
     </div>
   </div>

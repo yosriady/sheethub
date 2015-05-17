@@ -4,9 +4,11 @@
 <div class="nav-strip nav-strip-profile">
 <div class="container-fluid">
 <ul class="list-inline">
+  <li><h4><a href="<%= user_about_url(subdomain: @user.username) %>"> About </a></h4></li>
   <li><h4><a href="<%= user_profile_url(subdomain: @user.username) %>">Works</a></h4></li>
   <li class="active"><h4><a href="<%= user_likes_url(subdomain: @user.username) %>">Likes</a> <span class="fade-text"><%= @likes.count %></h4></li>
   <li><h4><a href="<%= new_user_contact_url(subdomain: @user.username) %>"> Contact </a></h4></li>
+  <% if current_user == @user %><li><h4><a href="<%= user_settings_url %>"><em class="fa fa-cog"></em> Edit Profile </a></h4></li><% end %>
 </ul>
 </div>
 </div>

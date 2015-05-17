@@ -5,9 +5,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   ONLY_PRO_MESSAGE = 'That feature is only available to Pro Users. Upgrade to Pro today!'
   PUBLISHER_ONLY_FEATURE_MESSAGE = 'This feature is only available when you have a published sheet.'
 
-  before_action :validate_user_signed_in, except: [:new, :create, :profile, :all, :likes]
+  before_action :validate_user_signed_in, except: [:new, :create, :profile,
+                                                   :all, :likes, :about,
+                                                   :new_contact,
+                                                   :create_contact]
   before_action :disable_for_omniauth, only: [:edit_password]
-  before_action :set_profile_user, only: [:profile, :likes, :new_contact, :create_contact]
+  before_action :set_profile_user, only: [:profile, :likes, :about,
+                                          :new_contact, :create_contact]
   before_action :validate_registration_finished
   before_action :validate_has_published, only: [:sales, :dashboard]
   before_action :set_current_user, only: [:edit_password, :edit_membership]
@@ -34,6 +38,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def likes
     track('View likes')
     @likes = @user.votes.includes(:votable).page(params[:page])
+  end
+
+  def about
+    track('View about')
   end
 
   def library
@@ -181,7 +189,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
                          :billing_state_province, :billing_country,
                          :billing_zipcode, :facebook_username,
                          :twitter_username, :googleplus_username,
-                         :soundcloud_username, :youtube_username)
+                         :soundcloud_username, :youtube_username, :about)
   end
 
   def password_params

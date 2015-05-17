@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       get '/', to: 'users/registrations#profile', constraints: { subdomain: /.+/ }, as: :user_profile
       get '/all-users', to: 'users/registrations#all', constraints: { subdomain: '' }, as: :all_users
       get '/likes', to: 'users/registrations#likes', constraints: { subdomain: /.+/ }, as: :user_likes
+      get '/about', to: 'users/registrations#about', constraints: { subdomain: /.+/ }, as: :user_about
       get '/contact', to: 'users/registrations#new_contact', constraints: { subdomain: /.+/ }, as: :new_user_contact
       post '/contact', to: 'users/registrations#create_contact', constraints: { subdomain: /.+/ }, as: :create_user_contact
       match 'users/finish_registration', to: 'users/registrations#finish_registration', via: [:get, :patch], as: :finish_registration
