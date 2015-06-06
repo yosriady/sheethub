@@ -1,14 +1,14 @@
 footer {
-    .brand {
-        color: #777;
+    a.badge {
         font-family: 'Roboto Slab', serif;
-        font-size: 24px;
-        margin-right: 5px;
-    }
+        font-size: 18px;
+        padding: 6px 12px;
+        font-weight: 100;
+        background: #777;
 
-    .copyright {
-        color: #777;
-        font-size: 14px;
+        &:hover, &:focus {
+            background: #2583eb;
+        }
     }
 
     &.panel-footer {
