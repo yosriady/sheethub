@@ -1,11 +1,10 @@
 sheethub
 ========
-SheetHub is a self-publishing platform to share and sell sheet music.
-To make it easy for composers and arrangers to share their creations.
+[SheetHub](http://sheethub.co) lets you easily publish, share, and sell sheet music.
 
-http://goo.gl/9DAcsw
+SheetHub is **open source** since 7 June 2015. It's been a one-man show up to this point, so mind some unnecessary complexity! Contributions are most welcome! 
 
-## System requirements
+## System Requirements
 '''
 brew install <requirement>
 '''
@@ -19,7 +18,10 @@ brew install <requirement>
 brew install <requirement>
 ```
 
-## Get Started
+You also need the following running:
+- Postgres
+
+## Getting Started
 
 ```
 bundle install
@@ -27,8 +29,22 @@ rake db:migrate
 rails s
 ```
 
-## Deploying to Production
-'''
+## Application Overview
 TODO
-'''
-Don’t forget to run Sheet.reindex when dropping/re-creating tables
+
+
+## Contributing
+
+Here are some ideas you can work on:
+- Audio Player on sheet pages
+- Allow Users to Organize Composition Competitions/Jams
+- Allow Arrangement licensing of original pieces on SheetHub. Users can submit arrangements of original pieces on SheetHub and sell it, sharing payments back with the original author
+- jobs.sheethub.co: Job Board for Musicians
+- Use background jobs with Active Job + Sidekiq
+- Missing unit tests
+- *Your idea here!*
+
+Register your interest by creating a new Github issue.
+
+Get in touch with me so I can help you get started!
+You'll need to add some config .yml files before you can run the project on development. 
