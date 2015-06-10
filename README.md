@@ -2,11 +2,13 @@ sheethub
 ========
 [SheetHub](http://sheethub.co) lets you easily publish, share, and sell sheet music.
 
-> Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle everything from payments, sales, emails, and distribution. You'll also get your very own personal portfolio and subdomain! You are paid directly and instantly the moment you make a sale.
+![SheetHub](http://i.imgur.com/HYwc8RY.png)
+
+> Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. SheetHub handles payments, sales, emails, and distribution. You'll also get your very own personal portfolio and subdomain! You are paid directly and instantly the moment you make a sale.
 
 SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music.
 
-> I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for sheet music and have been disappointed so far, so I decided to try my hand at building one.
+I've been looking for a decent community/marketplace for sheet music and have been disappointed so far, so I decided to try my hand at building one. Thus, SheetHub was born.
 
 SheetHub is **open source** since 7 June 2015. It's been a one-man show up to this point, so mind some unnecessary complexity! Contributions are most welcome!
 
@@ -26,9 +28,10 @@ brew install <requirement>
 
 You also need the following running:
 
-- Postgres
+- elasticsearch
+- postgres
 
-Additionally, you need to populate development environment [secrets.yml](https://github.com/Leventhan/sheethub/blob/master/config/secrets.yml) attributes before you can run the project on development. This means you'll have to register a number of external services, such as AWS S3 and PayPal Sandbox when running locally as well as redis and memcached when running on a staging server. See the `secrets.yml` file for more details.
+Additionally, you need to populate development environment [secrets.yml](https://github.com/Leventhan/sheethub/blob/master/config/secrets.yml) attributes before you can run the project on development. This means you'll have to register a number of external services, such as AWS S3 and PayPal Sandbox when running locally as well as `redis` and `memcached` when running on a staging server. See the `secrets.yml` file for more details.
 
 Message me if you need help!
 
@@ -72,19 +75,25 @@ Current features include:
 
 ## API
 
-SheetHub provides a **read-only API** for all public sheets. You can view the endpoints via [this Postman collection](https://www.getpostman.com/collections/d17c3262d1904a279a76). Note that you need an API Key to access the API. On development, create an new *ApiKey* object and use the token generated. The SheetHub API uses HTTP Token authentication. On production, [message me](yosriady@gmail.com) and I'll give you an API Key.
+SheetHub provides a **read-only JSON API** for all public sheets. You can view the endpoints via [this Postman collection](https://www.getpostman.com/collections/d17c3262d1904a279a76). Note that you need an API Key to access the API. On development, create an new *ApiKey* object and use the token generated. The SheetHub API uses HTTP Token authentication. On production, [message me](mailto:yosriady@gmail.com) and I'll give you an API Key.
 
 Both on development and production, use [Postman](https://www.getpostman.com/) to play around with the endpoints. The collection above comes with all the following available endpoints:
 
-- POST /v1/sheets/search
-- GET v1/sheets
-- GET v1/sheets/:id
-- GET v1/users
-- GET v1/users/:id
+- `POST` /v1/sheets/search
+- `GET` v1/sheets
+- `GET` v1/sheets/:id
+- `GET` v1/users
+- `GET` v1/users/:id
 
 > Postman is a powerful API testing suite which has become a must-have tool for many developers.
 
-The SheetHub API provides pagination support. The API is namespaced to an `api` subdomain like so:
+The SheetHub API provides pagination support.
+
+```
+/sheets?page=<page_number>
+```
+
+The API is namespaced to an `api` subdomain like so:
 
 ```
 http://api.sheethub.co/v1/sheets
@@ -94,7 +103,7 @@ You can use the API to build applications that interact with SheetHub's user-cur
 
 ## Subdomain Configuration
 
-Since SheetHub uses subdomains extensively for user profile pages (at `username.sheethub.co`), you won't be able to use `localhost` for local development. Instead, you must use `lvh.me`. Read [this](https://reinteractive.net/posts/199-developing-and-testing-rails-applications-with-subdomains) for more details.
+Since SheetHub uses subdomains extensively for user profile pages (such as `edwinsungmusic.sheethub.co`), you won't be able to use `localhost` for local development. Instead, you must use `lvh.me`. Read [this](https://reinteractive.net/posts/199-developing-and-testing-rails-applications-with-subdomains) for more details.
 
 ## Contributing
 
