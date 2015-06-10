@@ -4,7 +4,7 @@ sheethub
 
 > I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for sheet music and have been disappointed so far, so I decided to try my hand at building one.
 
-SheetHub is **open source** since 7 June 2015. It's been a one-man show up to this point, so mind some unnecessary complexity! Contributions are most welcome! 
+SheetHub is **open source** since 7 June 2015. It's been a one-man show up to this point, so mind some unnecessary complexity! Contributions are most welcome!
 
 ## System Requirements
 You'll need the following installed on your machine:
@@ -35,13 +35,13 @@ rails s
 ```
 
 ## Application Overview
-SheetHub lets you easily publish, share, and sell your music.
+> SheetHub lets you easily publish, share, and sell your music.
 
-Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle everything from payments, sales, emails, and distribution. You'll also get your very own personal portfolio and subdomain! You are paid directly and instantly the moment you make a sale.
+> Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle everything from payments, sales, emails, and distribution. You'll also get your very own personal portfolio and subdomain! You are paid directly and instantly the moment you make a sale.
 
-SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music.
+> SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music.
 
-SheetHub is on Rails 4.2. 
+SheetHub is on **Rails 4.2** and uses **Ruby 2.2.0**.
 
 The latest entity-relationship diagram can be viewed [here](https://github.com/Leventhan/sheethub/blob/master/erd.pdf).
 
@@ -63,7 +63,29 @@ Current features include:
 - User Likes/Favorites
 - [EU VAT Compliance](http://blog.sheethub.co/post/106770902463/2015-vat-compliance-with-sheethub)
 - Premium Memberships
-- and [many.](http://blog.sheethub.co/post/113654779988/new-purchase-status-page) [other.](http://blog.sheethub.co/post/114997377358/march-updates) [features.](http://blog.sheethub.co/post/107029226688/introducing-preview-mode)
+- and [many.](http://blog.sheethub.co/post/113654779988/new-purchase-status-page) [more.](http://blog.sheethub.co/post/114997377358/march-updates) [features.](http://blog.sheethub.co/post/107029226688/introducing-preview-mode)
+
+## API
+
+SheetHub provides a **read-only API** for all public sheets. You can view the endpoints via [this Postman collection](https://www.getpostman.com/collections/d17c3262d1904a279a76). Note that you need an API Key to access the API. On development, create an new *ApiKey* object and use the token generated. The SheetHub API uses HTTP Token authentication. On production, [message me](yosriady@gmail.com) and I'll give you an API Key.
+
+Both on development and production, use [Postman](https://www.getpostman.com/) to play around with the endpoints. The collection above comes with all the following available endpoints:
+
+- POST /v1/sheets/search
+- GET v1/sheets
+- GET v1/sheets/:id
+- GET v1/users
+- GET v1/users/:id
+
+> Postman is a powerful API testing suite which has become a must-have tool for many developers.
+
+The SheetHub API provides pagination support. The API is namespaced to the api subdomain (api.sheethub.co), like so:
+
+```
+http://api.sheethub.co/v1/sheets
+```
+
+You can use the API to build applications that interact with SheetHub's user-curated database of sheet music. Admittedly, the available data you can currently pull from the API is still sparse.
 
 ## Contributing
 
