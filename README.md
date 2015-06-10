@@ -2,6 +2,10 @@ sheethub
 ========
 [SheetHub](http://sheethub.co) lets you easily publish, share, and sell sheet music.
 
+> Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle everything from payments, sales, emails, and distribution. You'll also get your very own personal portfolio and subdomain! You are paid directly and instantly the moment you make a sale.
+
+SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music.
+
 > I started playing classical guitar at a young age and regularly play in my spare time. I've been looking for a decent community/marketplace for sheet music and have been disappointed so far, so I decided to try my hand at building one.
 
 SheetHub is **open source** since 7 June 2015. It's been a one-man show up to this point, so mind some unnecessary complexity! Contributions are most welcome!
@@ -24,7 +28,9 @@ You also need the following running:
 
 - Postgres
 
-Additionally, you need to populate development environment [secrets.yml](https://github.com/Leventhan/sheethub/blob/master/config/secrets.yml) attributes before you can run the project on development. This means you'll have to register a number of external services, such as AWS S3, PayPal locally as well as redis, memcached on a staging server. Message me if you need help!
+Additionally, you need to populate development environment [secrets.yml](https://github.com/Leventhan/sheethub/blob/master/config/secrets.yml) attributes before you can run the project on development. This means you'll have to register a number of external services, such as AWS S3 and PayPal Sandbox when running locally as well as redis and memcached when running on a staging server. See the `secrets.yml` file for more details.
+
+Message me if you need help!
 
 ## Getting Started
 
@@ -35,15 +41,14 @@ rails s
 ```
 
 ## Application Overview
-> SheetHub lets you easily publish, share, and sell your music.
 
-> Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle everything from payments, sales, emails, and distribution. You'll also get your very own personal portfolio and subdomain! You are paid directly and instantly the moment you make a sale.
+SheetHub is built on **Rails 4.2** and uses **Ruby 2.2.0**.
 
-> SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music.
+The latest entity-relationship diagram for all the model objects can be viewed [here](https://github.com/Leventhan/sheethub/blob/master/erd.pdf). You can update the erd.pdf file based on the current schema using the following command:
 
-SheetHub is on **Rails 4.2** and uses **Ruby 2.2.0**.
-
-The latest entity-relationship diagram can be viewed [here](https://github.com/Leventhan/sheethub/blob/master/erd.pdf).
+```
+bundle exec erd
+```
 
 Current features include:
 
@@ -79,13 +84,17 @@ Both on development and production, use [Postman](https://www.getpostman.com/) t
 
 > Postman is a powerful API testing suite which has become a must-have tool for many developers.
 
-The SheetHub API provides pagination support. The API is namespaced to the api subdomain (api.sheethub.co), like so:
+The SheetHub API provides pagination support. The API is namespaced to an `api` subdomain like so:
 
 ```
 http://api.sheethub.co/v1/sheets
 ```
 
-You can use the API to build applications that interact with SheetHub's user-curated database of sheet music. Admittedly, the available data you can currently pull from the API is still sparse.
+You can use the API to build applications that interact with SheetHub's user-curated database of sheet music and musicians. Admittedly, the available data you can currently pull from the API is still sparse.
+
+## Subdomain Configuration
+
+Since SheetHub uses subdomains extensively for user profile pages (at `username.sheethub.co`), you won't be able to use `localhost` for local development. Instead, you must use `lvh.me`. Read [this](https://reinteractive.net/posts/199-developing-and-testing-rails-applications-with-subdomains) for more details.
 
 ## Contributing
 
