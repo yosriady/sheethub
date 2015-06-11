@@ -118,4 +118,7 @@ Here are some ideas you can work on:
 - Fix typos
 - *Your idea here!*
 
-Discuss ideas by creating a Github issue!
+Initiate idea discussions by creating a Github issue! 
+
+We use [Github Flow](https://guides.github.com/introduction/flow/), a lightweight, branch-based workflow. Create feature branches and your pull requests will be reviewed!
+
