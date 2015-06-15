@@ -99,6 +99,7 @@ gem 's3_direct_upload'
 gem 'mini_magick'
 
 # Others
+gem 'httparty'
 gem 'friendly_id'
 gem 'bitmask_attributes'
 gem 'sdoc', '~> 0.4.0',          group: :doc
