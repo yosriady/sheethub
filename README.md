@@ -31,7 +31,17 @@ You also need the following running:
 - elasticsearch
 - postgres
 
-Additionally, you need to populate development environment [secrets.yml](https://github.com/Leventhan/sheethub/blob/master/config/secrets.yml) attributes before you can run the project on development. This means you'll have to register a number of external services, such as AWS S3 and PayPal Sandbox when running locally as well as `redis` and `memcached` when running on a staging server. See the `secrets.yml` file for more details.
+Additionally, you need to populate development environment [secrets.yml](https://github.com/Leventhan/sheethub/blob/master/config/secrets.yml) attributes before you can run the project on development. This means you'll have to register a number of external services, such as AWS S3 and PayPal Sandbox when running locally as well as `redis` and `memcached` when running on a staging server.
+
+For Facebook and Google Authentication to work, you'll need to create apps/setup oauth for both services.
+
+`asset_hash_secret`, `sheet_hash_secret` can be any long hash string, the longer and harder to quess, the more secure. For `secret_key_base`, use the following command to generate a secret to use:
+
+```
+rake secret
+```
+
+I recommend using secrets generated this way for all `secret` attributes.
 
 Message me if you need help!
 
@@ -110,6 +120,7 @@ Since SheetHub uses subdomains extensively for user profile pages (such as `edwi
 Here are some ideas you can work on:
 - Audio Player on sheet pages
 - Organize composition competitions
+- Crowdfunding
 - Allow Arrangement licensing of original pieces on SheetHub. Users can submit arrangements of original pieces on SheetHub and sell it, sharing payments back with the original author
 - jobs.sheethub.co
 - Use background jobs with Active Job + Sidekiq
@@ -118,7 +129,7 @@ Here are some ideas you can work on:
 - Fix typos
 - *Your idea here!*
 
-Initiate idea discussions by creating a Github issue! 
+Initiate idea discussions by creating a Github issue!
 
 We use [Github Flow](https://guides.github.com/introduction/flow/), a lightweight, branch-based workflow. Create feature branches and your pull requests will be reviewed!
 
