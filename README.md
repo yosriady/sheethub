@@ -31,7 +31,7 @@ You also need the following running:
 - elasticsearch
 - postgres
 
-Additionally, you need to populate development environment [secrets.yml](https://github.com/Leventhan/sheethub/blob/master/config/secrets.yml) attributes before you can run the project on development. This means you'll have to register a number of external services, such as AWS S3 and PayPal Sandbox when running locally as well as `redis` and `memcached` when running on a staging server.
+Additionally, you need to populate `development` environment [secrets.yml](https://github.com/Leventhan/sheethub/blob/master/config/secrets.yml) attributes before you can run the project on development. This means you'll have to register a number of external services, such as AWS S3 and PayPal Sandbox when running locally as well as `redis` and `memcached` when running on a staging server.
 
 For Facebook and Google Authentication to work, you'll need to create apps/setup oauth for both services.
 
@@ -43,9 +43,13 @@ rake secret
 
 I recommend using secrets generated this way for all `secret` attributes.
 
+Learn more [here](http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml).
+
 Message me if you need help!
 
 ## Getting Started
+
+Fork the project, and do a `git clone` from your fork.
 
 ```
 bundle install
@@ -114,6 +118,8 @@ You can use the API to build applications that interact with SheetHub's user-cur
 ## Subdomain Configuration
 
 Since SheetHub uses subdomains extensively for user profile pages (such as `edwinsungmusic.sheethub.co`), you won't be able to use `localhost` for local development. Instead, you must use `lvh.me`. Read [this](https://reinteractive.net/posts/199-developing-and-testing-rails-applications-with-subdomains) for more details.
+
+When deploying, deploy to a dedicated domain name (not `*.herokuapp.com`) or some routes will not work.
 
 ## Contributing
 
