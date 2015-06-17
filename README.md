@@ -126,6 +126,8 @@ When deploying, deploy to a dedicated domain name (not `*.herokuapp.com`) or som
 
 ## Contributing
 
+> Please also read CONTRIBUTING.md for more details on how to become a great contributor.
+
 Here are some ideas you can work on:
 - Audio Player on sheet pages
 - Organize composition competitions
