@@ -1,10 +1,11 @@
 sheethub
 ========
 
-[![Join the chat at https://gitter.im/Leventhan/sheethub](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Leventhan/sheethub?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[SheetHub](http://sheethub.co) lets you easily publish, share, and sell sheet music.
+[![Join the chat at https://gitter.im/Leventhan/sheethub](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Leventhan/sheethub)
 
 ![SheetHub](http://i.imgur.com/HYwc8RY.png)
+
+[SheetHub](http://sheethub.co) lets you easily publish, share, and sell sheet music.
 
 > Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. SheetHub handles payments, sales, emails, and distribution. You'll also get your very own personal portfolio and subdomain! You are paid directly and instantly the moment you make a sale.
 
