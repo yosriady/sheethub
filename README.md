@@ -1,5 +1,7 @@
 sheethub
 ========
+
+[![Join the chat at https://gitter.im/Leventhan/sheethub](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Leventhan/sheethub?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [SheetHub](http://sheethub.co) lets you easily publish, share, and sell sheet music.
 
 ![SheetHub](http://i.imgur.com/HYwc8RY.png)
