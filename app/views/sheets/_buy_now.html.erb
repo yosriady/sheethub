@@ -5,7 +5,7 @@
             <%= render 'sheets/edit_sheet_button', sheet: sheet %>
         <% elsif user_signed_in? %>
             <% if sheet.free? && !sheet.pay_what_you_want %>
-              <a href="<%= orders_get_url(sheet: sheet) %>" data-method="post"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> I Want This!</button></a>
+              <a href="<%= orders_get_url(sheet: sheet) %>" data-method="post"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Add to Library</button></a>
             <% else %>
               <a id="buy-now"><button type="button" class="btn btn-success btn-lg btn-block col-xs-8"> Add to Library</button></a>
             <% end %>
