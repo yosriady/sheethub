@@ -60,7 +60,6 @@
         font-weight: 300;
         color: #2583EB;
         margin: 0px;
-        padding-top: 100px;
     }
 
     h2 {
@@ -68,10 +67,15 @@
         font-size: 18px;
         color: #aaa;
         font-weight: 400;
+        padding-top: 80px;
     }
 
     h1, h2 {
         text-align: center;
+    }
+
+    div.text-center {
+        margin-top:40px;
     }
 
 }

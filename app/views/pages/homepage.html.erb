@@ -4,8 +4,11 @@ description "SheetHub is a community marketplace for musicians. Publish, find, a
 %>
 
 <div class="animated-banner">
-    <h1 class="sheets-heading">Publish, find, and share sheet music online. Easy.</h1>
-    <h2 class="sheets-subheading">Community Marketplace for Musicians. <%= link_to "Upload", sheet_upload_url %>.</h2>
+    <h2 class="sheets-subheading">The Community Marketplace for Musicians.</h2>
+    <h1 class="sheets-heading">Publish, find, and share sheet music online.</h1>
+    <div class="text-center">
+      <a href="<%= sheet_upload_url %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"><em class="fa fa-cloud-upload"></em> Start Publishing</a>
+    </div>
 </div>
 
 <div class="container">
@@ -38,5 +41,4 @@ description "SheetHub is a community marketplace for musicians. Publish, find, a
     </div>
 </div>
 
-<%= render 'layouts/sign_up_banner' %>
 <%= render 'layouts/upload_banner' %>
