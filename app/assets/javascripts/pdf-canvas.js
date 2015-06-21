@@ -125,7 +125,14 @@ var pdfDoc = null,
       });
    }
 
+   function initCanvas(){
+    canvas.height = window.innerHeight;
+    canvas.width = $("#sheet-content").width();
+   }
+
    if(canvas && gon && gon.pdf_url){
-     loadPDF(gon.pdf_url);
+    // TODO: initialize "Loading" canvas
+    initCanvas();
+    loadPDF(gon.pdf_url);
    }
 });
