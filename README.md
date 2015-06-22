@@ -122,7 +122,9 @@ You can use the API to build applications that interact with SheetHub's user-cur
 
 Since SheetHub uses subdomains extensively for user profile pages (such as `edwinsungmusic.sheethub.co`), you won't be able to use `localhost` for local development. Instead, you must use `lvh.me`. Read [this](https://reinteractive.net/posts/199-developing-and-testing-rails-applications-with-subdomains) for more details.
 
-When deploying, deploy to a dedicated domain name (not `*.herokuapp.com`) or some routes will not work.
+## Disclaimer
+
+**This is a hobby project. I'm not doing this to get rich and retire early. Having said that, I'd appreciate it if you don't outright clone SheetHub and host it elsewhere for commercial purposes. Contributions and Pull Requests are most welcome.**
 
 ## Contributing
 
