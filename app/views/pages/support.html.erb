@@ -5,8 +5,8 @@ keywords %w(support faq help frequently/ asked/ questions)
 %>
 
 <div class="animated-banner">
-    <h1><em class="fa fa-support"></em> Support Center</h1>
-    <h2>Frequently Asked Questions</h2>
+  <h2>Frequently Asked Questions</h2>
+  <h1><em class="fa fa-support"></em> Support Center</h1>
 </div>
 
 <div class="container">
@@ -15,7 +15,7 @@ keywords %w(support faq help frequently/ asked/ questions)
   <h4><em class="fa fa-book"></em> General</h4>
   <%= render "faq_item", id:"sheethub-benefits", question: "What does SheetHub give me?", answer: "<p>SheetHub empowers musicians, composers, and arrangers with the ability to easily find, publish, and share sheet music, tablature, and score online. You can easily create a page where your fans can view and purchase your works. You also get an online profile at username.sheethub.co that showcases all the works you've published on SheetHub. </p><p>Your files are securely hosted on SheetHub so you don't need to worry about building a website or storing files anywhere. We help you handle everything from payments, sales, emails, and distribution. SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music!</p><p>
   Get started today! Add your work, name a price, and start selling instantly. Want us to help you? Email us at <a href='mailto:support@sheethub.co'>support@sheethub.co</a></p> " %>
-  <%= render "faq_item", id:"sheethub-costs", question: "How much does SheetHub cost?", answer: "<p>With SheetHub, you have no setup fees, no monthly fees, no hosting fees, no bandwidth fees to worry about. Just <strike>15%</strike> <strong>5%</strong> per transaction! For a <strong>$5.00</strong> sale, you'll earn <strong>$4.75</strong>! The rest goes on to fund new features voted on by the SheetHub community for everyone's benefit.</p> <p class='bg-success'><em class='fa fa-star'></em> Be part of our public alpha and earn <strong>95%</strong>!</p> <p>You are paid directly to your PayPal account the moment you make a sale. SheetHub never holds any of your earnings. No one likes to wait for their money. Get paid instantly on SheetHub.
+  <%= render "faq_item", id:"sheethub-costs", question: "How much does SheetHub cost?", answer: "5% per transaction. This amount helps pay for our servers and hosting costs, and funds new features voted on by the SheetHub community. You are paid directly to your PayPal account the moment you make a sale. SheetHub never holds any of your earnings. No one likes to wait for their money. Get paid instantly on SheetHub.
     </p> <p>#{link_to 'Sign Up', new_user_registration_url} and get <strong>unlimited uploads</strong> today!</p>" %>
   <%= render "faq_item", id:"howto-upload", question: "How do I upload my music on SheetHub?", answer: "<a href='#{new_user_registration_url }'>Sign Up</a> and <a href='#{sheet_upload_url}'>Upload</a>. You will need at least a printable PDF version of your sheet music to start." %>
   <hr>
@@ -103,8 +103,8 @@ The Public Domain Mark is recommended for works that are free of known copyright
     <%= render "faq_item", id:"help-pay-what-you-want", question: "What is pay-what-you-want pricing?", answer: "<p>Pay what you want pricing lets your biggest fans pay above and beyond your listed price. This feature is available to #{link_to 'Plus', upgrade_url} and #{link_to 'Pro', upgrade_url} users. Enabling pay what you want will give your work the following Buy Now modal:</p><img src='http://i.imgur.com/uGBtLi0.png' style='width: 100%' alt='Pay what you want pricing sample'/>" %>
 
     <hr>
-    <h4><em class="fa fa-user"></em> Pro and Plus memberships</h4>
-      <%= render "faq_item", id:"help-membership-payment-terms", question: "What are the Pro and Plus membership payment terms?", answer: "<p>Pro and Plus membership is a month-to-month service. There is no contract or long term obligation. You are billed on a monthly basis, and if you cancel you will not be billed again.</p>" %>
+    <h4><em class="fa fa-user"></em> Premium memberships</h4>
+      <%= render "faq_item", id:"help-membership-payment-terms", question: "What are the Pro and Plus membership payment terms?", answer: "<p>Pro and Plus membership is a month-to-month service. Being a premium gives you the latest access to new features, better support, and our eternal thanks. There is no contract or long term obligation. You are billed on a monthly basis, and if you cancel you will not be billed again.</p>" %>
       <%= render "faq_item", id:"help-membership-downgrade", question: "What happens when I downgrade/cancel?", answer: "<p>You may lose access to some features. In addition, if your current usage quota exceeds the basic membership quota, you will need to delete some free sheets before you can downgrade.</p>" %>
 
 
