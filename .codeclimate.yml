@@ -1,0 +1,8 @@
+# Save as .codeclimate.yml (note leading .) in project root directory
+languages:
+  Ruby: true
+  JavaScript: true
+exclude_paths:
+- "public/js/pdf.worker.js"
+- "public/js/pdf.js"
+- "lib/assets/javascripts/*.js"
