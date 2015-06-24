@@ -42,12 +42,8 @@ class Sheet < ActiveRecord::Base
   def self.filter(params = {})
     # TODO: cache
     sheets = Sheet.is_public
-    if params[:date].present? && params[:date].in?(Sheet.filter_date_enum)
-      sheets = sheets.send("this_#{params[:date]}") if params[:date] != 'all-time'
-    end
-    if params[:sort_by].present? && params[:sort_by].in?(Sheet.sort_enum)
-      sheets = sheets.most_liked if params[:sort_by] == 'likes'
-    end
+    sheets = sheets.send("this_#{params[:date]}") if params[:date].in?(Sheet.filter_date_enum) && params[:date] != 'all-time'
+    sheets = sheets.most_liked if params[:sort_by].in?(Sheet.sort_enum) && params[:sort_by] == 'likes'
     sheets = sheets.tagged_with(params[:tags].split) if params[:tags].present?
     sheets = sheets.with_any_instruments(*params[:instruments].split) if params[:instruments].present?
     sheets.page(params[:page])

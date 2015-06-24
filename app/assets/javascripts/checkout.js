@@ -52,6 +52,6 @@ $(document).on("page:change", function() {
     };
 
     function checkoutUrl(amount){
-      return window.location.origin + "/checkout?sheet=" + sheet_slug + "&amount=" + amount;
+      return window.location.origin + "/orders/checkout?sheet=" + sheet_slug + "&amount=" + amount;
     }
 });

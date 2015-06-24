@@ -31,14 +31,7 @@ class OrdersController < ApplicationController
 
   def checkout
     track('Checking out sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-    if @sheet.pay_what_you_want && params[:amount].present?
-      amount = params[:amount].to_f
-      amount_cents = amount * 100
-    else
-      amount = @sheet.price
-      amount_cents = @sheet.price_cents
-    end
-
+    amount, amount_cents = calculate_amounts(@sheet, params[:amount])
     author = @sheet.user
     payment_request = build_payment_request(@sheet, amount)
     payment_response = pay(payment_request)
@@ -79,111 +72,102 @@ class OrdersController < ApplicationController
   end
 
   private
-    def build_payment_request(sheet, amount)
-      author = sheet.user
-      tracking_id = Order.generate_token
-      api = PayPal::SDK::AdaptivePayments::API.new
-      r = api.build_pay
-      r.trackingId = tracking_id
-      r.actionType = 'PAY'
-      r.feesPayer = 'PRIMARYRECEIVER'
-      r.cancelUrl = orders_cancel_url(sheet: sheet)
-      r.returnUrl = orders_status_url(tracking_id)
-      r.currencyCode = 'USD'
-
-      # Primary receiver (Sheet Owner)
-      r.receiverList.receiver[0].amount = amount
-      r.receiverList.receiver[0].email = sheet.user.paypal_email
-      r.receiverList.receiver[0].primary = true
-
-      # Secondary Receiver (Marketplace)
-      r.receiverList.receiver[1].amount = Order.calculate_commission(author,
-                                                                     amount)
-      r.receiverList.receiver[1].email = Rails.application.secrets.paypal_email
-      r.receiverList.receiver[1].primary = false
-      r
+  def calculate_amounts(sheet, amount)
+    if sheet.pay_what_you_want && amount.present?
+      amount = amount.to_f
+      amount_cents = amount * 100
+    else
+      amount = sheet.price
+      amount_cents = sheet.price_cents
     end
+    return amount, amount_cents
+  end
 
-    def pay(payment_request)
-      api = PayPal::SDK::AdaptivePayments::API.new
-      api.pay(payment_request)
-    end
+  def build_payment_request(sheet, amount)
+    author = sheet.user
+    tracking_id = Order.generate_token
+    api = PayPal::SDK::AdaptivePayments::API.new
+    r = api.build_pay
+    r.trackingId = tracking_id
+    r.actionType = 'PAY'
+    r.feesPayer = 'PRIMARYRECEIVER'
+    r.cancelUrl = orders_cancel_url(sheet: sheet)
+    r.returnUrl = orders_status_url(tracking_id)
+    r.currencyCode = 'USD'
 
-    def build_redirect_url(payKey)
-      "https://#{Rails.application.secrets.paypal_domain}/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
-    end
+    # Primary receiver (Sheet Owner)
+    r.receiverList.receiver[0].amount = amount
+    r.receiverList.receiver[0].email = sheet.user.paypal_email
+    r.receiverList.receiver[0].primary = true
 
-    def invalid_account_details?(pay_response)
-      pay_response.error.first.errorId.in? [580001, 520009]
-    end
+    # Secondary Receiver (Marketplace)
+    r.receiverList.receiver[1].amount = Order.calculate_commission(author,
+                                                                   amount)
+    r.receiverList.receiver[1].email = Rails.application.secrets.paypal_email
+    r.receiverList.receiver[1].primary = false
+    r
+  end
 
-    # Method currently not used
-    def add_additional_receivers(payment_request, receivers)
-      fail 'Amount of split funds above 100%' if (t.values.sum > 1.0)
+  def pay(payment_request)
+    api = PayPal::SDK::AdaptivePayments::API.new
+    api.pay(payment_request)
+  end
 
-      index = 2
-      receivers.each do |email, proportion|
-        payment_request.receiverList.receiver[index].amount = proportion * amount
-        payment_request.receiverList.receiver[index].email = email
-        payment_request.receiverList.receiver[index].primary = false
-        index += 1
-      end
-      payment_request
-    end
+  def build_redirect_url(payKey)
+    "https://#{Rails.application.secrets.paypal_domain}/cgi-bin/webscr?cmd=_ap-payment&paykey=#{payKey}"
+  end
 
-    # Method currently not used
-    def build_split_payment_request(sheet, amount, receivers = {})
-      r = build_payment_request(sheet, amount)
-      add_additional_receivers(r, receivers)
-    end
+  def invalid_account_details?(pay_response)
+    pay_response.error.first.errorId.in? [580001, 520009]
+  end
 
-    def validate_flagged
-      return unless @sheet.is_flagged
-      flash[:error] = FLAGGED_MESSAGE
-      redirect_to root_url
-    end
+  def validate_flagged
+    return unless @sheet.is_flagged
+    flash[:error] = FLAGGED_MESSAGE
+    redirect_to root_url
+  end
 
-    def validate_purchase_limits
-      return if @sheet.in_stock?
-      flash[:error] = "#{@sheet.title} is currently out of stock"
-      OrderMailer.purchase_out_of_stock_email(@sheet).deliver
-      redirect_to @sheet
-    end
+  def validate_purchase_limits
+    return if @sheet.in_stock?
+    flash[:error] = "#{@sheet.title} is currently out of stock"
+    OrderMailer.purchase_out_of_stock_email(@sheet).deliver
+    redirect_to @sheet
+  end
 
-    def validate_ownership
-      redirect_to :back, error: "You've already owned #{@sheet.title}" if @order.completed?
-    end
+  def validate_ownership
+    redirect_to :back, error: "You've already owned #{@sheet.title}" if @order.completed?
+  end
 
-    def validate_min_amount
-      return unless @sheet.pay_what_you_want && params[:amount]
-      above_minimum = params[:amount].to_f >= @sheet.price
-      return if above_minimum
-      flash[:error] = INVALID_PRICE_MESSAGE
-      redirect_to @sheet
-    end
+  def validate_min_amount
+    return unless @sheet.pay_what_you_want && params[:amount]
+    above_minimum = params[:amount].to_f >= @sheet.price
+    return if above_minimum
+    flash[:error] = INVALID_PRICE_MESSAGE
+    redirect_to @sheet
+  end
 
-    def validate_order_exists
-      return if @order.present?
-      flash[:error] = "That order does not exist."
-      redirect_to root_url
-    end
+  def validate_order_exists
+    return if @order.present?
+    flash[:error] = "That order does not exist."
+    redirect_to root_url
+  end
 
-    def authenticate_owner
-      return if @order.user == current_user
-      flash[:error] = "You are not the owner of that order."
-      redirect_to root_url
-    end
+  def authenticate_owner
+    return if @order.user == current_user
+    flash[:error] = "You are not the owner of that order."
+    redirect_to root_url
+  end
 
-    def set_order
-      @order = Order.find_by(tracking_id: params[:tracking_id])
-    end
+  def set_order
+    @order = Order.find_by(tracking_id: params[:tracking_id])
+  end
 
-    def set_order_for_sheet
-      @order = Order.find_or_initialize_by(user_id: current_user.id,
-                                         sheet_id: @sheet.id)
-    end
+  def set_order_for_sheet
+    @order = Order.find_or_initialize_by(user_id: current_user.id,
+                                       sheet_id: @sheet.id)
+  end
 
-    def set_sheet
-      @sheet = Sheet.friendly.find(params[:sheet]) || not_found
-    end
+  def set_sheet
+    @sheet = Sheet.friendly.find(params[:sheet]) || not_found
+  end
 end

@@ -1,7 +1,8 @@
 <% title "Thank You" %>
 
 <div class="animated-banner">
-    <h1 class="animated bounceIn"><em class="fa fa-check-circle"></em> <%= @order.free_checkout? ? "Purchase Successful!" : "Thank You For Your Purchase!"%></h1>
+    <h2><%= link_to @sheet.title, sheet_url(@sheet) %> added to your library</h2>
+    <h1 class="animated bounceIn"><em class="fa fa-check-circle"></em> <%= @order.free_checkout? ? "Enjoy!" : "Thank You For Your Purchase"%></h1>
 </div>
 
 <div class="container">

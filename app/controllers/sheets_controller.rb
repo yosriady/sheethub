@@ -6,7 +6,7 @@ class SheetsController < ApplicationController
   before_action :validate_instruments, only: [:create, :update]
   before_action :set_all_tags, only: [:new, :create, :edit, :update]
   before_action :set_instruments
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :restore]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :like, :update, :destroy, :restore]
   before_action :validate_flagged, only: [:show]
   before_action :hide_private_sheets, only: [:show, :report, :flag, :like, :download], if: :is_private_sheet
   before_action :authenticate_owner, only: [:edit, :update, :destroy, :restore]
@@ -14,7 +14,6 @@ class SheetsController < ApplicationController
   TAG_FIELDS = [:composer_list, :genre_list, :source_list, :instruments_list, :publisher_list]
   DEFAULT_FLAG_MESSAGE = 'No Message.'
   SUCCESS_FLAG_MESSAGE = "Succesfully reported! We'll come back to you in 72 hours."
-  ERROR_UNSIGNED_LIKE_MESSAGE = 'You need to be signed in to like'
   SUCCESS_LIKE_MESSAGE = 'Sweet! Added to likes.'
   SUCCESS_UNLIKE_MESSAGE = 'Removed from likes.'
   SUCCESS_CREATE_SHEET_MESSAGE = "Woohoo! You've uploaded a new sheet."
@@ -101,17 +100,12 @@ class SheetsController < ApplicationController
 
   def like
     track('Like sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-    unless current_user
-      redirect_to new_user_session_url, error: ERROR_UNSIGNED_LIKE_MESSAGE
-    end
-    if @sheet && (!current_user.voted_for? @sheet)
+    if !current_user.voted_for? @sheet
       @sheet.liked_by current_user
       redirect_to sheet_url(@sheet), notice: SUCCESS_LIKE_MESSAGE
     elsif @sheet && (current_user.voted_for? @sheet)
       @sheet.unliked_by current_user
       redirect_to sheet_url(@sheet), notice: SUCCESS_UNLIKE_MESSAGE
-    else
-      redirect_to root_url, error: ERROR_SHEET_NOT_FOUND_MESSAGE
     end
   end
 
@@ -138,8 +132,8 @@ class SheetsController < ApplicationController
         format.html { redirect_to @sheet, notice: SUCCESS_CREATE_SHEET_MESSAGE }
         format.json { render :show, status: :created, location: @sheet }
       else
-        format.html { render :new }
         flash[:error] = @sheet.errors.full_messages.to_sentence
+        format.html { render :new }
         format.json { render json: @sheet.errors.full_messages.to_sentence, status: :unprocessable_entity }
       end
     end
@@ -155,8 +149,8 @@ class SheetsController < ApplicationController
         format.html { redirect_to @sheet, notice: SUCCESS_UPDATE_SHEET_MESSAGE }
         format.json { render :show, status: :ok, location: @sheet }
       else
-        format.html { render :edit }
         flash[:error] = @sheet.errors.full_messages.to_sentence
+        format.html { render :edit }
         format.json { render json: @sheet.errors.full_messages.to_sentence, status: :unprocessable_entity }
       end
     end
@@ -286,10 +280,12 @@ class SheetsController < ApplicationController
                             :composers,
                             :genres,
                             :publishers).friendly.find(params[:id])
+    redirect_to root_url, error: ERROR_SHEET_NOT_FOUND_MESSAGE unless @sheet
   end
 
   def set_sheet_lazy
     @sheet = Sheet.friendly.find(params[:id])
+    redirect_to root_url, error: ERROR_SHEET_NOT_FOUND_MESSAGE unless @sheet
   end
 
   def set_deleted_sheet
