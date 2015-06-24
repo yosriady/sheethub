@@ -125,17 +125,12 @@ class SheetsController < ApplicationController
   def create
     create_params = build_tags(sheet_params)
     @sheet = Sheet.new(create_params)
-
-    respond_to do |format|
-      if @sheet.save
-        track('Upload sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-        format.html { redirect_to @sheet, notice: SUCCESS_CREATE_SHEET_MESSAGE }
-        format.json { render :show, status: :created, location: @sheet }
-      else
-        flash[:error] = @sheet.errors.full_messages.to_sentence
-        format.html { render :new }
-        format.json { render json: @sheet.errors.full_messages.to_sentence, status: :unprocessable_entity }
-      end
+    if @sheet.save
+      track('Upload sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
+      redirect_to @sheet, notice: SUCCESS_CREATE_SHEET_MESSAGE
+    else
+      flash[:error] = @sheet.errors.full_messages.to_sentence
+      render :new
     end
   end
 
@@ -143,16 +138,12 @@ class SheetsController < ApplicationController
   # PATCH/PUT /sheets/1.json
   def update
     update_params = build_tags(sheet_params)
-    respond_to do |format|
-      if @sheet.update(update_params)
-        track('Update sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-        format.html { redirect_to @sheet, notice: SUCCESS_UPDATE_SHEET_MESSAGE }
-        format.json { render :show, status: :ok, location: @sheet }
-      else
-        flash[:error] = @sheet.errors.full_messages.to_sentence
-        format.html { render :edit }
-        format.json { render json: @sheet.errors.full_messages.to_sentence, status: :unprocessable_entity }
-      end
+    if @sheet.update(update_params)
+      track('Update sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
+      redirect_to @sheet, notice: SUCCESS_UPDATE_SHEET_MESSAGE
+    else
+      flash[:error] = @sheet.errors.full_messages.to_sentence
+      render :edit
     end
   end
 
@@ -161,20 +152,14 @@ class SheetsController < ApplicationController
   def destroy
     @sheet.destroy
     track('Delete sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-    respond_to do |format|
-      format.html { redirect_to user_trash_url, notice: SUCCESS_DESTROY_SHEET_MESSAGE }
-      format.json { head :no_content }
-    end
+    redirect_to user_trash_url, notice: SUCCESS_DESTROY_SHEET_MESSAGE
   end
 
   # Reverses soft-deletion
   def restore
     @sheet.restore
     track('Restore sheet', sheet_id: @sheet.id, sheet_title: @sheet.title)
-    respond_to do |format|
-      format.html { redirect_to sheet_url(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE }
-      format.json { head :no_content }
-    end
+    redirect_to sheet_url(@sheet), notice: SUCCESS_RESTORE_SHEET_MESSAGE
   end
 
   # GET /instruments
