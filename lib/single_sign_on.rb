@@ -19,7 +19,6 @@ class SingleSignOn
   def self.parse(payload, sso_secret = nil)
     sso = new
     sso.sso_secret = sso_secret if sso_secret
-
     parsed = Rack::Utils.parse_query(payload)
     if sso.sign(parsed["sso"]) != parsed["sig"]
       diags = "\n\nsso: #{parsed["sso"]}\n\nsig: #{parsed["sig"]}\n\nexpected sig: #{sso.sign(parsed["sso"])}"
@@ -43,9 +42,6 @@ class SingleSignOn
     end
 
     decoded_hash.each do |k,v|
-      # 1234567
-      # custom.
-      #
       if k[0..6] == "custom."
         field = k[7..-1]
         sso.custom_fields[field] = v

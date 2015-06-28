@@ -29,7 +29,6 @@ module Taggable
   end
 
   def clear_tags
-    # TODO: refactor this
     genres.clear
     sources.clear
     composers.clear
