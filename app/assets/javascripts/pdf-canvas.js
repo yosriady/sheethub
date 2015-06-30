@@ -125,14 +125,24 @@ var pdfDoc = null,
       });
    }
 
+   function showLoader(){
+    var canvas = document.getElementById("pdf-canvas");
+    var context = canvas.getContext("2d");
+    context.fillStyle = "#5cb85c";
+    context.font = '36px Roboto Slab';
+    var textString = "Loading...",
+        textWidth = context.measureText(textString).width;
+    context.fillText(textString , (canvas.width/2) - (textWidth / 2), 150);
+   }
+
    function initCanvas(){
     canvas.height = window.innerHeight;
     canvas.width = $("#sheet-content").width();
    }
 
    if(canvas && gon && gon.pdf_url){
-    // TODO: initialize "Loading" canvas
     initCanvas();
+    showLoader();
     loadPDF(gon.pdf_url);
    }
 });
