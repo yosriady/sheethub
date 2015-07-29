@@ -68,6 +68,7 @@ GEM
     autoprefixer-rails (5.1.11)
       execjs
       json
+    awesome_print (1.6.1)
     aws-sdk (1.64.0)
       aws-sdk-v1 (= 1.64.0)
     aws-sdk-v1 (1.64.0)
@@ -78,8 +79,6 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
-    binding_of_caller (0.7.2)
-      debug_inspector (>= 0.0.1)
     bitmask_attributes (1.0.0)
       activerecord (>= 3.1)
     bootstrap-sass (3.1.1.1)
@@ -94,6 +93,8 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
+    byebug (4.0.5)
+      columnize (= 0.9.0)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -118,13 +119,15 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     colored (1.2)
+    columnize (0.9.0)
     connection_pool (2.2.0)
+    coolline (0.5.0)
+      unicode_utils (~> 1.4)
     countries (0.11.4)
       currencies (~> 0.4.2)
       i18n_data (~> 0.7.0)
     currencies (0.4.2)
     dalli (2.7.4)
-    debug_inspector (0.0.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -133,6 +136,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    diffy (3.0.7)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.0.1)
@@ -166,12 +170,16 @@ GEM
       json
       multi_json
       request_store (>= 1.0.5)
+    grit (2.0.0)
+      diff-lcs (>= 1.1.2)
+      mime-types (>= 1.15)
     groupdate (2.4.0)
       activesupport (>= 3)
     hashie (3.4.1)
     heroku-deflater (0.5.3)
       rack (>= 1.4.5)
     hike (1.2.3)
+    hirb (0.7.3)
     hitimes (1.2.2)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -180,6 +188,15 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     i18n_data (0.7.0)
+    jazz_fingers (2.0.1)
+      awesome_print (~> 1.6)
+      hirb (~> 0.7)
+      pry (~> 0.10)
+      pry-byebug (~> 3.1)
+      pry-coolline (~> 0.2)
+      pry-doc (~> 0.6)
+      pry-git (~> 0.2)
+      pry-remote (>= 0.1.7)
     jquery-fileupload-rails (0.4.5)
       actionpack (>= 3.1)
       railties (>= 3.1)
@@ -261,8 +278,18 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rails (0.3.4)
-      pry (>= 0.9.10)
+    pry-byebug (3.1.0)
+      byebug (~> 4.0)
+      pry (~> 0.10)
+    pry-coolline (0.2.5)
+      coolline (~> 0.5)
+    pry-doc (0.8.0)
+      pry (~> 0.9)
+      yard (~> 0.8)
+    pry-git (0.2.3)
+      diffy
+      grit
+      pry (>= 0.9.8)
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
@@ -418,6 +445,7 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     xml-simple (1.1.5)
+    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -431,7 +459,6 @@ DEPENDENCIES
   autoprefixer-rails
   aws-sdk (< 2.0)
   better_errors
-  binding_of_caller
   bitmask_attributes
   bootstrap-sass (~> 3.1.1)
   bootsy (>= 2.1.0)
@@ -449,6 +476,7 @@ DEPENDENCIES
   groupdate
   heroku-deflater
   httparty
+  jazz_fingers
   jquery-rails
   kaminari
   letter_opener
@@ -468,8 +496,6 @@ DEPENDENCIES
   paypal-express
   paypal-sdk-adaptivepayments
   pg
-  pry-rails
-  pry-remote
   rails (= 4.2.0.rc3)
   rails-erd
   rails_12factor
