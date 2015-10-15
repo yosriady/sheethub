@@ -33,7 +33,7 @@ class Order < ActiveRecord::Base
            billing_zipcode: user.billing_zipcode,
            ip: user.current_sign_in_ip)
     sheet.increment(:total_sold)
-    sheet.decrement(:limit_purchase_quantity)
+    sheet.decrement(:limit_purchase_quantity) if sheet.limit_purchases
     sheet.save!
     send_completion_emails
     Analytics.track_charge(self) unless free_checkout?
@@ -111,8 +111,13 @@ class Order < ActiveRecord::Base
   def pdf_download_url
     return false unless completed?
     return sheet.pdf.expiring_url unless sheet.enable_pdf_stamping
-    generate_watermarked_pdf unless latest_pdf?
-    pdf.expiring_url(EXPIRATION_TIME)
+
+    begin
+      generate_watermarked_pdf unless latest_pdf?
+      pdf.expiring_url(EXPIRATION_TIME)
+    rescue
+      sheet.pdf.expiring_url
+    end
   end
 
   # TODO: Refactor out to a common CSV interface

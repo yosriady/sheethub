@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   has_one :api_key
+  has_many :orders
 
   def country
     return unless billing_country
