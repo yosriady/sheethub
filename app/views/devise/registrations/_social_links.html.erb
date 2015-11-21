@@ -1,17 +1,17 @@
 <div class="social-links">
-  <% if user.soundcloud_username %>
+  <% if user.soundcloud_username.present? %>
   <a href="https://www.soundcloud.com/<%= user.soundcloud_username %>" class="social-link pull-right" title="Soundcloud page" target="_blank"><em class="fa fa-soundcloud"></em></a>
   <% end %>
-  <% if user.youtube_username %>
-  <a href="https://www.youtube.com/user/<%= user.youtube_username %>" class="social-link pull-right" title="Youtube page" target="_blank"><em class="fa fa-youtube-square"></em></a>
+  <% if user.youtube_username.present? %>
+  <a href="https://www.youtube.com/<%= user.youtube_username %>" class="social-link pull-right" title="Youtube page" target="_blank"><em class="fa fa-youtube-square"></em></a>
   <% end %>
-  <% if user.googleplus_username %>
+  <% if user.googleplus_username.present? %>
   <a href="https://plus.google.com/+<%= user.googleplus_username %>" class="social-link pull-right" title="Google+ page" target="_blank"><em class="fa fa-google-plus-square"></em></a>
   <% end %>
-  <% if user.twitter_username %>
+  <% if user.twitter_username.present? %>
   <a href="https://twitter.com/<%= user.twitter_username %>" class="social-link pull-right" title="Twitter page" target="_blank"><em class="fa fa-twitter-square"></em></a>
   <% end %>
-  <% if user.facebook_username %>
+  <% if user.facebook_username.present? %>
   <a href="https://www.facebook.com/<%= user.facebook_username %>" class="social-link pull-right" title="Facebook page" target="_blank"><em class="fa fa-facebook-square"></em></a>
   <% end %>
   <% if user.website? %>
