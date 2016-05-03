@@ -13,7 +13,7 @@ SheetHub handles all the technical complexities behind hosting and selling your 
 
 I've been looking for a decent community/marketplace for sheet music and have been disappointed so far, so I decided to try my hand at building one. Thus, SheetHub was born.
 
-SheetHub is **open source** since 7 June 2015. It's been a one-man show up to this point, so mind some unnecessary complexity! Contributions are most welcome!
+SheetHub is **open source** since 7 June 2015. Contributions are most welcome!
 
 ## System Requirements
 You'll need the following installed on your machine:
@@ -145,4 +145,3 @@ Here are some ideas you can work on:
 Initiate idea discussions by creating a Github issue!
 
 We use [Github Flow](https://guides.github.com/introduction/flow/), a lightweight, branch-based workflow. Create feature branches and your pull requests will be reviewed!
-
