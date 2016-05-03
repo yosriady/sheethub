@@ -1,46 +1,42 @@
 footer {
-    a.badge {
+    h2 {
         font-family: 'Roboto Slab', serif;
-        font-size: 18px;
-        padding: 6px 12px;
-        font-weight: 100;
-        background: #777;
-
-        &:hover, &:focus {
+        color: #fff;
+        .fa.fa-heart {
+            color: #c10808;
+        }
+        &:focus,
+        &:hover {
             background: #2583eb;
         }
     }
-
     &.panel-footer {
-        padding: 40px 60px;
+        padding: 80px 80px 40px;
         background: #333;
         border-top: none;
-
         .container-fluid {
             opacity: 0.7;
         }
-
     }
-
     ul {
         height: 50px;
         padding: 15px;
-        margin-bottom: 0px;
-
-        li, li a {
+        margin-bottom: 0;
+        li,
+        li a {
             color: #999;
         }
-
-        a:hover, a:focus {
+        a:focus,
+        a:hover {
             color: #ECEDEF;
         }
-     }
-
+    }
     .social-link {
-        display:inline-block;
+        display: inline-block;
         font-size: 36px;
         color: #555;
-        &:hover, &:focus {
+        &:focus,
+        &:hover {
             color: #777;
         }
     }
