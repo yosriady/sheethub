@@ -1,3 +1,8 @@
+.animated {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+}
+
 .animate-forever {
     -webkit-animation-duration: 2s;
     -moz-animation-duration: 2s;

@@ -4,19 +4,19 @@ $(document).on("page:change", function() {
 
     $('#amount').maskMoney();
     $("#buy-now").click(function(){
-      $('#buyNowModal').addClass('animated bounceIn');
+      $('#buyNowModal').addClass('animated zoomIn');
       $('#buyNowModal').modal();
     });
 
     // Add buttons logic
     $('.add_button').click(function(){
-      $(this).addClass("animated rubberBand");
+      $(this).addClass("animated pulse");
       var newAmount = parseFloat($('#amount').val()) + parseFloat($(this).data('amount'));
       $('#amount').val(newAmount.toFixed(2));
       validateAboveMinimum(newAmount);
       updateCheckoutUrl(newAmount);
       $(this).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $(this).removeClass("animated rubberBand");
+        $(this).removeClass("animated pulse");
       });
     })
 

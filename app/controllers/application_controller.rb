@@ -1,7 +1,7 @@
 require 'mixpanel-ruby'
 
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :ensure_registration_finishes
   after_filter :store_location
