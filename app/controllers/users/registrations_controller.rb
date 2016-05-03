@@ -27,7 +27,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def all
-    @users = User.is_active.page(params[:page])
+    @users = User.is_active.page(params[:page]).per(10)
   end
 
   def dashboard

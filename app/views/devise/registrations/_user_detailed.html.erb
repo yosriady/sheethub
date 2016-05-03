@@ -1,16 +1,18 @@
 <%= cache("user_detailed_#{user.username}_#{user.updated_at}") do %>
 <a href="<%= user_profile_url(subdomain: user.username) %>">
-<div class="col-xs-4 white-container">
+<div class="col-xs-6 user-container">
     <%= image_tag(user.avatar_url, class: "medium-avatar pull-left", title:user.display_name) %>
-    <div class="user-bio pull-left">
+    <div class="user-bio ">
+    <div class="pull-left">
       <h3><%= user.display_name %></h3>
       <ul class="list-inline">
         <% if user.country.present? %>
           <li><p><em class="fa fa-map-marker"></em> <%= user.country %></p></li>
         <% end %>
       </ul>
-      <% unless user.sheets.count.zero? %><p><%= user.sheets.count %> Sheets</p> <% end %>
     </div>
+    <% unless user.sheets.count.zero? %><p class='pull-right'><%= user.sheets.count %> Sheets</p> <% end %>
+  </div>
 </div>
 </a>
 <% end %>
