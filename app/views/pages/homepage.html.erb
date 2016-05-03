@@ -4,27 +4,21 @@ description "SheetHub is a community marketplace for musicians. Publish, find, a
 %>
 
 <div class="animated-banner">
-    <h2 class="sheets-subheading">The Community Marketplace for Musicians.</h2>
-    <h1 class="sheets-heading">Publish, find, and share sheet music online.</h1>
+    <h2 class="sheets-subheading">Publish, find, and share sheet music online</h2>
+    <h1 class="sheets-heading">The Community Marketplace for Musicians</h1>
     <div class="text-center">
-      <a href="<%= sheet_upload_url %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"><em class="fa fa-cloud-upload"></em> Start Publishing</a>
-    </div>
-    <div class="text-center">
-      <a href="<%= features_url %>" class='text-muted'><em class="fa fa-info-circle"></em> Learn More</a>
+      <a href="<%= sheet_upload_url %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"><em class="fa fa-cloud-upload"></em> Get Started</a>
     </div>
 </div>
 
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
-            <div class="flat-tags text-center">
-              <a href="<%= sheets_url %>"><span class="tag active">New To SheetHub</span></a>
-              <a href="<%= best_sellers_url %>"><span class="tag">Best Sellers</span></a>
-              <a href="<%= community_favorites_url %>"><span class="tag">Community Favorites</span></a>
-            </div>
-            <br/>
-            <%= render 'sheets/sheets', sheets: @sheets %>
-    </div>
+            <h2 class="sheets-heading">Community Spotlight</h2>
+            <h4 class="sheets-subheading"><em class="fa fa-star-o"></em> Get inspiration from these SheetHub members' top picks</h4>
+            <br />
+            <%= render 'sheets/featured_sheets', sheets: @featured %>
+      </div>
     </div>
 </div>
 
@@ -36,12 +30,18 @@ description "SheetHub is a community marketplace for musicians. Publish, find, a
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
-            <a href="<%= community_favorites_url %>"><h2 class="sheets-heading">Community Spotlight</h2></a>
-            <h4 class="sheets-subheading"><em class="fa fa-star-o"></em> Get inspiration from these SheetHub members' top picks</h4>
-            <br />
-            <%= render 'sheets/featured_sheets', sheets: @featured %>
-      </div>
+            <h1 class="sheets-heading">Explore the Full Catalogue</h1>
+            <br/>
+            <div class="flat-tags text-center">
+              <a href="<%= sheets_url %>"><span class="tag active">New To SheetHub</span></a>
+              <a href="<%= best_sellers_url %>"><span class="tag">Best Sellers</span></a>
+              <a href="<%= community_favorites_url %>"><span class="tag">Community Favorites</span></a>
+            </div>
+            <br/>
+            <%= render 'sheets/sheets', sheets: @sheets %>
+    </div>
     </div>
 </div>
+
 
 <%= render 'layouts/upload_banner' %>
