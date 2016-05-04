@@ -7,7 +7,6 @@
         <th>Date</th>
         <th>Title</th>
         <th>User</th>
-        <th>Email</th>
         <th>Country</th>
         <th>Amount</th>
         <th>Earnings <a href="<%= support_url %>#earnings-calculation"><em class="fa fa-question-circle"></em></a></th>
@@ -19,7 +18,6 @@
             <td><%= order.purchased_at.strftime("%A, %e %B %Y %l:%M %p") %></td>
             <td><%= link_to order.sheet.title, sheet_url(order.sheet) %></td>
             <td><%= link_to order.user.display_name, user_profile_url(subdomain: order.user.username) %></td>
-            <td><%= order.user.email %></td>
             <td><%= order.billing_country %></td>
             <td><%= number_to_currency(order.amount) %></td>
             <td><%= number_to_currency(order.royalty) %></td>

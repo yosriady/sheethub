@@ -6,7 +6,7 @@ keywords %w(contact support)
 
 <div class="animated-banner">
     <h2>Have questions? We're happy to help!</h2>
-    <h1><em class="fa fa-paper-plane"></em> Contact</h1>
+    <h1><em class="fa fa-paper-plane"></em> Contact Us</h1>
 </div>
 
 <div class="container">
@@ -16,13 +16,10 @@ keywords %w(contact support)
       <%= render 'contact_form/form', contact: @contact %>
     </div>
     <div class="col-xs-4">
-        <div class="bg-info blurb"><strong><em class="fa fa-info-circle"></em> Alpha</strong> <p>We are currently in public alpha, which means things may not work perfectly – yet. If you encounter something that looks broken, please let us know!</p></div>
-        <br/>
-        <a href="<%= support_url %>" class="btn btn-block btn-lg btn-primary"><em class="fa fa-support"></em> Support Center</a>
+        <a href="<%= support_url %>" class="btn btn-block btn-lg btn-default"><em class="fa fa-support"></em> Support Center</a>
         <br/>
         <div class="panel panel-default">
             <%= render 'layouts/twitter_widget' %>
-            <%= render 'layouts/facebook_widget' %>
         </div>
 
     </div>

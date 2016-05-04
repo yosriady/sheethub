@@ -1,9 +1,10 @@
 <tr>
-  <td class="sheet table-sheet">
-    <%= render 'sheets/sheet_text', sheet: sheet %>
-    <em class="fade-text" style="padding:10px;" data-toggle="tooltip" data-placement="right" title="Purchased <%= order.purchased_at.strftime('%d %B %Y') %>"><span class="publish-date">Purchased <%= distance_of_time_in_words(Time.zone.now, order.purchased_at) %> ago</span></em>
-  </td>
   <td>
+    <em class="fade-text pull-right">Purchased <%= distance_of_time_in_words(Time.zone.now, order.purchased_at) %> ago</span></em>
+    <div class="sheet table-sheet">
+      <%= render 'sheets/sheet_text', sheet: sheet %>
+    </div>
+    <br/>
     <%= render 'sheets/sheet_files', sheet: sheet %>
   </td>
 </tr>

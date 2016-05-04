@@ -7,7 +7,8 @@ description "SheetHub is a community marketplace for musicians. Publish, find, a
     <h2 class="sheets-subheading">Publish, find, and share sheet music online</h2>
     <h1 class="sheets-heading">The Community Marketplace for Musicians</h1>
     <div class="text-center">
-      <a href="<%= sheet_upload_url %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"><em class="fa fa-cloud-upload"></em> Get Started</a>
+      <a href="<%= sheet_upload_url %>" class="btn btn-success btn-inline btn-banner btn-lg center-block"><em class="fa fa-cloud-upload"></em> Upload</a>
+      <a href="<%= sheets_url %>" class="btn btn-default btn-inline btn-banner btn-lg center-block" style="margin-left: 10px;">Discover</a>
     </div>
 </div>
 
@@ -15,7 +16,7 @@ description "SheetHub is a community marketplace for musicians. Publish, find, a
     <div class="col-xs-12">
       <div class="row">
             <h2 class="sheets-heading">Community Spotlight</h2>
-            <h4 class="sheets-subheading"><em class="fa fa-star-o"></em> Get inspiration from these SheetHub members' top picks</h4>
+            <h4 class="sheets-subheading">Get inspiration from the community's top picks</h4>
             <br />
             <%= render 'sheets/featured_sheets', sheets: @featured %>
       </div>
@@ -30,16 +31,16 @@ description "SheetHub is a community marketplace for musicians. Publish, find, a
 <div class="container">
     <div class="col-xs-12">
       <div class="row">
-            <h2 class="sheets-heading">Explore the Full Catalogue</h2>
-            <br/>
-            <div class="flat-tags text-center">
-              <a href="<%= sheets_url %>"><span class="tag active">New To SheetHub</span></a>
-              <a href="<%= best_sellers_url %>"><span class="tag">Best Sellers</span></a>
-              <a href="<%= community_favorites_url %>"><span class="tag">Community Favorites</span></a>
-            </div>
+            <h2 class="sheets-heading">Recently Uploaded</h2>
             <br/>
             <%= render 'sheets/sheets', sheets: @sheets %>
-    </div>
+      </div>
+      <div class="row">
+        <br/>
+        <div class="flat-tags text-center">
+          <a href="<%= sheets_url %>"><span class="tag">Discover More Music</span></a>
+        </div>
+      </div>
     </div>
 </div>
 <%= render 'layouts/upload_banner' %>

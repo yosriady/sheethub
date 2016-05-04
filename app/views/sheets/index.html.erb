@@ -10,6 +10,9 @@ description "Sheet Music, Scores, Tablature, Chords"
       <%= render 'sheets/filter' %>
       <div class="row">
         <%= render 'sheets/sheets', sheets: @sheets %>
-    </div>
+        <div id="paginator" class="text-center">
+          <%= paginate @sheets %>
+        </div>
+      </div>
     </div>
 </div>
