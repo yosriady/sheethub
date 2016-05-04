@@ -1,0 +1,16 @@
+<div class="container-fluid bordered-top featured-users-container">
+  <div class="col-xs-12">
+    <% if users.present? %>
+      <% cache("featured_users") do %>
+        <div class="featured-users">
+          <% users.each do |user| %>
+            <%= render 'devise/registrations/user_featured', user: user %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+        <h2 class="text-center"><em class="fa fa-eye-slash"></em></h2>
+        <h2 class="text-center">None yet!</h2>
+    <% end %>
+  </div>
+</div>

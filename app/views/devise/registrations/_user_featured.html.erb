@@ -1,0 +1,5 @@
+<%= cache("user_featured_#{user.username}_#{user.updated_at}") do %>
+<a href="<%= user_profile_url(subdomain: user.username) %>" title="<%= user.display_name %>">
+    <%= image_tag(user.avatar_url, class: "medium-avatar pull-left", title:user.display_name) %>
+</a>
+<% end %>

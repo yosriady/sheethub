@@ -18,6 +18,8 @@ module Avatarable
     validates :avatar, dimensions: { width: AVATAR_MAX_WIDTH,
                                      height: AVATAR_MAX_HEIGHT }
     attr_accessor :remove_avatar
+
+    scope :with_avatars, -> { User.where.not(image: nil).where.not(username: nil) }
   end
 
   def avatar_url
@@ -29,5 +31,4 @@ module Avatarable
       MISSING_AVATAR_URL
     end
   end
-
 end
