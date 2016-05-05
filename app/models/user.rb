@@ -4,17 +4,19 @@ class User < ActiveRecord::Base
   include Upgradable
   include Payable
 
-  FEATURED_DEFAULT_LIMIT = 48
+  FEATURED_DEFAULT_LIMIT = 50
   FEATURED_USERNAMES = %w(
     carlamariemusic tamlumusic edwinsungmusic pdguitar leventhan marioverehrer2 bananas jackjiet street52124 elrene59 lapispls
     reynith pawtiko jtbeiser thecrimsonloftwing ladya shirocloud merosalia diaz anair raventan fungfung879 anartist
     seiji333 uribr95 kaelder2 kk ohparkle faithforone katm2911 maisieleighd binh palemoon govz elvaanish kitsenpai
     keiou sdsdfsdf 158 djenkko spookybogie nononononono nakarin vinchris monseiur kongzilla saberaustin tomoya
     suksawat roshyyy ygor anthonyz andrew isha powly cjbrat212 richard ljchieng knguyen056 themuddiva
-    mahsaunai vvychmy lololol lugugweegee457 kiyohisa
+    mahsaunai vvychmy lololol lugugweegee457 kiyohisa amon2293 pablito ducktapedduck skybolt peppermintmusic
+    poop tobiasmeister98 annisha02 professorgucho dominicogabriel bpoplawski curlydodo blankistan morette smashmelons
+    candy3454 wigeria aaronling leiven gkisk
   )
 
-  scope :featured, -> { where(username: FEATURED_USERNAMES) }
+  scope :featured, -> { where(username: FEATURED_USERNAMES).limit(80) }
   scope :is_active, -> { where(finished_registration?: true) }
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "No spaces and no special characters allowed!"}, if: :finished_registration?

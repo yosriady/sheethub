@@ -9,22 +9,6 @@ keywords %w(about publishing features benefits)
     <h1 class="sheets-heading" style="padding-top: 0px; ">Made for Composers, Arrangers, and Musicians</h1>
 </div>
 
-<div class="container">
-    <div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-        <div class="panel panel-default" style="margin-top: 60px">
-            <div class="panel-body">
-              <p>Hi there! <em class="fa fa-smile-o" aria-hidden="true"></em></p>
-              <p>You can easily publish your sheet music, score, and / or tablature on SheetHub.</p><p> SheetHub handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music.</p>
-            </div>
-        <div class="panel-footer">
-          <span class="fade-text"><em class="fa fa-heart" aria-hidden="true"></em> SheetHub is a labour of love by a fellow <a href="http://leventhan.sheethub.co">musician</a>.</span>
-        </div>
-      </div>
-    </div>
-    </div>
-</div>
-
 <div class="white-container">
 <div id="features" class="container">
     <div class="row">
@@ -305,6 +289,26 @@ keywords %w(about publishing features benefits)
 </div>
 </div>
 
+<div class="container">
+    <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="panel panel-default" style="margin-top: 60px;">
+            <link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
+            <div class="panel-body handwritten">
+              <p>As you can see, it's easy to publish your sheet music or tablature on SheetHub. Our marketplace handles all the technical complexities behind hosting and selling your sheet music online, so you can focus on pursuing your music.</p>
+              <p>SheetHub is a friendly community of more than 1000 musicians from all over the world.</p>
+            <p><em>Come join us!</em></p>
+            </div>
+        <div class="panel-footer">
+          <span class="fade-text"><em class="fa fa-heart" aria-hidden="true"></em> SheetHub is a labour of love by a fellow <a href="http://leventhan.sheethub.co">musician</a>.</span>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
 <div class="animated-banner footer-banner">
     <h1><a href="<%= new_user_registration_url %>" class="btn btn-inline btn-success btn-banner btn-lg center-block"><em class="fa fa-user-plus"></em> Sign Up and Get Started</a></h1>
 </div>
+
+<%= render 'layouts/featured_users', users: @featured_users %>

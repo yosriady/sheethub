@@ -12,6 +12,7 @@ class PagesController < ApplicationController
 
   def features
     track('View features')
+    @featured_users = User.featured
   end
 
   def notes
